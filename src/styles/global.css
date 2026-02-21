@@ -807,6 +807,35 @@ a:hover {
 }
 
 /* ============================================================
+   MOBILE: DISABLE HEAVY CSS ANIMATIONS
+   ============================================================ */
+@media (max-width: 767px) {
+  /* Aurora blobs — large 200% scale+rotate transforms */
+  .bg-aurora::before,
+  .bg-aurora::after {
+    animation: none;
+  }
+
+  /* 12 individually-animated sparkle dots */
+  .bg-sparkles span {
+    display: none;
+  }
+
+  /* Supernova rings — width/height expansion is expensive */
+  .bg-supernova .ring-center,
+  .bg-supernova .ring-a,
+  .bg-supernova .ring-b {
+    animation: none;
+  }
+
+  /* Crosshatch — translateX on inset:-200% elements */
+  .bg-crosshatch::before,
+  .bg-crosshatch::after {
+    animation: none;
+  }
+}
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {

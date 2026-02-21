@@ -1,5 +1,8 @@
 ---
 import profile from '../data/profile.json';
+import pkg from '../../package.json';
+const [major, minor] = pkg.version.split('.');
+const displayVersion = `v${major}.${minor}`;
 ---
 
 <footer
@@ -37,8 +40,9 @@ import profile from '../data/profile.json';
         </p>
         <p
           class="text-xs mt-1 font-mono"
-          style="color: var(--green-muted); opacity: 0.5; letter-spacing: 0.12em;"
+          style="color: var(--green-muted); opacity: 0.35; letter-spacing: 0.12em;"
         >
+          {displayVersion}
         </p>
       </div>
 

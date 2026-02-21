@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-const PARTICLE_COUNT = 130;
-const CONNECTION_DISTANCE = 140;
-const MAX_CONNECTIONS = Math.floor((PARTICLE_COUNT * (PARTICLE_COUNT - 1)) / 2);
+const PARTICLE_COUNT_DESKTOP = 130;
+const PARTICLE_COUNT_MOBILE  = 60;
+const CONNECTION_DISTANCE_DESKTOP = 140;
+const CONNECTION_DISTANCE_MOBILE  = 100;
 
 interface ParticleData {
   x: number;
@@ -38,6 +39,11 @@ export default function HeroCanvas() {
     const container = mountRef.current;
     let width = container.clientWidth;
     let height = container.clientHeight;
+
+    const isMobile = window.innerWidth < 768;
+    const PARTICLE_COUNT     = isMobile ? PARTICLE_COUNT_MOBILE     : PARTICLE_COUNT_DESKTOP;
+    const CONNECTION_DISTANCE = isMobile ? CONNECTION_DISTANCE_MOBILE : CONNECTION_DISTANCE_DESKTOP;
+    const MAX_CONNECTIONS    = Math.floor((PARTICLE_COUNT * (PARTICLE_COUNT - 1)) / 2);
 
     // ─── Scene Setup ─────────────────────────────────────────────
     const scene = new THREE.Scene();
