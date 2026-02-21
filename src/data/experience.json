@@ -18,5 +18,15 @@
     "description": "Advanced studies in distributed computing, parallel algorithms, machine learning, and large-scale data processing pipelines.",
     "type": "education",
     "logo": ""
+  },
+  {
+    "id": "edu-2",
+    "company": "Babes Bolyai University",
+    "role": "Bachelors's — Maths for Informatics",
+    "startDate": "10/2021",
+    "endDate": "06/2024",
+    "description": "In depth mathematical knowledge and foundamentals of OOP, data structures, DB's, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities.",
+    "type": "education",
+    "logo": ""
   }
 ]
