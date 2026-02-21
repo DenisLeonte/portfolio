@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://DenisLeonte.github.io/portfolio/sitemap-index.xml
+Sitemap: https://denistechs.com/sitemap-index.xml
