@@ -112,6 +112,7 @@ a:hover {
 .section-wrapper {
   padding: 6rem 1.5rem;
   position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {

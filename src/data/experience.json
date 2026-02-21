@@ -1,13 +1,13 @@
 [
   {
-    "id": "exp-1",
-    "company": ".msg Systems Romania",
-    "role": "System Integration / Full-Stack Developer",
-    "startDate": "01/2024",
-    "endDate": "Present",
-    "description": "Working on a Mercedes-Benz Group AG project — developing Spring Boot applications, API integration, database management, and enterprise platform integration. Collaborating with international teams across Romania and Germany.",
-    "type": "work",
-    "logo": "/images/timeline/Msg_systems_Logo.svg.png"
+    "id": "edu-2",
+    "company": "Babes Bolyai University",
+    "role": "Bachelors's — Maths for Informatics",
+    "startDate": "10/2021",
+    "endDate": "06/2024",
+    "description": "In depth mathematical knowledge and foundamentals of OOP, data structures, DB's, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities.",
+    "type": "education",
+    "logo": ""
   },
   {
     "id": "edu-1",
@@ -18,15 +18,14 @@
     "description": "Advanced studies in distributed computing, parallel algorithms, machine learning, and large-scale data processing pipelines.",
     "type": "education",
     "logo": ""
-  },
-  {
-    "id": "edu-2",
-    "company": "Babes Bolyai University",
-    "role": "Bachelors's — Maths for Informatics",
-    "startDate": "10/2021",
-    "endDate": "06/2024",
-    "description": "In depth mathematical knowledge and foundamentals of OOP, data structures, DB's, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities.",
-    "type": "education",
-    "logo": ""
+  },{
+    "id": "exp-1",
+    "company": ".msg Systems Romania",
+    "role": "System Integration / Full-Stack Developer",
+    "startDate": "01/2024",
+    "endDate": "Present",
+    "description": "Working on a Mercedes-Benz Group AG project — developing Spring Boot applications, API integration, database management, and enterprise platform integration. Collaborating with international teams across Romania and Germany.",
+    "type": "work",
+    "logo": "/images/timeline/Msg_systems_Logo.svg.png"
   }
 ]
