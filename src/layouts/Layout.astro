@@ -33,6 +33,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
