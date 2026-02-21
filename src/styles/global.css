@@ -566,6 +566,131 @@ a:hover {
 }
 
 /* ============================================================
+   SECTION BACKGROUND ANIMATIONS
+   ============================================================ */
+
+/* --- About: drifting blurred orbs --- */
+.bg-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.bg-orbs span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.07;
+  background: var(--green-primary);
+  animation: orbDrift linear infinite;
+}
+.bg-orbs span:nth-child(1) { width: 400px; height: 400px; top: -10%; left: -5%;  animation-duration: 25s; animation-delay: 0s; }
+.bg-orbs span:nth-child(2) { width: 300px; height: 300px; top: 40%; right: -8%; animation-duration: 32s; animation-delay: -8s; }
+.bg-orbs span:nth-child(3) { width: 250px; height: 250px; bottom: -5%; left: 30%; animation-duration: 28s; animation-delay: -14s; }
+
+@keyframes orbDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(40px, -30px) scale(1.05); }
+  66%  { transform: translate(-20px, 20px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* --- Skills: pulsing dot grid --- */
+.bg-dot-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(0, 255, 65, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: dotGridPulse 5s ease-in-out infinite;
+}
+
+@keyframes dotGridPulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.65; }
+}
+
+/* --- Projects: diagonal drifting lines --- */
+.bg-diagonal-lines {
+  position: absolute;
+  inset: -100%;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    55deg,
+    transparent,
+    transparent 60px,
+    rgba(0, 255, 65, 0.03) 60px,
+    rgba(0, 255, 65, 0.03) 61px
+  );
+  animation: diagonalDrift 18s linear infinite;
+}
+
+@keyframes diagonalDrift {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(200px); }
+}
+
+/* --- Experience: vertical flowing lines --- */
+.bg-circuit-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.bg-circuit-lines span {
+  position: absolute;
+  top: -100%;
+  width: 1px;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 255, 65, 0.25), transparent);
+  animation: circuitFlow linear infinite;
+}
+.bg-circuit-lines span:nth-child(1)  { left: 8%;  animation-duration: 6s;  animation-delay: 0s; }
+.bg-circuit-lines span:nth-child(2)  { left: 20%; animation-duration: 9s;  animation-delay: -2s; }
+.bg-circuit-lines span:nth-child(3)  { left: 35%; animation-duration: 7s;  animation-delay: -5s; }
+.bg-circuit-lines span:nth-child(4)  { left: 50%; animation-duration: 11s; animation-delay: -1s; }
+.bg-circuit-lines span:nth-child(5)  { left: 65%; animation-duration: 8s;  animation-delay: -7s; }
+.bg-circuit-lines span:nth-child(6)  { left: 78%; animation-duration: 10s; animation-delay: -3s; }
+.bg-circuit-lines span:nth-child(7)  { left: 90%; animation-duration: 6.5s;animation-delay: -9s; }
+
+@keyframes circuitFlow {
+  0%   { top: -40%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 110%;  opacity: 0; }
+}
+
+/* --- Contact: expanding pulse rings --- */
+.bg-pulse-rings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-pulse-rings span {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 65, 0.12);
+  animation: ringExpand 6s ease-out infinite;
+}
+.bg-pulse-rings span:nth-child(1) { animation-delay: 0s; }
+.bg-pulse-rings span:nth-child(2) { animation-delay: 2s; }
+.bg-pulse-rings span:nth-child(3) { animation-delay: 4s; }
+
+@keyframes ringExpand {
+  0%   { width: 100px;  height: 100px;  opacity: 0.6; }
+  100% { width: 900px;  height: 900px;  opacity: 0; }
+}
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
