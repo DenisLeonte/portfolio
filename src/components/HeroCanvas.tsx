@@ -234,7 +234,7 @@ export default function HeroCanvas() {
       ref={mountRef}
       className="absolute inset-0"
       aria-hidden="true"
-      style={{ cursor: 'none' }}
+      style={{ cursor: 'default' }}
     />
   );
 }
