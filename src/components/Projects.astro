@@ -191,6 +191,27 @@ const otherProjects = projects.filter((p) => !p.featured);
       </div>
     )}
 
+    <!-- CTA below all projects -->
+    {!projects.every(p => p.name.startsWith('[')) && (
+      <div class="projects-cta gsap-hidden">
+        <p class="projects-cta__label">// see more</p>
+        <h3 class="projects-cta__heading">Want to see what else I can build?</h3>
+        <p class="projects-cta__sub">
+          These are just a few highlights. See the full range of what I can design and build —
+          from restaurant sites to e-commerce stores to creative agencies.
+        </p>
+        <a href="/showcase" class="projects-cta__btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          View the Showcase
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    )}
+
     <!-- Empty state (when only placeholder project) -->
     {projects.every(p => p.name.startsWith('[')) && (
       <div

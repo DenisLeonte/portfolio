@@ -1,0 +1,52 @@
+[
+  {
+    "id": "restaurant",
+    "name": "La Cucina",
+    "category": "Restaurant & Café",
+    "description": "An elegant dining experience with animated menu sections, reservation CTA, and warm Mediterranean aesthetics.",
+    "techHighlights": ["GSAP", "CSS Grid", "Scroll Animations", "Google Fonts"],
+    "colorPreview": "#D4A574",
+    "preview": "/images/showcase_pictures/cuisine.png",
+    "slug": "restaurant"
+  },
+  {
+    "id": "ecommerce",
+    "name": "Luxe Store",
+    "category": "E-commerce & Product",
+    "description": "A sleek product showcase with interactive galleries, cart UI, and modern minimalist design.",
+    "techHighlights": ["CSS Animations", "Flexbox", "Image Gallery", "Snap Scroll"],
+    "colorPreview": "#C9A96E",
+    "preview": "/images/showcase_pictures/luxe.png",
+    "slug": "ecommerce"
+  },
+  {
+    "id": "agency",
+    "name": "Prism Studio",
+    "category": "Creative Agency",
+    "description": "A bold, high-energy agency site with dynamic scroll effects, team showcase, and animated counters.",
+    "techHighlights": ["GSAP", "Three.js", "Parallax", "SVG Animations"],
+    "colorPreview": "#FF6B35",
+    "preview":"/images/showcase_pictures/prism.png",
+    "slug": "agency"
+  },
+  {
+    "id": "blog",
+    "name": "Inkwell",
+    "category": "Blog & Magazine",
+    "description": "A clean, typography-focused reading experience with dark/light mode toggle and reading progress bar.",
+    "techHighlights": ["Dark/Light Mode", "CSS Grid", "Reading Progress", "Typography"],
+    "colorPreview": "#C05746",
+    "preview": "/images/showcase_pictures/inkwell.png",
+    "slug": "blog"
+  },
+  {
+    "id": "realestate",
+    "name": "Horizon Homes",
+    "category": "Real Estate & Property",
+    "description": "A property listing showcase with image carousels, neighborhood sections, and elegant property detail layouts.",
+    "techHighlights": ["Image Carousel", "CSS Grid", "Scroll Reveal", "Interactive Cards"],
+    "colorPreview": "#2C5F2D",
+    "preview": "/images/showcase_pictures/horizon.png",
+    "slug": "realestate"
+  }
+]

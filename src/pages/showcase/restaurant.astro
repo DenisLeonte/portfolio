@@ -1,0 +1,274 @@
+---
+import TemplateLayout from '../../layouts/TemplateLayout.astro';
+import TemplateDemoBar from '../../components/showcase/TemplateDemoBar.astro';
+import '../../styles/showcase/restaurant.css';
+---
+
+<TemplateLayout title="La Cucina" description="Elegant restaurant website template with Mediterranean aesthetics, animated menu sections and reservation CTA.">
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link slot="head" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" />
+
+  <TemplateDemoBar templateName="La Cucina" slug="restaurant" />
+
+  <!-- Navigation -->
+  <nav class="cr-nav">
+    <div class="container">
+      <div class="cr-nav__inner">
+        <a href="#" class="cr-nav__logo">La Cucina</a>
+        <ul class="cr-nav__links">
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+        <a href="#reservation" class="cr-nav__reserve">Reserve a Table</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="cr-hero" id="hero">
+    <img class="cr-hero__photo" src="/images/cuisine_showcase/main-bg.jpg" alt="" aria-hidden="true" fetchpriority="high" />
+    <div class="cr-hero__overlay"></div>
+    <div class="cr-hero__content">
+      <span class="cr-hero__label">Est. 1987 · Napoli, Italy</span>
+      <h1 class="cr-hero__title">La Cucina</h1>
+      <p class="cr-hero__tagline">"Where every dish tells a story of the Mediterranean sun."</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="#menu" class="cr-btn">Explore Menu</a>
+        <a href="#reservation" class="cr-btn cr-btn--filled">Reserve a Table</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="cr-about" id="about">
+    <div class="container">
+      <div class="cr-about__grid">
+        <div class="reveal">
+          <p class="cr-about__label">Our Story</p>
+          <h2 class="cr-about__title">A Passion for Authentic Italian Cuisine</h2>
+          <p class="cr-about__text">
+            Founded in the heart of the Italian quarter, La Cucina has been serving generations of families with the same
+            unwavering commitment to quality, tradition, and the simple joy of a well-cooked meal. We source our
+            ingredients directly from trusted farms in Tuscany and Campania.
+          </p>
+          <p class="cr-about__text">
+            Our head chef, Marco Deluca, trained in Rome before bringing his craft to the world stage. Every dish
+            on our menu is a love letter to the land, the season, and the people who gather around our tables.
+          </p>
+          <a href="#menu" class="cr-btn cr-btn--dark">View Our Menu</a>
+        </div>
+        <div class="cr-about__image reveal">
+          <img src="/images/cuisine_showcase/chef.jpg" alt="Head chef Marco Deluca in the kitchen" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section class="cr-menu" id="menu">
+    <div class="container">
+      <div class="cr-section-header reveal">
+        <p class="cr-section-label">Our Selection</p>
+        <h2 class="cr-section-title">Today's Menu</h2>
+        <div class="cr-section-divider"></div>
+      </div>
+      <div class="cr-menu__grid">
+        <article class="cr-dish-card reveal">
+          <div class="cr-dish-card__img">
+            <img src="/images/cuisine_showcase/ragu.jpg" alt="Tagliatelle al Ragù" loading="lazy" />
+          </div>
+          <div class="cr-dish-card__body">
+            <h3 class="cr-dish-card__name">Tagliatelle al Ragù</h3>
+            <p class="cr-dish-card__desc">Hand-rolled egg pasta with a slow-braised Bolognese ragù, aged Parmigiano-Reggiano, and fresh basil.</p>
+            <div class="cr-dish-card__footer">
+              <span class="cr-dish-card__price">€24</span>
+              <span class="cr-dish-card__tag">Pasta</span>
+            </div>
+          </div>
+        </article>
+        <article class="cr-dish-card reveal">
+          <div class="cr-dish-card__img">
+            <img src="/images/cuisine_showcase/lobster.jpg" alt="Aragosta alla Griglia" loading="lazy" />
+          </div>
+          <div class="cr-dish-card__body">
+            <h3 class="cr-dish-card__name">Aragosta alla Griglia</h3>
+            <p class="cr-dish-card__desc">Fresh Adriatic lobster grilled with garlic butter, lemon zest, and wild herbs from our rooftop garden.</p>
+            <div class="cr-dish-card__footer">
+              <span class="cr-dish-card__price">€52</span>
+              <span class="cr-dish-card__tag">Seafood</span>
+            </div>
+          </div>
+        </article>
+        <article class="cr-dish-card reveal">
+          <div class="cr-dish-card__img">
+            <img src="/images/cuisine_showcase/fiorentine.jpg" alt="Bistecca Fiorentina" loading="lazy" />
+          </div>
+          <div class="cr-dish-card__body">
+            <h3 class="cr-dish-card__name">Bistecca Fiorentina</h3>
+            <p class="cr-dish-card__desc">T-bone steak from Chianina cattle, dry-aged 45 days, charcoal-grilled and finished with Sicilian sea salt.</p>
+            <div class="cr-dish-card__footer">
+              <span class="cr-dish-card__price">€68</span>
+              <span class="cr-dish-card__tag">Grill</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="cr-gallery" id="gallery">
+    <div class="container">
+      <div class="cr-section-header reveal">
+        <p class="cr-section-label">Atmosphere</p>
+        <h2 class="cr-section-title">Our Space</h2>
+        <div class="cr-section-divider"></div>
+      </div>
+      <div class="cr-gallery__grid">
+        {[
+          { h: 220, img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=440&fit=crop&q=80', alt: 'Wine selection' },
+          { h: 180, img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=360&fit=crop&q=80', alt: 'Candlelit dining table' },
+          { h: 260, img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=520&fit=crop&q=80', alt: 'Restaurant interior' },
+          { h: 200, img: 'https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=600&h=400&fit=crop&q=80', alt: 'Fresh pasta dish' },
+          { h: 240, img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=480&fit=crop&q=80', alt: 'Chef in the kitchen' },
+          { h: 190, img: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&h=380&fit=crop&q=80', alt: 'Fresh herbs and vegetables' },
+        ].map((item) => (
+          <div class="cr-gallery__item">
+            <img src={item.img} alt={item.alt} loading="lazy" style={`height:${item.h}px;`} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="cr-testimonials" id="testimonials">
+    <div class="container">
+      <div class="cr-section-header reveal">
+        <p class="cr-section-label">What Guests Say</p>
+        <h2 class="cr-section-title">Memorable Moments</h2>
+        <div class="cr-section-divider"></div>
+      </div>
+      <div class="cr-testimonials__grid">
+        {[
+          { text: "The tagliatelle brought back memories of my grandmother's kitchen in Bologna. Absolute perfection — nothing less.", author: "Sophia M.", date: "March 2025" },
+          { text: "An evening at La Cucina is not just a meal, it is an experience. The ambiance, the wine, the service — flawless.", author: "James T.", date: "January 2025" },
+          { text: "We celebrate every anniversary here. Twelve years running, and the quality never wavers. Our forever favourite.", author: "Elena & Marco R.", date: "February 2025" },
+        ].map((q) => (
+          <blockquote class="cr-quote reveal">
+            <div class="cr-quote__stars">★★★★★</div>
+            <p class="cr-quote__text">"{q.text}"</p>
+            <div class="cr-quote__author">{q.author}</div>
+            <div class="cr-quote__date">{q.date}</div>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation -->
+  <section class="cr-reservation" id="reservation">
+    <div class="container">
+      <div class="cr-section-header reveal">
+        <p class="cr-section-label">Join Us</p>
+        <h2 class="cr-section-title">Reserve Your Table</h2>
+        <div class="cr-section-divider"></div>
+      </div>
+      <form class="cr-form" onsubmit="return false;" aria-label="Reservation form (demo)">
+        <div class="cr-form__group">
+          <label class="cr-form__label" for="res-name">Full Name</label>
+          <input class="cr-form__input" id="res-name" type="text" placeholder="Your Name" />
+        </div>
+        <div class="cr-form__group">
+          <label class="cr-form__label" for="res-email">Email</label>
+          <input class="cr-form__input" id="res-email" type="email" placeholder="you@example.com" />
+        </div>
+        <div class="cr-form__group">
+          <label class="cr-form__label" for="res-date">Date</label>
+          <input class="cr-form__input" id="res-date" type="date" />
+        </div>
+        <div class="cr-form__group">
+          <label class="cr-form__label" for="res-time">Time</label>
+          <input class="cr-form__input" id="res-time" type="time" />
+        </div>
+        <div class="cr-form__group">
+          <label class="cr-form__label" for="res-party">Party Size</label>
+          <input class="cr-form__input" id="res-party" type="number" min="1" max="20" placeholder="2" />
+        </div>
+        <div class="cr-form__group cr-form__full">
+          <button type="submit" class="cr-btn cr-btn--filled" style="width:100%;justify-content:center;">
+            Request Reservation
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cr-footer">
+    <div class="container">
+      <div class="cr-footer__grid">
+        <div>
+          <div class="cr-footer__logo">La Cucina</div>
+          <p class="cr-footer__tagline">"Authentic flavours, timeless traditions."</p>
+          <p style="font-size:0.85rem;line-height:1.7;">
+            Via della Pace 14, Roma, Italia<br/>
+            +39 06 1234 5678 · info@lacucina.it
+          </p>
+        </div>
+        <div>
+          <h4 class="cr-footer__heading">Hours</h4>
+          <ul class="cr-footer__list">
+            <li>Mon – Fri: 12:00 – 23:00</li>
+            <li>Saturday: 11:00 – 24:00</li>
+            <li>Sunday: 12:00 – 22:00</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="cr-footer__heading">Menu</h4>
+          <ul class="cr-footer__list">
+            <li>Antipasti</li>
+            <li>Primi Piatti</li>
+            <li>Secondi</li>
+            <li>Dessert</li>
+            <li>Wine List</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cr-footer__bottom">
+        <span>© 2025 La Cucina. All rights reserved.</span>
+        <span>Roma · Firenze · Milano</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Portfolio coda -->
+  <div class="cr-coda">
+    <span>Template built by</span>
+    <a href="/">Leonte Denis</a>
+    <span class="cr-coda__sep">·</span>
+    <a href="/">View Portfolio</a>
+    <span class="cr-coda__sep">·</span>
+    <a href="/#contact">Get In Touch</a>
+  </div>
+</TemplateLayout>
+
+<script>
+  // Intersection Observer for .reveal elements
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  );
+  revealElements.forEach((el) => observer.observe(el));
+</script>

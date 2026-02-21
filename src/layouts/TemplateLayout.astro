@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Template demo built by Leonte Denis — Full-Stack Software Engineer.' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — Template Demo · Leonte Denis</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="noindex, nofollow" />
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+</body>
+</html>

@@ -1,0 +1,271 @@
+---
+import TemplateLayout from '../../layouts/TemplateLayout.astro';
+import TemplateDemoBar from '../../components/showcase/TemplateDemoBar.astro';
+import '../../styles/showcase/agency.css';
+---
+
+<TemplateLayout title="Prism Studio" description="Bold, high-energy creative agency site with GSAP animations, team showcase, and animated counters.">
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link slot="head" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" />
+
+  <TemplateDemoBar templateName="Prism Studio" slug="agency" />
+
+  <!-- Nav -->
+  <nav class="ag-nav">
+    <div class="ag-nav__inner">
+      <div class="ag-nav__logo">PRISM<span>.</span></div>
+      <ul class="ag-nav__links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Work</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+      <a href="#cta" class="ag-nav__cta">Start a Project</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="ag-hero" id="hero">
+    <div class="ag-hero__bg">
+      <div class="ag-blob ag-blob--1"></div>
+      <div class="ag-blob ag-blob--2"></div>
+      <div class="ag-blob ag-blob--3"></div>
+    </div>
+    <div class="container">
+      <div class="ag-hero__content">
+        <div class="ag-hero__badge">
+          <div class="ag-hero__badge-dot"></div>
+          Available for new projects in 2025
+        </div>
+        <h1 class="ag-hero__title" id="hero-title">
+          <span class="line-break">We Build</span>
+          <em>Bold</em>
+          <span class="line-break"> Digital</span>
+          <span class="line-break">Experiences</span>
+        </h1>
+        <p class="ag-hero__sub">
+          Prism Studio is a creative agency pushing the boundaries of digital design and development.
+          We craft experiences that captivate, convert, and endure.
+        </p>
+        <div class="ag-hero__actions">
+          <a href="#portfolio" class="ag-btn ag-btn--primary">See Our Work</a>
+          <a href="#cta" class="ag-btn ag-btn--outline">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="ag-services" id="services">
+    <div class="container">
+      <div class="ag-section-header">
+        <p class="ag-section-label">What We Do</p>
+        <h2 class="ag-section-title">Services That <em>Scale</em></h2>
+      </div>
+      <div class="ag-services__grid">
+        {[
+          { icon: '🎨', title: 'Brand Identity', desc: 'We craft visual identities that resonate — from logo to full brand guidelines and motion systems.' },
+          { icon: '💻', title: 'Web Development', desc: 'Blazing-fast, accessible websites and applications built with modern frameworks and best practices.' },
+          { icon: '📱', title: 'UX / UI Design', desc: 'User-centric interfaces that delight. We combine research, strategy, and craft to deliver exceptional experiences.' },
+          { icon: '🚀', title: 'Growth & SEO', desc: 'Data-driven strategies to grow your digital presence, from technical SEO to content and conversion optimisation.' },
+        ].map((s) => (
+          <article class="ag-service-card">
+            <div class="ag-service-card__icon">{s.icon}</div>
+            <h3 class="ag-service-card__title">{s.title}</h3>
+            <p class="ag-service-card__desc">{s.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="ag-portfolio" id="portfolio">
+    <div class="container">
+      <div class="ag-section-header">
+        <p class="ag-section-label">Selected Work</p>
+        <h2 class="ag-section-title">Recent <em>Projects</em></h2>
+      </div>
+      <div class="ag-portfolio__grid">
+        {[
+          { cat: 'Branding', title: 'Nova Bank Identity', img: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800&h=600&fit=crop&q=80' },
+          { cat: 'Web Design', title: 'Bloom E-commerce', img: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop&q=80' },
+          { cat: 'UX Research', title: 'HealthTrack App', img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop&q=80' },
+          { cat: 'Motion', title: 'Aria Campaign', img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=600&fit=crop&q=80' },
+          { cat: 'Development', title: 'SkyLog Platform', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80' },
+          { cat: 'Branding', title: 'Ember Spirits Co.', img: 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=800&h=600&fit=crop&q=80' },
+        ].map((p) => (
+          <div class="ag-portfolio-item">
+            <div class="ag-portfolio-item__bg">
+              <img src={p.img} alt={p.title} loading="lazy" />
+            </div>
+            <div class="ag-portfolio-item__overlay">
+              <div class="ag-portfolio-item__category">{p.cat}</div>
+              <div class="ag-portfolio-item__title">{p.title}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="ag-stats" id="stats">
+    <div class="container">
+      <div class="ag-stats__grid">
+        {[
+          { value: 150, suffix: '+', label: 'Projects Delivered' },
+          { value: 50, suffix: '+', label: 'Happy Clients' },
+          { value: 12, suffix: '', label: 'Industry Awards' },
+          { value: 8, suffix: '', label: 'Years in Business' },
+        ].map((s, i) => (
+          <div class="ag-stat">
+            <div class="ag-stat__number" data-target={s.value} data-suffix={s.suffix}>
+              0<span>{s.suffix}</span>
+            </div>
+            <div class="ag-stat__label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="ag-team" id="team">
+    <div class="container">
+      <div class="ag-section-header">
+        <p class="ag-section-label">The People</p>
+        <h2 class="ag-section-title">Meet the <em>Team</em></h2>
+      </div>
+    </div>
+    <div class="container" style="overflow:visible;">
+      <div class="ag-team__scroll">
+        {[
+          { name: 'Alex Rivera', role: 'Creative Director', bio: 'Design visionary with 15 years crafting brand identities for global companies.', e: '👩‍🎨', bg: 'linear-gradient(135deg,#FF6B35,#FF9F35)' },
+          { name: 'Jordan Kim', role: 'Lead Developer', bio: 'Full-stack wizard passionate about performance and clean, maintainable code.', e: '👨‍💻', bg: 'linear-gradient(135deg,#4A90E2,#1A2B4A)' },
+          { name: 'Sam Patel', role: 'UX Strategist', bio: 'User advocate who translates complex problems into elegant, intuitive solutions.', e: '🎯', bg: 'linear-gradient(135deg,#6B35FF,#9F35FF)' },
+          { name: 'Chris Morgan', role: 'Motion Designer', bio: 'Breathing life into brands through animation, video, and interactive storytelling.', e: '✨', bg: 'linear-gradient(135deg,#C05746,#F0A078)' },
+        ].map((m) => (
+          <div class="ag-team-card">
+            <div class="ag-team-card__photo" style={`background:${m.bg};`}>{m.e}</div>
+            <div class="ag-team-card__info">
+              <div class="ag-team-card__name">{m.name}</div>
+              <div class="ag-team-card__role">{m.role}</div>
+              <p class="ag-team-card__bio">{m.bio}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="ag-cta" id="cta">
+    <div class="container">
+      <div class="ag-cta__content">
+        <h2 class="ag-cta__title">Have a project in mind?</h2>
+        <p class="ag-cta__sub">Let's build something extraordinary together. We'd love to hear your vision.</p>
+        <a href="/#contact" class="ag-btn ag-btn--white">Start the Conversation →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="ag-footer">
+    <div class="container">
+      <div class="ag-footer__inner">
+        <div class="ag-footer__logo">PRISM<span>.</span></div>
+        <span class="ag-footer__copy">© 2025 Prism Studio. All rights reserved.</span>
+        <ul class="ag-footer__links">
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Portfolio coda -->
+  <div class="ag-coda">
+    <span>Template built by</span>
+    <a href="/">Leonte Denis</a>
+    <span class="ag-coda__sep">·</span>
+    <a href="/">View Portfolio</a>
+    <span class="ag-coda__sep">·</span>
+    <a href="/#contact">Get In Touch</a>
+  </div>
+</TemplateLayout>
+
+<script>
+  // Service cards stagger
+  const serviceCards = document.querySelectorAll('.ag-service-card');
+  const serviceObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        serviceCards.forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), i * 120);
+        });
+        serviceObserver.disconnect();
+      }
+    },
+    { threshold: 0.1 }
+  );
+  if (serviceCards.length) serviceObserver.observe(serviceCards[0].closest('section') || serviceCards[0]);
+
+  // Animated counters
+  const statNumbers = document.querySelectorAll('.ag-stat__number');
+
+  const animateCounter = (el: Element) => {
+    const target = parseInt(el.getAttribute('data-target') || '0');
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1800;
+    const startTime = performance.now();
+
+    const update = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const current = Math.round(eased * target);
+      el.innerHTML = `${current}<span>${suffix}</span>`;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+
+    requestAnimationFrame(update);
+  };
+
+  const statsSection = document.getElementById('stats');
+  if (statsSection) {
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            statNumbers.forEach(animateCounter);
+            counterObserver.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    counterObserver.observe(statsSection);
+  }
+
+  // Hero title character animation with GSAP
+  // (Minimal vanilla JS fallback if GSAP not loaded in this context)
+  const heroTitle = document.getElementById('hero-title');
+  if (heroTitle) {
+    heroTitle.style.opacity = '1';
+    const lines = heroTitle.querySelectorAll('span:not(.line-break), em');
+    lines.forEach((line, i) => {
+      (line as HTMLElement).style.opacity = '0';
+      (line as HTMLElement).style.transform = 'translateY(40px)';
+      (line as HTMLElement).style.transition = `opacity 0.6s ease ${0.1 + i * 0.15}s, transform 0.6s ease ${0.1 + i * 0.15}s`;
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          (line as HTMLElement).style.opacity = '1';
+          (line as HTMLElement).style.transform = 'translateY(0)';
+        }, 50);
+      });
+    });
+  }
+</script>

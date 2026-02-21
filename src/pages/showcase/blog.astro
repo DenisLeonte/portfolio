@@ -1,0 +1,226 @@
+---
+import TemplateLayout from '../../layouts/TemplateLayout.astro';
+import TemplateDemoBar from '../../components/showcase/TemplateDemoBar.astro';
+import '../../styles/showcase/blog.css';
+---
+
+<TemplateLayout title="Inkwell" description="Clean, typography-focused blog template with dark/light mode toggle and reading progress bar.">
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link slot="head" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Lato:wght@300;400;700&display=swap" />
+
+  <TemplateDemoBar templateName="Inkwell" slug="blog" />
+
+  <!-- Reading progress bar -->
+  <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- Header -->
+  <header class="bl-header">
+    <div class="container">
+      <div class="bl-header__inner">
+        <div class="bl-header__logo">Inkwell</div>
+        <ul class="bl-header__nav">
+          <li><a href="#featured">Home</a></li>
+          <li><a href="#categories">Topics</a></li>
+          <li><a href="#articles">Archive</a></li>
+          <li><a href="#newsletter">Subscribe</a></li>
+        </ul>
+        <div class="bl-header__actions">
+          <button class="bl-theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+            🌙
+          </button>
+          <button class="bl-subscribe-btn" type="button">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Featured Article -->
+  <section class="bl-featured" id="featured">
+    <div class="container">
+      <article class="bl-featured__card reveal">
+        <div class="bl-featured__image">
+          <img src="/images/inkwell_showcase/main.jpg" alt="The Quiet Revolution of Slow Reading" fetchpriority="high" />
+        </div>
+        <div class="bl-featured__content">
+          <span class="bl-category-tag">Philosophy</span>
+          <h1 class="bl-featured__title">The Quiet Revolution of Slow Reading in a Fast World</h1>
+          <p class="bl-featured__excerpt">
+            In an era defined by infinite scroll and shrinking attention spans, a growing movement is
+            rediscovering the profound pleasure of sitting with a single long-form text. What does it
+            mean to truly read — and what are we losing when we skim?
+          </p>
+          <div class="bl-featured__meta">
+            <div class="bl-featured__avatar">E</div>
+            <div>
+              <div style="font-weight:700;color:var(--bl-text);">Eleanor Whitmore</div>
+              <div>March 14, 2025 · 12 min read</div>
+            </div>
+          </div>
+          <a href="#" class="bl-read-link">
+            Read Essay
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Category Pills -->
+  <section class="bl-categories" id="categories">
+    <div class="container">
+      <p class="bl-categories__title">Browse by Topic</p>
+      <div class="bl-pills">
+        {['All', 'Philosophy', 'Technology', 'Culture', 'Science', 'Politics', 'Environment', 'Art', 'Travel', 'Books'].map((cat, i) => (
+          <button class={`bl-pill${i === 0 ? ' active' : ''}`} type="button">{cat}</button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Grid -->
+  <section class="bl-articles" id="articles">
+    <div class="container">
+      <div class="bl-articles__grid">
+        {[
+          { cat: 'Technology', title: 'Why the Open Web Still Matters More Than Ever', excerpt: 'Centralisation has been the story of the last decade. But a quiet decentralised resurgence is underway.', author: 'T. Okonkwo', date: 'Mar 10', color: '#4A90E2', reading: '8 min', img: 'https://picsum.photos/seed/openwebtech/800/450' },
+          { cat: 'Culture', title: 'The Architecture of Memory: How Cities Remember', excerpt: 'From Hausmann\'s Paris to brutalist relics, our cities are living archives. But who decides what gets preserved?', author: 'M. Castillo', date: 'Mar 7', color: '#C05746', reading: '11 min', img: 'https://picsum.photos/seed/cityarchive/800/450' },
+          { cat: 'Science', title: 'Quantum Entanglement and the Nature of Now', excerpt: 'Einstein called it "spooky action at a distance." New experiments are revealing it\'s stranger still.', author: 'Dr. A. Patel', date: 'Mar 3', color: '#2C5F2D', reading: '15 min', img: 'https://picsum.photos/seed/quantumphysics/800/450' },
+          { cat: 'Art', title: 'When Algorithms Dream of Painting', excerpt: 'AI-generated art is flooding galleries. Artists, collectors, and critics are still trying to make sense of it.', author: 'L. van Berg', date: 'Feb 28', color: '#FF6B35', reading: '9 min', img: 'https://picsum.photos/seed/artgallery22/800/450' },
+          { cat: 'Environment', title: 'The Last Glaciers: A Photographic Elegy', excerpt: 'Photographer Yuki Sato spent five years documenting the retreat of glaciers across three continents.', author: 'Y. Sato', date: 'Feb 24', color: '#4A9E4C', reading: '6 min', img: 'https://picsum.photos/seed/glaciersnow/800/450' },
+          { cat: 'Books', title: 'Ten Novels That Predicted the Present', excerpt: 'From Zamyatin to Ishiguro — fiction has long been our sharpest lens on the future. Here are the ten most prescient.', author: 'E. Whitmore', date: 'Feb 20', color: '#9B59B6', reading: '10 min', img: 'https://picsum.photos/seed/librarybooks/800/450' },
+        ].map((a) => (
+          <article class="bl-article-card reveal">
+            <div class="bl-article-card__img">
+              <img src={a.img} alt={a.title} loading="lazy" />
+            </div>
+            <div class="bl-article-card__body">
+              <span class="bl-category-tag" style={`background:${a.color}18;color:${a.color};`}>{a.cat}</span>
+              <h3 class="bl-article-card__title">{a.title}</h3>
+              <p class="bl-article-card__excerpt">{a.excerpt}</p>
+              <div class="bl-article-card__meta">
+                <span>{a.author} · {a.date}</span>
+                <span class="bl-reading-time">{a.reading}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="bl-newsletter" id="newsletter">
+    <div class="container">
+      <div class="bl-newsletter__icon">✉️</div>
+      <h2 class="bl-newsletter__title">Stories Worth Your Time</h2>
+      <p class="bl-newsletter__sub">Deep dives, thoughtful essays, and occasional surprises. No noise, no spam. Unsubscribe anytime.</p>
+      <form class="bl-newsletter__form" onsubmit="return false;" aria-label="Newsletter signup (demo)">
+        <input class="bl-newsletter__input" type="email" placeholder="your@email.com" aria-label="Email address" />
+        <button class="bl-newsletter__submit" type="submit">Subscribe Free</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bl-footer">
+    <div class="container">
+      <div class="bl-footer__grid">
+        <div>
+          <div class="bl-footer__logo">Inkwell</div>
+          <p class="bl-footer__tagline">Long-form writing for curious minds. Independent, thoughtful, unhurried.</p>
+        </div>
+        <div>
+          <h4 class="bl-footer__heading">Topics</h4>
+          <ul class="bl-footer__list">
+            <li><a href="#">Philosophy</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Culture</a></li>
+            <li><a href="#">Science</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="bl-footer__heading">Inkwell</h4>
+          <ul class="bl-footer__list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Writers</a></li>
+            <li><a href="#">Pitch Us</a></li>
+            <li><a href="#">Advertise</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="bl-footer__heading">Legal</h4>
+          <ul class="bl-footer__list">
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bl-footer__bottom">
+        <span>© 2025 Inkwell Publication. All rights reserved.</span>
+        <span>Words that last.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Portfolio coda -->
+  <div class="bl-coda">
+    <span>Template built by</span>
+    <a href="/">Leonte Denis</a>
+    <span class="bl-coda__sep">·</span>
+    <a href="/">View Portfolio</a>
+    <span class="bl-coda__sep">·</span>
+    <a href="/#contact">Get In Touch</a>
+  </div>
+</TemplateLayout>
+
+<script>
+  // ── Dark / Light mode toggle ──────────────────────────────────
+  const toggleBtn = document.getElementById('theme-toggle') as HTMLButtonElement;
+  let isDark = false;
+
+  toggleBtn?.addEventListener('click', () => {
+    isDark = !isDark;
+    document.body.setAttribute('data-theme', isDark ? 'dark' : '');
+    toggleBtn.textContent = isDark ? '☀️' : '🌙';
+    toggleBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  });
+
+  // ── Reading progress bar ──────────────────────────────────────
+  const progressBar = document.getElementById('reading-progress');
+  if (progressBar) {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = `${Math.min(pct, 100)}%`;
+      progressBar.setAttribute('aria-valuenow', String(Math.round(pct)));
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // ── Category pill active state ────────────────────────────────
+  document.querySelectorAll('.bl-pill').forEach((pill) => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.bl-pill').forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // ── Scroll reveal ─────────────────────────────────────────────
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+  );
+  revealElements.forEach((el) => observer.observe(el));
+</script>
