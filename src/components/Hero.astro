@@ -1,0 +1,188 @@
+---
+import HeroCanvas from './HeroCanvas.tsx';
+import TypingEffect from './TypingEffect.tsx';
+import profile from '../data/profile.json';
+---
+
+<section
+  id="hero"
+  class="relative flex items-center justify-center overflow-hidden"
+  style="min-height: 100dvh; min-height: 100vh;"
+>
+  <!-- Three.js Canvas (React island — loads immediately) -->
+  <HeroCanvas client:load />
+
+  <!-- Scanline overlay -->
+  <div class="scanlines absolute inset-0 pointer-events-none z-[1]"></div>
+
+  <!-- Radial glow at center -->
+  <div
+    class="absolute inset-0 pointer-events-none z-[1]"
+    style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,255,65,0.05) 0%, transparent 70%);"
+  ></div>
+
+  <!-- Hero Content -->
+  <div
+    class="relative z-10 text-center px-6 max-w-4xl mx-auto"
+    style="padding-top: 5rem;"
+  >
+    <!-- Terminal prompt line -->
+    <div
+      class="terminal-prompt mb-6 text-sm opacity-0"
+      id="hero-prompt"
+      aria-hidden="true"
+    >
+      <span style="color: var(--green-muted);">user@portfolio</span>
+      <span style="color: rgba(138,138,138,0.6);">:</span>
+      <span style="color: #3b8eea;">~</span>
+      <span style="color: rgba(138,138,138,0.6);">$</span>
+      <span style="color: rgba(138,138,138,0.5); margin-left: 0.5rem;">whoami</span>
+    </div>
+
+    <!-- Main heading -->
+    <h1
+      class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-4 tracking-tight opacity-0"
+      id="hero-heading"
+      style="letter-spacing: -0.03em; line-height: 1.0;"
+    >
+      Hi, I'm{' '}
+      <span
+        class="glow-text"
+        style="color: #00ff41;"
+      >
+        {profile.name}.
+      </span>
+    </h1>
+
+    <!-- Typing phrase subtitle -->
+    <div
+      class="text-xl md:text-2xl lg:text-3xl mb-8 h-10 flex items-center justify-center opacity-0"
+      id="hero-typing"
+      style="font-weight: 500; letter-spacing: -0.01em;"
+    >
+      <TypingEffect
+        client:load
+        phrases={profile.typingPhrases}
+      />
+    </div>
+
+    <!-- Subtitle -->
+    <p
+      class="text-base md:text-lg mb-12 opacity-0"
+      id="hero-subtitle"
+      style="color: var(--text-secondary); max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.7;"
+    >
+      {profile.heroSubtitle}
+    </p>
+
+    <!-- CTA Buttons -->
+    <div
+      class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0"
+      id="hero-cta"
+    >
+      <a href="#projects" class="btn-primary">
+        <span>View My Work</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        Get In Touch
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 scroll-indicator opacity-0"
+    id="hero-scroll"
+    aria-hidden="true"
+  >
+    <span style="font-size: 0.65rem; letter-spacing: 0.25em;">SCROLL</span>
+    <div class="chevron mt-2"></div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      // Just show everything instantly
+      ['#hero-prompt', '#hero-heading', '#hero-typing', '#hero-subtitle', '#hero-cta', '#hero-scroll'].forEach(
+        (id) => {
+          const el = document.querySelector(id) as HTMLElement;
+          if (el) el.style.opacity = '1';
+        }
+      );
+      return;
+    }
+
+    // Staggered entrance animation
+    const tl = gsap.timeline({ delay: 0.3 });
+
+    tl.to('#hero-prompt', {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    })
+      .to(
+        '#hero-heading',
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        },
+        '-=0.2'
+      )
+      .to(
+        '#hero-typing',
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+        },
+        '-=0.4'
+      )
+      .to(
+        '#hero-subtitle',
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+        },
+        '-=0.3'
+      )
+      .to(
+        '#hero-cta',
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+        },
+        '-=0.3'
+      )
+      .to(
+        '#hero-scroll',
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+        },
+        '-=0.2'
+      );
+
+    // Set initial positions
+    gsap.set(['#hero-prompt', '#hero-heading', '#hero-typing', '#hero-subtitle', '#hero-cta', '#hero-scroll'], {
+      y: 30,
+    });
+  });
+</script>

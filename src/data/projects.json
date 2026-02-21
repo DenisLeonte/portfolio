@@ -1,0 +1,12 @@
+[
+  {
+    "id": "project-1",
+    "name": "Instalații Suceava",
+    "description": "A professional service website built for my father's plumbing & HVAC business in Suceava, Romania. Features service listings, contact details, and structured SEO markup to help local customers find the business.",
+    "techStack": ["React", "TypeScript", "TailwindCSS"],
+    "githubUrl": "",
+    "liveUrl": "https://instalatiisuceava.ro",
+    "image": "/images/projects/project-1.png",
+    "featured": true
+  }
+]

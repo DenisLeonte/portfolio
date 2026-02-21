@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Timeline from '../components/Timeline.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import profile from '../data/profile.json';
+
+const pageTitle = `${profile.name} — ${profile.title}`;
+const pageDescription = `Full-Stack Software Engineer with 2+ years of experience. Spring Boot, React, Angular, AI & Big Data. Currently at Mercedes-Benz Group AG.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Skip to main content (accessibility) -->
+  <a
+    href="#about"
+    class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-bg-primary focus:text-green-primary focus:outline-none focus:ring-2 focus:ring-green-primary"
+  >
+    Skip to main content
+  </a>
+
+  <Navbar />
+
+  <main id="main">
+    <Hero />
+    <About />
+    <Skills />
+    <Projects />
+    <Timeline />
+    <Contact />
+  </main>
+
+  <Footer />
+</Layout>

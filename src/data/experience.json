@@ -1,0 +1,22 @@
+[
+  {
+    "id": "exp-1",
+    "company": ".msg Systems Romania",
+    "role": "System Integration / Full-Stack Developer",
+    "startDate": "[START_DATE]",
+    "endDate": "Present",
+    "description": "Working on a Mercedes-Benz Group AG project — developing Spring Boot applications, API integration, database management, and enterprise platform integration. Collaborating with international teams across Romania and Germany.",
+    "type": "work",
+    "logo": ""
+  },
+  {
+    "id": "edu-1",
+    "company": "[UNIVERSITY_NAME]",
+    "role": "Master's — High Performance Computing and Big Data Analysis",
+    "startDate": "[EDUCATION_START_DATE]",
+    "endDate": "[EDUCATION_END_DATE]",
+    "description": "Advanced studies in distributed computing, parallel algorithms, machine learning, and large-scale data processing pipelines.",
+    "type": "education",
+    "logo": ""
+  }
+]

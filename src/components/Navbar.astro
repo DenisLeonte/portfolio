@@ -1,0 +1,161 @@
+---
+import profile from '../data/profile.json';
+
+const navLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 px-6 py-4"
+  aria-label="Primary navigation"
+>
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Logo / Name -->
+    <a
+      href="#hero"
+      class="flex items-center gap-2 no-underline group"
+      aria-label="Back to top"
+    >
+      <span
+        class="text-green-primary font-bold text-xl tracking-tight"
+        style="text-shadow: 0 0 15px rgba(0,255,65,0.4);"
+      >
+        <span class="opacity-50 group-hover:opacity-100 transition-opacity">&gt;_</span>
+        <span style="color: #00ff41;">{profile.name.split(' ')[0]}</span>
+        <span class="text-white opacity-80">.{profile.name.split(' ')[1].toLowerCase()}</span>
+      </span>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex items-center gap-8" role="list">
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link" role="listitem">
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Mobile Hamburger Button -->
+    <button
+      id="hamburger"
+      class="md:hidden flex flex-col gap-[5px] p-2 group"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="hamburger-line block w-6 h-[1px] bg-white transition-all duration-300 group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[6px]"></span>
+      <span class="hamburger-line block w-6 h-[1px] bg-white transition-all duration-300 group-aria-expanded:opacity-0 group-aria-expanded:scale-x-0"></span>
+      <span class="hamburger-line block w-6 h-[1px] bg-white transition-all duration-300 group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[6px]"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden overflow-hidden"
+    style="max-height: 0; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; opacity: 0;"
+    aria-hidden="true"
+  >
+    <div
+      class="container mx-auto mt-4 pb-4 border-t flex flex-col gap-1"
+      style="border-color: rgba(0,255,65,0.15);"
+    >
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-nav-link py-3 text-sm tracking-widest uppercase text-secondary hover:text-green-primary transition-colors"
+          style="color: var(--text-secondary);"
+        >
+          <span class="text-green-primary mr-2 opacity-60">//</span>
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar')!;
+  const hamburger = document.getElementById('hamburger')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  // ─── Scroll → Navbar glass effect ────────────────────────────
+  const onScroll = () => {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ─── Mobile Menu Toggle ───────────────────────────────────────
+  let menuOpen = false;
+
+  const toggleMenu = () => {
+    menuOpen = !menuOpen;
+    hamburger.setAttribute('aria-expanded', String(menuOpen));
+    mobileMenu.setAttribute('aria-hidden', String(!menuOpen));
+
+    if (menuOpen) {
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      mobileMenu.style.opacity = '1';
+    } else {
+      mobileMenu.style.maxHeight = '0';
+      mobileMenu.style.opacity = '0';
+    }
+  };
+
+  hamburger.addEventListener('click', toggleMenu);
+
+  // Close on mobile link click
+  mobileLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (menuOpen) toggleMenu();
+    });
+  });
+
+  // ─── Active Section Highlighting (Intersection Observer) ─────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+  );
+
+  sections.forEach((s) => sectionObserver.observe(s));
+
+  // ─── Smooth Scroll for Nav Links ─────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = (anchor as HTMLAnchorElement).getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>

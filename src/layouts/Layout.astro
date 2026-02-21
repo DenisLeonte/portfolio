@@ -1,0 +1,194 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Leonte Denis — Full-Stack Software Engineer',
+  description = 'Full-Stack Software Engineer with 2 years of experience. Spring Boot, React, Angular, AI & Big Data. Currently at Mercedes-Benz Group AG.',
+  image = '/og-image.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Leonte Denis" />
+    <meta name="keywords" content="Full-Stack Developer, Spring Boot, React, Angular, Java, Software Engineer, Portfolio" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts: JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- GSAP ScrollTrigger initialization (runs after DOM is ready) -->
+    <script>
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) return;
+
+        // ─── ABOUT SECTION ───────────────────────────────────────
+        const aboutElements = document.querySelectorAll('#about .gsap-hidden');
+        if (aboutElements.length) {
+          gsap.to(aboutElements, {
+            scrollTrigger: {
+              trigger: '#about',
+              start: 'top 75%',
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+          });
+        }
+
+        // ─── SKILLS SECTION ──────────────────────────────────────
+        const skillCards = document.querySelectorAll('#skills .skill-card');
+        if (skillCards.length) {
+          gsap.to(skillCards, {
+            scrollTrigger: {
+              trigger: '#skills',
+              start: 'top 75%',
+            },
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: 'back.out(1.4)',
+          });
+
+          // Animate skill bars when visible
+          ScrollTrigger.create({
+            trigger: '#skills',
+            start: 'top 60%',
+            onEnter: () => {
+              document.querySelectorAll('.skill-bar-fill').forEach((bar) => {
+                (bar as HTMLElement).classList.add('animated');
+              });
+            },
+          });
+        }
+
+        // ─── PROJECTS SECTION ────────────────────────────────────
+        const projectCards = document.querySelectorAll('#projects .project-card');
+        if (projectCards.length) {
+          gsap.to(projectCards, {
+            scrollTrigger: {
+              trigger: '#projects',
+              start: 'top 75%',
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out',
+          });
+        }
+
+        // ─── EXPERIENCE TIMELINE ─────────────────────────────────
+        const timelineItems = document.querySelectorAll('#experience .timeline-item');
+        if (timelineItems.length) {
+          timelineItems.forEach((item, index) => {
+            const isLeft = index % 2 === 0;
+            gsap.set(item, { opacity: 0, x: isLeft ? -60 : 60 });
+            gsap.to(item, {
+              scrollTrigger: {
+                trigger: item,
+                start: 'top 80%',
+              },
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: 'power3.out',
+              delay: 0.1,
+            });
+          });
+        }
+
+        // ─── CONTACT SECTION ─────────────────────────────────────
+        const contactElements = document.querySelectorAll('#contact .gsap-hidden');
+        if (contactElements.length) {
+          gsap.to(contactElements, {
+            scrollTrigger: {
+              trigger: '#contact',
+              start: 'top 75%',
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+          });
+        }
+
+        // ─── PARALLAX BACKGROUNDS ────────────────────────────────
+        const parallaxLayers = document.querySelectorAll('[data-parallax]');
+        parallaxLayers.forEach((layer) => {
+          const speed = parseFloat((layer as HTMLElement).dataset.parallax || '0.3');
+          gsap.to(layer, {
+            yPercent: speed * 100,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: layer,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

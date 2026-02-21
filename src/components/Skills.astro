@@ -1,0 +1,109 @@
+---
+import skillsData from '../data/skills.json';
+---
+
+<section id="skills" class="section-wrapper" style="background: rgba(0,255,65,0.01);">
+  <!-- Subtle top border -->
+  <div
+    class="absolute top-0 left-0 right-0 h-px"
+    style="background: linear-gradient(90deg, transparent, rgba(0,255,65,0.2), transparent);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container mx-auto">
+    <p class="section-label gsap-hidden">02. Tech Stack</p>
+    <h2 class="section-title gsap-hidden">
+      Skills & <span>Tools</span>
+    </h2>
+    <p class="gsap-hidden mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+      Technologies I work with daily — from backend APIs to machine learning pipelines.
+    </p>
+
+    <!-- Skill Categories Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {skillsData.categories.map((category, catIdx) => (
+        <div
+          class="skill-card gsap-hidden"
+          style={`
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition-delay: ${catIdx * 60}ms;
+          `}
+        >
+          <!-- Category Header -->
+          <div class="flex items-center gap-3 mb-5">
+            <span
+              class="text-lg"
+              aria-hidden="true"
+              style="filter: drop-shadow(0 0 6px rgba(0,255,65,0.3));"
+            >
+              {category.icon}
+            </span>
+            <div>
+              <h3
+                class="text-sm font-bold tracking-widest uppercase"
+                style="color: #fff; letter-spacing: 0.12em;"
+              >
+                {category.name}
+              </h3>
+              <div
+                class="h-px w-8 mt-1"
+                style="background: var(--green-primary); box-shadow: 0 0 6px rgba(0,255,65,0.5);"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Skills List -->
+          <ul class="flex flex-col gap-3" role="list">
+            {category.skills.map((skill) => (
+              <li role="listitem">
+                <div class="flex items-center justify-between mb-1">
+                  <span
+                    class="text-sm"
+                    style="color: var(--text-primary); font-size: 0.8rem;"
+                  >
+                    {skill.name}
+                  </span>
+                  <span
+                    class="text-xs"
+                    style="color: var(--green-muted); font-size: 0.7rem;"
+                  >
+                    {skill.level}%
+                  </span>
+                </div>
+                <div class="skill-bar-track" role="progressbar" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={`${skill.name} proficiency: ${skill.level}%`}>
+                  <div
+                    class="skill-bar-fill"
+                    style={`width: ${skill.level}%;`}
+                  ></div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom badge row — all skills flat -->
+    <div class="mt-12 gsap-hidden">
+      <p
+        class="text-xs tracking-widest uppercase mb-5"
+        style="color: var(--text-secondary); letter-spacing: 0.2em;"
+      >
+        // Quick Reference
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {skillsData.categories.flatMap(c => c.skills).map((skill) => (
+          <span class="tech-badge">{skill.name}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtle bottom border -->
+  <div
+    class="absolute bottom-0 left-0 right-0 h-px"
+    style="background: linear-gradient(90deg, transparent, rgba(0,255,65,0.2), transparent);"
+    aria-hidden="true"
+  ></div>
+</section>

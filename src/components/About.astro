@@ -1,0 +1,97 @@
+---
+import profile from '../data/profile.json';
+
+// Split bio into paragraphs
+const bioParagraphs = profile.bio.split('\n\n').filter(Boolean);
+---
+
+<section id="about" class="section-wrapper">
+  <div class="container mx-auto">
+    <!-- Section Label -->
+    <p class="section-label gsap-hidden">01. About Me</p>
+
+    <div class="grid md:grid-cols-5 gap-12 lg:gap-16 items-start">
+      <!-- Bio Text — left column (3/5) -->
+      <div class="md:col-span-3">
+        <h2 class="section-title gsap-hidden mb-8">
+          Who I <span>Am</span>
+        </h2>
+
+        {bioParagraphs.map((para) => (
+          <p class="gsap-hidden mb-5" style="color: var(--text-secondary); line-height: 1.85; font-size: 0.95rem;">
+            {para}
+          </p>
+        ))}
+
+        <div class="flex flex-wrap gap-3 mt-8 gsap-hidden">
+          <a href="#contact" class="btn-primary">
+            Let's Talk
+          </a>
+          <a
+            href={profile.socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary"
+          >
+            View GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Highlight Cards — right column (2/5) -->
+      <div class="md:col-span-2 flex flex-col gap-4">
+        {profile.highlights.map((highlight, i) => (
+          <div
+            class="glass-card p-6 gsap-hidden"
+            style={`transition-delay: ${i * 80}ms;`}
+          >
+            <div
+              class="text-2xl font-black mb-1 glow-text"
+              style="color: #00ff41; letter-spacing: -0.02em;"
+            >
+              {highlight.value}
+            </div>
+            <div
+              class="text-sm tracking-wide"
+              style="color: var(--text-secondary);"
+            >
+              {highlight.label}
+            </div>
+          </div>
+        ))}
+
+        <!-- Terminal snippet decoration -->
+        <div
+          class="glass-card p-5 gsap-hidden mt-2 font-mono text-xs"
+          style="border-color: rgba(0,255,65,0.12);"
+        >
+          <div style="color: var(--green-muted); margin-bottom: 0.5rem;">// denis.config.json</div>
+          <div style="color: var(--text-secondary);">
+            <span style="color: var(--green-primary);">"role"</span>
+            <span>: </span>
+            <span style="color: #e8b84b;">"Full-Stack Engineer"</span>
+            <span>,</span>
+          </div>
+          <div style="color: var(--text-secondary);">
+            <span style="color: var(--green-primary);">"hobbies"</span>
+            <span>: [</span>
+          </div>
+          <div style="color: var(--text-secondary); padding-left: 1rem;">
+            <span style="color: #e8b84b;">"cooking"</span><span>,</span>
+            <span style="color: #e8b84b;"> "cars"</span><span>,</span>
+            <span style="color: #e8b84b;"> "astronomy"</span><span>,</span>
+            <span style="color: #e8b84b;"> "coffee"</span>
+          </div>
+          <div style="color: var(--text-secondary);">
+            <span>],</span>
+          </div>
+          <div style="color: var(--text-secondary);">
+            <span style="color: var(--green-primary);">"open_to_chat"</span>
+            <span>: </span>
+            <span style="color: var(--green-primary);">true</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

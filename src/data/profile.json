@@ -1,0 +1,22 @@
+{
+  "name": "Leonte Denis",
+  "title": "Full-Stack Software Engineer",
+  "heroSubtitle": "Building robust, scalable applications from backend to frontend.",
+  "typingPhrases": [
+    "Full-Stack Software Engineer",
+    "Spring Boot & React Developer",
+    "AI & Big Data Enthusiast"
+  ],
+  "bio": "I'm a Full-Stack Software Engineer with 2 years of experience building enterprise-grade applications. I hold a Master's degree in High Performance Computing and Big Data Analysis, which fuels my passion for building performant, data-driven solutions.\n\nCurrently working at .msg Systems Romania on a Mercedes-Benz Group AG project, where I develop and integrate complex systems using Spring Boot, Angular, and modern cloud technologies. I thrive at the intersection of backend architecture and intuitive frontend experiences.\n\nOutside of work I'm usually cooking something new, going down a rabbit hole about cars, staring at the night sky, or making a decent cup of coffee — sometimes all in the same evening.",
+  "highlights": [
+    { "label": "Years Experience", "value": "2+" },
+    { "label": "Master's Degree", "value": "HPC & Big Data" },
+    { "label": "Current Role", "value": "@ .msg Systems" }
+  ],
+  "socialLinks": {
+    "github": "https://github.com/DenisLeonte",
+    "linkedin": "https://www.linkedin.com/in/denis-leonte-216683216/"
+  },
+  "email": "denistechs@gmail.com",
+  "profilePhoto": "/images/profile.jpg"
+}

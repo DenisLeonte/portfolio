@@ -1,0 +1,171 @@
+---
+import experience from '../data/experience.json';
+
+// Sort entries — "Present" sorts to top, then by startDate desc
+const sorted = [...experience].sort((a, b) => {
+  if (a.endDate === 'Present') return -1;
+  if (b.endDate === 'Present') return 1;
+  return 0;
+});
+---
+
+<section
+  id="experience"
+  class="section-wrapper"
+  style="background: rgba(0,255,65,0.01);"
+>
+  <!-- Top border -->
+  <div
+    class="absolute top-0 left-0 right-0 h-px"
+    style="background: linear-gradient(90deg, transparent, rgba(0,255,65,0.2), transparent);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container mx-auto">
+    <p class="section-label gsap-hidden">04. Experience</p>
+    <h2 class="section-title gsap-hidden">
+      My <span>Journey</span>
+    </h2>
+    <p class="gsap-hidden mb-16" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+      Professional milestones and academic achievements that shaped my career.
+    </p>
+
+    <!-- Timeline Container -->
+    <div class="relative">
+      <!-- Vertical line (desktop: center, mobile: left) -->
+      <div
+        class="timeline-line hidden md:block"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Mobile: left-side vertical line -->
+      <div
+        class="md:hidden absolute top-0 bottom-0"
+        style="left: 1.25rem; width: 1px; background: linear-gradient(to bottom, transparent, rgba(0,255,65,0.3), transparent);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="flex flex-col gap-12">
+        {sorted.map((entry, index) => {
+          const isLeft = index % 2 === 0;
+          const isWork = entry.type === 'work';
+
+          return (
+            <div
+              class={`timeline-item relative flex items-start gap-6 md:gap-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              style="opacity: 0;"
+            >
+              <!-- Desktop: left content block -->
+              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? 'text-right pr-8' : 'text-left pl-8 md:order-last'}`}>
+                <div
+                  class="glass-card p-6 inline-block w-full"
+                  style={`text-align: ${isLeft ? 'right' : 'left'};`}
+                >
+                  <!-- Type badge -->
+                  <span
+                    class="inline-block text-xs uppercase tracking-widest mb-3"
+                    style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
+                  >
+                    {isWork ? '// work' : '// education'}
+                  </span>
+
+                  <!-- Company & Role -->
+                  <h3
+                    class="text-lg font-bold text-white mb-1"
+                    style="letter-spacing: -0.02em;"
+                  >
+                    {entry.company}
+                  </h3>
+                  <p
+                    class="text-sm font-medium mb-2"
+                    style="color: var(--green-primary);"
+                  >
+                    {entry.role}
+                  </p>
+
+                  <!-- Date range -->
+                  <p
+                    class="text-xs mb-3"
+                    style="color: var(--text-secondary); letter-spacing: 0.05em;"
+                  >
+                    {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
+                    {' — '}
+                    {entry.endDate === 'Present' ? (
+                      <span style="color: var(--green-primary);">Present</span>
+                    ) : entry.endDate.startsWith('[') ? (
+                      'Date'
+                    ) : (
+                      entry.endDate
+                    )}
+                  </p>
+
+                  {entry.description && (
+                    <p class="text-sm" style="color: var(--text-secondary); line-height: 1.7;">
+                      {entry.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <!-- Center dot (desktop) -->
+              <div class="hidden md:flex items-start justify-center w-16 pt-6 flex-shrink-0 z-10">
+                <div class="timeline-dot"></div>
+              </div>
+
+              <!-- Right empty space (desktop) -->
+              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? '' : 'md:order-first'}`}></div>
+
+              <!-- Mobile layout (always full-width left-aligned) -->
+              <div class="md:hidden flex items-start gap-5 w-full pl-10">
+                <!-- Dot -->
+                <div
+                  class="absolute left-[1rem] top-[1.5rem] timeline-dot -translate-x-1/2"
+                  style="width: 10px; height: 10px;"
+                  aria-hidden="true"
+                ></div>
+
+                <!-- Content -->
+                <div class="glass-card p-5 flex-1">
+                  <span
+                    class="inline-block text-xs uppercase tracking-widest mb-2"
+                    style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
+                  >
+                    {isWork ? '// work' : '// education'}
+                  </span>
+                  <h3
+                    class="text-base font-bold text-white mb-1"
+                    style="letter-spacing: -0.02em;"
+                  >
+                    {entry.company}
+                  </h3>
+                  <p class="text-xs font-medium mb-2" style="color: var(--green-primary);">
+                    {entry.role}
+                  </p>
+                  <p class="text-xs mb-3" style="color: var(--text-secondary);">
+                    {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
+                    {' — '}
+                    {entry.endDate === 'Present' ? (
+                      <span style="color: var(--green-primary);">Present</span>
+                    ) : entry.endDate}
+                  </p>
+                  {entry.description && (
+                    <p class="text-sm" style="color: var(--text-secondary); line-height: 1.7;">
+                      {entry.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom border -->
+  <div
+    class="absolute bottom-0 left-0 right-0 h-px"
+    style="background: linear-gradient(90deg, transparent, rgba(0,255,65,0.2), transparent);"
+    aria-hidden="true"
+  ></div>
+</section>
