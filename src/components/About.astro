@@ -15,10 +15,10 @@ const bioParagraphs = profile.bio.split('\n\n').filter(Boolean);
     <!-- Section Label -->
     <p class="section-label gsap-hidden">01. About Me</p>
 
-    <div class="grid md:grid-cols-5 gap-12 lg:gap-16 items-start">
+    <div class="grid md:grid-cols-5 gap-6 md:gap-12 lg:gap-16 items-start">
       <!-- Bio Text — left column (3/5) -->
       <div class="md:col-span-3">
-        <h2 class="section-title gsap-hidden mb-8">
+        <h2 class="section-title gsap-hidden mb-4 md:mb-8">
           Who I <span>Am</span>
         </h2>
 
@@ -28,7 +28,7 @@ const bioParagraphs = profile.bio.split('\n\n').filter(Boolean);
           </p>
         ))}
 
-        <div class="flex flex-wrap gap-3 mt-8 gsap-hidden">
+        <div class="flex flex-wrap gap-3 mt-5 md:mt-8 gsap-hidden">
           <a href="#contact" class="btn-primary">
             Let's Talk
           </a>

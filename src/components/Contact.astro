@@ -24,14 +24,14 @@ const hasEmailJS = !!(
     <h2 class="section-title gsap-hidden">
       Let's <span>Connect</span>
     </h2>
-    <p class="gsap-hidden mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
       Have a project in mind, want to collaborate, or just want to say hi? Drop me a message — I read every one.
     </p>
 
-    <div class="grid md:grid-cols-5 gap-12 items-start">
+    <div class="grid md:grid-cols-5 gap-6 md:gap-12 items-start">
       <!-- Contact Form — left (3/5) -->
       <div class="md:col-span-3 gsap-hidden">
-        <div class="glass-card p-6 md:p-8">
+        <div class="glass-card p-4 md:p-6 lg:p-8">
           <!-- Terminal header bar -->
           <div
             class="flex items-center gap-2 mb-6 pb-4"
@@ -67,7 +67,7 @@ const hasEmailJS = !!(
       </div>
 
       <!-- Contact Info — right (2/5) -->
-      <div class="md:col-span-2 flex flex-col gap-6">
+      <div class="md:col-span-2 flex flex-col gap-4 md:gap-6">
         <!-- Direct email -->
         {profile.email && !profile.email.startsWith('[') && (
           <div class="gsap-hidden">

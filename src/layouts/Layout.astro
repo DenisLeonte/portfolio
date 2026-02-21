@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import profile from '../data/profile.json';
 
 export interface Props {
   title?: string;
@@ -63,6 +64,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": profile.name,
+      "jobTitle": profile.title,
+      "description": description,
+      "url": String(canonicalURL),
+      "email": profile.email,
+      "sameAs": [profile.socialLinks.github, profile.socialLinks.linkedin].filter(Boolean),
+    })} />
   </head>
 
   <body>
@@ -97,6 +110,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         }
 
         // ─── SKILLS SECTION ──────────────────────────────────────
+        const skillsHeaders = document.querySelectorAll('#skills .gsap-hidden');
+        if (skillsHeaders.length) {
+          gsap.to(skillsHeaders, {
+            scrollTrigger: { trigger: '#skills', start: 'top 75%' },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power3.out',
+          });
+        }
+
         const skillCards = document.querySelectorAll('#skills .skill-card');
         if (skillCards.length) {
           gsap.to(skillCards, {
@@ -125,6 +150,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         }
 
         // ─── PROJECTS SECTION ────────────────────────────────────
+        const projectsHeaders = document.querySelectorAll('#projects .gsap-hidden');
+        if (projectsHeaders.length) {
+          gsap.to(projectsHeaders, {
+            scrollTrigger: { trigger: '#projects', start: 'top 75%' },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power3.out',
+          });
+        }
+
         const projectCards = document.querySelectorAll('#projects .project-card');
         if (projectCards.length) {
           gsap.to(projectCards, {
@@ -141,6 +178,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         }
 
         // ─── EXPERIENCE TIMELINE ─────────────────────────────────
+        const experienceHeaders = document.querySelectorAll('#experience .gsap-hidden');
+        if (experienceHeaders.length) {
+          gsap.to(experienceHeaders, {
+            scrollTrigger: { trigger: '#experience', start: 'top 75%' },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power3.out',
+          });
+        }
+
         const timelineItems = document.querySelectorAll('#experience .timeline-item');
         if (timelineItems.length) {
           timelineItems.forEach((item, index) => {

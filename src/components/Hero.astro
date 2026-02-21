@@ -24,7 +24,7 @@ import profile from '../data/profile.json';
   <!-- Hero Content -->
   <div
     class="relative z-10 text-center px-6 max-w-4xl mx-auto"
-    style="padding-top: 5rem;"
+    style="padding-top: clamp(2.5rem, 6vw, 5rem);"
   >
     <!-- Terminal prompt line -->
     <div
@@ -68,7 +68,7 @@ import profile from '../data/profile.json';
 
     <!-- Subtitle -->
     <p
-      class="text-base md:text-lg mb-12 opacity-0"
+      class="text-base md:text-lg mb-6 md:mb-12 opacity-0"
       id="hero-subtitle"
       style="color: var(--text-secondary); max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.7;"
     >
@@ -184,5 +184,18 @@ import profile from '../data/profile.json';
     gsap.set(['#hero-prompt', '#hero-heading', '#hero-typing', '#hero-subtitle', '#hero-cta', '#hero-scroll'], {
       y: 30,
     });
+
+    // Fade out scroll indicator after user scrolls 50px
+    const scrollEl = document.querySelector('#hero-scroll') as HTMLElement | null;
+    if (scrollEl) {
+      const hideOnScroll = () => {
+        if (window.scrollY > 50) {
+          scrollEl.style.transition = 'opacity 0.5s ease';
+          scrollEl.style.opacity = '0';
+          window.removeEventListener('scroll', hideOnScroll);
+        }
+      };
+      window.addEventListener('scroll', hideOnScroll, { passive: true });
+    }
   });
 </script>

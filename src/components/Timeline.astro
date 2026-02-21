@@ -27,7 +27,7 @@ const sorted = [...experience].sort((a, b) => {
     <h2 class="section-title gsap-hidden">
       My <span>Journey</span>
     </h2>
-    <p class="gsap-hidden mb-16" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+    <p class="gsap-hidden mb-8 md:mb-16" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
       Professional milestones and academic achievements that shaped my career.
     </p>
 
@@ -46,7 +46,7 @@ const sorted = [...experience].sort((a, b) => {
         aria-hidden="true"
       ></div>
 
-      <div class="flex flex-col gap-12">
+      <div class="flex flex-col gap-6 md:gap-12">
         {sorted.map((entry, index) => {
           const isLeft = entry.type === 'work';
           const isWork = entry.type === 'work';

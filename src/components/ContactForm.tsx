@@ -172,13 +172,13 @@ export default function ContactForm() {
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={status === 'sending'}
+        disabled={status === 'sending' || status === 'success'}
         className="btn-primary"
         style={{
           justifyContent: 'center',
           width: '100%',
-          opacity: status === 'sending' ? 0.7 : 1,
-          cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+          opacity: status === 'sending' || status === 'success' ? 0.7 : 1,
+          cursor: status === 'sending' || status === 'success' ? 'not-allowed' : 'pointer',
         }}
       >
         {status === 'sending' ? (

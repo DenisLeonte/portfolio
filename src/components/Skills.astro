@@ -17,7 +17,7 @@ import skillsData from '../data/skills.json';
     <h2 class="section-title gsap-hidden">
       Skills & <span>Tools</span>
     </h2>
-    <p class="gsap-hidden mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
       Technologies I work with daily — from backend APIs to machine learning pipelines.
     </p>
 
@@ -87,7 +87,7 @@ import skillsData from '../data/skills.json';
     </div>
 
     <!-- Bottom badge row — all skills flat -->
-    <div class="mt-12 gsap-hidden">
+    <div class="mt-8 md:mt-12 gsap-hidden">
       <p
         class="text-xs tracking-widest uppercase mb-5"
         style="color: var(--text-secondary); letter-spacing: 0.2em;"
@@ -125,7 +125,11 @@ import skillsData from '../data/skills.json';
       ctx.scale(dpr, dpr);
     };
     resize();
-    window.addEventListener('resize', resize, { passive: true });
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
+    }, { passive: true });
 
     // Wave layer definitions — 3 layers on mobile, 5 on desktop
     const allLayers = [
@@ -165,7 +169,7 @@ import skillsData from '../data/skills.json';
         if (!isMobile) ctx.shadowBlur = 0;
       }
 
-      t++;
+      t = (t + 1) % 100000;
       animId = requestAnimationFrame(draw);
     };
 
