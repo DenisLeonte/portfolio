@@ -3,20 +3,20 @@
     "id": "exp-1",
     "company": ".msg Systems Romania",
     "role": "System Integration / Full-Stack Developer",
-    "startDate": "[START_DATE]",
+    "startDate": "01/2024",
     "endDate": "Present",
     "description": "Working on a Mercedes-Benz Group AG project — developing Spring Boot applications, API integration, database management, and enterprise platform integration. Collaborating with international teams across Romania and Germany.",
     "type": "work",
-    "logo": ""
+    "logo": "/images/timeline/Msg_systems_Logo.svg.png"
   },
   {
     "id": "edu-1",
-    "company": "[UNIVERSITY_NAME]",
+    "company": "Babes Bolyai University",
     "role": "Master's — High Performance Computing and Big Data Analysis",
-    "startDate": "[EDUCATION_START_DATE]",
-    "endDate": "[EDUCATION_END_DATE]",
+    "startDate": "10/2024",
+    "endDate": "06/2026",
     "description": "Advanced studies in distributed computing, parallel algorithms, machine learning, and large-scale data processing pipelines.",
     "type": "education",
-    "logo": ""
+    "logo": "/images/timeline/Logo_Universitatea_Babes-Bolyai_UBB_2021.svg.png"
   }
 ]

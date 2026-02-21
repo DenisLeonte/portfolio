@@ -61,13 +61,22 @@ const sorted = [...experience].sort((a, b) => {
                   class="glass-card p-6 inline-block w-full"
                   style={`text-align: ${isLeft ? 'right' : 'left'};`}
                 >
-                  <!-- Type badge -->
-                  <span
-                    class="inline-block text-xs uppercase tracking-widest mb-3"
-                    style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
-                  >
-                    {isWork ? '// work' : '// education'}
-                  </span>
+                  <!-- Logo + Type badge -->
+                  <div class={`flex items-center gap-3 mb-3 ${isLeft ? 'justify-end' : 'justify-start'}`}>
+                    {entry.logo && (
+                      <img
+                        src={entry.logo}
+                        alt={`${entry.company} logo`}
+                        style="height: 32px; width: auto; object-fit: contain; filter: brightness(0.9);"
+                      />
+                    )}
+                    <span
+                      class="inline-block text-xs uppercase tracking-widest"
+                      style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
+                    >
+                      {isWork ? '// work' : '// education'}
+                    </span>
+                  </div>
 
                   <!-- Company & Role -->
                   <h3
@@ -126,12 +135,21 @@ const sorted = [...experience].sort((a, b) => {
 
                 <!-- Content -->
                 <div class="glass-card p-5 flex-1">
-                  <span
-                    class="inline-block text-xs uppercase tracking-widest mb-2"
-                    style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
-                  >
-                    {isWork ? '// work' : '// education'}
-                  </span>
+                  <div class="flex items-center gap-3 mb-2">
+                    {entry.logo && (
+                      <img
+                        src={entry.logo}
+                        alt={`${entry.company} logo`}
+                        style="height: 28px; width: auto; object-fit: contain; filter: brightness(0.9);"
+                      />
+                    )}
+                    <span
+                      class="inline-block text-xs uppercase tracking-widest"
+                      style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
+                    >
+                      {isWork ? '// work' : '// education'}
+                    </span>
+                  </div>
                   <h3
                     class="text-base font-bold text-white mb-1"
                     style="letter-spacing: -0.02em;"
