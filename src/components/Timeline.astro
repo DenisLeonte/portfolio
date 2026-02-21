@@ -48,7 +48,7 @@ const sorted = [...experience].sort((a, b) => {
 
       <div class="flex flex-col gap-12">
         {sorted.map((entry, index) => {
-          const isLeft = index % 2 === 0;
+          const isLeft = entry.type === 'work';
           const isWork = entry.type === 'work';
 
           return (
