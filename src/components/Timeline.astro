@@ -53,11 +53,11 @@ const sorted = [...experience].sort((a, b) => {
 
           return (
             <div
-              class={`timeline-item relative flex items-start gap-6 md:gap-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              class="timeline-item relative flex items-start gap-6 md:gap-0"
               style="opacity: 0;"
             >
               <!-- Desktop: left content block -->
-              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? 'text-right pr-8' : 'text-left pl-8 md:order-last'}`}>
+              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? 'md:order-1 text-right pr-8' : 'md:order-3 text-left pl-8'}`}>
                 <div
                   class="glass-card p-6 inline-block w-full"
                   style={`text-align: ${isLeft ? 'right' : 'left'};`}
@@ -118,12 +118,12 @@ const sorted = [...experience].sort((a, b) => {
               </div>
 
               <!-- Center dot (desktop) -->
-              <div class="hidden md:flex items-start justify-center w-16 pt-6 flex-shrink-0 z-10">
+              <div class="hidden md:flex md:order-2 items-start justify-center w-16 pt-6 flex-shrink-0 z-10">
                 <div class="timeline-dot"></div>
               </div>
 
               <!-- Right empty space (desktop) -->
-              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? '' : 'md:order-first'}`}></div>
+              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? 'md:order-3' : 'md:order-1'}`}></div>
 
               <!-- Mobile layout (always full-width left-aligned) -->
               <div class="md:hidden flex items-start gap-5 w-full pl-10">
