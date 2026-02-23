@@ -201,7 +201,8 @@ const sorted = [...experience].sort((a, b) => {
       canvas.width  = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       cols  = Math.floor(canvas.width / FONT_SIZE);
-      drops = Array(cols).fill(1);
+      const rows = Math.floor(canvas.height / FONT_SIZE);
+      drops = Array.from({ length: cols }, () => Math.floor(Math.random() * rows));
     };
 
     resize();
@@ -233,6 +234,11 @@ const sorted = [...experience].sort((a, b) => {
         drops[i]++;
       }
     };
+
+    // Pre-warm: run frames synchronously so the canvas looks mid-stream
+    // when the user first scrolls into view, avoiding the "all columns
+    // starting at once" first-wave effect.
+    for (let f = 0; f < 150; f++) draw();
 
     let intervalId: ReturnType<typeof setInterval> | null = null;
 
