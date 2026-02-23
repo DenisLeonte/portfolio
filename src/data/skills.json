@@ -49,6 +49,15 @@
         { "name": "MySQL", "level": 80 },
         { "name": "Redis", "level": 70 }
       ]
+    },
+    {
+      "name": "Languages",
+      "icon": "🗣️",
+      "skills":[
+        {"name": "Italian 🇮🇹", "level": 100},
+        {"name": "Romanian 🇷🇴", "level": 100},
+        {"name": "English 🇺🇸", "level": 90}
+      ]
     }
   ]
 }
