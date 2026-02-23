@@ -7,7 +7,7 @@ const navLinks = [
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
   { label: 'Showcase', href: '/showcase' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 ---
 
@@ -161,6 +161,10 @@ const navLinks = [
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Section not on current page — navigate to home + hash
+        e.preventDefault();
+        window.location.href = '/' + href;
       }
     });
   });
