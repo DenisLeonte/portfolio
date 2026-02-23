@@ -110,9 +110,11 @@ const navLinks = [
     if (menuOpen) {
       mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
       mobileMenu.style.opacity = '1';
+      navbar.classList.add('menu-open');
     } else {
       mobileMenu.style.maxHeight = '0';
       mobileMenu.style.opacity = '0';
+      navbar.classList.remove('menu-open');
     }
   };
 
