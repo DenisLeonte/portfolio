@@ -91,7 +91,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       document.addEventListener('DOMContentLoaded', () => {
         // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
+        if (prefersReducedMotion) {
+          document.querySelectorAll('.gsap-hidden, .timeline-item, .project-card').forEach((el) => {
+            (el as HTMLElement).style.opacity = '1';
+            (el as HTMLElement).style.transform = 'none';
+          });
+          return;
+        }
 
         // ─── ABOUT SECTION ───────────────────────────────────────
         const aboutElements = document.querySelectorAll('#about .gsap-hidden');
@@ -215,6 +221,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           gsap.to(contactElements, {
             scrollTrigger: {
               trigger: '#contact',
+              start: 'top 75%',
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+          });
+        }
+
+        // ─── CTA SECTION ─────────────────────────────────────────
+        const ctaElements = document.querySelectorAll('#cta .gsap-hidden');
+        if (ctaElements.length) {
+          gsap.to(ctaElements, {
+            scrollTrigger: {
+              trigger: '#cta',
               start: 'top 75%',
             },
             opacity: 1,

@@ -18,3 +18,30 @@ const pageDescription = `Get in touch with ${profile.name}. Available for freela
 
   <Footer />
 </Layout>
+
+<script>
+  import gsap from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const elements = document.querySelectorAll('#contact .gsap-hidden');
+
+    if (prefersReducedMotion) {
+      elements.forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+      return;
+    }
+
+    // Contact is already in the viewport on this page — skip ScrollTrigger
+    gsap.to(elements, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.3,
+    });
+  });
+</script>
