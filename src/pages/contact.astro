@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import profile from '../data/profile.json';
+
+const pageTitle = `Contact — ${profile.name}`;
+const pageDescription = `Get in touch with ${profile.name}. Available for freelance projects, full-time roles, and interesting collaborations.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Navbar />
+
+  <main id="main" style="padding-top: 5rem;">
+    <Contact />
+  </main>
+
+  <Footer />
+</Layout>
