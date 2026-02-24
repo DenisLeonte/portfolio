@@ -518,33 +518,71 @@ import showcase from '../../data/showcase.json';
       let width = 0;
       let height = 0;
 
-      const resize = () => {
-        width = gridCanvas.width = window.innerWidth;
-        height = gridCanvas.height = window.innerHeight;
-      };
-      resize();
-      window.addEventListener('resize', resize);
-
       // Config
       const N_V       = 24;    // number of vertical lines
       const N_H       = 20;    // number of horizontal line slots
       const VPY_RATIO = 0.42;  // vanishing-point y as a fraction of screen height
       const OVERFLOW  = 0.45;  // how much wider than the screen the bottom of the grid is (each side)
-      const COLOR     = '#00ff41';
-      const MAX_ALPHA = 0.38;  // peak opacity for lines (was 0.18)
-      const SPEED     = 0.5;   // horizontal lines per second (was 0.28)
+      const MAX_ALPHA = 0.38;
+      const SPEED     = 0.5;   // horizontal lines per second
+
+      // ── Color helper: t=0 (horizon)→magenta, t=0.5→cyan, t=1 (viewer)→green ──
+      const depthColor = (t: number): string => {
+        if (t < 0.5) {
+          const u = t * 2;
+          const r = Math.round(255 * (1 - u));
+          const g = Math.round(255 * u);
+          const b = Math.round(204 + 51 * u);
+          return `rgb(${r},${g},${b})`;
+        } else {
+          const u = (t - 0.5) * 2;
+          const b = Math.round(255 * (1 - u));
+          return `rgb(0,255,${b})`;
+        }
+      };
+
+      // ── Stars ────────────────────────────────────────────────────
+      interface Star { x: number; y: number; r: number; baseAlpha: number; blinkSpeed: number; blinkPhase: number; }
+      let stars: Star[] = [];
+      const N_STARS = 80;
+      const buildStars = () => {
+        stars = Array.from({ length: N_STARS }, () => ({
+          x:          Math.random() * width,
+          y:          Math.random() * (height * VPY_RATIO * 0.85),
+          r:          0.4 + Math.random() * 1.2,
+          baseAlpha:  0.25 + Math.random() * 0.45,
+          blinkSpeed: 0.3 + Math.random() * 1.5,
+          blinkPhase: Math.random() * Math.PI * 2,
+        }));
+      };
+
+      const resize = () => {
+        width  = gridCanvas.width  = window.innerWidth;
+        height = gridCanvas.height = window.innerHeight;
+        buildStars();
+      };
+      resize();
+      window.addEventListener('resize', resize);
 
       // Mouse parallax tracking
-      let mouseX = 0.5; // normalised 0–1
+      let mouseX = 0.5;
       let mouseY = 0.5;
       window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX / window.innerWidth;
         mouseY = e.clientY / window.innerHeight;
       });
 
-      // Surge state — random horizontal lines that flash bright
-      const surgeLines = new Set<number>();
-      const SURGE_CHANCE = 0.003; // probability per frame per line slot
+      // ── Background surge state (random flashes, reduced) ────────
+      const surgeLines   = new Set<number>();
+      const SURGE_CHANCE = 0.001;
+
+      // ── Wave pulse surge ─────────────────────────────────────────
+      interface Pulse { startTime: number; duration: number; }
+      const pulses: Pulse[] = [];
+      let nextPulseAt = 0;
+      const schedulePulse = (now: number) => {
+        nextPulseAt = now + 3000 + Math.random() * 2500;
+      };
 
       let offset   = 0;
       let lastTime = 0;
@@ -556,6 +594,16 @@ import showcase from '../../data/showcase.json';
         lastTime = time;
         offset   = (offset + SPEED * dt) % 1;
 
+        // Spawn / expire pulses
+        if (nextPulseAt === 0) schedulePulse(time);
+        if (time >= nextPulseAt) {
+          pulses.push({ startTime: time, duration: 1600 });
+          schedulePulse(time);
+        }
+        for (let pi = pulses.length - 1; pi >= 0; pi--) {
+          if (time - pulses[pi].startTime > pulses[pi].duration) pulses.splice(pi, 1);
+        }
+
         ctx.clearRect(0, 0, width, height);
 
         // Vanishing point shifts subtly with mouse position
@@ -563,20 +611,81 @@ import showcase from '../../data/showcase.json';
         const vpY     = height * VPY_RATIO + (mouseY - 0.5) * height * 0.03;
         const groundH = height - vpY;
 
-        // ── Radial glow at vanishing point ──────────────────────
-        const radialGrad = ctx.createRadialGradient(vpX, vpY, 0, vpX, vpY, height * 0.35);
-        radialGrad.addColorStop(0, 'rgba(0,255,65,0.08)');
-        radialGrad.addColorStop(1, 'rgba(0,255,65,0)');
-        ctx.fillStyle = radialGrad;
+        // ── Radial glow at vanishing point (magenta/purple tint) ──
+        const radialGrad = ctx.createRadialGradient(vpX, vpY, 0, vpX, vpY, height * 0.4);
+        radialGrad.addColorStop(0,   'rgba(200,0,200,0.12)');
+        radialGrad.addColorStop(0.5, 'rgba(0,200,220,0.05)');
+        radialGrad.addColorStop(1,   'rgba(0,255,65,0)');
+        ctx.fillStyle   = radialGrad;
         ctx.globalAlpha = 1;
+        ctx.shadowBlur  = 0;
         ctx.fillRect(0, 0, width, height);
 
-        // ── Vertical lines (static, converge to vanishing point) ──
-        ctx.strokeStyle = COLOR;
+        // ── Stars (twinkling, sky region above horizon) ───────────
+        ctx.shadowBlur = 5;
+        for (const star of stars) {
+          const a = star.baseAlpha + Math.sin(time * 0.001 * star.blinkSpeed + star.blinkPhase) * 0.22;
+          ctx.globalAlpha = Math.max(0, a);
+          ctx.fillStyle   = '#ffffff';
+          ctx.shadowColor = '#88ffcc';
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.shadowBlur = 0;
+
+        // ── Retrowave Sun (semicircle with stripe cutouts) ────────
+        ctx.save();
+        const sunR = height * 0.135;
+        const sunX = vpX;
+        const sunY = vpY;
+
+        // Outer halo
+        const sunHalo = ctx.createRadialGradient(sunX, sunY, sunR * 0.6, sunX, sunY, sunR * 2.8);
+        sunHalo.addColorStop(0,   'rgba(255,0,180,0.20)');
+        sunHalo.addColorStop(0.5, 'rgba(255,60,0,0.07)');
+        sunHalo.addColorStop(1,   'rgba(255,0,180,0)');
+        ctx.globalAlpha = 1;
+        ctx.fillStyle   = sunHalo;
+        ctx.fillRect(0, 0, width, height);
+
+        // Clip to upper semicircle (arch sitting on the horizon)
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, sunR, Math.PI, 0, true);
+        ctx.closePath();
+        ctx.clip();
+
+        // Gradient fill: magenta top → orange base
+        const sunFill = ctx.createLinearGradient(sunX, sunY - sunR, sunX, sunY);
+        sunFill.addColorStop(0,   'rgba(255,30,220,0.92)');
+        sunFill.addColorStop(0.5, 'rgba(255,80,40,0.92)');
+        sunFill.addColorStop(1,   'rgba(255,160,0,0.92)');
+        ctx.fillStyle   = sunFill;
+        ctx.globalAlpha = 1;
+        ctx.fillRect(sunX - sunR, sunY - sunR, sunR * 2, sunR);
+
+        // Horizontal stripe cutouts in lower 2/3 of sun
+        ctx.globalCompositeOperation = 'destination-out';
+        const stripeCount = 6;
+        for (let s = 0; s < stripeCount; s++) {
+          const t  = s / (stripeCount - 1);
+          const sy = (sunY - sunR * 0.65) + t * sunR * 0.62;
+          ctx.fillStyle = 'rgba(0,0,0,1)';
+          ctx.fillRect(sunX - sunR - 1, sy, sunR * 2 + 2, sunR * 0.055);
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.restore();
+
+        // ── Vertical lines (depth gradient: magenta→cyan→green) ───
+        const vGrad = ctx.createLinearGradient(vpX, vpY, vpX, height);
+        vGrad.addColorStop(0,   'rgba(255,0,204,0.58)');
+        vGrad.addColorStop(0.5, 'rgba(0,255,255,0.55)');
+        vGrad.addColorStop(1,   'rgba(0,255,65,0.55)');
+        ctx.strokeStyle = vGrad;
         ctx.lineWidth   = 0.9;
         ctx.globalAlpha = MAX_ALPHA * 0.65;
         ctx.shadowBlur  = 6;
-        ctx.shadowColor = COLOR;
+        ctx.shadowColor = '#00ffaa';
 
         for (let i = 0; i <= N_V; i++) {
           const t       = i / N_V;
@@ -587,39 +696,47 @@ import showcase from '../../data/showcase.json';
           ctx.stroke();
         }
 
-        // ── Horizontal lines (animated, emerge from horizon) ──────
+        // ── Horizontal lines (depth-colored + wave pulse boost) ───
         for (let i = 0; i < N_H; i++) {
-          // rawPhase ∈ [0, 1): 0 = at horizon, 1 = at viewer's feet
           const rawPhase = ((i / N_H) + offset) % 1;
+          const screenT  = rawPhase * rawPhase;
+          if (screenT < 0.001) continue;
 
-          // Square maps phase to screen position with perspective compression
-          const screenT = rawPhase * rawPhase;
-          if (screenT < 0.001) continue; // skip lines indistinguishable from horizon
-
-          // Surge: randomly light up individual lines
+          // Random background surge
           const isSurging = surgeLines.has(i);
           if (!isSurging && Math.random() < SURGE_CHANCE) surgeLines.add(i);
-          if (isSurging && Math.random() < 0.04) surgeLines.delete(i);
+          if (isSurging  && Math.random() < 0.04)         surgeLines.delete(i);
 
-          const y        = vpY + screenT * groundH;
-          const progress = screenT;
+          const y      = vpY + screenT * groundH;
+          const xLeft  = vpX - screenT * width * (0.5 + OVERFLOW);
+          const xRight = vpX + screenT * width * (0.5 + OVERFLOW);
 
-          // X range follows the outermost vertical lines at this height
-          const xLeft  = vpX - progress * width * (0.5 + OVERFLOW);
-          const xRight = vpX + progress * width * (0.5 + OVERFLOW);
+          // Wave pulse: cosine falloff around active pulse front
+          let pulseBoost = 0;
+          for (const pulse of pulses) {
+            const pProgress = (time - pulse.startTime) / pulse.duration;
+            const diff      = Math.abs(rawPhase - pProgress);
+            const wrapDiff  = Math.min(diff, 1 - diff);
+            if (wrapDiff < 0.1) {
+              pulseBoost = Math.max(pulseBoost, Math.cos((wrapDiff / 0.1) * (Math.PI / 2)));
+            }
+          }
 
-          if (isSurging) {
-            ctx.globalAlpha = Math.min(screenT * 2.5, 0.85);
-            ctx.lineWidth   = (0.4 + screenT * 0.9) * 2.5;
-            ctx.shadowBlur  = 20;
+          const lineColor = depthColor(screenT);
+
+          if (isSurging || pulseBoost > 0) {
+            const boost     = Math.max(isSurging ? 0.6 : 0, pulseBoost);
+            ctx.globalAlpha = Math.min(screenT * 2.5 + boost * 0.4, 0.88);
+            ctx.lineWidth   = (0.4 + screenT * 0.9) * (1.8 + boost * 1.4);
+            ctx.shadowBlur  = 14 + boost * 20;
           } else {
             ctx.globalAlpha = Math.min(screenT * MAX_ALPHA * 2.2, MAX_ALPHA);
             ctx.lineWidth   = 0.4 + screenT * 0.9;
             ctx.shadowBlur  = 6;
           }
 
-          ctx.shadowColor = COLOR;
-          ctx.strokeStyle = COLOR;
+          ctx.shadowColor = lineColor;
+          ctx.strokeStyle = lineColor;
           ctx.beginPath();
           ctx.moveTo(Math.max(0, xLeft),  y);
           ctx.lineTo(Math.min(width, xRight), y);
