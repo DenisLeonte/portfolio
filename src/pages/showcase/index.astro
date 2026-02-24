@@ -17,6 +17,7 @@ import showcase from '../../data/showcase.json';
 
   <!-- Hero Section -->
   <section class="showcase-hero section-wrapper">
+    <div class="hero-spotlight" aria-hidden="true"></div>
     <div class="container mx-auto">
       <p class="section-label gsap-hidden">00. Showcase</p>
       <h1 class="showcase-title gsap-hidden">
@@ -36,9 +37,9 @@ import showcase from '../../data/showcase.json';
   <!-- Card Grid -->
   <section class="showcase-grid-section section-wrapper">
     <div class="container mx-auto">
-      <div class="showcase-grid">
+      <div class="showcase-grid" style="perspective: 1200px">
         {showcase.map((entry) => (
-          <a href={`/showcase/${entry.slug}`} class="showcase-card glass-card" aria-label={`View ${entry.name} template`}>
+          <a href={`/showcase/${entry.slug}`} class="showcase-card glass-card" data-color={entry.colorPreview} aria-label={`View ${entry.name} template`}>
             <!-- Thumbnail -->
             <div
               class="showcase-thumb"
@@ -93,6 +94,34 @@ import showcase from '../../data/showcase.json';
 </Layout>
 
 <style>
+  /* ── Neon title pulse ────────────────────────────────────────── */
+  @keyframes neonTitlePulse {
+    0%, 100% {
+      text-shadow:
+        0 0 10px rgba(0,255,65,0.7),
+        0 0 30px rgba(0,255,65,0.4),
+        0 0 60px rgba(0,255,65,0.2);
+    }
+    50% {
+      text-shadow:
+        0 0 20px rgba(0,255,65,1),
+        0 0 50px rgba(0,255,65,0.6),
+        0 0 100px rgba(0,255,65,0.3),
+        0 0 150px rgba(0,255,65,0.1);
+    }
+  }
+
+  .showcase-title .text-green-primary {
+    animation: neonTitlePulse 2.5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-title .text-green-primary {
+      animation: none;
+      text-shadow: 0 0 20px rgba(0,255,65,0.5);
+    }
+  }
+
   /* ── Back button ─────────────────────────────────────────────── */
   .back-btn {
     position: fixed;
@@ -121,10 +150,49 @@ import showcase from '../../data/showcase.json';
     background: rgba(0, 255, 65, 0.05);
   }
 
+  /* ── Hero spotlight ──────────────────────────────────────────── */
+  .hero-spotlight {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+    background: radial-gradient(
+      600px circle at var(--x, 50%) var(--y, 50%),
+      rgba(0, 255, 65, 0.06),
+      transparent 60%
+    );
+  }
+
+  .showcase-hero:hover .hero-spotlight {
+    opacity: 1;
+  }
+
   /* ── Hero ────────────────────────────────────────────────────── */
   .showcase-hero {
     padding-top: 120px;
     padding-bottom: 60px;
+  }
+
+  .showcase-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.015) 2px,
+      rgba(0, 255, 65, 0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .showcase-hero .container {
+    position: relative;
+    z-index: 1;
   }
 
   .showcase-title {
@@ -190,12 +258,15 @@ import showcase from '../../data/showcase.json';
     text-decoration: none;
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
+  /* JS handles transform/box-shadow on hover — CSS hover just prevents the glass-card override */
   .showcase-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    transform: none;
+    box-shadow: none;
   }
 
   /* Thumbnail */
@@ -232,12 +303,13 @@ import showcase from '../../data/showcase.json';
   .showcase-thumb__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.65);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .showcase-thumb__view {
@@ -248,9 +320,19 @@ import showcase from '../../data/showcase.json';
     border: 1px solid rgba(255, 255, 255, 0.4);
     padding: 8px 16px;
     border-radius: 4px;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s,
+                opacity 0.3s ease 0.05s;
   }
 
   .showcase-card:hover .showcase-thumb__overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .showcase-card:hover .showcase-thumb__view {
+    transform: translateY(0);
     opacity: 1;
   }
 
@@ -344,34 +426,87 @@ import showcase from '../../data/showcase.json';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Hero elements animate in on load
+  // Hero elements animate in on load — dramatic scale + skew entry
   const heroElements = document.querySelectorAll('.showcase-hero .gsap-hidden');
   if (heroElements.length) {
-    gsap.set(heroElements, { opacity: 0, y: 30 });
+    gsap.set(heroElements, { opacity: 0, y: 40, scale: 0.94, skewX: -1.5 });
     gsap.to(heroElements, {
       opacity: 1,
       y: 0,
-      duration: 0.7,
+      scale: 1,
+      skewX: 0,
+      duration: 0.8,
       stagger: 0.15,
       ease: 'power3.out',
       delay: 0.2,
     });
   }
 
-  // Cards animate in on scroll
+  // Cards animate in on scroll — per-card ScrollTrigger with 3D rotateX entry
   const cards = document.querySelectorAll('.showcase-card');
   if (cards.length) {
-    gsap.set(cards, { opacity: 0, y: 40 });
-    gsap.to(cards, {
-      scrollTrigger: {
-        trigger: '.showcase-grid',
-        start: 'top 80%',
-      },
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power3.out',
+    cards.forEach((card, i) => {
+      gsap.set(card, { opacity: 0, y: 60, scale: 0.92, rotateX: 15 });
+      gsap.to(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 88%',
+          once: true,
+        },
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotateX: 0,
+        duration: 0.65,
+        delay: (i % 3) * 0.08,
+        ease: 'power3.out',
+      });
+    });
+  }
+
+  // ── 3D card tilt + colour glow on hover ─────────────────────────
+  const tiltCards = document.querySelectorAll('.showcase-card') as NodeListOf<HTMLElement>;
+
+  tiltCards.forEach((card) => {
+    const color = card.dataset.color ?? '#00ff41';
+
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
+    });
+
+    card.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const cx = (e.clientX - rect.left) / rect.width  - 0.5;
+      const cy = (e.clientY - rect.top)  / rect.height - 0.5;
+      const MAX_TILT = 8;
+      const rotY =  cx * MAX_TILT * 2;
+      const rotX = -cy * MAX_TILT * 2;
+      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px) scale(1.02)`;
+      card.style.boxShadow = `
+        0 20px 60px rgba(0,0,0,0.5),
+        0 0 30px ${color}40,
+        0 0 60px ${color}20
+      `;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease';
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
+      card.style.boxShadow = '';
+    });
+  });
+
+  // ── Hero cursor spotlight ─────────────────────────────────────────
+  const heroSection = document.querySelector('.showcase-hero') as HTMLElement | null;
+  const spotlight   = document.querySelector('.hero-spotlight')  as HTMLElement | null;
+
+  if (heroSection && spotlight) {
+    heroSection.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1);
+      const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+      spotlight.style.setProperty('--x', `${x}%`);
+      spotlight.style.setProperty('--y', `${y}%`);
     });
   }
 
@@ -391,13 +526,25 @@ import showcase from '../../data/showcase.json';
       window.addEventListener('resize', resize);
 
       // Config
-      const N_V       = 20;    // number of vertical lines
-      const N_H       = 16;    // number of horizontal line slots
-      const VPY_RATIO = 0.45;  // vanishing-point y as a fraction of screen height
-      const OVERFLOW  = 0.4;   // how much wider than the screen the bottom of the grid is (each side)
+      const N_V       = 24;    // number of vertical lines
+      const N_H       = 20;    // number of horizontal line slots
+      const VPY_RATIO = 0.42;  // vanishing-point y as a fraction of screen height
+      const OVERFLOW  = 0.45;  // how much wider than the screen the bottom of the grid is (each side)
       const COLOR     = '#00ff41';
-      const MAX_ALPHA = 0.18;  // peak opacity for lines
-      const SPEED     = 0.28;  // horizontal lines per second (animation rate)
+      const MAX_ALPHA = 0.38;  // peak opacity for lines (was 0.18)
+      const SPEED     = 0.5;   // horizontal lines per second (was 0.28)
+
+      // Mouse parallax tracking
+      let mouseX = 0.5; // normalised 0–1
+      let mouseY = 0.5;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX / window.innerWidth;
+        mouseY = e.clientY / window.innerHeight;
+      });
+
+      // Surge state — random horizontal lines that flash bright
+      const surgeLines = new Set<number>();
+      const SURGE_CHANCE = 0.003; // probability per frame per line slot
 
       let offset   = 0;
       let lastTime = 0;
@@ -411,14 +558,25 @@ import showcase from '../../data/showcase.json';
 
         ctx.clearRect(0, 0, width, height);
 
-        const vpX     = width  * 0.5;
-        const vpY     = height * VPY_RATIO;
+        // Vanishing point shifts subtly with mouse position
+        const vpX     = width  * 0.5 + (mouseX - 0.5) * width  * 0.06;
+        const vpY     = height * VPY_RATIO + (mouseY - 0.5) * height * 0.03;
         const groundH = height - vpY;
+
+        // ── Radial glow at vanishing point ──────────────────────
+        const radialGrad = ctx.createRadialGradient(vpX, vpY, 0, vpX, vpY, height * 0.35);
+        radialGrad.addColorStop(0, 'rgba(0,255,65,0.08)');
+        radialGrad.addColorStop(1, 'rgba(0,255,65,0)');
+        ctx.fillStyle = radialGrad;
+        ctx.globalAlpha = 1;
+        ctx.fillRect(0, 0, width, height);
 
         // ── Vertical lines (static, converge to vanishing point) ──
         ctx.strokeStyle = COLOR;
-        ctx.lineWidth   = 0.8;
-        ctx.globalAlpha = MAX_ALPHA * 0.55;
+        ctx.lineWidth   = 0.9;
+        ctx.globalAlpha = MAX_ALPHA * 0.65;
+        ctx.shadowBlur  = 6;
+        ctx.shadowColor = COLOR;
 
         for (let i = 0; i <= N_V; i++) {
           const t       = i / N_V;
@@ -435,9 +593,13 @@ import showcase from '../../data/showcase.json';
           const rawPhase = ((i / N_H) + offset) % 1;
 
           // Square maps phase to screen position with perspective compression
-          // near the horizon (small rawPhase → very small screenT → near top).
           const screenT = rawPhase * rawPhase;
           if (screenT < 0.001) continue; // skip lines indistinguishable from horizon
+
+          // Surge: randomly light up individual lines
+          const isSurging = surgeLines.has(i);
+          if (!isSurging && Math.random() < SURGE_CHANCE) surgeLines.add(i);
+          if (isSurging && Math.random() < 0.04) surgeLines.delete(i);
 
           const y        = vpY + screenT * groundH;
           const progress = screenT;
@@ -446,8 +608,17 @@ import showcase from '../../data/showcase.json';
           const xLeft  = vpX - progress * width * (0.5 + OVERFLOW);
           const xRight = vpX + progress * width * (0.5 + OVERFLOW);
 
-          ctx.globalAlpha = Math.min(screenT * MAX_ALPHA * 2.2, MAX_ALPHA);
-          ctx.lineWidth   = 0.4 + screenT * 0.9;
+          if (isSurging) {
+            ctx.globalAlpha = Math.min(screenT * 2.5, 0.85);
+            ctx.lineWidth   = (0.4 + screenT * 0.9) * 2.5;
+            ctx.shadowBlur  = 20;
+          } else {
+            ctx.globalAlpha = Math.min(screenT * MAX_ALPHA * 2.2, MAX_ALPHA);
+            ctx.lineWidth   = 0.4 + screenT * 0.9;
+            ctx.shadowBlur  = 6;
+          }
+
+          ctx.shadowColor = COLOR;
           ctx.strokeStyle = COLOR;
           ctx.beginPath();
           ctx.moveTo(Math.max(0, xLeft),  y);
@@ -456,6 +627,7 @@ import showcase from '../../data/showcase.json';
         }
 
         ctx.globalAlpha = 1;
+        ctx.shadowBlur  = 0;
       };
 
       const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
