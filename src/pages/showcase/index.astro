@@ -550,9 +550,11 @@ import showcase from '../../data/showcase.json';
         ctx.fillStyle   = '#000000';
         ctx.fillRect(0, 0, width, height);
 
-        const vpX     = width  * 0.5;
-        const vpY     = height * VPY_RATIO;
-        const groundH = height - vpY;
+        const vpX      = width  * 0.5;
+        const vpY      = height * VPY_RATIO;
+        const groundH  = height - vpY;
+        // Declared here so all sections below can reference it
+        const isMobile = width < 768;
 
         // ── Horizon glow line ─────────────────────────────────────
         const hGrad = ctx.createLinearGradient(0, vpY, width, vpY);
@@ -583,7 +585,6 @@ import showcase from '../../data/showcase.json';
         ctx.shadowColor = '#00ff41';
 
         // Mobile: fewer lines, no shadow blur (blur = expensive GPU pass per draw call)
-        const isMobile = width < 768;
         const nV   = isMobile ? 8  : N_V;
         const vExt = isMobile ? 4  : 30;
 
