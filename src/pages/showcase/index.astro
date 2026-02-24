@@ -4,6 +4,9 @@ import showcase from '../../data/showcase.json';
 ---
 
 <Layout title="Showcase — What I Can Build" description="A curated gallery of website templates built from scratch — restaurant, e-commerce, agency, blog, and real estate designs.">
+  <!-- Grain / noise background overlay -->
+  <canvas id="grain-canvas" class="grain-overlay" aria-hidden="true"></canvas>
+
   <!-- Floating back button -->
   <a href="/" class="back-btn" aria-label="Back to portfolio">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -317,6 +320,24 @@ import showcase from '../../data/showcase.json';
     margin-right: auto;
     line-height: 1.7;
   }
+
+  /* ── Grain / noise overlay ────────────────────────────────────── */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: screen;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grain-overlay {
+      display: none;
+    }
+  }
 </style>
 
 <script>
@@ -354,5 +375,57 @@ import showcase from '../../data/showcase.json';
       stagger: 0.1,
       ease: 'power3.out',
     });
+  }
+
+  // ── Animated grain / noise canvas ───────────────────────────────
+  const grainCanvas = document.getElementById('grain-canvas') as HTMLCanvasElement | null;
+  if (grainCanvas) {
+    const ctx = grainCanvas.getContext('2d');
+    if (ctx) {
+      const resize = () => {
+        grainCanvas.width = window.innerWidth;
+        grainCanvas.height = window.innerHeight;
+      };
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Throttle to ~15 fps for performance (grain doesn't need 60 fps)
+      const FRAME_INTERVAL = 1000 / 15;
+      let lastFrame = 0;
+      let rafId: number;
+
+      const renderGrain = (time: number) => {
+        rafId = requestAnimationFrame(renderGrain);
+        if (time - lastFrame < FRAME_INTERVAL) return;
+        lastFrame = time;
+
+        const { width, height } = grainCanvas;
+        const imageData = ctx.createImageData(width, height);
+        const data = imageData.data;
+
+        for (let i = 0, len = data.length; i < len; i += 4) {
+          const v = (Math.random() * 255) | 0;
+          data[i] = v;      // R
+          data[i + 1] = v;  // G
+          data[i + 2] = v;  // B
+          data[i + 3] = 255; // A — opacity controlled by CSS
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+      };
+
+      // Respect prefers-reduced-motion
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!mq.matches) {
+        rafId = requestAnimationFrame(renderGrain);
+      }
+      mq.addEventListener('change', (e) => {
+        if (e.matches) {
+          cancelAnimationFrame(rafId);
+        } else {
+          rafId = requestAnimationFrame(renderGrain);
+        }
+      });
+    }
   }
 </script>
