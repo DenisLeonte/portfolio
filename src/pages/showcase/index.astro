@@ -503,10 +503,7 @@ import showcase from '../../data/showcase.json';
       const HORIZON_SPREAD = 0.22;  // fraction of full spread that lines occupy at the horizon
 
       // ── Color helper: green palette — dark green at horizon → neon green at viewer ──
-      const depthColor = (t: number): string => {
-        const g = Math.round(160 + 95 * t);   // 160 → 255
-        return `rgb(0,${g},30)`;
-      };
+      const depthColor = (t: number): string => `rgb(0,${Math.round(160 + 95 * t)},30)`;
 
       const resize = () => {
         width  = gridCanvas.width  = window.innerWidth;
@@ -530,6 +527,7 @@ import showcase from '../../data/showcase.json';
 
       const render = (time: number) => {
         rafId = requestAnimationFrame(render);
+        try {
         const dt = Math.min((time - lastTime) / 1000, 0.05);
         lastTime = time;
         offset   = (offset + SPEED * dt) % 1;
@@ -648,6 +646,10 @@ import showcase from '../../data/showcase.json';
 
         ctx.globalAlpha = 1;
         ctx.shadowBlur  = 0;
+        } catch (err) {
+          cancelAnimationFrame(rafId);
+          console.error('[grid] render error, animation stopped:', err);
+        }
       };
 
       const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
