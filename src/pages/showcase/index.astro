@@ -574,8 +574,12 @@ import showcase from '../../data/showcase.json';
         ctx.shadowBlur  = 6;
         ctx.shadowColor = '#00ff41';
 
-        for (let i = -30; i <= N_V + 30; i++) {
-          const t       = i / N_V;
+        // Fewer, wider-spaced lines on mobile
+        const nV   = width < 768 ? 8  : N_V;
+        const vExt = width < 768 ? 4  : 30;
+
+        for (let i = -vExt; i <= nV + vExt; i++) {
+          const t       = i / nV;
           const fullExt = (t - 0.5) * width * (1 + OVERFLOW * 2);
           const xTop    = vpX + fullExt * HORIZON_SPREAD;
           const xBottom = vpX + fullExt;
@@ -592,9 +596,9 @@ import showcase from '../../data/showcase.json';
           if (screenT < 0.001) continue;
 
           const y      = vpY + screenT * groundH;
-          // Half-width matches outermost vertical line (loop extends ±30 beyond N_V)
+          // Half-width matches outermost vertical line
           const spread = HORIZON_SPREAD + (1 - HORIZON_SPREAD) * screenT;
-          const halfW  = (0.5 + 30 / N_V) * width * (1 + OVERFLOW * 2) * spread;
+          const halfW  = (0.5 + vExt / nV) * width * (1 + OVERFLOW * 2) * spread;
           const xLeft  = vpX - halfW;
           const xRight = vpX + halfW;
 
