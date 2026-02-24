@@ -4,8 +4,8 @@ import showcase from '../../data/showcase.json';
 ---
 
 <Layout title="Showcase — What I Can Build" description="A curated gallery of website templates built from scratch — restaurant, e-commerce, agency, blog, and real estate designs.">
-  <!-- Grain / noise background overlay -->
-  <canvas id="grain-canvas" class="grain-overlay" aria-hidden="true"></canvas>
+  <!-- Neon perspective grid background -->
+  <canvas id="grid-canvas" class="grid-overlay" aria-hidden="true"></canvas>
 
   <!-- Floating back button -->
   <a href="/" class="back-btn" aria-label="Back to portfolio">
@@ -321,20 +321,18 @@ import showcase from '../../data/showcase.json';
     line-height: 1.7;
   }
 
-  /* ── Grain / noise overlay ────────────────────────────────────── */
-  .grain-overlay {
+  /* ── Neon perspective grid overlay ───────────────────────────── */
+  .grid-overlay {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.045;
-    mix-blend-mode: screen;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .grain-overlay {
+    .grid-overlay {
       display: none;
     }
   }
@@ -377,53 +375,100 @@ import showcase from '../../data/showcase.json';
     });
   }
 
-  // ── Animated grain / noise canvas ───────────────────────────────
-  const grainCanvas = document.getElementById('grain-canvas') as HTMLCanvasElement | null;
-  if (grainCanvas) {
-    const ctx = grainCanvas.getContext('2d');
+  // ── Neon perspective grid canvas ─────────────────────────────────
+  const gridCanvas = document.getElementById('grid-canvas') as HTMLCanvasElement | null;
+  if (gridCanvas) {
+    const ctx = gridCanvas.getContext('2d');
     if (ctx) {
+      let width = 0;
+      let height = 0;
+
       const resize = () => {
-        grainCanvas.width = window.innerWidth;
-        grainCanvas.height = window.innerHeight;
+        width = gridCanvas.width = window.innerWidth;
+        height = gridCanvas.height = window.innerHeight;
       };
       resize();
       window.addEventListener('resize', resize);
 
-      // Throttle to ~15 fps for performance (grain doesn't need 60 fps)
-      const FRAME_INTERVAL = 1000 / 15;
-      let lastFrame = 0;
-      let rafId: number;
+      // Config
+      const N_V       = 20;    // number of vertical lines
+      const N_H       = 16;    // number of horizontal line slots
+      const VPY_RATIO = 0.45;  // vanishing-point y as a fraction of screen height
+      const OVERFLOW  = 0.4;   // how much wider than the screen the bottom of the grid is (each side)
+      const COLOR     = '#00ff41';
+      const MAX_ALPHA = 0.18;  // peak opacity for lines
+      const SPEED     = 0.28;  // horizontal lines per second (animation rate)
 
-      const renderGrain = (time: number) => {
-        rafId = requestAnimationFrame(renderGrain);
-        if (time - lastFrame < FRAME_INTERVAL) return;
-        lastFrame = time;
+      let offset   = 0;
+      let lastTime = 0;
+      let rafId    = 0;
 
-        const { width, height } = grainCanvas;
-        const imageData = ctx.createImageData(width, height);
-        const data = imageData.data;
+      const render = (time: number) => {
+        rafId = requestAnimationFrame(render);
+        const dt = Math.min((time - lastTime) / 1000, 0.05);
+        lastTime = time;
+        offset   = (offset + SPEED * dt) % 1;
 
-        for (let i = 0, len = data.length; i < len; i += 4) {
-          const v = (Math.random() * 255) | 0;
-          data[i] = v;      // R
-          data[i + 1] = v;  // G
-          data[i + 2] = v;  // B
-          data[i + 3] = 255; // A — opacity controlled by CSS
+        ctx.clearRect(0, 0, width, height);
+
+        const vpX     = width  * 0.5;
+        const vpY     = height * VPY_RATIO;
+        const groundH = height - vpY;
+
+        // ── Vertical lines (static, converge to vanishing point) ──
+        ctx.strokeStyle = COLOR;
+        ctx.lineWidth   = 0.8;
+        ctx.globalAlpha = MAX_ALPHA * 0.55;
+
+        for (let i = 0; i <= N_V; i++) {
+          const t       = i / N_V;
+          const xBottom = vpX + (t - 0.5) * width * (1 + OVERFLOW * 2);
+          ctx.beginPath();
+          ctx.moveTo(vpX, vpY);
+          ctx.lineTo(xBottom, height);
+          ctx.stroke();
         }
 
-        ctx.putImageData(imageData, 0, 0);
+        // ── Horizontal lines (animated, emerge from horizon) ──────
+        for (let i = 0; i < N_H; i++) {
+          // rawPhase ∈ [0, 1): 0 = at horizon, 1 = at viewer's feet
+          const rawPhase = ((i / N_H) + offset) % 1;
+
+          // Square maps phase to screen position with perspective compression
+          // near the horizon (small rawPhase → very small screenT → near top).
+          const screenT = rawPhase * rawPhase;
+          if (screenT < 0.001) continue; // skip lines indistinguishable from horizon
+
+          const y        = vpY + screenT * groundH;
+          const progress = screenT;
+
+          // X range follows the outermost vertical lines at this height
+          const xLeft  = vpX - progress * width * (0.5 + OVERFLOW);
+          const xRight = vpX + progress * width * (0.5 + OVERFLOW);
+
+          ctx.globalAlpha = Math.min(screenT * MAX_ALPHA * 2.2, MAX_ALPHA);
+          ctx.lineWidth   = 0.4 + screenT * 0.9;
+          ctx.strokeStyle = COLOR;
+          ctx.beginPath();
+          ctx.moveTo(Math.max(0, xLeft),  y);
+          ctx.lineTo(Math.min(width, xRight), y);
+          ctx.stroke();
+        }
+
+        ctx.globalAlpha = 1;
       };
 
-      // Respect prefers-reduced-motion
       const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (!mq.matches) {
-        rafId = requestAnimationFrame(renderGrain);
+        rafId = requestAnimationFrame(render);
       }
       mq.addEventListener('change', (e) => {
         if (e.matches) {
           cancelAnimationFrame(rafId);
+          ctx.clearRect(0, 0, width, height);
         } else {
-          rafId = requestAnimationFrame(renderGrain);
+          lastTime = performance.now();
+          rafId = requestAnimationFrame(render);
         }
       });
     }

@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && cd dist && git init -b gh-pages && git add -A && git commit -m \"deploy: $(date -u '+%Y-%m-%d %H:%M:%S UTC')\" && git push -f $(git -C .. remote get-url origin) HEAD:gh-pages && cd .."
+    "deploy": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
     "@astrojs/react": "^3.6.0",
