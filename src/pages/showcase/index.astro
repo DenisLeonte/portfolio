@@ -243,6 +243,13 @@ import showcase from '../../data/showcase.json';
     will-change: transform;
   }
 
+  /* Frosted glass: needs visible dark tint so backdrop-filter blur is perceptible */
+  .showcase-card {
+    background: rgba(0, 8, 2, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
   /* JS handles transform/box-shadow on hover — CSS hover just prevents the glass-card override */
   .showcase-card:hover {
     transform: none;
@@ -556,7 +563,7 @@ import showcase from '../../data/showcase.json';
         ctx.strokeStyle = hGrad;
         ctx.lineWidth   = 1.5;
         ctx.globalAlpha = 1;
-        ctx.shadowBlur  = 20;
+        ctx.shadowBlur  = isMobile ? 0 : 20;
         ctx.shadowColor = 'rgba(0,255,65,0.9)';
         ctx.beginPath();
         ctx.moveTo(0, vpY);
@@ -571,12 +578,13 @@ import showcase from '../../data/showcase.json';
         ctx.strokeStyle = vGrad;
         ctx.lineWidth   = 0.9;
         ctx.globalAlpha = MAX_ALPHA * 0.65;
-        ctx.shadowBlur  = 6;
+        ctx.shadowBlur  = isMobile ? 0 : 6;
         ctx.shadowColor = '#00ff41';
 
-        // Fewer, wider-spaced lines on mobile
-        const nV   = width < 768 ? 8  : N_V;
-        const vExt = width < 768 ? 4  : 30;
+        // Mobile: fewer lines, no shadow blur (blur = expensive GPU pass per draw call)
+        const isMobile = width < 768;
+        const nV   = isMobile ? 8  : N_V;
+        const vExt = isMobile ? 4  : 30;
 
         for (let i = -vExt; i <= nV + vExt; i++) {
           const t       = i / nV;
@@ -621,11 +629,11 @@ import showcase from '../../data/showcase.json';
           if (pulseBoost > 0) {
             ctx.globalAlpha = Math.min(screenT * 2.5 + pulseBoost * 0.4, 0.88);
             ctx.lineWidth   = (0.4 + screenT * 0.9) * (1.8 + pulseBoost * 1.4);
-            ctx.shadowBlur  = 14 + pulseBoost * 20;
+            ctx.shadowBlur  = isMobile ? 0 : 14 + pulseBoost * 20;
           } else {
             ctx.globalAlpha = Math.min(screenT * MAX_ALPHA * 2.2, MAX_ALPHA);
             ctx.lineWidth   = 0.4 + screenT * 0.9;
-            ctx.shadowBlur  = 6;
+            ctx.shadowBlur  = isMobile ? 0 : 6;
           }
 
           ctx.shadowColor = lineColor;
