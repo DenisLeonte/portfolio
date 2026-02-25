@@ -226,12 +226,37 @@ function ProductionNode(_props: NodeProps) {
   );
 }
 
+// Floating labels — purely decorative, no handles
+function FloatLabelNode({ data }: NodeProps) {
+  const d = data as { text: string };
+  return (
+    <div
+      style={{
+        ...font,
+        fontSize: '10px',
+        letterSpacing: '0.13em',
+        textTransform: 'uppercase' as const,
+        color: '#666',
+        border: '1px dashed rgba(0,255,65,0.18)',
+        padding: '2px 9px',
+        borderRadius: '20px',
+        whiteSpace: 'nowrap' as const,
+        pointerEvents: 'none',
+        userSelect: 'none' as const,
+      }}
+    >
+      {d.text}
+    </div>
+  );
+}
+
 const nodeTypes: NodeTypes = {
   startNode: StartNode,
   decisionNode: DecisionNode,
   standardNode: StandardNode,
   envNode: EnvNode,
   productionNode: ProductionNode,
+  floatLabel: FloatLabelNode,
 };
 
 // ── Edge style ────────────────────────────────────────────────
@@ -247,17 +272,6 @@ const arrow = {
   height: 13,
 };
 
-const labelStyle: React.CSSProperties = {
-  fill: '#8a8a8a',
-  fontFamily: "'JetBrains Mono', monospace",
-  fontSize: '11px',
-};
-
-const labelBgStyle: React.CSSProperties = {
-  fill: 'rgba(8,8,8,0.88)',
-  rx: 3,
-  ry: 3,
-} as React.CSSProperties;
 
 // ── Graph definition ──────────────────────────────────────────
 //
@@ -286,6 +300,21 @@ const initialNodes: Node[] = [
     position: { x: 285, y: 72 },
     style: { width: '160px', height: '92px' },
     data: { label: 'Work Type?' },
+  },
+  // Floating branch labels — same y, flanking the diamond exits
+  {
+    id: 'lbl_claude',
+    type: 'floatLabel',
+    position: { x: 140, y: 109 },
+    selectable: false,
+    data: { text: 'Claude Code' },
+  },
+  {
+    id: 'lbl_manual',
+    type: 'floatLabel',
+    position: { x: 458, y: 109 },
+    selectable: false,
+    data: { text: 'Manual Dev' },
   },
 
   // ── Left branch (Claude Code) — x=0, w=260, centre at 130
@@ -319,10 +348,11 @@ const initialNodes: Node[] = [
   },
 
   // ── Right branch (Manual Dev) — x=490, w=240, centre at 610
+  // y=480 matches merge_dev so both convergence edges are symmetric
   {
     id: 'push_dev',
     type: 'standardNode',
-    position: { x: 490, y: 308 },
+    position: { x: 490, y: 480 },
     style: { width: '240px' },
     data: { beforeCode: 'Push directly to ', codePart: 'dev' },
   },
@@ -375,31 +405,23 @@ const initialEdges: Edge[] = [
     style: edgeStyle,
     markerEnd: arrow,
   },
-  // Decision → left branch (Claude Code)
+  // Decision → left branch (Claude Code) — label is a floatLabel node
   {
     id: 'e-decision-feature',
     source: 'decision',
     sourceHandle: 'left',
     target: 'push_feature',
     type: 'smoothstep',
-    label: 'Claude Code',
-    labelStyle,
-    labelBgStyle,
-    labelBgPadding: [4, 6] as [number, number],
     style: edgeStyle,
     markerEnd: arrow,
   },
-  // Decision → right branch (Manual Dev)
+  // Decision → right branch (Manual Dev) — label is a floatLabel node
   {
     id: 'e-decision-dev',
     source: 'decision',
     sourceHandle: 'right',
     target: 'push_dev',
     type: 'smoothstep',
-    label: 'Manual Dev',
-    labelStyle,
-    labelBgStyle,
-    labelBgPadding: [4, 6] as [number, number],
     style: edgeStyle,
     markerEnd: arrow,
   },
