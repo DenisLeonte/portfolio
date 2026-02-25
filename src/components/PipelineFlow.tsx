@@ -27,7 +27,8 @@ const nodeBase: React.CSSProperties = {
   borderRadius: '6px',
   color: '#e8e8e8',
   padding: '8px 14px',
-  whiteSpace: 'nowrap' as const,
+  width: '100%',
+  boxSizing: 'border-box' as const,
 };
 
 const handle: React.CSSProperties = {
@@ -86,7 +87,9 @@ function StartNode(_props: NodeProps) {
         letterSpacing: '0.12em',
         padding: '8px 22px',
         boxShadow: '0 0 18px rgba(0,255,65,0.18)',
-        whiteSpace: 'nowrap',
+        width: '100%',
+        boxSizing: 'border-box',
+        textAlign: 'center',
       }}
     >
       ▶ START
@@ -101,8 +104,8 @@ function DecisionNode({ data }: NodeProps) {
     <div
       style={{
         position: 'relative',
-        width: 150,
-        height: 78,
+        width: '100%',
+        height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -194,7 +197,8 @@ function ProductionNode(_props: NodeProps) {
         padding: '10px 22px',
         boxShadow: '0 0 22px rgba(0,255,65,0.22), inset 0 0 18px rgba(0,255,65,0.05)',
         textAlign: 'center',
-        whiteSpace: 'nowrap',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       <Handle type="target" position={Position.Top} style={handle} />
@@ -247,101 +251,119 @@ const labelBgStyle: React.CSSProperties = {
 
 // ── Graph definition ──────────────────────────────────────────
 //
-// Layout (all positions are top-left of node, units = px):
+// Each column has a fixed, uniform width so every node's centre handle
+// lands at the same absolute x — enabling perfectly straight vertical
+// edges within the same column.
 //
-//  Center axis ≈ x 260 (nodes ~150-290px wide)
-//  Left branch   x   0
-//  Right branch  x 490
+//  start / decision / post-merge centre: x+w/2 = 250
+//  Left branch  (w=260, x=  0): handle centre at x=130
+//  Right branch (w=240, x=490): handle centre at x=610
+//  Centre start (w=140, x=180): handle centre at x=250
+//  Centre decision (w=160, h=80, x=170): handle centre at x=250
+//  Post-merge   (w=290, x=105): handle centre at x=250
+//  Production   (w=390, x= 55): handle centre at x=250
 //
 const initialNodes: Node[] = [
   // ── Centre column ──────────────────────────────────────────
   {
     id: 'start',
     type: 'startNode',
-    position: { x: 275, y: 0 },
+    position: { x: 180, y: 0 },
+    style: { width: '140px' },
     data: {},
   },
   {
     id: 'decision',
     type: 'decisionNode',
-    position: { x: 263, y: 72 },
+    position: { x: 170, y: 72 },
+    style: { width: '160px', height: '80px' },
     data: { label: 'Work Type?' },
   },
 
-  // ── Left branch (Claude Code) ───────────────────────────────
+  // ── Left branch (Claude Code) — all x=0, w=260, centre at 130
   {
     id: 'push_feature',
     type: 'standardNode',
     position: { x: 0, y: 210 },
+    style: { width: '260px' },
     data: { beforeCode: 'Push to ', codePart: 'feature/*', afterCode: ' branch' },
   },
   {
     id: 'cf_preview',
     type: 'envNode',
     position: { x: 0, y: 296 },
+    style: { width: '260px' },
     data: { label: 'Cloudflare Preview Instance', dotColor: '#f38020' },
   },
   {
     id: 'test_review',
     type: 'standardNode',
     position: { x: 0, y: 382 },
+    style: { width: '260px' },
     data: { label: 'Test & Review Preview' },
   },
   {
     id: 'merge_dev',
     type: 'standardNode',
     position: { x: 0, y: 468 },
+    style: { width: '260px' },
     data: { beforeCode: 'Merge into ', codePart: 'dev' },
   },
 
-  // ── Right branch (Manual Dev) ───────────────────────────────
+  // ── Right branch (Manual Dev) — x=490, w=240, centre at 610
   {
     id: 'push_dev',
     type: 'standardNode',
     position: { x: 490, y: 296 },
+    style: { width: '240px' },
     data: { beforeCode: 'Push directly to ', codePart: 'dev' },
   },
 
-  // ── Centre column (converge) ────────────────────────────────
+  // ── Centre column (converge) — x=105, w=290, centre at 250
   {
     id: 'cf_staging',
     type: 'envNode',
-    position: { x: 115, y: 590 },
+    position: { x: 105, y: 590 },
+    style: { width: '290px' },
     data: { label: 'Cloudflare Staging Instance', dotColor: '#f38020' },
   },
   {
     id: 'validate',
     type: 'standardNode',
-    position: { x: 190, y: 676 },
+    position: { x: 105, y: 676 },
+    style: { width: '290px' },
     data: { label: 'Validate Staging' },
   },
   {
     id: 'merge_main',
     type: 'standardNode',
-    position: { x: 178, y: 762 },
+    position: { x: 105, y: 762 },
+    style: { width: '290px' },
     data: { beforeCode: 'Merge into ', codePart: 'main' },
   },
   {
     id: 'gh_actions',
     type: 'envNode',
-    position: { x: 108, y: 848 },
+    position: { x: 105, y: 848 },
+    style: { width: '290px' },
     data: { label: 'GitHub Actions → Deploy', dotColor: '#00ff41' },
   },
   {
     id: 'production',
     type: 'productionNode',
-    position: { x: 60, y: 934 },
+    position: { x: 55, y: 934 },
+    style: { width: '390px' },
     data: {},
   },
 ];
 
 const initialEdges: Edge[] = [
-  // Start → Decision
+  // Start → Decision  (same centre column → straight)
   {
     id: 'e-start-decision',
     source: 'start',
     target: 'decision',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
@@ -373,12 +395,12 @@ const initialEdges: Edge[] = [
     style: edgeStyle,
     markerEnd: arrow,
   },
-  // Left branch chain
+  // Left branch chain  (same left column → straight)
   {
     id: 'e-feature-preview',
     source: 'push_feature',
     target: 'cf_preview',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
@@ -386,7 +408,7 @@ const initialEdges: Edge[] = [
     id: 'e-preview-test',
     source: 'cf_preview',
     target: 'test_review',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
@@ -394,7 +416,7 @@ const initialEdges: Edge[] = [
     id: 'e-test-merge',
     source: 'test_review',
     target: 'merge_dev',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
@@ -415,12 +437,12 @@ const initialEdges: Edge[] = [
     style: edgeStyle,
     markerEnd: arrow,
   },
-  // Centre chain to production
+  // Centre chain to production  (same centre column → straight)
   {
     id: 'e-staging-validate',
     source: 'cf_staging',
     target: 'validate',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
@@ -428,7 +450,7 @@ const initialEdges: Edge[] = [
     id: 'e-validate-main',
     source: 'validate',
     target: 'merge_main',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
@@ -436,7 +458,7 @@ const initialEdges: Edge[] = [
     id: 'e-main-gh',
     source: 'merge_main',
     target: 'gh_actions',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
@@ -444,7 +466,7 @@ const initialEdges: Edge[] = [
     id: 'e-gh-production',
     source: 'gh_actions',
     target: 'production',
-    type: 'smoothstep',
+    type: 'straight',
     style: edgeStyle,
     markerEnd: arrow,
   },
