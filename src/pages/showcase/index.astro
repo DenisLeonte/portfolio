@@ -546,7 +546,9 @@ import showcase from '../../data/showcase.json';
           schedulePulse(time);
         }
         for (let pi = pulses.length - 1; pi >= 0; pi--) {
-          if (time - pulses[pi].startTime > pulses[pi].duration) pulses.splice(pi, 1);
+          // Keep pulse alive until pProgress > 1.1 so the wave front travels
+          // fully off the bottom edge (boost window = 0.1) before disappearing
+          if (time - pulses[pi].startTime > pulses[pi].duration * 1.15) pulses.splice(pi, 1);
         }
 
         // ── Solid black background — prevents page bleed-through ──
