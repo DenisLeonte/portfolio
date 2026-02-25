@@ -22,14 +22,16 @@ import showcase from '../../data/showcase.json';
       <h1 class="showcase-title gsap-hidden">
         What I Can <span class="text-green-primary">Build</span>
       </h1>
-      <p class="showcase-subtitle gsap-hidden">
-        Each template below is a fully interactive mini-site — designed and coded from scratch with
-        distinct aesthetics, real animations, and production-quality UI. No themes, no page builders.
-      </p>
-      <p class="showcase-cta-copy gsap-hidden">
-        Need something custom?
-        <a href="/contact" class="inline-link">Let's talk →</a>
-      </p>
+      <div class="showcase-text-card gsap-hidden">
+        <p class="showcase-subtitle">
+          Each template below is a fully interactive mini-site — designed and coded from scratch with
+          distinct aesthetics, real animations, and production-quality UI. No themes, no page builders.
+        </p>
+        <p class="showcase-cta-copy">
+          Need something custom?
+          <a href="/contact" class="inline-link">Let's talk →</a>
+        </p>
+      </div>
     </div>
   </section>
 
@@ -153,6 +155,7 @@ import showcase from '../../data/showcase.json';
   .showcase-hero {
     padding-top: 120px;
     padding-bottom: 60px;
+    overflow: visible; /* allow backdrop-filter to sample the fixed canvas */
   }
 
   .showcase-hero::before {
@@ -172,7 +175,6 @@ import showcase from '../../data/showcase.json';
 
   .showcase-hero .container {
     position: relative;
-    z-index: 1;
   }
 
   .showcase-title {
@@ -188,13 +190,26 @@ import showcase from '../../data/showcase.json';
     max-width: 600px;
     font-size: 1.05rem;
     line-height: 1.7;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
+    color: #b0b0b0;
+    margin: 0;
   }
 
   .showcase-cta-copy {
     font-size: 0.95rem;
-    color: var(--text-secondary);
+    color: #b0b0b0;
+    margin: 0;
+  }
+
+  .showcase-text-card {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 24px 28px;
   }
 
   .inline-link {
@@ -362,7 +377,7 @@ import showcase from '../../data/showcase.json';
 
   .showcase-card__desc {
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: #aaaaaa;
     line-height: 1.6;
     flex: 1;
     margin: 0;
@@ -383,7 +398,7 @@ import showcase from '../../data/showcase.json';
 
   .showcase-bottom__text {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: #b0b0b0;
     margin-bottom: 32px;
     max-width: 560px;
     margin-left: auto;
@@ -546,7 +561,9 @@ import showcase from '../../data/showcase.json';
           schedulePulse(time);
         }
         for (let pi = pulses.length - 1; pi >= 0; pi--) {
-          if (time - pulses[pi].startTime > pulses[pi].duration) pulses.splice(pi, 1);
+          // Keep pulse alive until pProgress > 1.1 so the wave front travels
+          // fully off the bottom edge (boost window = 0.1) before disappearing
+          if (time - pulses[pi].startTime > pulses[pi].duration * 1.15) pulses.splice(pi, 1);
         }
 
         // ── Solid black background — prevents page bleed-through ──
