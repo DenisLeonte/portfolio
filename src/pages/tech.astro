@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import PipelineFlow from '../components/PipelineFlow.tsx';
 import profile from '../data/profile.json';
 
 const pageTitle = `Tech Stack — ${profile.name}`;
@@ -108,7 +109,10 @@ const techStack = [
         <h1 class="section-title gsap-hidden">
           Under the <span>Hood</span>
         </h1>
-        <p class="gsap-hidden" style="max-width: 600px; color: var(--text-secondary); font-size: 1rem; line-height: 1.8;">
+        <p
+          class="gsap-hidden"
+          style="max-width: 600px; color: var(--text-secondary); font-size: 1rem; line-height: 1.8;"
+        >
           Every tool in this portfolio was chosen deliberately. Here's the full
           breakdown — from the rendering engine down to the deployment pipeline.
         </p>
@@ -118,7 +122,7 @@ const techStack = [
     <!-- ═══════════════════════════════════════════════════════
          TECH STACK GRID
          ═══════════════════════════════════════════════════════ -->
-    <section id="tech-stack" class="section-wrapper" style="padding-top: 2rem;">
+    <section id="tech-stack" class="section-wrapper" style="padding-top: 2rem; padding-bottom: 2rem;">
       <div class="container mx-auto">
         {techStack.map((group) => (
           <div class="tech-group gsap-hidden" data-group>
@@ -152,7 +156,7 @@ const techStack = [
     <!-- ═══════════════════════════════════════════════════════
          CI/CD PIPELINE
          ═══════════════════════════════════════════════════════ -->
-    <section id="tech-pipeline" class="section-wrapper">
+    <section id="tech-pipeline" class="section-wrapper" style="padding-top: 2rem;">
       <div class="container mx-auto">
         <p class="section-label gsap-hidden">// deployment_flow --graph</p>
         <h2 class="section-title gsap-hidden">
@@ -163,120 +167,12 @@ const techStack = [
           Preview and staging environments are hosted on a Cloudflare instance.
         </p>
 
-        <!-- ─── Pipeline Flowchart ─────────────────────────── -->
-        <div class="pipeline-wrap gsap-hidden">
+        <!-- React Flow diagram -->
+        <div class="gsap-hidden pipeline-flow-wrap">
+          <PipelineFlow client:load />
+        </div>
 
-          <!-- START -->
-          <div class="pipeline-row">
-            <div class="pipeline-node node-start" data-step="0">
-              <span class="node-icon">▶</span> START
-            </div>
-          </div>
-          <div class="pipeline-connector"><div class="connector-line"></div></div>
-
-          <!-- Decision -->
-          <div class="pipeline-row">
-            <div class="pipeline-diamond" data-step="1">
-              Work Type?
-            </div>
-          </div>
-
-          <!-- Fork labels -->
-          <div class="pipeline-fork-labels">
-            <div class="fork-label-left">
-              <span class="fork-path-tag">Claude Code</span>
-            </div>
-            <div class="fork-label-right">
-              <span class="fork-path-tag">Manual dev</span>
-            </div>
-          </div>
-
-          <!-- Fork branches -->
-          <div class="pipeline-fork">
-            <!-- Left branch -->
-            <div class="pipeline-branch branch-left">
-              <div class="branch-connector top"></div>
-              <div class="pipeline-node" data-step="2">
-                Push to <code>feature/*</code> branch
-              </div>
-              <div class="branch-connector mid"></div>
-              <div class="pipeline-node node-env" data-step="3">
-                <span class="env-dot cf"></span>
-                Cloudflare Preview Instance
-              </div>
-              <div class="branch-connector mid"></div>
-              <div class="pipeline-node" data-step="4">
-                Test &amp; Review Preview
-              </div>
-              <div class="branch-connector mid"></div>
-              <div class="pipeline-node node-merge-into" data-step="5">
-                Merge into <code>dev</code>
-              </div>
-              <div class="branch-connector bottom-left"></div>
-            </div>
-
-            <!-- Right branch -->
-            <div class="pipeline-branch branch-right">
-              <div class="branch-connector top"></div>
-              <div class="pipeline-node" data-step="2b">
-                Push directly to <code>dev</code>
-              </div>
-              <div class="branch-connector bottom-right"></div>
-            </div>
-          </div>
-
-          <!-- Merge point connector -->
-          <div class="pipeline-connector merge-connector"><div class="connector-line"></div></div>
-
-          <!-- Staging -->
-          <div class="pipeline-row">
-            <div class="pipeline-node node-env" data-step="6">
-              <span class="env-dot cf"></span>
-              Cloudflare Staging Instance
-            </div>
-          </div>
-          <div class="pipeline-connector"><div class="connector-line"></div></div>
-
-          <div class="pipeline-row">
-            <div class="pipeline-node" data-step="7">
-              Validate Staging
-            </div>
-          </div>
-          <div class="pipeline-connector"><div class="connector-line"></div></div>
-
-          <div class="pipeline-row">
-            <div class="pipeline-node" data-step="8">
-              Merge into <code>main</code>
-            </div>
-          </div>
-          <div class="pipeline-connector"><div class="connector-line"></div></div>
-
-          <!-- GitHub Actions -->
-          <div class="pipeline-row">
-            <div class="pipeline-node node-env" data-step="9">
-              <span class="env-dot gh"></span>
-              GitHub Actions → Deploy
-            </div>
-          </div>
-          <div class="pipeline-connector"><div class="connector-line"></div></div>
-
-          <!-- Production -->
-          <div class="pipeline-row">
-            <div class="pipeline-node node-production" data-step="10">
-              <span class="prod-check">✓</span>
-              Production Live &nbsp;·&nbsp;
-              <a
-                href="https://denistechs.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="prod-url"
-              >denistechs.com</a>
-            </div>
-          </div>
-
-        </div><!-- /pipeline-wrap -->
-
-        <!-- ─── Legend ─────────────────────────────────────── -->
+        <!-- Legend -->
         <div class="pipeline-legend gsap-hidden">
           <div class="legend-title">// environment_map</div>
           <div class="legend-table-wrap">
@@ -303,16 +199,17 @@ const techStack = [
                   <td><code>main</code></td>
                   <td>Production</td>
                   <td>
-                    <a href="https://denistechs.com" target="_blank" rel="noopener noreferrer">
-                      denistechs.com
-                    </a>
+                    <a
+                      href="https://denistechs.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >denistechs.com</a>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
       </div>
     </section>
   </main>
@@ -424,252 +321,32 @@ const techStack = [
     font-size: 0.9rem;
     line-height: 1.8;
     color: var(--text-secondary);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
-  /* ─── Pipeline Wrap ──────────────────────────────────────── */
-  .pipeline-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    max-width: 760px;
-    margin: 0 auto 3rem;
+  /* ─── Pipeline React Flow wrapper ────────────────────────── */
+  .pipeline-flow-wrap {
+    margin-bottom: 2.5rem;
+    /* React Flow sets its own overflow/clipping via the inner div */
   }
 
-  /* ─── Node base styles ───────────────────────────────────── */
-  .pipeline-node {
-    position: relative;
-    padding: 0.65rem 1.4rem;
-    border: 1px solid var(--border-green);
-    border-radius: 6px;
-    background: var(--bg-card);
-    backdrop-filter: blur(8px);
-    font-size: 0.82rem;
-    color: var(--text-primary);
-    text-align: center;
-    white-space: nowrap;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
+  /* Override React Flow default node background */
+  :global(.react-flow__node) {
+    font-family: 'JetBrains Mono', monospace;
   }
 
-  .pipeline-node code {
-    color: var(--green-primary);
-    background: rgba(0, 255, 65, 0.08);
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-size: 0.78rem;
+  :global(.react-flow__node-default) {
+    background: transparent;
+    border: none;
   }
 
-  /* START node */
-  .node-start {
-    background: rgba(0, 255, 65, 0.06);
-    border-color: var(--green-secondary);
-    color: var(--green-primary);
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
-  }
-
-  .node-icon {
-    font-size: 0.7rem;
-    margin-right: 0.4rem;
-  }
-
-  /* Decision diamond */
-  .pipeline-diamond {
-    position: relative;
-    width: 160px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #f9a825;
-    text-align: center;
-    opacity: 0;
-  }
-
-  .pipeline-diamond::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(249, 168, 37, 0.5);
-    transform: rotate(45deg) scale(0.7);
-    border-radius: 4px;
-    background: rgba(249, 168, 37, 0.05);
-    box-shadow: 0 0 16px rgba(249, 168, 37, 0.12);
-  }
-
-  /* Environment nodes */
-  .node-env {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    justify-content: center;
-  }
-
-  .env-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .env-dot.cf {
-    background: #f38020;
-    box-shadow: 0 0 6px rgba(243, 128, 32, 0.6);
-  }
-
-  .env-dot.gh {
-    background: var(--green-primary);
-    box-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
-  }
-
-  /* Merge-into variant */
-  .node-merge-into {
-    border-color: rgba(0, 204, 51, 0.4);
-  }
-
-  /* Production node */
-  .node-production {
-    border-color: var(--green-primary);
-    background: rgba(0, 255, 65, 0.07);
-    box-shadow:
-      0 0 20px rgba(0, 255, 65, 0.2),
-      inset 0 0 20px rgba(0, 255, 65, 0.04);
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: 0.88rem;
-  }
-
-  .prod-check {
-    color: var(--green-primary);
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
-    margin-right: 0.25rem;
-  }
-
-  .prod-url {
-    color: var(--green-primary);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-color: rgba(0, 255, 65, 0.4);
-  }
-
-  /* ─── Connector lines ────────────────────────────────────── */
-  .pipeline-row {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .pipeline-connector {
-    display: flex;
-    justify-content: center;
-    height: 28px;
-  }
-
-  .connector-line {
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--green-muted), var(--border-green));
-    opacity: 0.6;
-  }
-
-  /* ─── Fork labels ────────────────────────────────────────── */
-  .pipeline-fork-labels {
-    display: flex;
-    width: 100%;
-    max-width: 640px;
-    justify-content: space-around;
-    margin-bottom: 0.5rem;
-    padding: 0 1rem;
-  }
-
-  .fork-label-left,
-  .fork-label-right {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-  }
-
-  .fork-path-tag {
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-green);
-    padding: 2px 10px;
-    border-radius: 20px;
-  }
-
-  /* ─── Fork branches ──────────────────────────────────────── */
-  .pipeline-fork {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 640px;
-  }
-
-  .pipeline-branch {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-
-  /* Branch connector pieces */
-  .branch-connector {
-    flex-shrink: 0;
-  }
-
-  .branch-connector.top {
-    width: 2px;
-    height: 18px;
-    background: var(--border-green);
-    opacity: 0.6;
-  }
-
-  .branch-connector.mid {
-    width: 2px;
-    height: 18px;
-    background: var(--border-green);
-    opacity: 0.6;
-  }
-
-  /* Bottom-left branch connects diagonally to center merge */
-  .branch-connector.bottom-left {
-    width: 2px;
-    height: 24px;
-    background: var(--border-green);
-    opacity: 0.6;
-  }
-
-  .branch-connector.bottom-right {
-    width: 2px;
-    height: 24px;
-    background: var(--border-green);
-    opacity: 0.6;
-  }
-
-  .merge-connector {
-    height: 0;
-    margin-bottom: 0;
-  }
-
-  /* Override pipeline-node inside branch to allow wrapping */
-  .pipeline-branch .pipeline-node {
-    white-space: normal;
-    width: 100%;
+  :global(.react-flow__edge-path) {
+    stroke: rgba(0, 255, 65, 0.38);
   }
 
   /* ─── Legend ─────────────────────────────────────────────── */
   .pipeline-legend {
-    max-width: 760px;
-    margin: 0 auto;
+    margin-top: 1rem;
   }
 
   .legend-title {
@@ -729,29 +406,6 @@ const techStack = [
   }
 
   /* ─── Responsive ─────────────────────────────────────────── */
-  @media (max-width: 600px) {
-    .pipeline-fork {
-      grid-template-columns: 1fr;
-    }
-
-    .branch-right {
-      display: none;
-    }
-
-    .pipeline-fork-labels {
-      justify-content: flex-start;
-      padding-left: 0;
-    }
-
-    .fork-label-right {
-      display: none;
-    }
-
-    .pipeline-node {
-      white-space: normal;
-    }
-  }
-
   @media (max-width: 480px) {
     .tech-cards-grid {
       grid-template-columns: 1fr;
@@ -770,7 +424,6 @@ const techStack = [
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
-    // ── Hero & section labels animate in on load ──────────────
     const heroEls = document.querySelectorAll('#tech-hero .gsap-hidden');
 
     if (prefersReducedMotion) {
@@ -778,35 +431,37 @@ const techStack = [
         (el as HTMLElement).style.opacity = '1';
         (el as HTMLElement).style.transform = 'none';
       });
-    } else {
-      gsap.to(heroEls, {
+      return;
+    }
+
+    // Hero elements fade in on load
+    gsap.to(heroEls, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.2,
+    });
+
+    // Tech group cards fade in on scroll
+    document.querySelectorAll('[data-group]').forEach((group) => {
+      gsap.to(group, {
+        scrollTrigger: {
+          trigger: group,
+          start: 'top 80%',
+        },
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.12,
+        duration: 0.7,
         ease: 'power3.out',
-        delay: 0.2,
       });
+    });
 
-      // ── Tech group cards animate on scroll ────────────────────
-      document.querySelectorAll('[data-group]').forEach((group) => {
-        gsap.to(group, {
-          scrollTrigger: {
-            trigger: group,
-            start: 'top 80%',
-          },
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: 'power3.out',
-        });
-      });
-
-      // ── Pipeline section labels ───────────────────────────────
-      const pipelineLabels = document.querySelectorAll(
-        '#tech-pipeline .gsap-hidden'
-      );
-      pipelineLabels.forEach((el) => {
+    // Pipeline section elements fade in on scroll
+    document
+      .querySelectorAll('#tech-pipeline .gsap-hidden')
+      .forEach((el) => {
         gsap.to(el, {
           scrollTrigger: {
             trigger: el,
@@ -818,47 +473,5 @@ const techStack = [
           ease: 'power3.out',
         });
       });
-
-      // ── Pipeline nodes animate sequentially on scroll ─────────
-      const pipelineWrap = document.querySelector('.pipeline-wrap');
-      if (pipelineWrap) {
-        const nodes = pipelineWrap.querySelectorAll(
-          '.pipeline-node, .pipeline-diamond'
-        );
-
-        nodes.forEach((node, i) => {
-          gsap.to(node, {
-            scrollTrigger: {
-              trigger: pipelineWrap,
-              start: 'top 70%',
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            delay: i * 0.09,
-            ease: 'power2.out',
-          });
-        });
-
-        // Glow pulse on production node after all nodes have appeared
-        const prodNode = pipelineWrap.querySelector('.node-production');
-        if (prodNode) {
-          const totalDelay = nodes.length * 0.09 + 0.5;
-          gsap.to(prodNode, {
-            scrollTrigger: {
-              trigger: pipelineWrap,
-              start: 'top 70%',
-            },
-            boxShadow:
-              '0 0 40px rgba(0,255,65,0.35), inset 0 0 30px rgba(0,255,65,0.07)',
-            repeat: -1,
-            yoyo: true,
-            duration: 1.8,
-            ease: 'sine.inOut',
-            delay: totalDelay,
-          });
-        }
-      }
-    }
   });
 </script>
