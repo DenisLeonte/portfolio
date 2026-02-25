@@ -1,0 +1,484 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import PipelineFlow from '../components/PipelineFlow.tsx';
+import profile from '../data/profile.json';
+
+const pageTitle = `Tech Stack — ${profile.name}`;
+const pageDescription = `The technologies and deployment pipeline powering ${profile.name}'s portfolio — Astro, React, Three.js, GSAP, Cloudflare, and GitHub Actions.`;
+
+const techStack = [
+  {
+    category: 'Framework & Language',
+    categoryCode: '01',
+    items: [
+      {
+        badge: 'AS',
+        name: 'Astro',
+        version: '4.16',
+        desc: 'Static site generator with file-based routing and zero-JS-by-default React islands.',
+      },
+      {
+        badge: 'RX',
+        name: 'React',
+        version: '18.3',
+        desc: 'Powers interactive islands: canvas particle system, typing effect, and contact form.',
+      },
+      {
+        badge: 'TS',
+        name: 'TypeScript',
+        version: '5.6',
+        desc: 'Full type safety across all components, layouts, and JSON data files.',
+      },
+    ],
+  },
+  {
+    category: 'Styling & Animation',
+    categoryCode: '02',
+    items: [
+      {
+        badge: 'TW',
+        name: 'Tailwind CSS',
+        version: '3.4',
+        desc: 'Utility-first CSS layered with custom CSS properties for the terminal colour theme.',
+      },
+      {
+        badge: 'GP',
+        name: 'GSAP',
+        version: '3.12',
+        desc: 'Scroll-triggered animations, staggered reveals, parallax layers, and timeline sequences.',
+      },
+      {
+        badge: '3J',
+        name: 'Three.js',
+        version: '0.169',
+        desc: 'WebGL particle network in the hero section with real-time mouse-parallax interaction.',
+      },
+    ],
+  },
+  {
+    category: 'Infrastructure',
+    categoryCode: '03',
+    items: [
+      {
+        badge: 'CF',
+        name: 'Cloudflare Workers',
+        version: null,
+        desc: 'Hosts preview and staging environments for feature and dev branches via asset serving.',
+      },
+      {
+        badge: 'GA',
+        name: 'GitHub Actions',
+        version: null,
+        desc: 'CI/CD pipeline: auto-builds the site and deploys to GitHub Pages on every push to main.',
+      },
+      {
+        badge: 'GH',
+        name: 'GitHub Pages',
+        version: null,
+        desc: 'Production hosting at denistechs.com with a custom CNAME and automated versioning.',
+      },
+    ],
+  },
+  {
+    category: 'Services',
+    categoryCode: '04',
+    items: [
+      {
+        badge: 'EJ',
+        name: 'EmailJS',
+        version: '4.4',
+        desc: 'Client-side email delivery for the contact form — no backend or server required.',
+      },
+    ],
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Navbar />
+
+  <main id="main" style="padding-top: 5rem;">
+    <!-- ═══════════════════════════════════════════════════════
+         HERO
+         ═══════════════════════════════════════════════════════ -->
+    <section id="tech-hero" class="section-wrapper" style="padding-bottom: 3rem;">
+      <div class="container mx-auto">
+        <p class="section-label gsap-hidden">// tech_stack --verbose</p>
+        <h1 class="section-title gsap-hidden">
+          Under the <span>Hood</span>
+        </h1>
+        <p
+          class="gsap-hidden"
+          style="max-width: 600px; color: var(--text-secondary); font-size: 1rem; line-height: 1.8;"
+        >
+          Every tool in this portfolio was chosen deliberately. Here's the full
+          breakdown — from the rendering engine down to the deployment pipeline.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         TECH STACK GRID
+         ═══════════════════════════════════════════════════════ -->
+    <section id="tech-stack" class="section-wrapper" style="padding-top: 2rem; padding-bottom: 2rem;">
+      <div class="container mx-auto">
+        {techStack.map((group) => (
+          <div class="tech-group gsap-hidden" data-group>
+            <div class="tech-group-header">
+              <span class="tech-group-code">{group.categoryCode}</span>
+              <span class="tech-group-title">{group.category}</span>
+            </div>
+            <div class="tech-cards-grid">
+              {group.items.map((item) => (
+                <article class="glass-card tech-card">
+                  <div class="tech-card-inner">
+                    <div class="tech-badge" aria-hidden="true">{item.badge}</div>
+                    <div class="tech-info">
+                      <div class="tech-name-row">
+                        <span class="tech-name">{item.name}</span>
+                        {item.version && (
+                          <span class="tech-version">v{item.version}</span>
+                        )}
+                      </div>
+                      <p class="tech-desc">{item.desc}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CI/CD PIPELINE
+         ═══════════════════════════════════════════════════════ -->
+    <section id="tech-pipeline" class="section-wrapper" style="padding-top: 2rem;">
+      <div class="container mx-auto">
+        <p class="section-label gsap-hidden">// deployment_flow --graph</p>
+        <h2 class="section-title gsap-hidden">
+          Deployment <span>Pipeline</span>
+        </h2>
+        <p class="gsap-hidden pipeline-subtitle">
+          Three environments, two merge paths, one production endpoint.
+          Preview and staging environments are hosted on a Cloudflare instance.
+        </p>
+
+        <!-- React Flow diagram -->
+        <div class="gsap-hidden pipeline-flow-wrap">
+          <PipelineFlow client:load />
+        </div>
+
+        <!-- Legend -->
+        <div class="pipeline-legend gsap-hidden">
+          <div class="legend-title">// environment_map</div>
+          <div class="legend-table-wrap">
+            <table class="legend-table">
+              <thead>
+                <tr>
+                  <th>Branch</th>
+                  <th>Environment</th>
+                  <th>Host</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>feature/*</code></td>
+                  <td>Cloudflare Preview</td>
+                  <td class="legend-muted">Cloudflare instance (preview)</td>
+                </tr>
+                <tr>
+                  <td><code>dev</code></td>
+                  <td>Cloudflare Staging</td>
+                  <td class="legend-muted">Cloudflare instance (staging)</td>
+                </tr>
+                <tr>
+                  <td><code>main</code></td>
+                  <td>Production</td>
+                  <td>
+                    <a
+                      href="https://denistechs.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >denistechs.com</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ─── Tech Group ─────────────────────────────────────────── */
+  .tech-group {
+    margin-bottom: 3.5rem;
+  }
+
+  .tech-group-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-green);
+  }
+
+  .tech-group-code {
+    font-size: 0.7rem;
+    color: var(--green-primary);
+    opacity: 0.5;
+    letter-spacing: 0.2em;
+  }
+
+  .tech-group-title {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-primary);
+  }
+
+  .tech-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  /* ─── Tech Card ──────────────────────────────────────────── */
+  .tech-card {
+    padding: 1.25rem 1.5rem;
+    cursor: default;
+  }
+
+  .tech-card-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .tech-badge {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--green-primary);
+    border: 1px solid var(--border-green);
+    border-radius: 6px;
+    background: rgba(0, 255, 65, 0.06);
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+  }
+
+  .tech-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tech-name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .tech-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .tech-version {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--green-secondary);
+    border: 1px solid rgba(0, 204, 51, 0.3);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  .tech-desc {
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  /* ─── Pipeline subtitle ──────────────────────────────────── */
+  .pipeline-subtitle {
+    max-width: 560px;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  /* ─── Pipeline React Flow wrapper ────────────────────────── */
+  .pipeline-flow-wrap {
+    height: 960px;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .pipeline-flow-wrap {
+      /* diagram content is ~730×990px (ratio 0.737); fit to viewport width */
+      height: calc(100vw * 1.38);
+    }
+  }
+
+  /* Override React Flow default node background */
+  :global(.react-flow__node) {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  :global(.react-flow__node-default) {
+    background: transparent;
+    border: none;
+  }
+
+  :global(.react-flow__edge-path) {
+    stroke: rgba(0, 255, 65, 0.38);
+  }
+
+  /* ─── Legend ─────────────────────────────────────────────── */
+  .pipeline-legend {
+    margin-top: 1rem;
+  }
+
+  .legend-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--green-primary);
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .legend-table-wrap {
+    overflow-x: auto;
+  }
+
+  .legend-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+
+  .legend-table th,
+  .legend-table td {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border-green);
+    text-align: left;
+  }
+
+  .legend-table th {
+    color: var(--green-primary);
+    font-weight: 700;
+    background: rgba(0, 255, 65, 0.04);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .legend-table td {
+    color: var(--text-secondary);
+  }
+
+  .legend-table td code {
+    color: var(--green-primary);
+    background: rgba(0, 255, 65, 0.08);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.78rem;
+  }
+
+  .legend-table td a {
+    color: var(--green-primary);
+  }
+
+  .legend-muted {
+    color: var(--text-secondary) !important;
+    font-style: italic;
+    font-size: 0.75rem;
+  }
+
+  /* ─── Responsive ─────────────────────────────────────────── */
+  @media (max-width: 480px) {
+    .tech-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    const heroEls = document.querySelectorAll('#tech-hero .gsap-hidden');
+
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.gsap-hidden').forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+      return;
+    }
+
+    // Hero elements fade in on load
+    gsap.to(heroEls, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.2,
+    });
+
+    // Tech group cards fade in on scroll
+    document.querySelectorAll('[data-group]').forEach((group) => {
+      gsap.to(group, {
+        scrollTrigger: {
+          trigger: group,
+          start: 'top 80%',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+      });
+    });
+
+    // Pipeline section elements fade in on scroll
+    document
+      .querySelectorAll('#tech-pipeline .gsap-hidden')
+      .forEach((el) => {
+        gsap.to(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+          },
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+        });
+      });
+  });
+</script>
