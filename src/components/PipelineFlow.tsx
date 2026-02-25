@@ -100,6 +100,8 @@ function StartNode(_props: NodeProps) {
 
 function DecisionNode({ data }: NodeProps) {
   const d = data as StdData;
+  // Node container is 160×92px (set via style prop in initialNodes).
+  // SVG viewBox matches so the polygon always fills it correctly.
   return (
     <div
       style={{
@@ -111,18 +113,26 @@ function DecisionNode({ data }: NodeProps) {
         justifyContent: 'center',
       }}
     >
-      {/* Rotated box that forms the diamond shape */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 6,
-          border: '1px solid rgba(249,168,37,0.55)',
-          transform: 'rotate(45deg)',
-          borderRadius: '4px',
-          background: 'rgba(249,168,37,0.05)',
-          boxShadow: '0 0 14px rgba(249,168,37,0.14)',
-        }}
-      />
+      {/* SVG polygon — precise diamond regardless of aspect ratio */}
+      <svg
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }}
+        viewBox="0 0 160 92"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <filter id="diamond-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="rgba(249,168,37,0.35)" />
+          </filter>
+        </defs>
+        {/* top(80,3) right(157,46) bottom(80,89) left(3,46) */}
+        <polygon
+          points="80,3 157,46 80,89 3,46"
+          fill="rgba(249,168,37,0.06)"
+          stroke="rgba(249,168,37,0.6)"
+          strokeWidth="1"
+          filter="url(#diamond-glow)"
+        />
+      </svg>
       <span
         style={{
           ...font,
@@ -136,9 +146,9 @@ function DecisionNode({ data }: NodeProps) {
       >
         {d.label}
       </span>
-      <Handle type="target" position={Position.Top} style={{ ...handle, top: -3 }} />
-      <Handle id="left" type="source" position={Position.Left} style={{ ...handle, left: -3 }} />
-      <Handle id="right" type="source" position={Position.Right} style={{ ...handle, right: -3 }} />
+      <Handle type="target" position={Position.Top} style={handle} />
+      <Handle id="left" type="source" position={Position.Left} style={handle} />
+      <Handle id="right" type="source" position={Position.Right} style={handle} />
     </div>
   );
 }
@@ -251,61 +261,59 @@ const labelBgStyle: React.CSSProperties = {
 
 // ── Graph definition ──────────────────────────────────────────
 //
-// Each column has a fixed, uniform width so every node's centre handle
-// lands at the same absolute x — enabling perfectly straight vertical
-// edges within the same column.
+// Bounding box: x = [0, 730]  →  visual centre = 365
+// Every column has a uniform width so same-column handles share one x.
 //
-//  start / decision / post-merge centre: x+w/2 = 250
-//  Left branch  (w=260, x=  0): handle centre at x=130
-//  Right branch (w=240, x=490): handle centre at x=610
-//  Centre start (w=140, x=180): handle centre at x=250
-//  Centre decision (w=160, h=80, x=170): handle centre at x=250
-//  Post-merge   (w=290, x=105): handle centre at x=250
-//  Production   (w=390, x= 55): handle centre at x=250
+//  Left branch  (w=260, x=  0): handle centre x=130
+//  Right branch (w=240, x=490): handle centre x=610
+//  Centre start (w=140, x=295): handle centre x=365
+//  Centre decision (w=160, h=92, x=285): handle centre x=365
+//  Post-merge   (w=290, x=220): handle centre x=365
+//  Production   (w=390, x=170): handle centre x=365
 //
 const initialNodes: Node[] = [
   // ── Centre column ──────────────────────────────────────────
   {
     id: 'start',
     type: 'startNode',
-    position: { x: 180, y: 0 },
+    position: { x: 295, y: 0 },
     style: { width: '140px' },
     data: {},
   },
   {
     id: 'decision',
     type: 'decisionNode',
-    position: { x: 170, y: 72 },
-    style: { width: '160px', height: '80px' },
+    position: { x: 285, y: 72 },
+    style: { width: '160px', height: '92px' },
     data: { label: 'Work Type?' },
   },
 
-  // ── Left branch (Claude Code) — all x=0, w=260, centre at 130
+  // ── Left branch (Claude Code) — x=0, w=260, centre at 130
   {
     id: 'push_feature',
     type: 'standardNode',
-    position: { x: 0, y: 210 },
+    position: { x: 0, y: 222 },
     style: { width: '260px' },
     data: { beforeCode: 'Push to ', codePart: 'feature/*', afterCode: ' branch' },
   },
   {
     id: 'cf_preview',
     type: 'envNode',
-    position: { x: 0, y: 296 },
+    position: { x: 0, y: 308 },
     style: { width: '260px' },
     data: { label: 'Cloudflare Preview Instance', dotColor: '#f38020' },
   },
   {
     id: 'test_review',
     type: 'standardNode',
-    position: { x: 0, y: 382 },
+    position: { x: 0, y: 394 },
     style: { width: '260px' },
     data: { label: 'Test & Review Preview' },
   },
   {
     id: 'merge_dev',
     type: 'standardNode',
-    position: { x: 0, y: 468 },
+    position: { x: 0, y: 480 },
     style: { width: '260px' },
     data: { beforeCode: 'Merge into ', codePart: 'dev' },
   },
@@ -314,44 +322,44 @@ const initialNodes: Node[] = [
   {
     id: 'push_dev',
     type: 'standardNode',
-    position: { x: 490, y: 296 },
+    position: { x: 490, y: 308 },
     style: { width: '240px' },
     data: { beforeCode: 'Push directly to ', codePart: 'dev' },
   },
 
-  // ── Centre column (converge) — x=105, w=290, centre at 250
+  // ── Centre column (converge) — x=220, w=290, centre at 365
   {
     id: 'cf_staging',
     type: 'envNode',
-    position: { x: 105, y: 590 },
+    position: { x: 220, y: 600 },
     style: { width: '290px' },
     data: { label: 'Cloudflare Staging Instance', dotColor: '#f38020' },
   },
   {
     id: 'validate',
     type: 'standardNode',
-    position: { x: 105, y: 676 },
+    position: { x: 220, y: 686 },
     style: { width: '290px' },
     data: { label: 'Validate Staging' },
   },
   {
     id: 'merge_main',
     type: 'standardNode',
-    position: { x: 105, y: 762 },
+    position: { x: 220, y: 772 },
     style: { width: '290px' },
     data: { beforeCode: 'Merge into ', codePart: 'main' },
   },
   {
     id: 'gh_actions',
     type: 'envNode',
-    position: { x: 105, y: 848 },
+    position: { x: 220, y: 858 },
     style: { width: '290px' },
     data: { label: 'GitHub Actions → Deploy', dotColor: '#00ff41' },
   },
   {
     id: 'production',
     type: 'productionNode',
-    position: { x: 55, y: 934 },
+    position: { x: 170, y: 944 },
     style: { width: '390px' },
     data: {},
   },
