@@ -233,16 +233,19 @@ function FloatLabelNode({ data }: NodeProps) {
     <div
       style={{
         ...font,
-        fontSize: '10px',
-        letterSpacing: '0.13em',
+        fontSize: '11px',
+        fontWeight: 600,
+        letterSpacing: '0.1em',
         textTransform: 'uppercase' as const,
-        color: 'rgba(0,255,65,0.7)',
-        border: '1px dashed rgba(0,255,65,0.4)',
-        padding: '2px 9px',
+        color: '#00ff41',
+        background: '#0a0a0a',
+        border: '1px solid rgba(0,255,65,0.5)',
+        padding: '3px 10px',
         borderRadius: '20px',
         whiteSpace: 'nowrap' as const,
         pointerEvents: 'none',
         userSelect: 'none' as const,
+        boxShadow: '0 0 8px rgba(0,255,65,0.12)',
       }}
     >
       {d.text}
