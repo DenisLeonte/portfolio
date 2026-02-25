@@ -326,8 +326,15 @@ const techStack = [
 
   /* ─── Pipeline React Flow wrapper ────────────────────────── */
   .pipeline-flow-wrap {
+    height: 960px;
     margin-bottom: 2.5rem;
-    /* React Flow sets its own overflow/clipping via the inner div */
+  }
+
+  @media (max-width: 640px) {
+    .pipeline-flow-wrap {
+      /* diagram content is ~730×990px (ratio 0.737); fit to viewport width */
+      height: calc(100vw * 1.38);
+    }
   }
 
   /* Override React Flow default node background */

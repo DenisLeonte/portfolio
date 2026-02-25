@@ -511,7 +511,7 @@ export default function PipelineFlow() {
     <div
       style={{
         width: '100%',
-        height: '960px',
+        height: '100%',
         borderRadius: '8px',
         border: '1px solid rgba(0,255,65,0.1)',
         overflow: 'hidden',
