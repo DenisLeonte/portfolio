@@ -1,19 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
 import showcase from '../../data/showcase.json';
 ---
 
 <Layout title="Showcase — What I Can Build" description="A curated gallery of website templates built from scratch — restaurant, e-commerce, agency, blog, and real estate designs.">
+  <Navbar />
+
   <!-- Neon perspective grid background -->
   <canvas id="grid-canvas" class="grid-overlay" aria-hidden="true"></canvas>
-
-  <!-- Floating back button -->
-  <a href="/" class="back-btn" aria-label="Back to portfolio">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Portfolio
-  </a>
 
   <!-- Hero Section -->
   <section class="showcase-hero section-wrapper">
@@ -92,6 +88,8 @@ import showcase from '../../data/showcase.json';
       <a href="/contact" class="btn-primary">Get In Touch →</a>
     </div>
   </section>
+
+  <Footer />
 </Layout>
 
 <style>
@@ -121,34 +119,6 @@ import showcase from '../../data/showcase.json';
       animation: none;
       text-shadow: 0 0 20px rgba(0,255,65,0.5);
     }
-  }
-
-  /* ── Back button ─────────────────────────────────────────────── */
-  .back-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    background: rgba(8, 8, 8, 0.85);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 255, 65, 0.2);
-    border-radius: 6px;
-    color: rgba(255, 255, 255, 0.7);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  }
-
-  .back-btn:hover {
-    color: #00ff41;
-    border-color: rgba(0, 255, 65, 0.5);
-    background: rgba(0, 255, 65, 0.05);
   }
 
   /* ── Hero ────────────────────────────────────────────────────── */
@@ -393,7 +363,7 @@ import showcase from '../../data/showcase.json';
   /* ── Bottom CTA ──────────────────────────────────────────────── */
   .showcase-bottom {
     padding-top: 20px;
-    padding-bottom: 100px;
+    padding-bottom: 60px;
   }
 
   .showcase-bottom__text {
