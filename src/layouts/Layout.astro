@@ -247,6 +247,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           });
         }
 
+        // ─── TECH REF SECTION ────────────────────────────────────
+        const techRefElements = document.querySelectorAll('#tech-ref .gsap-hidden');
+        if (techRefElements.length) {
+          gsap.to(techRefElements, {
+            scrollTrigger: {
+              trigger: '#tech-ref',
+              start: 'top 75%',
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+          });
+        }
+
         // ─── PARALLAX BACKGROUNDS ────────────────────────────────
         const parallaxLayers = document.querySelectorAll('[data-parallax]');
         parallaxLayers.forEach((layer) => {
