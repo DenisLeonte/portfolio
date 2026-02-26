@@ -106,6 +106,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             scrollTrigger: {
               trigger: '#about',
               start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
             },
             opacity: 1,
             y: 0,
@@ -119,7 +121,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         const skillsHeaders = document.querySelectorAll('#skills .gsap-hidden');
         if (skillsHeaders.length) {
           gsap.to(skillsHeaders, {
-            scrollTrigger: { trigger: '#skills', start: 'top 75%' },
+            scrollTrigger: {
+              trigger: '#skills',
+              start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
+            },
             opacity: 1,
             y: 0,
             duration: 0.8,
@@ -134,6 +141,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             scrollTrigger: {
               trigger: '#skills',
               start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
             },
             opacity: 1,
             y: 0,
@@ -144,14 +153,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           });
 
           // Animate skill bars when visible
+          const addSkillBarAnimation = () => {
+            document.querySelectorAll('.skill-bar-fill').forEach((bar) => {
+              (bar as HTMLElement).classList.add('animated');
+            });
+          };
+          const removeSkillBarAnimation = () => {
+            document.querySelectorAll('.skill-bar-fill').forEach((bar) => {
+              (bar as HTMLElement).classList.remove('animated');
+            });
+          };
           ScrollTrigger.create({
             trigger: '#skills',
             start: 'top 60%',
-            onEnter: () => {
-              document.querySelectorAll('.skill-bar-fill').forEach((bar) => {
-                (bar as HTMLElement).classList.add('animated');
-              });
-            },
+            end: 'bottom 40%',
+            onEnter: addSkillBarAnimation,
+            onLeave: removeSkillBarAnimation,
+            onEnterBack: addSkillBarAnimation,
+            onLeaveBack: removeSkillBarAnimation,
           });
         }
 
@@ -159,7 +178,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         const projectsHeaders = document.querySelectorAll('#projects .gsap-hidden');
         if (projectsHeaders.length) {
           gsap.to(projectsHeaders, {
-            scrollTrigger: { trigger: '#projects', start: 'top 75%' },
+            scrollTrigger: {
+              trigger: '#projects',
+              start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
+            },
             opacity: 1,
             y: 0,
             duration: 0.8,
@@ -174,6 +198,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             scrollTrigger: {
               trigger: '#projects',
               start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
             },
             opacity: 1,
             y: 0,
@@ -187,7 +213,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         const experienceHeaders = document.querySelectorAll('#experience .gsap-hidden');
         if (experienceHeaders.length) {
           gsap.to(experienceHeaders, {
-            scrollTrigger: { trigger: '#experience', start: 'top 75%' },
+            scrollTrigger: {
+              trigger: '#experience',
+              start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
+            },
             opacity: 1,
             y: 0,
             duration: 0.8,
@@ -204,7 +235,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             gsap.to(item, {
               scrollTrigger: {
                 trigger: item,
-                start: 'top 80%',
+                start: 'top 85%',
+                end: 'bottom 15%',
+                toggleActions: 'play reverse play reverse',
               },
               opacity: 1,
               x: 0,
@@ -222,6 +255,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             scrollTrigger: {
               trigger: '#contact',
               start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
             },
             opacity: 1,
             y: 0,
@@ -238,6 +273,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             scrollTrigger: {
               trigger: '#cta',
               start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
             },
             opacity: 1,
             y: 0,
@@ -254,6 +291,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             scrollTrigger: {
               trigger: '#tech-ref',
               start: 'top 75%',
+              end: 'bottom 25%',
+              toggleActions: 'play reverse play reverse',
             },
             opacity: 1,
             y: 0,
