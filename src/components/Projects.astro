@@ -29,7 +29,7 @@ const otherProjects = projects.filter((p) => !p.featured);
             <!-- Project image / placeholder -->
             <div
               class="relative overflow-hidden"
-              style="aspect-ratio: 16/9; background: rgba(0,255,65,0.03); border-bottom: 1px solid var(--border-green);"
+              style="aspect-ratio: 16/9; background: rgba(22,163,74,0.03); border-bottom: 1px solid var(--border-green);"
             >
               {project.image && !project.image.includes('[') ? (
                 <img
@@ -42,7 +42,7 @@ const otherProjects = projects.filter((p) => !p.featured);
               ) : (
                 <div
                   class="w-full h-full flex items-center justify-center"
-                  style="background: repeating-linear-gradient(45deg, rgba(0,255,65,0.02) 0px, rgba(0,255,65,0.02) 1px, transparent 1px, transparent 8px);"
+                  style="background: repeating-linear-gradient(45deg, rgba(22,163,74,0.03) 0px, rgba(22,163,74,0.03) 1px, transparent 1px, transparent 8px);"
                   aria-hidden="true"
                 >
                   <div class="text-center" style="color: var(--green-muted);">
@@ -59,7 +59,7 @@ const otherProjects = projects.filter((p) => !p.featured);
               <!-- Featured badge -->
               <div
                 class="absolute top-3 right-3"
-                style="background: rgba(0,255,65,0.1); border: 1px solid rgba(0,255,65,0.25); padding: 0.25rem 0.6rem; border-radius: 3px; font-size: 0.65rem; color: var(--green-primary); letter-spacing: 0.1em; text-transform: uppercase;"
+                style="background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.25); padding: 0.25rem 0.6rem; border-radius: 3px; font-size: 0.65rem; color: var(--green-primary); letter-spacing: 0.1em; text-transform: uppercase;"
               >
                 Featured
               </div>
@@ -70,8 +70,8 @@ const otherProjects = projects.filter((p) => !p.featured);
               <!-- Project Name -->
               <div>
                 <h3
-                  class="text-xl font-bold text-white group-hover:text-green-primary transition-colors"
-                  style="color: #fff; letter-spacing: -0.02em;"
+                  class="text-xl font-bold group-hover:text-green-primary transition-colors"
+                  style="color: var(--text-primary); letter-spacing: -0.02em;"
                 >
                   {project.name.startsWith('[') ? (
                     <span style="color: var(--green-muted); font-size: 0.9rem; font-weight: normal; font-style: italic;">
@@ -161,7 +161,7 @@ const otherProjects = projects.filter((p) => !p.featured);
             <article class="project-card glass-card p-5 group" style="opacity: 0; transform: translateY(30px);">
               <h3
                 class="text-base font-bold mb-2 group-hover:text-green-primary transition-colors"
-                style="color: #fff;"
+                style="color: var(--text-primary);"
               >
                 {project.name}
               </h3>
@@ -216,7 +216,7 @@ const otherProjects = projects.filter((p) => !p.featured);
     {projects.every(p => p.name.startsWith('[')) && (
       <div
         class="text-center py-16"
-        style="border: 1px dashed rgba(0,255,65,0.15); border-radius: 8px;"
+        style="border: 1px dashed rgba(22,163,74,0.2); border-radius: 8px;"
       >
         <div style="color: var(--green-muted); font-size: 2rem; margin-bottom: 1rem;">{ }</div>
         <p style="color: var(--text-secondary); font-size: 0.875rem;">

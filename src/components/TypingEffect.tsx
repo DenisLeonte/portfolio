@@ -70,9 +70,8 @@ export default function TypingEffect({
     >
       <span
         style={{
-          color: '#00ff41',
-          textShadow:
-            '0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.25)',
+          color: '#16a34a',
+          textShadow: 'none',
         }}
       >
         {displayText}
@@ -82,8 +81,8 @@ export default function TypingEffect({
           display: 'inline-block',
           width: '2px',
           height: '1em',
-          background: '#00ff41',
-          boxShadow: '0 0 8px rgba(0,255,65,0.8)',
+          background: '#16a34a',
+          boxShadow: '0 0 6px rgba(22,163,74,0.5)',
           animation: 'blink 1s step-end infinite',
           verticalAlign: 'text-bottom',
           marginLeft: '1px',

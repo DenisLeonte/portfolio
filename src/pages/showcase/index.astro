@@ -93,20 +93,17 @@ import showcase from '../../data/showcase.json';
 </Layout>
 
 <style>
-  /* ── Neon title pulse ────────────────────────────────────────── */
+  /* ── Title pulse ────────────────────────────────────────────── */
   @keyframes neonTitlePulse {
     0%, 100% {
       text-shadow:
-        0 0 10px rgba(0,255,65,0.7),
-        0 0 30px rgba(0,255,65,0.4),
-        0 0 60px rgba(0,255,65,0.2);
+        0 0 10px rgba(22,163,74,0.3),
+        0 0 30px rgba(22,163,74,0.15);
     }
     50% {
       text-shadow:
-        0 0 20px rgba(0,255,65,1),
-        0 0 50px rgba(0,255,65,0.6),
-        0 0 100px rgba(0,255,65,0.3),
-        0 0 150px rgba(0,255,65,0.1);
+        0 0 20px rgba(22,163,74,0.5),
+        0 0 50px rgba(22,163,74,0.25);
     }
   }
 
@@ -117,7 +114,7 @@ import showcase from '../../data/showcase.json';
   @media (prefers-reduced-motion: reduce) {
     .showcase-title .text-green-primary {
       animation: none;
-      text-shadow: 0 0 20px rgba(0,255,65,0.5);
+      text-shadow: none;
     }
   }
 
@@ -125,7 +122,7 @@ import showcase from '../../data/showcase.json';
   .showcase-hero {
     padding-top: 120px;
     padding-bottom: 60px;
-    overflow: visible; /* allow backdrop-filter to sample the fixed canvas */
+    overflow: visible;
   }
 
   .showcase-hero::before {
@@ -136,8 +133,8 @@ import showcase from '../../data/showcase.json';
       0deg,
       transparent,
       transparent 2px,
-      rgba(0, 255, 65, 0.015) 2px,
-      rgba(0, 255, 65, 0.015) 4px
+      rgba(22, 163, 74, 0.015) 2px,
+      rgba(22, 163, 74, 0.015) 4px
     );
     pointer-events: none;
     z-index: 0;
@@ -441,7 +438,7 @@ import showcase from '../../data/showcase.json';
     const tiltCards = document.querySelectorAll('.showcase-card') as NodeListOf<HTMLElement>;
 
     tiltCards.forEach((card) => {
-      const color = card.dataset.color ?? '#00ff41';
+      const color = card.dataset.color ?? '#16a34a';
       let rafPending = false;
       let pendingCx = 0;
       let pendingCy = 0;
@@ -494,8 +491,8 @@ import showcase from '../../data/showcase.json';
       const SPEED          = 0.08;  // horizontal lines per second (slow ambient drift)
       const HORIZON_SPREAD = 0.22;  // fraction of full spread that lines occupy at the horizon
 
-      // ── Color helper: green palette — dark green at horizon → neon green at viewer ──
-      const depthColor = (t: number): string => `rgb(0,${Math.round(160 + 95 * t)},30)`;
+      // ── Color helper: green palette — light green at horizon → deep green at viewer ──
+      const depthColor = (t: number): string => `rgb(${Math.round(22 + 40*(1-t))},${Math.round(163 - 40*t)},${Math.round(74 - 20*t)})`;
 
       const resize = () => {
         width  = gridCanvas.width  = window.innerWidth;
@@ -536,10 +533,10 @@ import showcase from '../../data/showcase.json';
           if (time - pulses[pi].startTime > pulses[pi].duration * 1.15) pulses.splice(pi, 1);
         }
 
-        // ── Solid black background — prevents page bleed-through ──
+        // ── Light background — prevents page bleed-through ──
         ctx.globalAlpha = 1;
         ctx.shadowBlur  = 0;
-        ctx.fillStyle   = '#000000';
+        ctx.fillStyle   = '#ffffff';
         ctx.fillRect(0, 0, width, height);
 
         const vpX      = width  * 0.5;
@@ -550,31 +547,31 @@ import showcase from '../../data/showcase.json';
 
         // ── Horizon glow line ─────────────────────────────────────
         const hGrad = ctx.createLinearGradient(0, vpY, width, vpY);
-        hGrad.addColorStop(0,    'rgba(0,255,65,0)');
-        hGrad.addColorStop(0.15, 'rgba(0,255,65,0.7)');
-        hGrad.addColorStop(0.5,  'rgba(0,255,65,1)');
-        hGrad.addColorStop(0.85, 'rgba(0,255,65,0.7)');
-        hGrad.addColorStop(1,    'rgba(0,255,65,0)');
+        hGrad.addColorStop(0,    'rgba(22,163,74,0)');
+        hGrad.addColorStop(0.15, 'rgba(22,163,74,0.6)');
+        hGrad.addColorStop(0.5,  'rgba(22,163,74,0.9)');
+        hGrad.addColorStop(0.85, 'rgba(22,163,74,0.6)');
+        hGrad.addColorStop(1,    'rgba(22,163,74,0)');
         ctx.strokeStyle = hGrad;
         ctx.lineWidth   = 1.5;
         ctx.globalAlpha = 1;
-        ctx.shadowBlur  = isMobile ? 0 : 20;
-        ctx.shadowColor = 'rgba(0,255,65,0.9)';
+        ctx.shadowBlur  = isMobile ? 0 : 16;
+        ctx.shadowColor = 'rgba(22,163,74,0.7)';
         ctx.beginPath();
         ctx.moveTo(0, vpY);
         ctx.lineTo(width, vpY);
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        // ── Vertical lines (dark green → neon green) ─────────────
+        // ── Vertical lines (light green → deep green) ────────────
         const vGrad = ctx.createLinearGradient(vpX, vpY, vpX, height);
-        vGrad.addColorStop(0,   'rgba(0,160,30,0.55)');
-        vGrad.addColorStop(1,   'rgba(0,255,65,0.55)');
+        vGrad.addColorStop(0,   'rgba(134,239,172,0.4)');
+        vGrad.addColorStop(1,   'rgba(22,163,74,0.45)');
         ctx.strokeStyle = vGrad;
         ctx.lineWidth   = 0.9;
         ctx.globalAlpha = MAX_ALPHA * 0.65;
-        ctx.shadowBlur  = isMobile ? 0 : 6;
-        ctx.shadowColor = '#00ff41';
+        ctx.shadowBlur  = isMobile ? 0 : 5;
+        ctx.shadowColor = 'rgba(22,163,74,0.5)';
 
         // Mobile: fewer lines, no shadow blur (blur = expensive GPU pass per draw call)
         const nV   = isMobile ? 8  : N_V;

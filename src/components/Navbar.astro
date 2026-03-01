@@ -26,11 +26,11 @@ const navLinks = [
     >
       <span
         class="text-green-primary font-bold text-xl tracking-tight"
-        style="text-shadow: 0 0 15px rgba(0,255,65,0.4);"
+        style="text-shadow: none;"
       >
         <span class="opacity-50 group-hover:opacity-100 transition-opacity">&gt;_</span>
-        <span style="color: #00ff41;">{profile.name.split(' ')[0]}</span>
-        <span class="text-white opacity-80">.{profile.name.split(' ')[1].toLowerCase()}</span>
+        <span style="color: var(--green-primary);">{profile.name.split(' ')[0]}</span>
+        <span style="color: var(--text-secondary); opacity: 0.8;">.{profile.name.split(' ')[1].toLowerCase()}</span>
       </span>
     </a>
 
@@ -51,9 +51,9 @@ const navLinks = [
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <span class="hamburger-line block w-6 h-[1px] bg-white transition-all duration-300 group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[6px]"></span>
-      <span class="hamburger-line block w-6 h-[1px] bg-white transition-all duration-300 group-aria-expanded:opacity-0 group-aria-expanded:scale-x-0"></span>
-      <span class="hamburger-line block w-6 h-[1px] bg-white transition-all duration-300 group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[6px]"></span>
+      <span class="hamburger-line block w-6 h-[1px] bg-slate-700 transition-all duration-300 group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[6px]"></span>
+      <span class="hamburger-line block w-6 h-[1px] bg-slate-700 transition-all duration-300 group-aria-expanded:opacity-0 group-aria-expanded:scale-x-0"></span>
+      <span class="hamburger-line block w-6 h-[1px] bg-slate-700 transition-all duration-300 group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[6px]"></span>
     </button>
   </div>
 
@@ -66,7 +66,7 @@ const navLinks = [
   >
     <div
       class="container mx-auto mt-4 pb-4 border-t flex flex-col gap-1"
-      style="border-color: rgba(0,255,65,0.15);"
+      style="border-color: var(--border-green);"
     >
       {navLinks.map((link) => (
         <a

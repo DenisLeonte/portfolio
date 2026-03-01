@@ -188,8 +188,8 @@ export default function ContactForm() {
                 display: 'inline-block',
                 width: '14px',
                 height: '14px',
-                border: '2px solid rgba(0,255,65,0.3)',
-                borderTopColor: '#00ff41',
+                border: '2px solid rgba(22,163,74,0.3)',
+                borderTopColor: '#16a34a',
                 borderRadius: '50%',
                 animation: 'spin 0.7s linear infinite',
               }}
@@ -218,10 +218,10 @@ export default function ContactForm() {
           role="alert"
           style={{
             padding: '0.875rem 1rem',
-            background: 'rgba(0, 255, 65, 0.08)',
-            border: '1px solid rgba(0, 255, 65, 0.3)',
+            background: 'rgba(22, 163, 74, 0.08)',
+            border: '1px solid rgba(22, 163, 74, 0.3)',
             borderRadius: '4px',
-            color: '#00ff41',
+            color: '#15803d',
             fontSize: '0.875rem',
             fontFamily: 'var(--font-mono)',
           }}

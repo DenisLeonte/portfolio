@@ -22,25 +22,25 @@ const font: React.CSSProperties = {
 
 const nodeBase: React.CSSProperties = {
   ...font,
-  background: 'rgba(0,255,65,0.03)',
-  border: '1px solid rgba(0,255,65,0.22)',
+  background: 'rgba(22,163,74,0.04)',
+  border: '1px solid rgba(22,163,74,0.22)',
   borderRadius: '6px',
-  color: '#e8e8e8',
+  color: '#0f172a',
   padding: '8px 14px',
   width: '100%',
   boxSizing: 'border-box' as const,
 };
 
 const handle: React.CSSProperties = {
-  background: 'rgba(0,255,65,0.25)',
-  border: '1px solid rgba(0,255,65,0.4)',
+  background: 'rgba(22,163,74,0.35)',
+  border: '1px solid rgba(22,163,74,0.5)',
   width: 7,
   height: 7,
 };
 
 const codeChip: React.CSSProperties = {
-  color: '#00ff41',
-  background: 'rgba(0,255,65,0.1)',
+  color: '#15803d',
+  background: 'rgba(22,163,74,0.1)',
   padding: '0 5px',
   borderRadius: '3px',
   fontSize: '11px',
@@ -79,14 +79,14 @@ function StartNode(_props: NodeProps) {
     <div
       style={{
         ...font,
-        background: 'rgba(0,255,65,0.07)',
-        border: '1px solid #00cc33',
+        background: 'rgba(22,163,74,0.08)',
+        border: '1px solid #15803d',
         borderRadius: '6px',
-        color: '#00ff41',
+        color: '#15803d',
         fontWeight: 700,
         letterSpacing: '0.12em',
         padding: '8px 22px',
-        boxShadow: '0 0 18px rgba(0,255,65,0.18)',
+        boxShadow: '0 0 12px rgba(22,163,74,0.15)',
         width: '100%',
         boxSizing: 'border-box',
         textAlign: 'center',
@@ -198,27 +198,27 @@ function ProductionNode(_props: NodeProps) {
     <div
       style={{
         ...font,
-        background: 'rgba(0,255,65,0.08)',
-        border: '1px solid #00ff41',
+        background: 'rgba(22,163,74,0.08)',
+        border: '1px solid #16a34a',
         borderRadius: '6px',
-        color: '#e8e8e8',
+        color: '#0f172a',
         fontWeight: 600,
         fontSize: '13px',
         padding: '10px 22px',
-        boxShadow: '0 0 22px rgba(0,255,65,0.22), inset 0 0 18px rgba(0,255,65,0.05)',
+        boxShadow: '0 0 22px rgba(22,163,74,0.15), inset 0 0 18px rgba(22,163,74,0.04)',
         textAlign: 'center',
         width: '100%',
         boxSizing: 'border-box',
       }}
     >
       <Handle type="target" position={Position.Top} style={handle} />
-      <span style={{ color: '#00ff41', textShadow: '0 0 10px rgba(0,255,65,0.8)' }}>✓</span>{' '}
+      <span style={{ color: '#16a34a', textShadow: 'none' }}>✓</span>{' '}
       Production Live{' · '}
       <a
         href="https://denistechs.com"
         target="_blank"
         rel="noopener noreferrer"
-        style={{ color: '#00ff41', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+        style={{ color: '#16a34a', textDecoration: 'underline', textUnderlineOffset: '3px' }}
       >
         denistechs.com
       </a>
@@ -237,15 +237,15 @@ function FloatLabelNode({ data }: NodeProps) {
         fontWeight: 600,
         letterSpacing: '0.1em',
         textTransform: 'uppercase' as const,
-        color: '#00ff41',
-        background: '#0a0a0a',
-        border: '1px solid rgba(0,255,65,0.5)',
+        color: '#15803d',
+        background: '#f0fdf4',
+        border: '1px solid rgba(22,163,74,0.4)',
         padding: '3px 10px',
         borderRadius: '20px',
         whiteSpace: 'nowrap' as const,
         pointerEvents: 'none',
         userSelect: 'none' as const,
-        boxShadow: '0 0 8px rgba(0,255,65,0.12)',
+        boxShadow: '0 0 6px rgba(22,163,74,0.08)',
       }}
     >
       {d.text}
@@ -264,13 +264,13 @@ const nodeTypes: NodeTypes = {
 
 // ── Edge style ────────────────────────────────────────────────
 const edgeStyle: React.CSSProperties = {
-  stroke: 'rgba(0,255,65,0.38)',
+  stroke: 'rgba(22,163,74,0.38)',
   strokeWidth: 1.5,
 };
 
 const arrow = {
   type: MarkerType.ArrowClosed,
-  color: 'rgba(0,255,65,0.55)',
+  color: 'rgba(22,163,74,0.6)',
   width: 13,
   height: 13,
 };
@@ -387,7 +387,7 @@ const initialNodes: Node[] = [
     type: 'envNode',
     position: { x: 220, y: 858 },
     style: { width: '290px' },
-    data: { label: 'GitHub Actions → Deploy', dotColor: '#00ff41' },
+    data: { label: 'GitHub Actions → Deploy', dotColor: '#16a34a' },
   },
   {
     id: 'production',
@@ -513,7 +513,7 @@ export default function PipelineFlow() {
         width: '100%',
         height: '100%',
         borderRadius: '8px',
-        border: '1px solid rgba(0,255,65,0.1)',
+        border: '1px solid rgba(22,163,74,0.12)',
         overflow: 'hidden',
       }}
     >
@@ -535,7 +535,7 @@ export default function PipelineFlow() {
         style={{ background: 'transparent' }}
       >
         <Background
-          color="rgba(0,255,65,0.06)"
+          color="rgba(22,163,74,0.06)"
           gap={22}
           size={1}
           variant={BackgroundVariant.Dots}

@@ -93,10 +93,10 @@ export default function HeroCanvas() {
     particleGeometry.setAttribute('position', posAttr);
 
     const particleMaterial = new THREE.PointsMaterial({
-      color: 0x00ff41,
+      color: 0x16a34a,
       size: 2.2,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.7,
       sizeAttenuation: true,
     });
 
@@ -112,9 +112,9 @@ export default function HeroCanvas() {
     lineGeometry.setDrawRange(0, 0);
 
     const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x00ff41,
+      color: 0x16a34a,
       transparent: true,
-      opacity: 0.18,
+      opacity: 0.15,
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -229,7 +229,7 @@ export default function HeroCanvas() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 50%, rgba(0, 255, 65, 0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse at 50% 50%, rgba(22, 163, 74, 0.06) 0%, transparent 70%)',
         }}
       />
     );
