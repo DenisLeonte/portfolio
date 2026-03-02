@@ -283,6 +283,28 @@ const techStack = [
     }
   }
 
+  /* ─── Frosted glass override for tech cards ──────────────── */
+  /* Remove the diagonal lightning gradient */
+  :global(#tech-stack .glass-card::before) {
+    content: none;
+  }
+
+  /* Neutral semi-transparent tint so the wave shows through */
+  :global(#tech-stack .glass-card) {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  :global(html.dark #tech-stack .glass-card),
+  :global(html:not(.dark):not(.light) #tech-stack .glass-card) {
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html:not(.dark):not(.light) #tech-stack .glass-card) {
+      background: rgba(0, 0, 0, 0.18);
+    }
+  }
+
   /* ─── Tech Group ─────────────────────────────────────────── */
   .tech-group {
     margin-bottom: 3.5rem;
