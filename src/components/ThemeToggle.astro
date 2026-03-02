@@ -4,7 +4,7 @@
 ---
 
 <div class="theme-track" role="group" aria-label="Theme preference">
-  <div class="theme-indicator" id="theme-indicator" aria-hidden="true"></div>
+  <div class="theme-indicator" aria-hidden="true"></div>
 
   <button class="theme-btn" data-theme="dark" aria-label="Dark theme" aria-pressed="false" title="Dark theme">
     <!-- Moon -->
@@ -98,8 +98,9 @@
   const THEME_KEY = 'theme';
   const BTN_WIDTH = 28; // px — matches .theme-btn width
 
-  const indicator = document.getElementById('theme-indicator') as HTMLElement | null;
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.theme-btn');
+  // Use querySelectorAll so every rendered instance (desktop + mobile menu) stays in sync
+  const allIndicators = () => document.querySelectorAll<HTMLElement>('.theme-indicator');
+  const allButtons    = () => document.querySelectorAll<HTMLButtonElement>('.theme-btn');
 
   const POSITIONS: Record<string, number> = { dark: 0, system: 1, light: 2 };
 
@@ -112,10 +113,10 @@
 
   function updateUI(theme: string) {
     const pos = POSITIONS[theme] ?? 1;
-    if (indicator) {
-      indicator.style.transform = `translateX(${pos * BTN_WIDTH}px)`;
-    }
-    buttons.forEach((btn) => {
+    allIndicators().forEach((ind) => {
+      ind.style.transform = `translateX(${pos * BTN_WIDTH}px)`;
+    });
+    allButtons().forEach((btn) => {
       const active = btn.dataset.theme === theme;
       btn.classList.toggle('active', active);
       btn.setAttribute('aria-pressed', String(active));
@@ -140,16 +141,16 @@
   const stored = localStorage.getItem(THEME_KEY) ?? 'system';
   updateUI(stored);
 
-  // ─── Button clicks ──────────────────────────────────────────────────
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      applyTheme(btn.dataset.theme ?? 'system');
-    });
+  // ─── Button clicks — attach once via delegation ──────────────────────
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest<HTMLButtonElement>('.theme-btn');
+    if (btn) applyTheme(btn.dataset.theme ?? 'system');
   });
 
   // ─── System preference changes ──────────────────────────────────────
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if ((localStorage.getItem(THEME_KEY) ?? 'system') === 'system') {
+      updateUI('system');
       document.dispatchEvent(
         new CustomEvent('themechange', { detail: { theme: 'system', isDark: isDark() } })
       );
