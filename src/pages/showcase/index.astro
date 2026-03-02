@@ -454,10 +454,12 @@ import showcase from '../../data/showcase.json';
     tiltCards.forEach((card) => {
       const color = card.dataset.color ?? '#16a34a';
       let rafPending = false;
+      let cancelled  = false;
       let pendingCx = 0;
       let pendingCy = 0;
 
       card.addEventListener('mouseenter', () => {
+        cancelled = false;
         card.style.willChange = 'transform';
         card.style.transition = 'transform 0.15s ease, box-shadow 0.3s ease';
       });
@@ -469,16 +471,19 @@ import showcase from '../../data/showcase.json';
         if (rafPending) return;
         rafPending = true;
         requestAnimationFrame(() => {
+          rafPending = false;
+          if (cancelled) return; // mouseleave fired before this RAF ran
           const MAX_TILT = 8;
           const rotY =  pendingCx * MAX_TILT * 2;
           const rotX = -pendingCy * MAX_TILT * 2;
           card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px) scale(1.02)`;
           card.style.boxShadow = `0 20px 60px rgba(0,0,0,0.5),0 0 30px ${color}40,0 0 60px ${color}20`;
-          rafPending = false;
         });
       });
 
       card.addEventListener('mouseleave', () => {
+        cancelled  = true;
+        rafPending = false;
         card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease';
         card.style.transform = '';
         card.style.boxShadow = '';
