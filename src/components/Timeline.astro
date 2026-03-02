@@ -12,13 +12,13 @@ const sorted = [...experience].sort((a, b) => {
 <section
   id="experience"
   class="section-wrapper"
-  style="background: rgba(0,255,65,0.01);"
+  style="background: var(--bg-secondary);"
 >
   <canvas id="matrix-canvas" aria-hidden="true"></canvas>
   <!-- Top border -->
   <div
     class="absolute top-0 left-0 right-0 h-px"
-    style="background: linear-gradient(90deg, transparent, rgba(0,255,65,0.2), transparent);"
+    style="background: linear-gradient(90deg, transparent, rgba(22,163,74,0.2), transparent);"
     aria-hidden="true"
   ></div>
 
@@ -42,7 +42,7 @@ const sorted = [...experience].sort((a, b) => {
       <!-- Mobile: left-side vertical line -->
       <div
         class="md:hidden absolute top-0 bottom-0"
-        style="left: 1.25rem; width: 1px; background: linear-gradient(to bottom, transparent, rgba(0,255,65,0.3), transparent);"
+        style="left: 1.25rem; width: 1px; background: linear-gradient(to bottom, transparent, rgba(22,163,74,0.3), transparent);"
         aria-hidden="true"
       ></div>
 
@@ -81,7 +81,8 @@ const sorted = [...experience].sort((a, b) => {
 
                   <!-- Company & Role -->
                   <h3
-                    class="text-lg font-bold text-white mb-1"
+                    class="text-lg font-bold mb-1"
+                    style="color: var(--text-primary);"
                     style="letter-spacing: -0.02em;"
                   >
                     {entry.company}
@@ -152,7 +153,8 @@ const sorted = [...experience].sort((a, b) => {
                     </span>
                   </div>
                   <h3
-                    class="text-base font-bold text-white mb-1"
+                    class="text-base font-bold mb-1"
+                    style="color: var(--text-primary);"
                     style="letter-spacing: -0.02em;"
                   >
                     {entry.company}
@@ -184,7 +186,7 @@ const sorted = [...experience].sort((a, b) => {
   <!-- Bottom border -->
   <div
     class="absolute bottom-0 left-0 right-0 h-px"
-    style="background: linear-gradient(90deg, transparent, rgba(0,255,65,0.2), transparent);"
+    style="background: linear-gradient(90deg, transparent, rgba(22,163,74,0.2), transparent);"
     aria-hidden="true"
   ></div>
 </section>
@@ -208,8 +210,31 @@ const sorted = [...experience].sort((a, b) => {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
+    // ─── Theme-aware matrix colors ────────────────────────────────
+    const getIsDark = () => {
+      const h = document.documentElement;
+      if (h.classList.contains('dark')) return true;
+      if (h.classList.contains('light')) return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+
+    const getMatrixColors = (dark: boolean) => dark
+      ? { bg: 'rgba(8,8,8,0.08)',       bright: '#ffffff', mid: '#00ff41', dim: '#005520' }
+      : { bg: 'rgba(248,250,252,0.18)', bright: '#14532d', mid: '#166534', dim: '#16a34a' };
+
+    let colors = getMatrixColors(getIsDark());
+
+    document.addEventListener('themechange', () => {
+      colors = getMatrixColors(getIsDark());
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if ((localStorage.getItem('theme') ?? 'system') === 'system') {
+        colors = getMatrixColors(getIsDark());
+      }
+    });
+
     const draw = () => {
-      ctx.fillStyle = 'rgba(8, 8, 8, 0.08)';
+      ctx.fillStyle = colors.bg;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.font = `${FONT_SIZE}px "JetBrains Mono", monospace`;
@@ -219,11 +244,11 @@ const sorted = [...experience].sort((a, b) => {
         const brightness = Math.random();
 
         if (brightness > 0.95) {
-          ctx.fillStyle = '#ffffff';
+          ctx.fillStyle = colors.bright;
         } else if (brightness > 0.7) {
-          ctx.fillStyle = '#00ff41';
+          ctx.fillStyle = colors.mid;
         } else {
-          ctx.fillStyle = '#005520';
+          ctx.fillStyle = colors.dim;
         }
 
         ctx.fillText(char, i * FONT_SIZE, drops[i] * FONT_SIZE);
