@@ -100,6 +100,8 @@ const techStack = [
   <Navbar />
 
   <main id="main" style="padding-top: 5rem;">
+    <!-- Page-wide wavy gradient background -->
+    <div class="bg-tech-wave" aria-hidden="true"></div>
     <!-- ═══════════════════════════════════════════════════════
          HERO
          ═══════════════════════════════════════════════════════ -->
@@ -218,6 +220,67 @@ const techStack = [
 </Layout>
 
 <style>
+  /* ─── Page-wide wavy gradient background ─────────────────── */
+  .bg-tech-wave {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  /* Primary wave: wide horizontal ellipses, slow drift */
+  .bg-tech-wave::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background:
+      radial-gradient(ellipse 80% 28% at 28% 32%, var(--aurora-c1) 0%, transparent 70%),
+      radial-gradient(ellipse 72% 22% at 74% 62%, var(--aurora-c2) 0%, transparent 65%),
+      radial-gradient(ellipse 88% 24% at 52% 82%, var(--aurora-c3) 0%, transparent 65%);
+    animation: techWaveDriftA 22s ease-in-out infinite alternate;
+  }
+
+  /* Secondary wave: counter-drifting layer */
+  .bg-tech-wave::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background:
+      radial-gradient(ellipse 76% 22% at 62% 48%, var(--aurora-c4) 0%, transparent 65%),
+      radial-gradient(ellipse 84% 20% at 18% 68%, var(--aurora-c5) 0%, transparent 60%);
+    animation: techWaveDriftB 30s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes techWaveDriftA {
+    0%   { transform: translate(0%,   0%)   skewY(0deg);    }
+    25%  { transform: translate(3%,  -5%)   skewY(0.8deg);  }
+    50%  { transform: translate(-4%,  4%)   skewY(-1deg);   }
+    75%  { transform: translate(5%,  -2%)   skewY(0.5deg);  }
+    100% { transform: translate(-2%,  5%)   skewY(-0.5deg); }
+  }
+
+  @keyframes techWaveDriftB {
+    0%   { transform: translate(0%,   0%)   skewY(0deg);   }
+    33%  { transform: translate(-4%,  6%)   skewY(1deg);   }
+    66%  { transform: translate(4%,  -4%)   skewY(-0.8deg);}
+    100% { transform: translate(-3%,  3%)   skewY(0.6deg); }
+  }
+
+  /* Disable wave animation on mobile to save battery/performance */
+  @media (max-width: 767px) {
+    .bg-tech-wave::before,
+    .bg-tech-wave::after {
+      animation: none;
+    }
+  }
+
   /* ─── Tech Group ─────────────────────────────────────────── */
   .tech-group {
     margin-bottom: 3.5rem;
