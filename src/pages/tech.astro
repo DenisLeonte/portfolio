@@ -229,7 +229,7 @@ const techStack = [
     z-index: 0;
   }
 
-  /* Primary wave: wide horizontal ellipses, slow drift */
+  /* Primary layer: 3 focused blobs that drift, scale, and rotate */
   .bg-tech-wave::before {
     content: '';
     position: absolute;
@@ -238,13 +238,14 @@ const techStack = [
     top: -50%;
     left: -50%;
     background:
-      radial-gradient(ellipse 80% 28% at 28% 32%, var(--aurora-c1) 0%, transparent 70%),
-      radial-gradient(ellipse 72% 22% at 74% 62%, var(--aurora-c2) 0%, transparent 65%),
-      radial-gradient(ellipse 88% 24% at 52% 82%, var(--aurora-c3) 0%, transparent 65%);
-    animation: techWaveDriftA 22s ease-in-out infinite alternate;
+      radial-gradient(ellipse 48% 34% at 25% 30%, var(--aurora-c1) 0%, transparent 65%),
+      radial-gradient(ellipse 42% 30% at 72% 58%, var(--aurora-c2) 0%, transparent 62%),
+      radial-gradient(ellipse 52% 28% at 50% 84%, var(--aurora-c3) 0%, transparent 62%);
+    animation: techWaveDriftA 10s ease-in-out infinite alternate;
+    will-change: transform;
   }
 
-  /* Secondary wave: counter-drifting layer */
+  /* Secondary layer: counter-drifting blobs */
   .bg-tech-wave::after {
     content: '';
     position: absolute;
@@ -253,24 +254,25 @@ const techStack = [
     top: -50%;
     left: -50%;
     background:
-      radial-gradient(ellipse 76% 22% at 62% 48%, var(--aurora-c4) 0%, transparent 65%),
-      radial-gradient(ellipse 84% 20% at 18% 68%, var(--aurora-c5) 0%, transparent 60%);
-    animation: techWaveDriftB 30s ease-in-out infinite alternate-reverse;
+      radial-gradient(ellipse 46% 32% at 62% 44%, var(--aurora-c4) 0%, transparent 62%),
+      radial-gradient(ellipse 50% 26% at 16% 65%, var(--aurora-c5) 0%, transparent 58%);
+    animation: techWaveDriftB 14s ease-in-out infinite alternate-reverse;
+    will-change: transform;
   }
 
   @keyframes techWaveDriftA {
-    0%   { transform: translate(0%,   0%)   skewY(0deg);    }
-    25%  { transform: translate(3%,  -5%)   skewY(0.8deg);  }
-    50%  { transform: translate(-4%,  4%)   skewY(-1deg);   }
-    75%  { transform: translate(5%,  -2%)   skewY(0.5deg);  }
-    100% { transform: translate(-2%,  5%)   skewY(-0.5deg); }
+    0%   { transform: translate(0%,    0%)   scale(1)     rotate(0deg);    }
+    25%  { transform: translate(10%,  -12%)  scale(1.12)  rotate(2deg);    }
+    50%  { transform: translate(-12%,  8%)   scale(0.92)  rotate(-2.5deg); }
+    75%  { transform: translate(14%,  -5%)   scale(1.08)  rotate(1.5deg);  }
+    100% { transform: translate(-8%,   14%)  scale(1.14)  rotate(-1deg);   }
   }
 
   @keyframes techWaveDriftB {
-    0%   { transform: translate(0%,   0%)   skewY(0deg);   }
-    33%  { transform: translate(-4%,  6%)   skewY(1deg);   }
-    66%  { transform: translate(4%,  -4%)   skewY(-0.8deg);}
-    100% { transform: translate(-3%,  3%)   skewY(0.6deg); }
+    0%   { transform: translate(0%,    0%)   scale(1)     rotate(0deg);   }
+    33%  { transform: translate(-12%,  10%)  scale(1.1)   rotate(2.5deg); }
+    66%  { transform: translate(10%,  -14%)  scale(0.9)   rotate(-2deg);  }
+    100% { transform: translate(-10%,  10%)  scale(1.12)  rotate(1.5deg); }
   }
 
   /* Disable wave animation on mobile to save battery/performance */
