@@ -93,10 +93,10 @@ export default function HeroCanvas() {
     particleGeometry.setAttribute('position', posAttr);
 
     const particleMaterial = new THREE.PointsMaterial({
-      color: 0x00ff41,
+      color: 0x16a34a,
       size: 2.2,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.7,
       sizeAttenuation: true,
     });
 
@@ -112,9 +112,9 @@ export default function HeroCanvas() {
     lineGeometry.setDrawRange(0, 0);
 
     const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x00ff41,
+      color: 0x16a34a,
       transparent: true,
-      opacity: 0.18,
+      opacity: 0.15,
     });
 
     const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
@@ -204,11 +204,40 @@ export default function HeroCanvas() {
 
     animate();
 
+    // ─── Theme Reactivity ─────────────────────────────────────────
+    const getIsDark = () => {
+      const h = document.documentElement;
+      if (h.classList.contains('dark')) return true;
+      if (h.classList.contains('light')) return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+
+    const updateThemeColors = () => {
+      const dark = getIsDark();
+      particleMaterial.color.setHex(dark ? 0x00ff41 : 0x15803d);
+      particleMaterial.opacity = dark ? 0.6 : 0.9;
+      lineMaterial.color.setHex(dark ? 0x00ff41 : 0x16a34a);
+      lineMaterial.opacity = dark ? 0.12 : 0.40;
+    };
+
+    updateThemeColors();
+
+    const themeObserver = new MutationObserver(updateThemeColors);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    const systemMql = window.matchMedia('(prefers-color-scheme: dark)');
+    systemMql.addEventListener('change', updateThemeColors);
+
     // ─── Cleanup ─────────────────────────────────────────────────
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+      themeObserver.disconnect();
+      systemMql.removeEventListener('change', updateThemeColors);
 
       particleGeometry.dispose();
       lineGeometry.dispose();
@@ -229,7 +258,7 @@ export default function HeroCanvas() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 50%, rgba(0, 255, 65, 0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse at 50% 50%, rgba(22, 163, 74, 0.06) 0%, transparent 70%)',
         }}
       />
     );

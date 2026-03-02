@@ -21,6 +21,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <!-- Theme: read localStorage and apply class BEFORE paint to prevent FOUC -->
+    <script is:inline>
+      (function () {
+        var t = localStorage.getItem('theme');
+        var h = document.documentElement;
+        h.classList.remove('dark', 'light');
+        if (t === 'dark')  h.classList.add('dark');
+        if (t === 'light') h.classList.add('light');
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 

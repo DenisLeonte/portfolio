@@ -100,6 +100,8 @@ const techStack = [
   <Navbar />
 
   <main id="main" style="padding-top: 5rem;">
+    <!-- Page-wide wavy gradient background -->
+    <div class="bg-tech-wave" aria-hidden="true"></div>
     <!-- ═══════════════════════════════════════════════════════
          HERO
          ═══════════════════════════════════════════════════════ -->
@@ -218,6 +220,91 @@ const techStack = [
 </Layout>
 
 <style>
+  /* ─── Page-wide wavy gradient background ─────────────────── */
+  .bg-tech-wave {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  /* Primary layer: 3 focused blobs that drift, scale, and rotate */
+  .bg-tech-wave::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background:
+      radial-gradient(ellipse 48% 34% at 25% 30%, var(--aurora-c1) 0%, transparent 65%),
+      radial-gradient(ellipse 42% 30% at 72% 58%, var(--aurora-c2) 0%, transparent 62%),
+      radial-gradient(ellipse 52% 28% at 50% 84%, var(--aurora-c3) 0%, transparent 62%);
+    animation: techWaveDriftA 10s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  /* Secondary layer: counter-drifting blobs */
+  .bg-tech-wave::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background:
+      radial-gradient(ellipse 46% 32% at 62% 44%, var(--aurora-c4) 0%, transparent 62%),
+      radial-gradient(ellipse 50% 26% at 16% 65%, var(--aurora-c5) 0%, transparent 58%);
+    animation: techWaveDriftB 14s ease-in-out infinite alternate-reverse;
+    will-change: transform;
+  }
+
+  @keyframes techWaveDriftA {
+    0%   { transform: translate(0%,    0%)   scale(1)     rotate(0deg);    }
+    25%  { transform: translate(10%,  -12%)  scale(1.12)  rotate(2deg);    }
+    50%  { transform: translate(-12%,  8%)   scale(0.92)  rotate(-2.5deg); }
+    75%  { transform: translate(14%,  -5%)   scale(1.08)  rotate(1.5deg);  }
+    100% { transform: translate(-8%,   14%)  scale(1.14)  rotate(-1deg);   }
+  }
+
+  @keyframes techWaveDriftB {
+    0%   { transform: translate(0%,    0%)   scale(1)     rotate(0deg);   }
+    33%  { transform: translate(-12%,  10%)  scale(1.1)   rotate(2.5deg); }
+    66%  { transform: translate(10%,  -14%)  scale(0.9)   rotate(-2deg);  }
+    100% { transform: translate(-10%,  10%)  scale(1.12)  rotate(1.5deg); }
+  }
+
+  /* Disable wave animation on mobile to save battery/performance */
+  @media (max-width: 767px) {
+    .bg-tech-wave::before,
+    .bg-tech-wave::after {
+      animation: none;
+    }
+  }
+
+  /* ─── Frosted glass override for tech cards ──────────────── */
+  /* Remove the diagonal lightning gradient */
+  :global(#tech-stack .glass-card::before) {
+    content: none;
+  }
+
+  /* Neutral semi-transparent tint so the wave shows through */
+  :global(#tech-stack .glass-card) {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  :global(html.dark #tech-stack .glass-card),
+  :global(html:not(.dark):not(.light) #tech-stack .glass-card) {
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html:not(.dark):not(.light) #tech-stack .glass-card) {
+      background: rgba(0, 0, 0, 0.18);
+    }
+  }
+
   /* ─── Tech Group ─────────────────────────────────────────── */
   .tech-group {
     margin-bottom: 3.5rem;
@@ -277,9 +364,9 @@ const techStack = [
     color: var(--green-primary);
     border: 1px solid var(--border-green);
     border-radius: 6px;
-    background: rgba(0, 255, 65, 0.06);
-    text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+    background: rgba(22, 163, 74, 0.06);
+    text-shadow: none;
+    box-shadow: 0 0 8px rgba(22, 163, 74, 0.1);
   }
 
   .tech-info {
@@ -348,7 +435,7 @@ const techStack = [
   }
 
   :global(.react-flow__edge-path) {
-    stroke: rgba(0, 255, 65, 0.38);
+    stroke: rgba(22, 163, 74, 0.38);
   }
 
   /* ─── Legend ─────────────────────────────────────────────── */
@@ -384,7 +471,7 @@ const techStack = [
   .legend-table th {
     color: var(--green-primary);
     font-weight: 700;
-    background: rgba(0, 255, 65, 0.04);
+    background: rgba(22, 163, 74, 0.04);
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -396,7 +483,7 @@ const techStack = [
 
   .legend-table td code {
     color: var(--green-primary);
-    background: rgba(0, 255, 65, 0.08);
+    background: rgba(22, 163, 74, 0.08);
     padding: 1px 6px;
     border-radius: 3px;
     font-size: 0.78rem;

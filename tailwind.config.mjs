@@ -5,27 +5,27 @@ export default {
     extend: {
       colors: {
         green: {
-          primary: '#00ff41',
-          secondary: '#00cc33',
-          muted: '#0d7a3e',
-          dim: '#005520',
-          glow: 'rgba(0, 255, 65, 0.15)',
+          primary: '#16a34a',
+          secondary: '#15803d',
+          muted: '#22c55e',
+          dim: '#dcfce7',
+          glow: 'rgba(22, 163, 74, 0.1)',
         },
         bg: {
-          primary: '#080808',
-          secondary: '#0d0d0d',
-          card: 'rgba(0, 255, 65, 0.03)',
+          primary: '#ffffff',
+          secondary: '#f8fafc',
+          card: 'rgba(22, 163, 74, 0.04)',
         },
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', 'Fira Code', 'Consolas', 'monospace'],
       },
       boxShadow: {
-        'glow-sm': '0 0 10px rgba(0, 255, 65, 0.3)',
-        'glow': '0 0 20px rgba(0, 255, 65, 0.4)',
-        'glow-lg': '0 0 40px rgba(0, 255, 65, 0.5)',
-        'glow-xl': '0 0 60px rgba(0, 255, 65, 0.3)',
-        'card': '0 4px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(0, 255, 65, 0.05)',
+        'glow-sm': '0 0 10px rgba(22, 163, 74, 0.2)',
+        'glow': '0 0 20px rgba(22, 163, 74, 0.25)',
+        'glow-lg': '0 0 40px rgba(22, 163, 74, 0.3)',
+        'glow-xl': '0 0 60px rgba(22, 163, 74, 0.2)',
+        'card': '0 4px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(22, 163, 74, 0.05)',
       },
       animation: {
         'blink': 'blink 1s step-end infinite',
@@ -39,8 +39,8 @@ export default {
           '50%': { opacity: '0' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 10px rgba(0, 255, 65, 0.4)' },
-          '50%': { boxShadow: '0 0 30px rgba(0, 255, 65, 0.8)' },
+          '0%, 100%': { boxShadow: '0 0 10px rgba(22, 163, 74, 0.3)' },
+          '50%': { boxShadow: '0 0 30px rgba(22, 163, 74, 0.6)' },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
