@@ -1,5 +1,6 @@
 ---
 import profile from '../data/profile.json';
+import ThemeToggle from './ThemeToggle.astro';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -34,27 +35,31 @@ const navLinks = [
       </span>
     </a>
 
-    <!-- Desktop Nav Links -->
+    <!-- Desktop Nav Links + Theme Toggle -->
     <div class="hidden md:flex items-center gap-8" role="list">
       {navLinks.map((link) => (
         <a href={link.href} class="nav-link" role="listitem">
           {link.label}
         </a>
       ))}
+      <ThemeToggle />
     </div>
 
-    <!-- Mobile Hamburger Button -->
-    <button
-      id="hamburger"
-      class="md:hidden flex flex-col gap-[5px] p-2 group"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <span class="hamburger-line block w-6 h-[1px] bg-slate-700 transition-all duration-300 group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[6px]"></span>
-      <span class="hamburger-line block w-6 h-[1px] bg-slate-700 transition-all duration-300 group-aria-expanded:opacity-0 group-aria-expanded:scale-x-0"></span>
-      <span class="hamburger-line block w-6 h-[1px] bg-slate-700 transition-all duration-300 group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[6px]"></span>
-    </button>
+    <!-- Mobile: Theme Toggle + Hamburger -->
+    <div class="md:hidden flex items-center gap-3">
+      <ThemeToggle />
+      <button
+        id="hamburger"
+        class="flex flex-col gap-[5px] p-2 group"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="hamburger-line block w-6 h-[1px] transition-all duration-300 group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[6px]"></span>
+        <span class="hamburger-line block w-6 h-[1px] transition-all duration-300 group-aria-expanded:opacity-0 group-aria-expanded:scale-x-0"></span>
+        <span class="hamburger-line block w-6 h-[1px] transition-all duration-300 group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[6px]"></span>
+      </button>
+    </div>
   </div>
 
   <!-- Mobile Menu -->
@@ -81,6 +86,13 @@ const navLinks = [
     </div>
   </div>
 </nav>
+
+<style>
+  .hamburger-line {
+    background: var(--text-primary);
+    opacity: 0.7;
+  }
+</style>
 
 <script>
   const navbar = document.getElementById('navbar')!;

@@ -210,8 +210,31 @@ const sorted = [...experience].sort((a, b) => {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
+    // ─── Theme-aware matrix colors ────────────────────────────────
+    const getIsDark = () => {
+      const h = document.documentElement;
+      if (h.classList.contains('dark')) return true;
+      if (h.classList.contains('light')) return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+
+    const getMatrixColors = (dark: boolean) => dark
+      ? { bg: 'rgba(8,8,8,0.08)',         bright: '#ffffff', mid: '#00ff41', dim: '#005520' }
+      : { bg: 'rgba(248,250,252,0.12)',    bright: '#15803d', mid: '#16a34a', dim: '#86efac' };
+
+    let colors = getMatrixColors(getIsDark());
+
+    document.addEventListener('themechange', () => {
+      colors = getMatrixColors(getIsDark());
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if ((localStorage.getItem('theme') ?? 'system') === 'system') {
+        colors = getMatrixColors(getIsDark());
+      }
+    });
+
     const draw = () => {
-      ctx.fillStyle = 'rgba(248, 250, 252, 0.12)';
+      ctx.fillStyle = colors.bg;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.font = `${FONT_SIZE}px "JetBrains Mono", monospace`;
@@ -221,11 +244,11 @@ const sorted = [...experience].sort((a, b) => {
         const brightness = Math.random();
 
         if (brightness > 0.95) {
-          ctx.fillStyle = '#15803d';
+          ctx.fillStyle = colors.bright;
         } else if (brightness > 0.7) {
-          ctx.fillStyle = '#16a34a';
+          ctx.fillStyle = colors.mid;
         } else {
-          ctx.fillStyle = '#86efac';
+          ctx.fillStyle = colors.dim;
         }
 
         ctx.fillText(char, i * FONT_SIZE, drops[i] * FONT_SIZE);

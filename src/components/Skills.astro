@@ -131,16 +131,52 @@ import skillsData from '../data/skills.json';
       resizeTimer = setTimeout(resize, 150);
     }, { passive: true });
 
-    // Wave layer definitions — 3 layers on mobile, 5 on desktop
-    const allLayers = [
-      { amp: 0.28, freq: 1.4,  speed: 0.00050, color: 'rgba(22,163,74,0.30)',  lw: 1.5 },
-      { amp: 0.20, freq: 2.3,  speed: 0.00075, color: 'rgba(22,163,74,0.18)',  lw: 1.0 },
-      { amp: 0.36, freq: 0.8,  speed: 0.00030, color: 'rgba(21,128,61,0.12)',  lw: 2.0 },
-      { amp: 0.14, freq: 4.1,  speed: 0.00120, color: 'rgba(22,163,74,0.10)',  lw: 0.8 },
-      { amp: 0.24, freq: 1.9,  speed: 0.00060, color: 'rgba(34,197,94,0.08)',  lw: 1.2 },
+    // ─── Theme-aware wave colors ──────────────────────────────────
+    const lightColors = [
+      'rgba(22,163,74,0.30)',
+      'rgba(22,163,74,0.18)',
+      'rgba(21,128,61,0.12)',
+      'rgba(22,163,74,0.10)',
+      'rgba(34,197,94,0.08)',
     ];
+    const darkColors = [
+      'rgba(0,255,65,0.35)',
+      'rgba(0,255,65,0.20)',
+      'rgba(0,200,50,0.15)',
+      'rgba(0,255,65,0.12)',
+      'rgba(80,255,120,0.10)',
+    ];
+
+    const getIsDark = () => {
+      const h = document.documentElement;
+      if (h.classList.contains('dark')) return true;
+      if (h.classList.contains('light')) return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+
+    // Wave layer definitions — 3 layers on mobile, 5 on desktop
+    const layerBase = [
+      { amp: 0.28, freq: 1.4, speed: 0.00050, lw: 1.5 },
+      { amp: 0.20, freq: 2.3, speed: 0.00075, lw: 1.0 },
+      { amp: 0.36, freq: 0.8, speed: 0.00030, lw: 2.0 },
+      { amp: 0.14, freq: 4.1, speed: 0.00120, lw: 0.8 },
+      { amp: 0.24, freq: 1.9, speed: 0.00060, lw: 1.2 },
+    ];
+
+    let currentColors = getIsDark() ? darkColors : lightColors;
+
+    const allLayers = layerBase.map((l, i) => ({ ...l, get color() { return currentColors[i]; } }));
     const layers = isMobile ? allLayers.slice(0, 3) : allLayers;
     const step   = isMobile ? 4 : 2;
+
+    document.addEventListener('themechange', () => {
+      currentColors = getIsDark() ? darkColors : lightColors;
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if ((localStorage.getItem('theme') ?? 'system') === 'system') {
+        currentColors = getIsDark() ? darkColors : lightColors;
+      }
+    });
 
     const draw = () => {
       // Draw in CSS pixel space (context is pre-scaled by DPR)
@@ -154,7 +190,7 @@ import skillsData from '../data/skills.json';
         ctx.lineWidth   = layer.lw;
         if (!isMobile) {
           ctx.shadowBlur  = 6;
-          ctx.shadowColor = 'rgba(22,163,74,0.2)';
+          ctx.shadowColor = getIsDark() ? 'rgba(0,255,65,0.2)' : 'rgba(22,163,74,0.2)';
         }
 
         const baseY = H * 0.5;

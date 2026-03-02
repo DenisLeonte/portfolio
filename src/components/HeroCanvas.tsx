@@ -204,11 +204,40 @@ export default function HeroCanvas() {
 
     animate();
 
+    // ─── Theme Reactivity ─────────────────────────────────────────
+    const getIsDark = () => {
+      const h = document.documentElement;
+      if (h.classList.contains('dark')) return true;
+      if (h.classList.contains('light')) return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+
+    const updateThemeColors = () => {
+      const dark = getIsDark();
+      particleMaterial.color.setHex(dark ? 0x00ff41 : 0x16a34a);
+      particleMaterial.opacity = dark ? 0.6 : 0.7;
+      lineMaterial.color.setHex(dark ? 0x00ff41 : 0x16a34a);
+      lineMaterial.opacity = dark ? 0.12 : 0.15;
+    };
+
+    updateThemeColors();
+
+    const themeObserver = new MutationObserver(updateThemeColors);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    const systemMql = window.matchMedia('(prefers-color-scheme: dark)');
+    systemMql.addEventListener('change', updateThemeColors);
+
     // ─── Cleanup ─────────────────────────────────────────────────
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+      themeObserver.disconnect();
+      systemMql.removeEventListener('change', updateThemeColors);
 
       particleGeometry.dispose();
       lineGeometry.dispose();

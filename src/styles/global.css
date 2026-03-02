@@ -5,9 +5,10 @@
 @tailwind utilities;
 
 /* ============================================================
-   CSS CUSTOM PROPERTIES
+   CSS CUSTOM PROPERTIES — LIGHT (default)
    ============================================================ */
 :root {
+  /* Base palette */
   --green-primary: #16a34a;
   --green-secondary: #15803d;
   --green-muted: #22c55e;
@@ -22,6 +23,193 @@
   --border-green: rgba(22, 163, 74, 0.2);
   --border-green-hover: rgba(22, 163, 74, 0.5);
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Semantic vars (differ between themes) */
+  --noise-opacity: 0.015;
+  --link-hover: var(--green-secondary);
+  --title-accent-shadow: none;
+  --glow-shadow: 0 0 20px rgba(22,163,74,0.3), 0 0 40px rgba(22,163,74,0.15);
+  --card-hover-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 0 30px rgba(22,163,74,0.08);
+  --btn-primary-hover-shadow: 0 0 20px rgba(22,163,74,0.3);
+  --btn-secondary-border: rgba(15,23,42,0.15);
+  --btn-secondary-hover-color: var(--text-primary);
+  --btn-secondary-hover-border: rgba(15,23,42,0.35);
+  --btn-secondary-hover-bg: rgba(15,23,42,0.04);
+  --navbar-scrolled-bg: rgba(255,255,255,0.92);
+  --skill-track-bg: rgba(15,23,42,0.08);
+  --skill-bar-glow: 0 0 6px rgba(22,163,74,0.3);
+  --dot-pulse-shadow: 0 0 0 3px rgba(22,163,74,0.15), 0 0 15px rgba(22,163,74,0.3);
+  --dot-pulse-shadow-active: 0 0 0 6px rgba(22,163,74,0.1), 0 0 25px rgba(22,163,74,0.5);
+  --social-hover-shadow: 0 0 20px rgba(22,163,74,0.15);
+  --nav-underline-shadow: 0 0 6px rgba(22,163,74,0.3);
+  --tech-badge-hover-shadow: 0 0 12px rgba(22,163,74,0.15);
+  --skill-card-hover-shadow: 0 0 20px rgba(22,163,74,0.08);
+  --scanline-alpha: 0.02;
+  --toggle-active-icon: #fff;
+
+  /* Background animation colors */
+  --aurora-c1: rgba(22,163,74,0.07);
+  --aurora-c2: rgba(34,197,94,0.05);
+  --aurora-c3: rgba(22,163,74,0.04);
+  --aurora-c4: rgba(22,163,74,0.05);
+  --aurora-c5: rgba(21,128,61,0.04);
+  --sparkle-shadow: 0 0 4px 1px rgba(22,163,74,0.4);
+  --dot-grid-color: rgba(22,163,74,0.15);
+  --crosshatch-color: rgba(22,163,74,0.03);
+  --spotlight-color: rgba(22,163,74,0.04);
+  --nova-center-border: rgba(22,163,74,0.35);
+  --nova-a-border: rgba(22,163,74,0.18);
+  --nova-b-border: rgba(22,163,74,0.15);
+  --nova-core-shadow: 0 0 20px 8px rgba(22,163,74,0.3), 0 0 60px 20px rgba(22,163,74,0.1);
+  --nova-core-shadow-pulse: 0 0 35px 14px rgba(22,163,74,0.5), 0 0 80px 30px rgba(22,163,74,0.2);
+  --cta-border-color: rgba(22,163,74,0.15);
+  --cta-before-bg: rgba(22,163,74,0.06);
+  --cta-btn-shadow: 0 0 24px rgba(22,163,74,0.2);
+  --cta-btn-hover-shadow: 0 0 40px rgba(22,163,74,0.3), 0 8px 24px rgba(0,0,0,0.1);
+  --cta-btn-color: #fff;
+  --cta-btn-hover-bg: var(--green-secondary);
+}
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — DARK
+   ============================================================ */
+html.dark {
+  --green-primary: #00ff41;
+  --green-secondary: #00cc33;
+  --green-muted: #0d7a3e;
+  --green-dim: #005520;
+  --green-glow: rgba(0, 255, 65, 0.15);
+  --green-glow-strong: rgba(0, 255, 65, 0.4);
+  --bg-primary: #080808;
+  --bg-secondary: #0d0d0d;
+  --bg-card: rgba(0, 255, 65, 0.03);
+  --text-primary: #e8e8e8;
+  --text-secondary: #8a8a8a;
+  --border-green: rgba(0, 255, 65, 0.2);
+  --border-green-hover: rgba(0, 255, 65, 0.5);
+
+  --noise-opacity: 0.03;
+  --link-hover: #fff;
+  --title-accent-shadow: 0 0 20px rgba(0,255,65,0.5);
+  --glow-shadow: 0 0 10px rgba(0,255,65,0.6), 0 0 30px rgba(0,255,65,0.3), 0 0 60px rgba(0,255,65,0.15);
+  --card-hover-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,255,65,0.12);
+  --btn-primary-hover-shadow: 0 0 20px rgba(0,255,65,0.4);
+  --btn-secondary-border: rgba(255,255,255,0.1);
+  --btn-secondary-hover-color: #fff;
+  --btn-secondary-hover-border: rgba(255,255,255,0.3);
+  --btn-secondary-hover-bg: rgba(255,255,255,0.05);
+  --navbar-scrolled-bg: rgba(8,8,8,0.9);
+  --skill-track-bg: rgba(255,255,255,0.06);
+  --skill-bar-glow: 0 0 8px rgba(0,255,65,0.4);
+  --dot-pulse-shadow: 0 0 0 3px rgba(0,255,65,0.15), 0 0 15px rgba(0,255,65,0.4);
+  --dot-pulse-shadow-active: 0 0 0 6px rgba(0,255,65,0.1), 0 0 25px rgba(0,255,65,0.6);
+  --social-hover-shadow: 0 0 20px rgba(0,255,65,0.25);
+  --nav-underline-shadow: 0 0 8px rgba(0,255,65,0.4);
+  --tech-badge-hover-shadow: 0 0 12px rgba(0,255,65,0.2);
+  --skill-card-hover-shadow: 0 0 20px rgba(0,255,65,0.1);
+  --scanline-alpha: 0.08;
+  --toggle-active-icon: #000;
+
+  --aurora-c1: rgba(0,255,65,0.13);
+  --aurora-c2: rgba(0,200,50,0.09);
+  --aurora-c3: rgba(0,255,100,0.08);
+  --aurora-c4: rgba(0,255,65,0.1);
+  --aurora-c5: rgba(0,180,40,0.07);
+  --sparkle-shadow: 0 0 6px 2px rgba(0,255,65,0.6);
+  --dot-grid-color: rgba(0,255,65,0.25);
+  --crosshatch-color: rgba(0,255,65,0.04);
+  --spotlight-color: rgba(0,255,65,0.05);
+  --nova-center-border: rgba(0,255,65,0.5);
+  --nova-a-border: rgba(0,255,65,0.25);
+  --nova-b-border: rgba(0,255,65,0.2);
+  --nova-core-shadow: 0 0 20px 8px rgba(0,255,65,0.4), 0 0 60px 20px rgba(0,255,65,0.15);
+  --nova-core-shadow-pulse: 0 0 35px 14px rgba(0,255,65,0.7), 0 0 80px 30px rgba(0,255,65,0.25);
+  --cta-border-color: rgba(0,255,65,0.12);
+  --cta-before-bg: rgba(0,255,65,0.08);
+  --cta-btn-shadow: 0 0 24px rgba(0,255,65,0.25);
+  --cta-btn-hover-shadow: 0 0 40px rgba(0,255,65,0.4), 0 8px 24px rgba(0,0,0,0.3);
+  --cta-btn-color: #000;
+  --cta-btn-hover-bg: #1aff5a;
+}
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — SYSTEM PREFERENCE (dark)
+   Applies when no .dark / .light class is set on <html>
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  html:not(.dark):not(.light) {
+    --green-primary: #00ff41;
+    --green-secondary: #00cc33;
+    --green-muted: #0d7a3e;
+    --green-dim: #005520;
+    --green-glow: rgba(0, 255, 65, 0.15);
+    --green-glow-strong: rgba(0, 255, 65, 0.4);
+    --bg-primary: #080808;
+    --bg-secondary: #0d0d0d;
+    --bg-card: rgba(0, 255, 65, 0.03);
+    --text-primary: #e8e8e8;
+    --text-secondary: #8a8a8a;
+    --border-green: rgba(0, 255, 65, 0.2);
+    --border-green-hover: rgba(0, 255, 65, 0.5);
+
+    --noise-opacity: 0.03;
+    --link-hover: #fff;
+    --title-accent-shadow: 0 0 20px rgba(0,255,65,0.5);
+    --glow-shadow: 0 0 10px rgba(0,255,65,0.6), 0 0 30px rgba(0,255,65,0.3), 0 0 60px rgba(0,255,65,0.15);
+    --card-hover-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,255,65,0.12);
+    --btn-primary-hover-shadow: 0 0 20px rgba(0,255,65,0.4);
+    --btn-secondary-border: rgba(255,255,255,0.1);
+    --btn-secondary-hover-color: #fff;
+    --btn-secondary-hover-border: rgba(255,255,255,0.3);
+    --btn-secondary-hover-bg: rgba(255,255,255,0.05);
+    --navbar-scrolled-bg: rgba(8,8,8,0.9);
+    --skill-track-bg: rgba(255,255,255,0.06);
+    --skill-bar-glow: 0 0 8px rgba(0,255,65,0.4);
+    --dot-pulse-shadow: 0 0 0 3px rgba(0,255,65,0.15), 0 0 15px rgba(0,255,65,0.4);
+    --dot-pulse-shadow-active: 0 0 0 6px rgba(0,255,65,0.1), 0 0 25px rgba(0,255,65,0.6);
+    --social-hover-shadow: 0 0 20px rgba(0,255,65,0.25);
+    --nav-underline-shadow: 0 0 8px rgba(0,255,65,0.4);
+    --tech-badge-hover-shadow: 0 0 12px rgba(0,255,65,0.2);
+    --skill-card-hover-shadow: 0 0 20px rgba(0,255,65,0.1);
+    --scanline-alpha: 0.08;
+    --toggle-active-icon: #000;
+
+    --aurora-c1: rgba(0,255,65,0.13);
+    --aurora-c2: rgba(0,200,50,0.09);
+    --aurora-c3: rgba(0,255,100,0.08);
+    --aurora-c4: rgba(0,255,65,0.1);
+    --aurora-c5: rgba(0,180,40,0.07);
+    --sparkle-shadow: 0 0 6px 2px rgba(0,255,65,0.6);
+    --dot-grid-color: rgba(0,255,65,0.25);
+    --crosshatch-color: rgba(0,255,65,0.04);
+    --spotlight-color: rgba(0,255,65,0.05);
+    --nova-center-border: rgba(0,255,65,0.5);
+    --nova-a-border: rgba(0,255,65,0.25);
+    --nova-b-border: rgba(0,255,65,0.2);
+    --nova-core-shadow: 0 0 20px 8px rgba(0,255,65,0.4), 0 0 60px 20px rgba(0,255,65,0.15);
+    --nova-core-shadow-pulse: 0 0 35px 14px rgba(0,255,65,0.7), 0 0 80px 30px rgba(0,255,65,0.25);
+    --cta-border-color: rgba(0,255,65,0.12);
+    --cta-before-bg: rgba(0,255,65,0.08);
+    --cta-btn-shadow: 0 0 24px rgba(0,255,65,0.25);
+    --cta-btn-hover-shadow: 0 0 40px rgba(0,255,65,0.4), 0 8px 24px rgba(0,0,0,0.3);
+    --cta-btn-color: #000;
+    --cta-btn-hover-bg: #1aff5a;
+  }
+}
+
+/* ============================================================
+   THEME TRANSITION
+   ============================================================ */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.35s ease !important;
 }
 
 /* ============================================================
@@ -70,13 +258,13 @@ body {
   position: relative;
 }
 
-/* Noise grain overlay — very subtle */
+/* Noise grain overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: 0.015;
+  opacity: var(--noise-opacity);
   pointer-events: none;
   z-index: 1000;
 }
@@ -103,7 +291,7 @@ a {
 }
 
 a:hover {
-  color: var(--green-secondary);
+  color: var(--link-hover);
 }
 
 /* ============================================================
@@ -153,27 +341,25 @@ a:hover {
 
 .section-title span {
   color: var(--green-primary);
-  text-shadow: none;
+  text-shadow: var(--title-accent-shadow);
 }
 
 /* ============================================================
    GLOW EFFECTS
    ============================================================ */
 .glow-text {
-  text-shadow:
-    0 0 20px rgba(22, 163, 74, 0.3),
-    0 0 40px rgba(22, 163, 74, 0.15);
+  text-shadow: var(--glow-shadow);
 }
 
 .glow-border {
   border: 1px solid var(--border-green);
-  box-shadow: 0 0 20px rgba(22, 163, 74, 0.05), inset 0 0 20px rgba(22, 163, 74, 0.02);
+  box-shadow: 0 0 20px var(--green-glow), inset 0 0 20px var(--green-glow);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glow-border:hover {
   border-color: var(--border-green-hover);
-  box-shadow: 0 0 30px rgba(22, 163, 74, 0.1), inset 0 0 30px rgba(22, 163, 74, 0.04);
+  box-shadow: 0 0 30px var(--green-glow-strong), inset 0 0 30px var(--green-glow);
 }
 
 /* ============================================================
@@ -194,13 +380,13 @@ a:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(22, 163, 74, 0.03) 0%, transparent 60%);
+  background: linear-gradient(135deg, var(--green-glow) 0%, transparent 60%);
   pointer-events: none;
 }
 
 .glass-card:hover {
   border-color: var(--border-green-hover);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 0 30px rgba(22, 163, 74, 0.08);
+  box-shadow: var(--card-hover-shadow);
   transform: translateY(-3px);
 }
 
@@ -239,8 +425,8 @@ a:hover {
 }
 
 .btn-primary:hover {
-  color: #fff;
-  box-shadow: 0 0 20px rgba(22, 163, 74, 0.3);
+  color: var(--bg-primary);
+  box-shadow: var(--btn-primary-hover-shadow);
 }
 
 .btn-primary:hover::before {
@@ -257,7 +443,7 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.05em;
   color: var(--text-secondary);
-  border: 1px solid rgba(15, 23, 42, 0.15);
+  border: 1px solid var(--btn-secondary-border);
   background: transparent;
   border-radius: 4px;
   cursor: pointer;
@@ -266,9 +452,9 @@ a:hover {
 }
 
 .btn-secondary:hover {
-  color: var(--text-primary);
-  border-color: rgba(15, 23, 42, 0.35);
-  background: rgba(15, 23, 42, 0.04);
+  color: var(--btn-secondary-hover-color);
+  border-color: var(--btn-secondary-hover-border);
+  background: var(--btn-secondary-hover-bg);
 }
 
 /* ============================================================
@@ -307,8 +493,8 @@ a:hover {
     to bottom,
     transparent 0px,
     transparent 2px,
-    rgba(0, 0, 0, 0.02) 2px,
-    rgba(0, 0, 0, 0.02) 4px
+    rgba(0, 0, 0, var(--scanline-alpha)) 2px,
+    rgba(0, 0, 0, var(--scanline-alpha)) 4px
   );
   pointer-events: none;
 }
@@ -326,16 +512,29 @@ a:hover {
   font-weight: 500;
   color: var(--green-secondary);
   background: rgba(22, 163, 74, 0.06);
-  border: 1px solid rgba(22, 163, 74, 0.2);
+  border: 1px solid var(--border-green);
   border-radius: 3px;
   transition: all 0.2s ease;
   letter-spacing: 0.03em;
 }
 
+html.dark .tech-badge,
+html:not(.dark):not(.light) .tech-badge {
+  color: var(--green-primary);
+  background: rgba(0, 255, 65, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.dark):not(.light) .tech-badge {
+    color: var(--green-primary);
+    background: rgba(0, 255, 65, 0.06);
+  }
+}
+
 .tech-badge:hover {
-  background: rgba(22, 163, 74, 0.12);
-  border-color: rgba(22, 163, 74, 0.4);
-  box-shadow: 0 0 12px rgba(22, 163, 74, 0.15);
+  background: var(--green-glow);
+  border-color: var(--border-green-hover);
+  box-shadow: var(--tech-badge-hover-shadow);
   transform: translateY(-1px);
 }
 
@@ -351,15 +550,25 @@ a:hover {
   cursor: default;
 }
 
+html.dark .skill-card {
+  background: rgba(0, 255, 65, 0.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.dark):not(.light) .skill-card {
+    background: rgba(0, 255, 65, 0.02);
+  }
+}
+
 .skill-card:hover {
-  background: rgba(22, 163, 74, 0.05);
+  background: var(--green-glow);
   border-color: var(--border-green-hover);
-  box-shadow: 0 0 20px rgba(22, 163, 74, 0.08);
+  box-shadow: var(--skill-card-hover-shadow);
 }
 
 .skill-bar-track {
   height: 2px;
-  background: rgba(15, 23, 42, 0.08);
+  background: var(--skill-track-bg);
   border-radius: 1px;
   overflow: hidden;
   margin-top: 0.5rem;
@@ -372,7 +581,7 @@ a:hover {
   transform-origin: left;
   transform: scaleX(0);
   transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 0 6px rgba(22, 163, 74, 0.3);
+  box-shadow: var(--skill-bar-glow);
 }
 
 .skill-bar-fill.animated {
@@ -404,18 +613,14 @@ a:hover {
   height: 12px;
   background: var(--green-primary);
   border-radius: 50%;
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15), 0 0 15px rgba(22, 163, 74, 0.3);
+  box-shadow: var(--dot-pulse-shadow);
   flex-shrink: 0;
   animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15), 0 0 10px rgba(22, 163, 74, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.1), 0 0 25px rgba(22, 163, 74, 0.5);
-  }
+  0%, 100% { box-shadow: var(--dot-pulse-shadow); }
+  50%       { box-shadow: var(--dot-pulse-shadow-active); }
 }
 
 /* ============================================================
@@ -462,7 +667,7 @@ a:hover {
 
 #navbar.scrolled,
 #navbar.menu-open {
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--navbar-scrolled-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-green);
@@ -487,7 +692,7 @@ a:hover {
   height: 1px;
   background: var(--green-primary);
   transition: right 0.25s ease;
-  box-shadow: 0 0 6px rgba(22, 163, 74, 0.3);
+  box-shadow: var(--nav-underline-shadow);
 }
 
 .nav-link:hover,
@@ -505,7 +710,7 @@ a:hover {
    ============================================================ */
 .form-input {
   width: 100%;
-  background: rgba(22, 163, 74, 0.02);
+  background: var(--green-glow);
   border: 1px solid var(--border-green);
   border-radius: 4px;
   padding: 0.85rem 1rem;
@@ -518,13 +723,18 @@ a:hover {
 }
 
 .form-input::placeholder {
-  color: rgba(100, 116, 139, 0.6);
+  color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 .form-input:focus {
   border-color: var(--green-primary);
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.08);
-  background: rgba(22, 163, 74, 0.03);
+  box-shadow: 0 0 0 3px var(--green-glow);
+  background: var(--green-glow-strong);
+}
+
+html.dark .form-input:focus {
+  background: rgba(0, 255, 65, 0.04);
 }
 
 .form-label {
@@ -554,8 +764,8 @@ a:hover {
 .social-link:hover {
   color: var(--green-primary);
   border-color: var(--green-primary);
-  box-shadow: 0 0 20px rgba(22, 163, 74, 0.15);
-  background: rgba(22, 163, 74, 0.05);
+  box-shadow: var(--social-hover-shadow);
+  background: var(--green-glow);
 }
 
 /* ============================================================
@@ -579,7 +789,7 @@ a:hover {
 }
 
 /* ============================================================
-   SECTION BACKGROUND ANIMATIONS — WILD EDITION
+   SECTION BACKGROUND ANIMATIONS
    ============================================================ */
 
 /* ── ABOUT: Aurora blobs + sparkle field ──────────────────── */
@@ -598,9 +808,9 @@ a:hover {
   top: -50%;
   left: -50%;
   background:
-    radial-gradient(ellipse 60% 40% at 20% 40%, rgba(22,163,74,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 80% 20%, rgba(34,197,94,0.05) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 40% at 55% 85%, rgba(22,163,74,0.04) 0%, transparent 55%);
+    radial-gradient(ellipse 60% 40% at 20% 40%, var(--aurora-c1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 20%, var(--aurora-c2) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 40% at 55% 85%, var(--aurora-c3) 0%, transparent 55%);
   animation: auroraFlow 14s ease-in-out infinite alternate;
 }
 .bg-aurora::after {
@@ -611,8 +821,8 @@ a:hover {
   top: -50%;
   left: -50%;
   background:
-    radial-gradient(ellipse 45% 60% at 70% 60%, rgba(22,163,74,0.05) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 35% at 15% 75%, rgba(21,128,61,0.04) 0%, transparent 50%);
+    radial-gradient(ellipse 45% 60% at 70% 60%, var(--aurora-c4) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 35% at 15% 75%, var(--aurora-c5) 0%, transparent 50%);
   animation: auroraFlow 20s ease-in-out infinite alternate-reverse;
 }
 
@@ -635,7 +845,7 @@ a:hover {
   height: 2px;
   border-radius: 50%;
   background: var(--green-primary);
-  box-shadow: 0 0 4px 1px rgba(22,163,74,0.4);
+  box-shadow: var(--sparkle-shadow);
   animation: sparkle ease-in-out infinite;
 }
 .bg-sparkles span:nth-child(1)  { top:  8%; left: 15%; animation-duration: 3.1s; animation-delay: 0s; }
@@ -662,7 +872,7 @@ a:hover {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image: radial-gradient(circle, rgba(22, 163, 74, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--dot-grid-color) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -674,6 +884,17 @@ a:hover {
   opacity: 0.45;
   pointer-events: none;
   z-index: 0;
+}
+
+html.dark #wave-canvas,
+html:not(.dark):not(.light) #wave-canvas {
+  opacity: 0.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.dark):not(.light) #wave-canvas {
+    opacity: 0.55;
+  }
 }
 
 /* ── PROJECTS: Counter-rotating crosshatch ───────────────── */
@@ -693,8 +914,8 @@ a:hover {
     55deg,
     transparent,
     transparent 50px,
-    rgba(22, 163, 74, 0.03) 50px,
-    rgba(22, 163, 74, 0.03) 51px
+    var(--crosshatch-color) 50px,
+    var(--crosshatch-color) 51px
   );
 }
 .bg-crosshatch::before {
@@ -705,8 +926,8 @@ a:hover {
     -55deg,
     transparent,
     transparent 50px,
-    rgba(22, 163, 74, 0.03) 50px,
-    rgba(22, 163, 74, 0.03) 51px
+    var(--crosshatch-color) 50px,
+    var(--crosshatch-color) 51px
   );
   animation: crosshatchB 25s linear infinite;
 }
@@ -725,7 +946,7 @@ a:hover {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(22,163,74,0.04) 0%, transparent 70%);
+  background: radial-gradient(ellipse 50% 60% at 50% 50%, var(--spotlight-color) 0%, transparent 70%);
   animation: spotlightDrift 12s ease-in-out infinite alternate;
 }
 
@@ -746,6 +967,16 @@ a:hover {
   z-index: 0;
 }
 
+html.dark #matrix-canvas {
+  opacity: 0.18;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.dark):not(.light) #matrix-canvas {
+    opacity: 0.18;
+  }
+}
+
 /* ── CONTACT: Multi-source supernova rings ───────────────── */
 .bg-supernova {
   position: absolute;
@@ -755,27 +986,25 @@ a:hover {
   z-index: 0;
 }
 
-/* Central burst */
 .bg-supernova .ring-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid rgba(22, 163, 74, 0.35);
+  border: 1px solid var(--nova-center-border);
   animation: novaRing 4s ease-out infinite;
 }
 .bg-supernova .ring-center:nth-child(1) { animation-delay: 0s; }
 .bg-supernova .ring-center:nth-child(2) { animation-delay: 1.3s; }
 .bg-supernova .ring-center:nth-child(3) { animation-delay: 2.6s; }
 
-/* Off-center secondary bursts */
 .bg-supernova .ring-a {
   position: absolute;
   top: 20%;
   left: 15%;
   border-radius: 50%;
-  border: 1px solid rgba(22, 163, 74, 0.18);
+  border: 1px solid var(--nova-a-border);
   animation: novaRingSm 5s ease-out infinite;
 }
 .bg-supernova .ring-a:nth-child(4) { animation-delay: 0.5s; }
@@ -786,13 +1015,12 @@ a:hover {
   bottom: 20%;
   right: 15%;
   border-radius: 50%;
-  border: 1px solid rgba(22, 163, 74, 0.15);
+  border: 1px solid var(--nova-b-border);
   animation: novaRingSm 6s ease-out infinite;
 }
 .bg-supernova .ring-b:nth-child(6) { animation-delay: 1.0s; }
 .bg-supernova .ring-b:nth-child(7) { animation-delay: 3.5s; }
 
-/* Central glow dot */
 .bg-supernova .core {
   position: absolute;
   top: 50%;
@@ -802,46 +1030,39 @@ a:hover {
   height: 6px;
   border-radius: 50%;
   background: var(--green-primary);
-  box-shadow: 0 0 20px 8px rgba(22,163,74,0.3), 0 0 60px 20px rgba(22,163,74,0.1);
+  box-shadow: var(--nova-core-shadow);
   animation: corePulse 2s ease-in-out infinite;
 }
 
 @keyframes novaRing {
-  0%   { width: 0;    height: 0;    opacity: 0.7; }
+  0%   { width: 0;    height: 0;    opacity: 0.9; }
   100% { width: 120vmax; height: 120vmax; opacity: 0; }
 }
 @keyframes novaRingSm {
-  0%   { width: 0;   height: 0;   opacity: 0.5; }
+  0%   { width: 0;   height: 0;   opacity: 0.6; }
   100% { width: 60vmax; height: 60vmax; opacity: 0; }
 }
 @keyframes corePulse {
-  0%, 100% { box-shadow: 0 0 20px 8px rgba(22,163,74,0.3), 0 0 60px 20px rgba(22,163,74,0.1); }
-  50%       { box-shadow: 0 0 35px 14px rgba(22,163,74,0.5), 0 0 80px 30px rgba(22,163,74,0.2); }
+  0%, 100% { box-shadow: var(--nova-core-shadow); }
+  50%       { box-shadow: var(--nova-core-shadow-pulse); }
 }
 
 /* ============================================================
    MOBILE: DISABLE HEAVY CSS ANIMATIONS
    ============================================================ */
 @media (max-width: 767px) {
-  /* Aurora blobs — large 200% scale+rotate transforms */
   .bg-aurora::before,
   .bg-aurora::after {
     animation: none;
   }
-
-  /* 12 individually-animated sparkle dots */
   .bg-sparkles span {
     display: none;
   }
-
-  /* Supernova rings — width/height expansion is expensive */
   .bg-supernova .ring-center,
   .bg-supernova .ring-a,
   .bg-supernova .ring-b {
     animation: none;
   }
-
-  /* Crosshatch — translateX on inset:-200% elements */
   .bg-crosshatch::before,
   .bg-crosshatch::after {
     animation: none;
@@ -855,9 +1076,9 @@ a:hover {
   margin-top: 64px;
   padding: 52px 40px;
   text-align: center;
-  border: 1px solid rgba(22, 163, 74, 0.15);
+  border: 1px solid var(--cta-border-color);
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(22, 163, 74, 0.03) 0%, transparent 60%);
+  background: linear-gradient(135deg, var(--green-glow) 0%, transparent 60%);
   position: relative;
   overflow: hidden;
 }
@@ -870,7 +1091,7 @@ a:hover {
   transform: translateX(-50%);
   width: 320px;
   height: 160px;
-  background: radial-gradient(ellipse, rgba(22, 163, 74, 0.06) 0%, transparent 70%);
+  background: radial-gradient(ellipse, var(--cta-before-bg) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -908,7 +1129,7 @@ a:hover {
   font-family: var(--font-mono);
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: #fff;
+  color: var(--cta-btn-color);
   background: var(--green-primary);
   border: none;
   border-radius: 6px;
@@ -917,7 +1138,7 @@ a:hover {
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  box-shadow: 0 0 24px rgba(22, 163, 74, 0.2);
+  box-shadow: var(--cta-btn-shadow);
 }
 
 .projects-cta__btn::before {
@@ -931,9 +1152,9 @@ a:hover {
 
 .projects-cta__btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(22, 163, 74, 0.3), 0 8px 24px rgba(0, 0, 0, 0.1);
-  background: var(--green-secondary);
-  color: #fff;
+  box-shadow: var(--cta-btn-hover-shadow);
+  background: var(--cta-btn-hover-bg);
+  color: var(--cta-btn-color);
 }
 
 .projects-cta__btn:hover::before {
@@ -960,7 +1181,6 @@ a:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
   html {
     scroll-behavior: auto;
   }

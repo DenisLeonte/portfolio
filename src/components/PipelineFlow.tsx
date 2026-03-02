@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ReactFlow,
   Handle,
@@ -13,6 +13,27 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
+// ── Theme hook ─────────────────────────────────────────────────
+function useIsDark(): boolean {
+  const getIsDark = () => {
+    const h = document.documentElement;
+    if (h.classList.contains('dark')) return true;
+    if (h.classList.contains('light')) return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
+  const [dark, setDark] = useState(false); // safe SSR default
+  useEffect(() => {
+    setDark(getIsDark());
+    const obs = new MutationObserver(() => setDark(getIsDark()));
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const onMql = () => setDark(getIsDark());
+    mql.addEventListener('change', onMql);
+    return () => { obs.disconnect(); mql.removeEventListener('change', onMql); };
+  }, []);
+  return dark;
+}
+
 // ── Shared styles ─────────────────────────────────────────────
 const font: React.CSSProperties = {
   fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
@@ -22,25 +43,25 @@ const font: React.CSSProperties = {
 
 const nodeBase: React.CSSProperties = {
   ...font,
-  background: 'rgba(22,163,74,0.04)',
-  border: '1px solid rgba(22,163,74,0.22)',
+  background: 'var(--bg-card)',
+  border: '1px solid var(--border-green)',
   borderRadius: '6px',
-  color: '#0f172a',
+  color: 'var(--text-primary)',
   padding: '8px 14px',
   width: '100%',
   boxSizing: 'border-box' as const,
 };
 
 const handle: React.CSSProperties = {
-  background: 'rgba(22,163,74,0.35)',
-  border: '1px solid rgba(22,163,74,0.5)',
+  background: 'var(--green-glow-strong)',
+  border: '1px solid var(--border-green-hover)',
   width: 7,
   height: 7,
 };
 
 const codeChip: React.CSSProperties = {
-  color: '#15803d',
-  background: 'rgba(22,163,74,0.1)',
+  color: 'var(--green-primary)',
+  background: 'var(--green-glow)',
   padding: '0 5px',
   borderRadius: '3px',
   fontSize: '11px',
@@ -79,14 +100,14 @@ function StartNode(_props: NodeProps) {
     <div
       style={{
         ...font,
-        background: 'rgba(22,163,74,0.08)',
-        border: '1px solid #15803d',
+        background: 'var(--green-glow)',
+        border: '1px solid var(--green-secondary)',
         borderRadius: '6px',
-        color: '#15803d',
+        color: 'var(--green-primary)',
         fontWeight: 700,
         letterSpacing: '0.12em',
         padding: '8px 22px',
-        boxShadow: '0 0 12px rgba(22,163,74,0.15)',
+        boxShadow: '0 0 12px var(--green-glow-strong)',
         width: '100%',
         boxSizing: 'border-box',
         textAlign: 'center',
@@ -198,27 +219,27 @@ function ProductionNode(_props: NodeProps) {
     <div
       style={{
         ...font,
-        background: 'rgba(22,163,74,0.08)',
-        border: '1px solid #16a34a',
+        background: 'var(--green-glow)',
+        border: '1px solid var(--green-primary)',
         borderRadius: '6px',
-        color: '#0f172a',
+        color: 'var(--text-primary)',
         fontWeight: 600,
         fontSize: '13px',
         padding: '10px 22px',
-        boxShadow: '0 0 22px rgba(22,163,74,0.15), inset 0 0 18px rgba(22,163,74,0.04)',
+        boxShadow: '0 0 22px var(--green-glow-strong), inset 0 0 18px var(--bg-card)',
         textAlign: 'center',
         width: '100%',
         boxSizing: 'border-box',
       }}
     >
       <Handle type="target" position={Position.Top} style={handle} />
-      <span style={{ color: '#16a34a', textShadow: 'none' }}>✓</span>{' '}
+      <span style={{ color: 'var(--green-primary)', textShadow: 'none' }}>✓</span>{' '}
       Production Live{' · '}
       <a
         href="https://denistechs.com"
         target="_blank"
         rel="noopener noreferrer"
-        style={{ color: '#16a34a', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+        style={{ color: 'var(--green-primary)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
       >
         denistechs.com
       </a>
@@ -237,15 +258,15 @@ function FloatLabelNode({ data }: NodeProps) {
         fontWeight: 600,
         letterSpacing: '0.1em',
         textTransform: 'uppercase' as const,
-        color: '#15803d',
-        background: '#f0fdf4',
-        border: '1px solid rgba(22,163,74,0.4)',
+        color: 'var(--green-secondary)',
+        background: 'var(--green-dim)',
+        border: '1px solid var(--border-green-hover)',
         padding: '3px 10px',
         borderRadius: '20px',
         whiteSpace: 'nowrap' as const,
         pointerEvents: 'none',
         userSelect: 'none' as const,
-        boxShadow: '0 0 6px rgba(22,163,74,0.08)',
+        boxShadow: '0 0 6px var(--green-glow)',
       }}
     >
       {d.text}
@@ -262,17 +283,10 @@ const nodeTypes: NodeTypes = {
   floatLabel: FloatLabelNode,
 };
 
-// ── Edge style ────────────────────────────────────────────────
+// ── Edge style (stroke uses CSS var; arrow color set per-render in component) ──
 const edgeStyle: React.CSSProperties = {
-  stroke: 'rgba(22,163,74,0.38)',
+  stroke: 'var(--border-green-hover)',
   strokeWidth: 1.5,
-};
-
-const arrow = {
-  type: MarkerType.ArrowClosed,
-  color: 'rgba(22,163,74,0.6)',
-  width: 13,
-  height: 13,
 };
 
 
@@ -387,7 +401,7 @@ const initialNodes: Node[] = [
     type: 'envNode',
     position: { x: 220, y: 858 },
     style: { width: '290px' },
-    data: { label: 'GitHub Actions → Deploy', dotColor: '#16a34a' },
+    data: { label: 'GitHub Actions → Deploy', dotColor: 'var(--green-primary)' },
   },
   {
     id: 'production',
@@ -406,7 +420,7 @@ const initialEdges: Edge[] = [
     target: 'decision',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   // Decision → left branch (Claude Code) — label is a floatLabel node
   {
@@ -416,7 +430,7 @@ const initialEdges: Edge[] = [
     target: 'push_feature',
     type: 'smoothstep',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   // Decision → right branch (Manual Dev) — label is a floatLabel node
   {
@@ -426,7 +440,7 @@ const initialEdges: Edge[] = [
     target: 'push_dev',
     type: 'smoothstep',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   // Left branch chain  (same left column → straight)
   {
@@ -435,7 +449,7 @@ const initialEdges: Edge[] = [
     target: 'cf_preview',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   {
     id: 'e-preview-test',
@@ -443,7 +457,7 @@ const initialEdges: Edge[] = [
     target: 'test_review',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   {
     id: 'e-test-merge',
@@ -451,7 +465,7 @@ const initialEdges: Edge[] = [
     target: 'merge_dev',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   // Both branches converge → Staging
   {
@@ -460,7 +474,7 @@ const initialEdges: Edge[] = [
     target: 'cf_staging',
     type: 'smoothstep',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   {
     id: 'e-dev-staging',
@@ -468,7 +482,7 @@ const initialEdges: Edge[] = [
     target: 'cf_staging',
     type: 'smoothstep',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   // Centre chain to production  (same centre column → straight)
   {
@@ -477,7 +491,7 @@ const initialEdges: Edge[] = [
     target: 'validate',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   {
     id: 'e-validate-main',
@@ -485,7 +499,7 @@ const initialEdges: Edge[] = [
     target: 'merge_main',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   {
     id: 'e-main-gh',
@@ -493,7 +507,7 @@ const initialEdges: Edge[] = [
     target: 'gh_actions',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
   {
     id: 'e-gh-production',
@@ -501,25 +515,39 @@ const initialEdges: Edge[] = [
     target: 'production',
     type: 'straight',
     style: edgeStyle,
-    markerEnd: arrow,
+    markerEnd: undefined,
   },
 ];
 
 // ── Component ─────────────────────────────────────────────────
 export default function PipelineFlow() {
+  const dark = useIsDark();
+
+  const arrowColor = dark ? 'rgba(0,255,65,0.6)' : 'rgba(22,163,74,0.6)';
+  const bgDotColor = dark ? 'rgba(0,255,65,0.06)' : 'rgba(22,163,74,0.06)';
+
+  const arrow = {
+    type: MarkerType.ArrowClosed,
+    color: arrowColor,
+    width: 13,
+    height: 13,
+  };
+
+  const edges = initialEdges.map((e) => ({ ...e, markerEnd: arrow }));
+
   return (
     <div
       style={{
         width: '100%',
         height: '100%',
         borderRadius: '8px',
-        border: '1px solid rgba(22,163,74,0.12)',
+        border: '1px solid var(--border-green)',
         overflow: 'hidden',
       }}
     >
       <ReactFlow
         nodes={initialNodes}
-        edges={initialEdges}
+        edges={edges}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.06 }}
@@ -535,7 +563,7 @@ export default function PipelineFlow() {
         style={{ background: 'transparent' }}
       >
         <Background
-          color="rgba(22,163,74,0.06)"
+          color={bgDotColor}
           gap={22}
           size={1}
           variant={BackgroundVariant.Dots}
