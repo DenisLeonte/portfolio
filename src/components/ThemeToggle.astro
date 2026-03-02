@@ -1,9 +1,18 @@
 ---
-// 3-way theme toggle: Dark | System | Light
-// State is managed via localStorage; html class is applied by Layout.astro blocking script
+// Desktop: 3-way toggle (Dark | System | Light)
+// Mobile:  2-way toggle (Dark | Light) — prop twoWay={true}
+interface Props {
+  twoWay?: boolean;
+}
+const { twoWay = false } = Astro.props;
 ---
 
-<div class="theme-track" role="group" aria-label="Theme preference">
+<div
+  class="theme-track"
+  data-two-way={twoWay ? 'true' : undefined}
+  role="group"
+  aria-label="Theme preference"
+>
   <div class="theme-indicator" aria-hidden="true"></div>
 
   <button class="theme-btn" data-theme="dark" aria-label="Dark theme" aria-pressed="false" title="Dark theme">
@@ -13,14 +22,16 @@
     </svg>
   </button>
 
-  <button class="theme-btn" data-theme="system" aria-label="System theme" aria-pressed="true" title="System theme">
-    <!-- Monitor -->
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="2" y="3" width="20" height="14" rx="2"/>
-      <line x1="8" y1="21" x2="16" y2="21"/>
-      <line x1="12" y1="17" x2="12" y2="21"/>
-    </svg>
-  </button>
+  {!twoWay && (
+    <button class="theme-btn" data-theme="system" aria-label="System theme" aria-pressed="true" title="System theme">
+      <!-- Monitor -->
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="3" width="20" height="14" rx="2"/>
+        <line x1="8" y1="21" x2="16" y2="21"/>
+        <line x1="12" y1="17" x2="12" y2="21"/>
+      </svg>
+    </button>
+  )}
 
   <button class="theme-btn" data-theme="light" aria-label="Light theme" aria-pressed="false" title="Light theme">
     <!-- Sun -->
@@ -98,28 +109,47 @@
   const THEME_KEY = 'theme';
   const BTN_WIDTH = 28; // px — matches .theme-btn width
 
-  // Use querySelectorAll so every rendered instance (desktop + mobile menu) stays in sync
-  const allIndicators = () => document.querySelectorAll<HTMLElement>('.theme-indicator');
-  const allButtons    = () => document.querySelectorAll<HTMLButtonElement>('.theme-btn');
+  // 3-way indicator positions
+  const POSITIONS_3: Record<string, number> = { dark: 0, system: 1, light: 2 };
+  // 2-way indicator positions
+  const POSITIONS_2: Record<string, number> = { dark: 0, light: 1 };
 
-  const POSITIONS: Record<string, number> = { dark: 0, system: 1, light: 2 };
+  function systemPrefersDark(): boolean {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  // Resolve 'system' to an actual dark/light value for 2-way display
+  function resolveTheme(theme: string): string {
+    return theme === 'system'
+      ? (systemPrefersDark() ? 'dark' : 'light')
+      : theme;
+  }
 
   function isDark(): boolean {
     const h = document.documentElement;
     if (h.classList.contains('dark')) return true;
     if (h.classList.contains('light')) return false;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return systemPrefersDark();
   }
 
-  function updateUI(theme: string) {
-    const pos = POSITIONS[theme] ?? 1;
-    allIndicators().forEach((ind) => {
-      ind.style.transform = `translateX(${pos * BTN_WIDTH}px)`;
-    });
-    allButtons().forEach((btn) => {
-      const active = btn.dataset.theme === theme;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-pressed', String(active));
+  function updateUI(storedTheme: string) {
+    document.querySelectorAll<HTMLElement>('.theme-track').forEach((track) => {
+      const isTwoWay = track.getAttribute('data-two-way') === 'true';
+      const indicator = track.querySelector<HTMLElement>('.theme-indicator');
+      const buttons   = track.querySelectorAll<HTMLButtonElement>('.theme-btn');
+
+      const displayTheme = isTwoWay ? resolveTheme(storedTheme) : storedTheme;
+      const positions    = isTwoWay ? POSITIONS_2 : POSITIONS_3;
+      // fallback: 2-way → 0 (dark), 3-way → 1 (system)
+      const pos = positions[displayTheme] ?? (isTwoWay ? 0 : 1);
+
+      if (indicator) indicator.style.transform = `translateX(${pos * BTN_WIDTH}px)`;
+
+      buttons.forEach((btn) => {
+        const active = btn.dataset.theme === displayTheme;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
     });
   }
 
@@ -137,20 +167,23 @@
     setTimeout(() => html.classList.remove('theme-transitioning'), 400);
   }
 
-  // ─── Initial render (html class already applied by blocking script) ──
+  // ─── Initial render ───────────────────────────────────────────────────────
   const stored = localStorage.getItem(THEME_KEY) ?? 'system';
   updateUI(stored);
 
-  // ─── Button clicks — attach once via delegation ──────────────────────
+  // ─── Button clicks ────────────────────────────────────────────────────────
   document.addEventListener('click', (e) => {
     const btn = (e.target as Element).closest<HTMLButtonElement>('.theme-btn');
-    if (btn) applyTheme(btn.dataset.theme ?? 'system');
+    if (!btn) return;
+    applyTheme(btn.dataset.theme ?? 'system');
   });
 
-  // ─── System preference changes ──────────────────────────────────────
+  // ─── System preference changes ────────────────────────────────────────────
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    if ((localStorage.getItem(THEME_KEY) ?? 'system') === 'system') {
-      updateUI('system');
+    const current = localStorage.getItem(THEME_KEY) ?? 'system';
+    // Always re-render so 2-way toggle reflects the new system value
+    updateUI(current);
+    if (current === 'system') {
       document.dispatchEvent(
         new CustomEvent('themechange', { detail: { theme: 'system', isDark: isDark() } })
       );
