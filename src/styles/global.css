@@ -48,20 +48,20 @@
   --toggle-active-icon: #fff;
 
   /* Background animation colors */
-  --aurora-c1: rgba(22,163,74,0.07);
-  --aurora-c2: rgba(34,197,94,0.05);
-  --aurora-c3: rgba(22,163,74,0.04);
-  --aurora-c4: rgba(22,163,74,0.05);
-  --aurora-c5: rgba(21,128,61,0.04);
-  --sparkle-shadow: 0 0 4px 1px rgba(22,163,74,0.4);
-  --dot-grid-color: rgba(22,163,74,0.15);
-  --crosshatch-color: rgba(22,163,74,0.03);
-  --spotlight-color: rgba(22,163,74,0.04);
-  --nova-center-border: rgba(22,163,74,0.35);
-  --nova-a-border: rgba(22,163,74,0.18);
-  --nova-b-border: rgba(22,163,74,0.15);
-  --nova-core-shadow: 0 0 20px 8px rgba(22,163,74,0.3), 0 0 60px 20px rgba(22,163,74,0.1);
-  --nova-core-shadow-pulse: 0 0 35px 14px rgba(22,163,74,0.5), 0 0 80px 30px rgba(22,163,74,0.2);
+  --aurora-c1: rgba(22,163,74,0.13);
+  --aurora-c2: rgba(34,197,94,0.09);
+  --aurora-c3: rgba(22,163,74,0.08);
+  --aurora-c4: rgba(22,163,74,0.10);
+  --aurora-c5: rgba(21,128,61,0.07);
+  --sparkle-shadow: 0 0 5px 2px rgba(22,163,74,0.55);
+  --dot-grid-color: rgba(22,163,74,0.22);
+  --crosshatch-color: rgba(22,163,74,0.07);
+  --spotlight-color: rgba(22,163,74,0.08);
+  --nova-center-border: rgba(22,163,74,0.45);
+  --nova-a-border: rgba(22,163,74,0.25);
+  --nova-b-border: rgba(22,163,74,0.20);
+  --nova-core-shadow: 0 0 20px 8px rgba(22,163,74,0.4), 0 0 60px 20px rgba(22,163,74,0.18);
+  --nova-core-shadow-pulse: 0 0 35px 14px rgba(22,163,74,0.6), 0 0 80px 30px rgba(22,163,74,0.28);
   --cta-border-color: rgba(22,163,74,0.15);
   --cta-before-bg: rgba(22,163,74,0.06);
   --cta-btn-shadow: 0 0 24px rgba(22,163,74,0.2);

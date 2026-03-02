@@ -501,12 +501,26 @@ import showcase from '../../data/showcase.json';
       const N_H            = 20;    // number of horizontal line slots
       const VPY_RATIO      = 0.40;  // vanishing-point y as a fraction of screen height
       const OVERFLOW       = 0.60;  // how much wider than the screen the bottom of the grid is (each side)
-      const MAX_ALPHA      = 0.38;
       const SPEED          = 0.08;  // horizontal lines per second (slow ambient drift)
       const HORIZON_SPREAD = 0.22;  // fraction of full spread that lines occupy at the horizon
 
-      // ── Color helper: green palette — light green at horizon → deep green at viewer ──
-      const depthColor = (t: number): string => `rgb(${Math.round(22 + 40*(1-t))},${Math.round(163 - 40*t)},${Math.round(74 - 20*t)})`;
+      // ── Theme detection ───────────────────────────────────────────
+      const getIsDark = () => {
+        const h = document.documentElement;
+        if (h.classList.contains('dark')) return true;
+        if (h.classList.contains('light')) return false;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      };
+      let isDarkMode = getIsDark();
+      document.addEventListener('themechange', () => { isDarkMode = getIsDark(); });
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if ((localStorage.getItem('theme') ?? 'system') === 'system') isDarkMode = getIsDark();
+      });
+
+      // ── Color helpers (theme-aware) ───────────────────────────────
+      const depthColor = (t: number): string => isDarkMode
+        ? `rgba(0,255,65,${(0.25 + 0.5 * t).toFixed(2)})`
+        : `rgb(${Math.round(22 + 40*(1-t))},${Math.round(163 - 40*t)},${Math.round(74 - 20*t)})`;
 
       const resize = () => {
         width  = gridCanvas.width  = window.innerWidth;
@@ -547,11 +561,10 @@ import showcase from '../../data/showcase.json';
           if (time - pulses[pi].startTime > pulses[pi].duration * 1.15) pulses.splice(pi, 1);
         }
 
-        // ── Light background — prevents page bleed-through ──
+        // ── Clear canvas — body background-color provides the page bg ──
         ctx.globalAlpha = 1;
         ctx.shadowBlur  = 0;
-        ctx.fillStyle   = '#ffffff';
-        ctx.fillRect(0, 0, width, height);
+        ctx.clearRect(0, 0, width, height);
 
         const vpX      = width  * 0.5;
         const vpY      = height * VPY_RATIO;
@@ -560,32 +573,36 @@ import showcase from '../../data/showcase.json';
         const isMobile = width < 768;
 
         // ── Horizon glow line ─────────────────────────────────────
+        const [hC0, hC1, hC2, hShadow] = isDarkMode
+          ? ['rgba(0,255,65,0)', 'rgba(0,255,65,0.75)', 'rgba(0,255,65,1)', 'rgba(0,255,65,0.9)']
+          : ['rgba(22,163,74,0)', 'rgba(22,163,74,0.6)', 'rgba(22,163,74,0.9)', 'rgba(22,163,74,0.7)'];
         const hGrad = ctx.createLinearGradient(0, vpY, width, vpY);
-        hGrad.addColorStop(0,    'rgba(22,163,74,0)');
-        hGrad.addColorStop(0.15, 'rgba(22,163,74,0.6)');
-        hGrad.addColorStop(0.5,  'rgba(22,163,74,0.9)');
-        hGrad.addColorStop(0.85, 'rgba(22,163,74,0.6)');
-        hGrad.addColorStop(1,    'rgba(22,163,74,0)');
+        hGrad.addColorStop(0,    hC0);
+        hGrad.addColorStop(0.15, hC1);
+        hGrad.addColorStop(0.5,  hC2);
+        hGrad.addColorStop(0.85, hC1);
+        hGrad.addColorStop(1,    hC0);
         ctx.strokeStyle = hGrad;
         ctx.lineWidth   = 1.5;
         ctx.globalAlpha = 1;
         ctx.shadowBlur  = isMobile ? 0 : 16;
-        ctx.shadowColor = 'rgba(22,163,74,0.7)';
+        ctx.shadowColor = hShadow;
         ctx.beginPath();
         ctx.moveTo(0, vpY);
         ctx.lineTo(width, vpY);
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        // ── Vertical lines (light green → deep green) ────────────
+        // ── Vertical lines ────────────────────────────────────────
+        const maxAlpha = isDarkMode ? 0.55 : 0.38;
         const vGrad = ctx.createLinearGradient(vpX, vpY, vpX, height);
-        vGrad.addColorStop(0,   'rgba(134,239,172,0.4)');
-        vGrad.addColorStop(1,   'rgba(22,163,74,0.45)');
+        vGrad.addColorStop(0, isDarkMode ? 'rgba(0,255,100,0.5)'   : 'rgba(134,239,172,0.4)');
+        vGrad.addColorStop(1, isDarkMode ? 'rgba(0,255,65,0.6)'    : 'rgba(22,163,74,0.45)');
         ctx.strokeStyle = vGrad;
         ctx.lineWidth   = 0.9;
-        ctx.globalAlpha = MAX_ALPHA * 0.65;
+        ctx.globalAlpha = maxAlpha * 0.65;
         ctx.shadowBlur  = isMobile ? 0 : 5;
-        ctx.shadowColor = 'rgba(22,163,74,0.5)';
+        ctx.shadowColor = isDarkMode ? 'rgba(0,255,65,0.6)' : 'rgba(22,163,74,0.5)';
 
         // Mobile: fewer lines, no shadow blur (blur = expensive GPU pass per draw call)
         const nV   = isMobile ? 8  : N_V;
@@ -636,7 +653,7 @@ import showcase from '../../data/showcase.json';
             ctx.lineWidth   = (0.4 + screenT * 0.9) * (1.8 + pulseBoost * 1.4);
             ctx.shadowBlur  = isMobile ? 0 : 14 + pulseBoost * 20;
           } else {
-            ctx.globalAlpha = Math.min(screenT * MAX_ALPHA * 2.2, MAX_ALPHA);
+            ctx.globalAlpha = Math.min(screenT * maxAlpha * 2.2, maxAlpha);
             ctx.lineWidth   = 0.4 + screenT * 0.9;
             ctx.shadowBlur  = isMobile ? 0 : 6;
           }
