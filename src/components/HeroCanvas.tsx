@@ -214,10 +214,10 @@ export default function HeroCanvas() {
 
     const updateThemeColors = () => {
       const dark = getIsDark();
-      particleMaterial.color.setHex(dark ? 0x00ff41 : 0x16a34a);
-      particleMaterial.opacity = dark ? 0.6 : 0.7;
+      particleMaterial.color.setHex(dark ? 0x00ff41 : 0x15803d);
+      particleMaterial.opacity = dark ? 0.6 : 0.9;
       lineMaterial.color.setHex(dark ? 0x00ff41 : 0x16a34a);
-      lineMaterial.opacity = dark ? 0.12 : 0.15;
+      lineMaterial.opacity = dark ? 0.12 : 0.40;
     };
 
     updateThemeColors();
