@@ -242,14 +242,29 @@ import showcase from '../../data/showcase.json';
   }
 
   /* Dark mode: restore original near-black glass */
-  html.dark .showcase-card {
+  html.dark .showcase-card,
+  html:not(.dark):not(.light) .showcase-card {
     background: rgba(0, 8, 2, 0.55);
     box-shadow: none;
   }
 
   @media (max-width: 767px) {
-    html.dark .showcase-card {
+    html.dark .showcase-card,
+    html:not(.dark):not(.light) .showcase-card {
+
       background: rgba(0, 8, 2, 0.75);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    html:not(.dark):not(.light) .showcase-card {
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    }
+    @media (max-width: 767px) {
+      html:not(.dark):not(.light) .showcase-card {
+        background: rgba(255, 255, 255, 0.97);
+      }
     }
   }
 

@@ -222,6 +222,7 @@ html.theme-transitioning *::after {
 }
 
 html {
+  background-color: var(--bg-primary);
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--green-muted) var(--bg-secondary);
