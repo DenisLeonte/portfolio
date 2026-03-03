@@ -18,7 +18,7 @@ import profile from '../data/profile.json';
   <!-- Radial glow at center -->
   <div
     class="absolute inset-0 pointer-events-none z-[1]"
-    style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,255,65,0.05) 0%, transparent 70%);"
+    style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(22,163,74,0.04) 0%, transparent 70%);"
   ></div>
 
   <!-- Hero Content -->
@@ -32,23 +32,24 @@ import profile from '../data/profile.json';
       id="hero-prompt"
       aria-hidden="true"
     >
-      <span style="color: var(--green-muted);">user@portfolio</span>
-      <span style="color: rgba(138,138,138,0.6);">:</span>
-      <span style="color: #3b8eea;">~</span>
-      <span style="color: rgba(138,138,138,0.6);">$</span>
-      <span style="color: rgba(138,138,138,0.5); margin-left: 0.5rem;">whoami</span>
+      <span style="color: var(--green-secondary);">user@portfolio</span>
+      <span style="color: rgba(100,116,139,0.6);">:</span>
+      <span style="color: #2563eb;">~</span>
+      <span style="color: rgba(100,116,139,0.6);">$</span>
+      <span style="color: rgba(100,116,139,0.5); margin-left: 0.5rem;">whoami</span>
     </div>
 
     <!-- Main heading -->
     <h1
-      class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-4 tracking-tight opacity-0"
+      class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tight opacity-0"
+      style="color: var(--text-primary);"
       id="hero-heading"
       style="letter-spacing: -0.03em; line-height: 1.0;"
     >
       Hi, I'm{' '}
       <span
         class="glow-text"
-        style="color: #00ff41;"
+        style="color: var(--green-primary);"
       >
         {profile.name}.
       </span>
