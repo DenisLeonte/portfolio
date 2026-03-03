@@ -8,6 +8,7 @@
    CSS CUSTOM PROPERTIES
    ============================================================ */
 :root {
+  color-scheme: dark;
   --green-primary: #00ff41;
   --green-secondary: #00cc33;
   --green-muted: #0d7a3e;
@@ -34,6 +35,7 @@
 }
 
 html {
+  background-color: var(--bg-primary);
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--green-muted) var(--bg-secondary);
