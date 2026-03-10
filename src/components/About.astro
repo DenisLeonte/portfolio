@@ -13,23 +13,25 @@ const bioParagraphs = profile.bio.split('\n\n').filter(Boolean);
   </div>
   <div class="container mx-auto">
     <!-- Section Label -->
-    <p class="section-label gsap-hidden">01. About Me</p>
+    <p class="section-label gsap-hidden" data-i18n="about.label">01. About Me</p>
 
     <div class="grid md:grid-cols-5 gap-6 md:gap-12 lg:gap-16 items-start">
       <!-- Bio Text — left column (3/5) -->
       <div class="md:col-span-3">
         <h2 class="section-title gsap-hidden mb-4 md:mb-8">
-          Who I <span>Am</span>
+          <span data-i18n="about.title_1">Who I </span><span data-i18n="about.title_2">Am</span>
         </h2>
 
-        {bioParagraphs.map((para) => (
-          <p class="gsap-hidden mb-5" style="color: var(--text-secondary); line-height: 1.85; font-size: 0.95rem;">
-            {para}
-          </p>
-        ))}
+        <div id="about-bio">
+          {bioParagraphs.map((para) => (
+            <p class="gsap-hidden mb-5" style="color: var(--text-secondary); line-height: 1.85; font-size: 0.95rem;">
+              {para}
+            </p>
+          ))}
+        </div>
 
         <div class="flex flex-wrap gap-3 mt-5 md:mt-8 gsap-hidden">
-          <a href="/contact" class="btn-primary">
+          <a href="/contact" class="btn-primary" data-i18n="about.letsTalk">
             Let's Talk
           </a>
           <a
@@ -37,6 +39,7 @@ const bioParagraphs = profile.bio.split('\n\n').filter(Boolean);
             target="_blank"
             rel="noopener noreferrer"
             class="btn-secondary"
+            data-i18n="about.viewGithub"
           >
             View GitHub
           </a>
@@ -57,8 +60,9 @@ const bioParagraphs = profile.bio.split('\n\n').filter(Boolean);
               {highlight.value}
             </div>
             <div
-              class="text-sm tracking-wide"
+              class="text-sm tracking-wide highlight-label"
               style="color: var(--text-secondary);"
+              data-i18n={`about.highlights.${highlight.label === 'Years Experience' ? 'yearsExp' : highlight.label === "Master's Degree" ? 'masters' : 'currentRole'}`}
             >
               {highlight.label}
             </div>
@@ -74,14 +78,14 @@ const bioParagraphs = profile.bio.split('\n\n').filter(Boolean);
           <div style="color: var(--text-secondary);">
             <span style="color: var(--green-primary);">"role"</span>
             <span>: </span>
-            <span style="color: #e8b84b;">"Full-Stack Engineer"</span>
+            <span style="color: #e8b84b;" data-i18n-wrap="about.config.role">"<span data-i18n="about.config.role">Full-Stack Engineer</span>"</span>
             <span>,</span>
           </div>
           <div style="color: var(--text-secondary);">
             <span style="color: var(--green-primary);">"hobbies"</span>
             <span>: [</span>
           </div>
-          <div style="color: var(--text-secondary); padding-left: 1rem;">
+          <div id="about-hobbies" style="color: var(--text-secondary); padding-left: 1rem;">
             <span style="color: #e8b84b;">"cooking"</span><span>,</span>
             <span style="color: #e8b84b;"> "cars"</span><span>,</span>
             <span style="color: #e8b84b;"> "astronomy"</span><span>,</span>

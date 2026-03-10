@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
 import profile from '../data/profile.json';
+import en from '../i18n/en.json';
+import ro from '../i18n/ro.json';
+import it from '../i18n/it.json';
 
 export interface Props {
   title?: string;
@@ -15,13 +18,14 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const allTranslations = JSON.stringify({ en, ro, it });
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <!-- Theme: read localStorage and apply class BEFORE paint to prevent FOUC -->
+    <!-- Theme + Language: read localStorage BEFORE paint to prevent FOUC -->
     <script is:inline>
       (function () {
         var t = localStorage.getItem('theme');
@@ -29,6 +33,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         h.classList.remove('dark', 'light');
         if (t === 'dark')  h.classList.add('dark');
         if (t === 'light') h.classList.add('light');
+
+        // Language detection
+        var supported = ['en', 'ro', 'it'];
+        var stored = localStorage.getItem('lang');
+        if (!stored || supported.indexOf(stored) === -1) {
+          var nav = (navigator.language || '').split('-')[0].toLowerCase();
+          stored = supported.indexOf(nav) !== -1 ? nav : 'en';
+          localStorage.setItem('lang', stored);
+        }
+        h.setAttribute('lang', stored);
+        h.dataset.lang = stored;
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -307,6 +322,178 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           }
         }
       });
+    </script>
+
+    <!-- i18n: embed translations and apply on load -->
+    <script id="i18n-data" type="application/json" set:html={allTranslations} />
+    <script>
+      // ─── i18n: Client-side translation engine ───────────────────
+      const LANG_KEY = 'lang';
+      const SUPPORTED = ['en', 'ro', 'it'] as const;
+      type Lang = (typeof SUPPORTED)[number];
+      const BTN_WIDTH = 28; // px — matches .lang-btn width
+
+      // Parse embedded translations
+      const dataEl = document.getElementById('i18n-data');
+      const allTranslations: Record<string, unknown> = dataEl ? JSON.parse(dataEl.textContent || '{}') : {};
+
+      function getNestedValue(obj: unknown, path: string): unknown {
+        const parts = path.split('.');
+        let result = obj;
+        for (const part of parts) {
+          if (result && typeof result === 'object' && part in (result as Record<string, unknown>)) {
+            result = (result as Record<string, unknown>)[part];
+          } else {
+            return undefined;
+          }
+        }
+        return result;
+      }
+
+      function t(key: string, lang: Lang): string {
+        const val = getNestedValue(allTranslations[lang], key);
+        if (val !== undefined) return String(val);
+        // Fallback to English
+        const fallback = getNestedValue(allTranslations['en'], key);
+        return fallback !== undefined ? String(fallback) : key;
+      }
+
+      function tArray(key: string, lang: Lang): string[] {
+        const val = getNestedValue(allTranslations[lang], key);
+        if (Array.isArray(val)) return val.map(String);
+        const fallback = getNestedValue(allTranslations['en'], key);
+        return Array.isArray(fallback) ? fallback.map(String) : [];
+      }
+
+      function getCurrentLang(): Lang {
+        const stored = localStorage.getItem(LANG_KEY);
+        if (stored && SUPPORTED.includes(stored as Lang)) return stored as Lang;
+        return 'en';
+      }
+
+      // Apply translations to all elements with data-i18n attribute
+      function applyTranslations(lang: Lang) {
+        document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+          const key = el.dataset.i18n!;
+          const val = t(key, lang);
+          // For mobile nav links, update only the text span, not the // prefix
+          const textSpan = el.querySelector('.mobile-nav-text');
+          if (textSpan) {
+            textSpan.textContent = val;
+          } else {
+            el.textContent = val;
+          }
+        });
+
+        // Apply HTML translations (for elements needing innerHTML like configureEmailJSSub)
+        document.querySelectorAll<HTMLElement>('[data-i18n-html]').forEach((el) => {
+          const key = el.dataset.i18nHtml!;
+          const val = t(key, lang);
+          el.innerHTML = val;
+        });
+
+        // Apply placeholder translations
+        document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-i18n-placeholder]').forEach((el) => {
+          const key = el.dataset.i18nPlaceholder!;
+          el.placeholder = t(key, lang);
+        });
+
+        // ── Dynamic content: About bio ──
+        const bioContainer = document.getElementById('about-bio');
+        if (bioContainer) {
+          const bioText = t('about.bio', lang);
+          const paragraphs = bioText.split('\n\n').filter(Boolean);
+          bioContainer.innerHTML = paragraphs
+            .map((p: string) => `<p class="gsap-hidden mb-5" style="color: var(--text-secondary); line-height: 1.85; font-size: 0.95rem; opacity: 1; transform: none;">${p}</p>`)
+            .join('');
+        }
+
+        // ── Dynamic content: About hobbies ──
+        const hobbiesContainer = document.getElementById('about-hobbies');
+        if (hobbiesContainer) {
+          const hobbies = tArray('about.config.hobbies', lang);
+          if (hobbies.length) {
+            hobbiesContainer.innerHTML = hobbies
+              .map((h: string, i: number) => `<span style="color: #e8b84b;">"${h}"</span>${i < hobbies.length - 1 ? '<span>,</span>' : ''}`)
+              .join(' ');
+          }
+        }
+
+        // ── Dynamic content: Timeline entries (role + description) ──
+        const entries = getNestedValue(allTranslations[lang], 'experience.entries') as Array<{id: string; role: string; description: string}> | undefined;
+        if (entries && Array.isArray(entries)) {
+          for (const entry of entries) {
+            document.querySelectorAll<HTMLElement>(`.timeline-role[data-entry-id="${entry.id}"]`).forEach((el) => {
+              el.textContent = entry.role;
+            });
+            document.querySelectorAll<HTMLElement>(`.timeline-desc[data-entry-id="${entry.id}"]`).forEach((el) => {
+              el.textContent = entry.description;
+            });
+          }
+        }
+
+        // Update html lang attribute
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.dataset.lang = lang;
+
+        // Update language toggle UI
+        updateLangToggleUI(lang);
+
+        // Dispatch event for React components and other listeners
+        document.dispatchEvent(
+          new CustomEvent('langchange', { detail: { lang } })
+        );
+      }
+
+      function updateLangToggleUI(lang: Lang) {
+        // Desktop toggles
+        document.querySelectorAll<HTMLElement>('.lang-toggle-desktop').forEach((track) => {
+          const indicator = track.querySelector<HTMLElement>('.lang-indicator');
+          const buttons = track.querySelectorAll<HTMLButtonElement>('.lang-btn');
+          const positions: Record<string, number> = { en: 0, ro: 1, it: 2 };
+          const pos = positions[lang] ?? 0;
+          if (indicator) indicator.style.transform = `translateX(${pos * BTN_WIDTH}px)`;
+          buttons.forEach((btn) => {
+            const active = btn.dataset.lang === lang;
+            btn.classList.toggle('active', active);
+            btn.setAttribute('aria-pressed', String(active));
+          });
+        });
+
+        // Mobile toggles
+        document.querySelectorAll<HTMLButtonElement>('.lang-btn-mobile').forEach((btn) => {
+          const active = btn.dataset.lang === lang;
+          btn.classList.toggle('active', active);
+          btn.setAttribute('aria-pressed', String(active));
+        });
+      }
+
+      function setLang(lang: Lang) {
+        localStorage.setItem(LANG_KEY, lang);
+        applyTranslations(lang);
+      }
+
+      // ─── Initial render ────────────────────────────────────────
+      const initialLang = getCurrentLang();
+      // Apply after DOM is interactive
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => applyTranslations(initialLang));
+      } else {
+        applyTranslations(initialLang);
+      }
+
+      // ─── Button clicks ─────────────────────────────────────────
+      document.addEventListener('click', (e) => {
+        const btn = (e.target as Element).closest<HTMLButtonElement>('.lang-btn, .lang-btn-mobile');
+        if (!btn || !btn.dataset.lang) return;
+        const lang = btn.dataset.lang as Lang;
+        if (SUPPORTED.includes(lang)) {
+          setLang(lang);
+        }
+      });
+
+      // Expose for React components
+      (window as any).__i18n = { t, tArray, getCurrentLang, setLang };
     </script>
   </body>
 </html>

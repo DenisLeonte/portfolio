@@ -1,15 +1,16 @@
 ---
 import profile from '../data/profile.json';
 import ThemeToggle from './ThemeToggle.astro';
+import LanguageToggle from './LanguageToggle.astro';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Showcase', href: '/showcase' },
-  { label: 'Tech', href: '/tech' },
-  { label: 'Contact', href: '/contact' },
+  { key: 'about', label: 'About', href: '#about' },
+  { key: 'skills', label: 'Skills', href: '#skills' },
+  { key: 'projects', label: 'Projects', href: '#projects' },
+  { key: 'experience', label: 'Experience', href: '#experience' },
+  { key: 'showcase', label: 'Showcase', href: '/showcase' },
+  { key: 'tech', label: 'Tech', href: '/tech' },
+  { key: 'contact', label: 'Contact', href: '/contact' },
 ];
 ---
 
@@ -35,13 +36,14 @@ const navLinks = [
       </span>
     </a>
 
-    <!-- Desktop Nav Links + Theme Toggle -->
-    <div class="hidden md:flex items-center gap-8" role="list">
+    <!-- Desktop Nav Links + Language Toggle + Theme Toggle -->
+    <div class="hidden md:flex items-center gap-5" role="list">
       {navLinks.map((link) => (
-        <a href={link.href} class="nav-link" role="listitem">
+        <a href={link.href} class="nav-link" role="listitem" data-i18n={`nav.${link.key}`}>
           {link.label}
         </a>
       ))}
+      <LanguageToggle />
       <ThemeToggle />
     </div>
 
@@ -75,11 +77,25 @@ const navLinks = [
           href={link.href}
           class="mobile-nav-link py-3 text-sm tracking-widest uppercase text-secondary hover:text-green-primary transition-colors"
           style="color: var(--text-secondary);"
+          data-i18n={`nav.${link.key}`}
         >
           <span class="text-green-primary mr-2 opacity-60">//</span>
-          {link.label}
+          <span class="mobile-nav-text">{link.label}</span>
         </a>
       ))}
+      <!-- Language toggle in mobile menu -->
+      <div
+        class="py-3 flex items-center justify-between border-t mt-1"
+        style="border-color: var(--border-green);"
+      >
+        <span
+          class="text-xs tracking-widest uppercase"
+          style="color: var(--text-secondary); letter-spacing: 0.18em;"
+        >
+          <span class="text-green-primary mr-2 opacity-60">//</span><span data-i18n="nav.language">Language</span>
+        </span>
+        <LanguageToggle mobile={true} />
+      </div>
       <!-- Theme toggle as last menu entry -->
       <div
         class="py-3 flex items-center justify-between border-t mt-1"
@@ -89,7 +105,7 @@ const navLinks = [
           class="text-xs tracking-widest uppercase"
           style="color: var(--text-secondary); letter-spacing: 0.18em;"
         >
-          <span class="text-green-primary mr-2 opacity-60">//</span>Theme
+          <span class="text-green-primary mr-2 opacity-60">//</span><span data-i18n="nav.theme">Theme</span>
         </span>
         <ThemeToggle twoWay={true} />
       </div>

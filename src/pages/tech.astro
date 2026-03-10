@@ -107,13 +107,14 @@ const techStack = [
          ═══════════════════════════════════════════════════════ -->
     <section id="tech-hero" class="section-wrapper" style="padding-bottom: 3rem;">
       <div class="container mx-auto">
-        <p class="section-label gsap-hidden">// tech_stack --verbose</p>
+        <p class="section-label gsap-hidden" data-i18n="techPage.heroLabel">// tech_stack --verbose</p>
         <h1 class="section-title gsap-hidden">
-          Under the <span>Hood</span>
+          <span data-i18n="techPage.heroTitle_1">Under the </span><span data-i18n="techPage.heroTitle_2">Hood</span>
         </h1>
         <p
           class="gsap-hidden"
           style="max-width: 600px; color: var(--text-secondary); font-size: 1rem; line-height: 1.8;"
+          data-i18n="techPage.heroSubtitle"
         >
           Every tool in this portfolio was chosen deliberately. Here's the full
           breakdown — from the rendering engine down to the deployment pipeline.
@@ -160,11 +161,11 @@ const techStack = [
          ═══════════════════════════════════════════════════════ -->
     <section id="tech-pipeline" class="section-wrapper" style="padding-top: 2rem;">
       <div class="container mx-auto">
-        <p class="section-label gsap-hidden">// deployment_flow --graph</p>
+        <p class="section-label gsap-hidden" data-i18n="techPage.pipelineLabel">// deployment_flow --graph</p>
         <h2 class="section-title gsap-hidden">
-          Deployment <span>Pipeline</span>
+          <span data-i18n="techPage.pipelineTitle_1">Deployment </span><span data-i18n="techPage.pipelineTitle_2">Pipeline</span>
         </h2>
-        <p class="gsap-hidden pipeline-subtitle">
+        <p class="gsap-hidden pipeline-subtitle" data-i18n="techPage.pipelineSubtitle">
           Three environments, two merge paths, one production endpoint.
           Preview and staging environments are hosted on a Cloudflare instance.
         </p>
@@ -176,14 +177,14 @@ const techStack = [
 
         <!-- Legend -->
         <div class="pipeline-legend gsap-hidden">
-          <div class="legend-title">// environment_map</div>
+          <div class="legend-title" data-i18n="techPage.legendTitle">// environment_map</div>
           <div class="legend-table-wrap">
             <table class="legend-table">
               <thead>
                 <tr>
-                  <th>Branch</th>
-                  <th>Environment</th>
-                  <th>Host</th>
+                  <th data-i18n="techPage.legendBranch">Branch</th>
+                  <th data-i18n="techPage.legendEnv">Environment</th>
+                  <th data-i18n="techPage.legendHost">Host</th>
                 </tr>
               </thead>
               <tbody>
