@@ -565,7 +565,7 @@ h1, h2, h3, h4 { margin: 0 0 1rem; line-height: 1.25; }
   padding: 20px 24px;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   letter-spacing: 0.05em;
   display: flex;
   flex-wrap: wrap;
