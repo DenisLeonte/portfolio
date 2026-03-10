@@ -23,11 +23,11 @@ const sorted = [...experience].sort((a, b) => {
   ></div>
 
   <div class="container mx-auto">
-    <p class="section-label gsap-hidden">04. Experience</p>
+    <p class="section-label gsap-hidden" data-i18n="experience.label">04. Experience</p>
     <h2 class="section-title gsap-hidden">
-      My <span>Journey</span>
+      <span data-i18n="experience.title_1">My </span><span data-i18n="experience.title_2">Journey</span>
     </h2>
-    <p class="gsap-hidden mb-8 md:mb-16" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+    <p class="gsap-hidden mb-8 md:mb-16" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;" data-i18n="experience.subtitle">
       Professional milestones and academic achievements that shaped my career.
     </p>
 
@@ -74,6 +74,7 @@ const sorted = [...experience].sort((a, b) => {
                     <span
                       class="inline-block text-xs uppercase tracking-widest"
                       style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
+                      data-i18n={isWork ? 'experience.work' : 'experience.education'}
                     >
                       {isWork ? '// work' : '// education'}
                     </span>
@@ -88,8 +89,9 @@ const sorted = [...experience].sort((a, b) => {
                     {entry.company}
                   </h3>
                   <p
-                    class="text-sm font-medium mb-2"
+                    class="text-sm font-medium mb-2 timeline-role"
                     style="color: var(--green-primary);"
+                    data-entry-id={entry.id}
                   >
                     {entry.role}
                   </p>
@@ -102,7 +104,7 @@ const sorted = [...experience].sort((a, b) => {
                     {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
                     {' — '}
                     {entry.endDate === 'Present' ? (
-                      <span style="color: var(--green-primary);">Present</span>
+                      <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
                     ) : entry.endDate.startsWith('[') ? (
                       'Date'
                     ) : (
@@ -111,7 +113,7 @@ const sorted = [...experience].sort((a, b) => {
                   </p>
 
                   {entry.description && (
-                    <p class="text-sm" style="color: var(--text-secondary); line-height: 1.7;">
+                    <p class="text-sm timeline-desc" style="color: var(--text-secondary); line-height: 1.7;" data-entry-id={entry.id}>
                       {entry.description}
                     </p>
                   )}
@@ -148,6 +150,7 @@ const sorted = [...experience].sort((a, b) => {
                     <span
                       class="inline-block text-xs uppercase tracking-widest"
                       style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
+                      data-i18n={isWork ? 'experience.work' : 'experience.education'}
                     >
                       {isWork ? '// work' : '// education'}
                     </span>
@@ -159,18 +162,18 @@ const sorted = [...experience].sort((a, b) => {
                   >
                     {entry.company}
                   </h3>
-                  <p class="text-xs font-medium mb-2" style="color: var(--green-primary);">
+                  <p class="text-xs font-medium mb-2 timeline-role" style="color: var(--green-primary);" data-entry-id={entry.id}>
                     {entry.role}
                   </p>
                   <p class="text-xs mb-3" style="color: var(--text-secondary);">
                     {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
                     {' — '}
                     {entry.endDate === 'Present' ? (
-                      <span style="color: var(--green-primary);">Present</span>
+                      <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
                     ) : entry.endDate}
                   </p>
                   {entry.description && (
-                    <p class="text-sm" style="color: var(--text-secondary); line-height: 1.7;">
+                    <p class="text-sm timeline-desc" style="color: var(--text-secondary); line-height: 1.7;" data-entry-id={entry.id}>
                       {entry.description}
                     </p>
                   )}

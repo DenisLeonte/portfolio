@@ -1,0 +1,183 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "showcase": "Showcase",
+    "tech": "Tech",
+    "contact": "Contact",
+    "theme": "Theme",
+    "language": "Language"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "subtitle": "Building robust, scalable applications from backend to frontend.",
+    "viewWork": "View My Work",
+    "getInTouch": "Get In Touch",
+    "scroll": "SCROLL",
+    "typingPhrases": [
+      "Full-Stack Software Engineer",
+      "Spring Boot & React Developer",
+      "AI & Big Data Enthusiast"
+    ]
+  },
+  "about": {
+    "label": "01. About Me",
+    "title_1": "Who I ",
+    "title_2": "Am",
+    "bio": "I'm a Full-Stack Software Engineer with 2 years of experience building enterprise-grade applications. I hold a Master's degree in High Performance Computing and Big Data Analysis, which fuels my passion for building performant, data-driven solutions.\n\nCurrently working at .msg Systems Romania on a Mercedes-Benz Group AG project, where I develop and integrate complex systems using Spring Boot, Angular, and modern cloud technologies. I thrive at the intersection of backend architecture and intuitive frontend experiences.\n\nOutside of work I'm usually cooking something new, going down a rabbit hole about cars, staring at the night sky, or making a decent cup of coffee — sometimes all in the same evening.",
+    "letsTalk": "Let's Talk",
+    "viewGithub": "View GitHub",
+    "highlights": {
+      "yearsExp": "Years Experience",
+      "masters": "Master's Degree",
+      "currentRole": "Current Role"
+    },
+    "config": {
+      "role": "Full-Stack Engineer",
+      "openToChat": "true",
+      "hobbies": ["cooking", "cars", "astronomy", "coffee"]
+    }
+  },
+  "skills": {
+    "label": "02. Tech Stack",
+    "title_1": "Skills & ",
+    "title_2": "Tools",
+    "subtitle": "Technologies I work with daily — from backend APIs to machine learning pipelines.",
+    "quickRef": "// Quick Reference",
+    "categories": {
+      "Backend": "Backend",
+      "Frontend": "Frontend",
+      "AI / Machine Learning": "AI / Machine Learning",
+      "DevOps & Tools": "DevOps & Tools",
+      "Databases": "Databases",
+      "Languages": "Languages"
+    }
+  },
+  "projects": {
+    "label": "03. Projects",
+    "title_1": "What I've ",
+    "title_2": "Built",
+    "subtitle": "A selection of projects that showcase my work across backend systems, frontend interfaces, and data pipelines.",
+    "featured": "Featured",
+    "otherProjects": "// Other Projects",
+    "screenshot": "Screenshot",
+    "github": "GitHub",
+    "liveDemo": "Live Demo",
+    "demo": "Demo",
+    "cta": {
+      "label": "// see more",
+      "heading": "Want to see what else I can build?",
+      "sub": "These are just a few highlights. See the full range of what I can design and build — from restaurant sites to e-commerce stores to creative agencies.",
+      "btn": "View the Showcase"
+    },
+    "emptyState": "Add your projects to"
+  },
+  "experience": {
+    "label": "04. Experience",
+    "title_1": "My ",
+    "title_2": "Journey",
+    "subtitle": "Professional milestones and academic achievements that shaped my career.",
+    "work": "// work",
+    "education": "// education",
+    "present": "Present",
+    "entries": [
+      {
+        "id": "edu-2",
+        "role": "Bachelor's — Maths for Informatics",
+        "description": "In depth mathematical knowledge and fundamentals of OOP, data structures, DB's, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities."
+      },
+      {
+        "id": "edu-1",
+        "role": "Master's — High Performance Computing and Big Data Analysis",
+        "description": "Advanced studies in distributed computing, parallel algorithms, machine learning, and large-scale data processing pipelines."
+      },
+      {
+        "id": "exp-1",
+        "role": "System Integration / Full-Stack Developer",
+        "description": "Working on a Mercedes-Benz Group AG project — developing Spring Boot applications, API integration, database management, and enterprise platform integration. Collaborating with international teams across Romania and Germany."
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "title_1": "Let's ",
+    "title_2": "Connect",
+    "subtitle": "Have a project in mind, want to collaborate, or just want to say hi? Drop me a message — I read every one.",
+    "terminal": "~ send-message",
+    "emailLabel": "// Email",
+    "socialLabel": "// Social",
+    "openTo": "Open to opportunities",
+    "available": "Available for freelance projects, full-time roles, and interesting collaborations.",
+    "responseTime": "// Typical response time: 24–48 hours",
+    "configureEmailJS": "Configure EmailJS to enable the contact form.",
+    "configureEmailJSSub": "Copy <code>.env.example</code> → <code>.env</code> and add your EmailJS credentials.",
+    "form": {
+      "name": "// Name",
+      "email": "// Email",
+      "message": "// Message",
+      "namePlaceholder": "John Doe",
+      "emailPlaceholder": "john@example.com",
+      "messagePlaceholder": "Tell me about your project or just say hi...",
+      "nameRequired": "Name is required.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email.",
+      "messageMin": "Message must be at least 10 characters.",
+      "sending": "Sending...",
+      "send": "./send",
+      "sendFlag": "--message",
+      "success": "Message sent! I'll get back to you soon.",
+      "error": "Something went wrong. Try emailing me directly."
+    }
+  },
+  "cta": {
+    "label": "05. Get In Touch",
+    "title_1": "Let's ",
+    "title_2": "Work Together",
+    "subtitle": "Have a project in mind or just want to say hi? I'm always open to new opportunities and interesting conversations.",
+    "btn": "Contact Me"
+  },
+  "techRef": {
+    "question": "Want to know how this website is being developed?",
+    "btn": "View Tech Stack & Pipeline"
+  },
+  "footer": {
+    "builtWith": "Built with",
+    "top": "top"
+  },
+  "showcase": {
+    "label": "00. Showcase",
+    "title_1": "What I Can ",
+    "title_2": "Build",
+    "subtitle": "Each template below is a fully interactive mini-site — designed and coded from scratch with distinct aesthetics, real animations, and production-quality UI. No themes, no page builders.",
+    "ctaCopy": "Need something custom?",
+    "letsTalk": "Let's talk →",
+    "viewTemplate": "View Template →",
+    "bottomText": "Each template is designed and built from scratch — no themes, no page builders.",
+    "bottomBtn": "Get In Touch →"
+  },
+  "techPage": {
+    "heroLabel": "// tech_stack --verbose",
+    "heroTitle_1": "Under the ",
+    "heroTitle_2": "Hood",
+    "heroSubtitle": "Every tool in this portfolio was chosen deliberately. Here's the full breakdown — from the rendering engine down to the deployment pipeline.",
+    "pipelineLabel": "// deployment_flow --graph",
+    "pipelineTitle_1": "Deployment ",
+    "pipelineTitle_2": "Pipeline",
+    "pipelineSubtitle": "Three environments, two merge paths, one production endpoint. Preview and staging environments are hosted on a Cloudflare instance.",
+    "legendTitle": "// environment_map",
+    "legendBranch": "Branch",
+    "legendEnv": "Environment",
+    "legendHost": "Host"
+  },
+  "a11y": {
+    "skipToMain": "Skip to main content",
+    "backToTop": "Back to top",
+    "toggleMenu": "Toggle menu",
+    "primaryNav": "Primary navigation"
+  },
+  "projectDescriptions": {
+    "project-1": "A professional service website built for my father's plumbing & HVAC business in Suceava, Romania. Features service listings, contact details, and structured SEO markup to help local customers find the business."
+  }
+}

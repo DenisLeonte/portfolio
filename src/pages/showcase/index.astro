@@ -14,18 +14,18 @@ import showcase from '../../data/showcase.json';
   <!-- Hero Section -->
   <section class="showcase-hero section-wrapper">
     <div class="container mx-auto">
-      <p class="section-label gsap-hidden">00. Showcase</p>
+      <p class="section-label gsap-hidden" data-i18n="showcase.label">00. Showcase</p>
       <h1 class="showcase-title gsap-hidden">
-        What I Can <span class="text-green-primary">Build</span>
+        <span data-i18n="showcase.title_1">What I Can </span><span class="text-green-primary" data-i18n="showcase.title_2">Build</span>
       </h1>
       <div class="showcase-text-card gsap-hidden">
-        <p class="showcase-subtitle">
+        <p class="showcase-subtitle" data-i18n="showcase.subtitle">
           Each template below is a fully interactive mini-site — designed and coded from scratch with
           distinct aesthetics, real animations, and production-quality UI. No themes, no page builders.
         </p>
         <p class="showcase-cta-copy">
-          Need something custom?
-          <a href="/contact" class="inline-link">Let's talk →</a>
+          <span data-i18n="showcase.ctaCopy">Need something custom?</span>
+          <a href="/contact" class="inline-link" data-i18n="showcase.letsTalk">Let's talk →</a>
         </p>
       </div>
     </div>
@@ -56,7 +56,7 @@ import showcase from '../../data/showcase.json';
                 </span>
               )}
               <div class="showcase-thumb__overlay">
-                <span class="showcase-thumb__view">View Template →</span>
+                <span class="showcase-thumb__view" data-i18n="showcase.viewTemplate">View Template →</span>
               </div>
             </div>
 
@@ -82,10 +82,10 @@ import showcase from '../../data/showcase.json';
   <!-- Bottom CTA -->
   <section class="showcase-bottom section-wrapper">
     <div class="container mx-auto text-center">
-      <p class="showcase-bottom__text">
+      <p class="showcase-bottom__text" data-i18n="showcase.bottomText">
         Each template is designed and built from scratch — no themes, no page builders.
       </p>
-      <a href="/contact" class="btn-primary">Get In Touch →</a>
+      <a href="/contact" class="btn-primary" data-i18n="showcase.bottomBtn">Get In Touch →</a>
     </div>
   </section>
 

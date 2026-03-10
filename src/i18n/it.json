@@ -1,0 +1,183 @@
+{
+  "nav": {
+    "about": "Chi Sono",
+    "skills": "Competenze",
+    "projects": "Progetti",
+    "experience": "Esperienza",
+    "showcase": "Vetrina",
+    "tech": "Tecnologie",
+    "contact": "Contatto",
+    "theme": "Tema",
+    "language": "Lingua"
+  },
+  "hero": {
+    "greeting": "Ciao, sono",
+    "subtitle": "Creo applicazioni robuste e scalabili, dal backend al frontend.",
+    "viewWork": "Vedi i Progetti",
+    "getInTouch": "Contattami",
+    "scroll": "SCORRI",
+    "typingPhrases": [
+      "Ingegnere Software Full-Stack",
+      "Sviluppatore Spring Boot & React",
+      "Appassionato di AI & Big Data"
+    ]
+  },
+  "about": {
+    "label": "01. Chi Sono",
+    "title_1": "Chi ",
+    "title_2": "Sono",
+    "bio": "Sono un Ingegnere Software Full-Stack con 2 anni di esperienza nella creazione di applicazioni enterprise. Ho una laurea magistrale in High Performance Computing e Analisi Big Data, che alimenta la mia passione per la creazione di soluzioni performanti e basate sui dati.\n\nAttualmente lavoro presso .msg Systems Romania su un progetto Mercedes-Benz Group AG, dove sviluppo e integro sistemi complessi utilizzando Spring Boot, Angular e tecnologie cloud moderne. Mi trovo al meglio all'intersezione tra architettura backend ed esperienze frontend intuitive.\n\nFuori dal lavoro di solito cucino qualcosa di nuovo, mi perdo in un rabbit hole sulle auto, guardo il cielo notturno o mi preparo un buon caffe — a volte tutto nella stessa serata.",
+    "letsTalk": "Parliamo",
+    "viewGithub": "Vedi GitHub",
+    "highlights": {
+      "yearsExp": "Anni di Esperienza",
+      "masters": "Laurea Magistrale",
+      "currentRole": "Ruolo Attuale"
+    },
+    "config": {
+      "role": "Ingegnere Full-Stack",
+      "openToChat": "true",
+      "hobbies": ["cucinare", "auto", "astronomia", "caffe"]
+    }
+  },
+  "skills": {
+    "label": "02. Stack Tecnico",
+    "title_1": "Competenze & ",
+    "title_2": "Strumenti",
+    "subtitle": "Tecnologie con cui lavoro ogni giorno — dalle API backend alle pipeline di machine learning.",
+    "quickRef": "// Riferimento Rapido",
+    "categories": {
+      "Backend": "Backend",
+      "Frontend": "Frontend",
+      "AI / Machine Learning": "AI / Machine Learning",
+      "DevOps & Tools": "DevOps & Strumenti",
+      "Databases": "Database",
+      "Languages": "Lingue"
+    }
+  },
+  "projects": {
+    "label": "03. Progetti",
+    "title_1": "Cosa Ho ",
+    "title_2": "Costruito",
+    "subtitle": "Una selezione di progetti che mostrano il mio lavoro su sistemi backend, interfacce frontend e pipeline di dati.",
+    "featured": "In Evidenza",
+    "otherProjects": "// Altri Progetti",
+    "screenshot": "Screenshot",
+    "github": "GitHub",
+    "liveDemo": "Demo Live",
+    "demo": "Demo",
+    "cta": {
+      "label": "// vedi altro",
+      "heading": "Vuoi vedere cos'altro posso costruire?",
+      "sub": "Questi sono solo alcuni punti salienti. Scopri la gamma completa di quello che posso progettare e costruire — dai siti per ristoranti ai negozi e-commerce alle agenzie creative.",
+      "btn": "Vedi la Vetrina"
+    },
+    "emptyState": "Aggiungi i tuoi progetti in"
+  },
+  "experience": {
+    "label": "04. Esperienza",
+    "title_1": "Il Mio ",
+    "title_2": "Percorso",
+    "subtitle": "Traguardi professionali e risultati accademici che hanno plasmato la mia carriera.",
+    "work": "// lavoro",
+    "education": "// istruzione",
+    "present": "Presente",
+    "entries": [
+      {
+        "id": "edu-2",
+        "role": "Laurea Triennale — Matematica per l'Informatica",
+        "description": "Conoscenze approfondite di matematica e fondamenti di OOP, strutture dati, database, sviluppo web, AI e analisi matematica, algebra, geometria, statistica e probabilita."
+      },
+      {
+        "id": "edu-1",
+        "role": "Laurea Magistrale — High Performance Computing e Analisi Big Data",
+        "description": "Studi avanzati in calcolo distribuito, algoritmi paralleli, machine learning e pipeline di elaborazione dati su larga scala."
+      },
+      {
+        "id": "exp-1",
+        "role": "Integrazione Sistemi / Sviluppatore Full-Stack",
+        "description": "Lavoro su un progetto Mercedes-Benz Group AG — sviluppo applicazioni Spring Boot, integrazione API, gestione database e integrazione piattaforme enterprise. Collaboro con team internazionali in Romania e Germania."
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contatto",
+    "title_1": "Restiamo in ",
+    "title_2": "Contatto",
+    "subtitle": "Hai un progetto in mente, vuoi collaborare o vuoi solo salutare? Mandami un messaggio — li leggo tutti.",
+    "terminal": "~ invia-messaggio",
+    "emailLabel": "// Email",
+    "socialLabel": "// Social",
+    "openTo": "Aperto a opportunita",
+    "available": "Disponibile per progetti freelance, ruoli full-time e collaborazioni interessanti.",
+    "responseTime": "// Tempo tipico di risposta: 24–48 ore",
+    "configureEmailJS": "Configura EmailJS per abilitare il modulo di contatto.",
+    "configureEmailJSSub": "Copia <code>.env.example</code> → <code>.env</code> e aggiungi le credenziali EmailJS.",
+    "form": {
+      "name": "// Nome",
+      "email": "// Email",
+      "message": "// Messaggio",
+      "namePlaceholder": "Mario Rossi",
+      "emailPlaceholder": "mario@esempio.it",
+      "messagePlaceholder": "Raccontami del tuo progetto o salutami...",
+      "nameRequired": "Il nome e obbligatorio.",
+      "emailRequired": "L'email e obbligatoria.",
+      "emailInvalid": "Inserisci un'email valida.",
+      "messageMin": "Il messaggio deve avere almeno 10 caratteri.",
+      "sending": "Invio in corso...",
+      "send": "./invia",
+      "sendFlag": "--messaggio",
+      "success": "Messaggio inviato! Ti rispondero presto.",
+      "error": "Qualcosa e andato storto. Prova a inviarmi un'email direttamente."
+    }
+  },
+  "cta": {
+    "label": "05. Contattami",
+    "title_1": "Lavoriamo ",
+    "title_2": "Insieme",
+    "subtitle": "Hai un progetto in mente o vuoi solo salutare? Sono sempre aperto a nuove opportunita e conversazioni interessanti.",
+    "btn": "Contattami"
+  },
+  "techRef": {
+    "question": "Vuoi sapere come viene sviluppato questo sito?",
+    "btn": "Vedi Stack Tecnico & Pipeline"
+  },
+  "footer": {
+    "builtWith": "Costruito con",
+    "top": "su"
+  },
+  "showcase": {
+    "label": "00. Vetrina",
+    "title_1": "Cosa Posso ",
+    "title_2": "Costruire",
+    "subtitle": "Ogni template qui sotto e un mini-sito completamente interattivo — progettato e codificato da zero con estetica distinta, animazioni reali e interfaccia di qualita produzione. Nessun tema, nessun page builder.",
+    "ctaCopy": "Hai bisogno di qualcosa di personalizzato?",
+    "letsTalk": "Parliamo →",
+    "viewTemplate": "Vedi Template →",
+    "bottomText": "Ogni template e progettato e costruito da zero — nessun tema, nessun page builder.",
+    "bottomBtn": "Contattami →"
+  },
+  "techPage": {
+    "heroLabel": "// stack_tecnico --dettagliato",
+    "heroTitle_1": "Sotto il ",
+    "heroTitle_2": "Cofano",
+    "heroSubtitle": "Ogni strumento in questo portfolio e stato scelto deliberatamente. Ecco la panoramica completa — dal motore di rendering alla pipeline di deployment.",
+    "pipelineLabel": "// flusso_deployment --grafo",
+    "pipelineTitle_1": "Pipeline di ",
+    "pipelineTitle_2": "Deployment",
+    "pipelineSubtitle": "Tre ambienti, due percorsi di merge, un unico endpoint di produzione. Gli ambienti di preview e staging sono ospitati su un'istanza Cloudflare.",
+    "legendTitle": "// mappa_ambienti",
+    "legendBranch": "Branch",
+    "legendEnv": "Ambiente",
+    "legendHost": "Host"
+  },
+  "a11y": {
+    "skipToMain": "Vai al contenuto principale",
+    "backToTop": "Torna su",
+    "toggleMenu": "Attiva/disattiva menu",
+    "primaryNav": "Navigazione principale"
+  },
+  "projectDescriptions": {
+    "project-1": "Un sito web professionale di servizi costruito per l'attivita di idraulica e HVAC di mio padre a Suceava, Romania. Include elenchi di servizi, dettagli di contatto e markup SEO strutturato per aiutare i clienti locali a trovare l'attivita."
+  }
+}
