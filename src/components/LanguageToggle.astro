@@ -1,0 +1,118 @@
+---
+// Language toggle — cycles through EN / RO / IT
+// Desktop: always visible next to theme toggle
+// Mobile: shown inside hamburger menu (via prop)
+interface Props {
+  mobile?: boolean;
+}
+const { mobile = false } = Astro.props;
+---
+
+{mobile ? (
+  <!-- Mobile: row of language buttons -->
+  <div class="lang-toggle-mobile" role="group" aria-label="Language preference">
+    <button class="lang-btn-mobile" data-lang="en" aria-pressed="false">EN</button>
+    <button class="lang-btn-mobile" data-lang="ro" aria-pressed="false">RO</button>
+    <button class="lang-btn-mobile" data-lang="it" aria-pressed="false">IT</button>
+  </div>
+) : (
+  <!-- Desktop: compact pill toggle -->
+  <div class="lang-toggle-desktop" role="group" aria-label="Language preference">
+    <div class="lang-indicator" aria-hidden="true"></div>
+    <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    <button class="lang-btn" data-lang="ro" aria-pressed="false">RO</button>
+    <button class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+  </div>
+)}
+
+<style>
+  /* ── Desktop toggle (pill style like theme toggle) ── */
+  .lang-toggle-desktop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-green);
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .lang-indicator {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green-primary);
+    box-shadow: 0 0 8px var(--green-glow-strong);
+    transition:
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.35s ease,
+      box-shadow 0.35s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .lang-btn {
+    position: relative;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    padding: 0;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .lang-btn.active {
+    color: var(--toggle-active-icon);
+  }
+
+  .lang-btn:not(.active):hover {
+    color: var(--green-primary);
+  }
+
+  /* ── Mobile toggle ── */
+  .lang-toggle-mobile {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lang-btn-mobile {
+    padding: 0.3rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid var(--border-green);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lang-btn-mobile.active {
+    color: var(--toggle-active-icon);
+    background: var(--green-primary);
+    border-color: var(--green-primary);
+  }
+
+  .lang-btn-mobile:not(.active):hover {
+    color: var(--green-primary);
+    border-color: var(--border-green-hover);
+  }
+</style>

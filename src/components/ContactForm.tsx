@@ -1,4 +1,4 @@
-import { useState, useRef, type FormEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -7,30 +7,42 @@ const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID as string;
 const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID as string;
 const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY as string;
 
+function ti(key: string): string {
+  const i18n = (window as any).__i18n;
+  if (i18n) return i18n.t(key, i18n.getCurrentLang());
+  return key;
+}
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [, setLang] = useState(0);
 
-  const validate = (form: HTMLFormElement): Record<string, string> => {
+  useEffect(() => {
+    const handler = () => setLang((n) => n + 1);
+    document.addEventListener('langchange', handler);
+    return () => document.removeEventListener('langchange', handler);
+  }, []);
+
+  const validate = useCallback((form: HTMLFormElement): Record<string, string> => {
     const errs: Record<string, string> = {};
     const name = (form.elements.namedItem('user_name') as HTMLInputElement)?.value.trim();
     const email = (form.elements.namedItem('user_email') as HTMLInputElement)?.value.trim();
     const message = (form.elements.namedItem('message') as HTMLTextAreaElement)?.value.trim();
 
-    if (!name) errs.user_name = 'Name is required.';
+    if (!name) errs.user_name = ti('contact.form.nameRequired');
     if (!email) {
-      errs.user_email = 'Email is required.';
+      errs.user_email = ti('contact.form.emailRequired');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errs.user_email = 'Please enter a valid email.';
+      errs.user_email = ti('contact.form.emailInvalid');
     }
     if (!message || message.length < 10) {
-      errs.message = 'Message must be at least 10 characters.';
+      errs.message = ti('contact.form.messageMin');
     }
 
     return errs;
-  };
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,13 +84,13 @@ export default function ContactForm() {
       {/* Name */}
       <div>
         <label htmlFor="user_name" className="form-label">
-          // Name
+          {ti('contact.form.name')}
         </label>
         <input
           id="user_name"
           name="user_name"
           type="text"
-          placeholder="John Doe"
+          placeholder={ti('contact.form.namePlaceholder')}
           className={inputClass}
           style={{
             border: errors.user_name
@@ -105,13 +117,13 @@ export default function ContactForm() {
       {/* Email */}
       <div>
         <label htmlFor="user_email" className="form-label">
-          // Email
+          {ti('contact.form.email')}
         </label>
         <input
           id="user_email"
           name="user_email"
           type="email"
-          placeholder="john@example.com"
+          placeholder={ti('contact.form.emailPlaceholder')}
           className={inputClass}
           style={{
             border: errors.user_email
@@ -138,13 +150,13 @@ export default function ContactForm() {
       {/* Message */}
       <div>
         <label htmlFor="message" className="form-label">
-          // Message
+          {ti('contact.form.message')}
         </label>
         <textarea
           id="message"
           name="message"
           rows={6}
-          placeholder="Tell me about your project or just say hi..."
+          placeholder={ti('contact.form.messagePlaceholder')}
           className={inputClass}
           style={{
             border: errors.message
@@ -194,11 +206,11 @@ export default function ContactForm() {
                 animation: 'spin 0.7s linear infinite',
               }}
             />
-            Sending...
+            {ti('contact.form.sending')}
           </>
         ) : (
           <>
-            <span style={{ color: 'inherit' }}>./send</span>
+            <span style={{ color: 'inherit' }}>{ti('contact.form.send')}</span>
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
@@ -206,7 +218,7 @@ export default function ContactForm() {
                 opacity: 0.7,
               }}
             >
-              --message
+              {ti('contact.form.sendFlag')}
             </span>
           </>
         )}
@@ -226,7 +238,7 @@ export default function ContactForm() {
             fontFamily: 'var(--font-mono)',
           }}
         >
-          ✓ Message sent! I'll get back to you soon.
+          ✓ {ti('contact.form.success')}
         </div>
       )}
 
@@ -243,7 +255,7 @@ export default function ContactForm() {
             fontFamily: 'var(--font-mono)',
           }}
         >
-          ✗ Something went wrong. Try emailing me directly.
+          ✗ {ti('contact.form.error')}
         </div>
       )}
 

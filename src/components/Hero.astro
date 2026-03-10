@@ -46,7 +46,7 @@ import profile from '../data/profile.json';
       id="hero-heading"
       style="letter-spacing: -0.03em; line-height: 1.0;"
     >
-      Hi, I'm{' '}
+      <span data-i18n="hero.greeting">Hi, I'm</span>{' '}
       <span
         class="glow-text"
         style="color: var(--green-primary);"
@@ -73,7 +73,7 @@ import profile from '../data/profile.json';
       id="hero-subtitle"
       style="color: var(--text-secondary); max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.7;"
     >
-      {profile.heroSubtitle}
+      <span data-i18n="hero.subtitle">{profile.heroSubtitle}</span>
     </p>
 
     <!-- CTA Buttons -->
@@ -82,12 +82,12 @@ import profile from '../data/profile.json';
       id="hero-cta"
     >
       <a href="#projects" class="btn-primary">
-        <span>View My Work</span>
+        <span data-i18n="hero.viewWork">View My Work</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-      <a href="/contact" class="btn-secondary">
+      <a href="/contact" class="btn-secondary" data-i18n="hero.getInTouch">
         Get In Touch
       </a>
     </div>
@@ -99,7 +99,7 @@ import profile from '../data/profile.json';
     id="hero-scroll"
     aria-hidden="true"
   >
-    <span style="font-size: 0.65rem; letter-spacing: 0.25em;">SCROLL</span>
+    <span style="font-size: 0.65rem; letter-spacing: 0.25em;" data-i18n="hero.scroll">SCROLL</span>
     <div class="chevron mt-2"></div>
   </div>
 </section>

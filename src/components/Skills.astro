@@ -13,11 +13,11 @@ import skillsData from '../data/skills.json';
   ></div>
 
   <div class="container mx-auto">
-    <p class="section-label gsap-hidden">02. Tech Stack</p>
+    <p class="section-label gsap-hidden" data-i18n="skills.label">02. Tech Stack</p>
     <h2 class="section-title gsap-hidden">
-      Skills & <span>Tools</span>
+      <span data-i18n="skills.title_1">Skills & </span><span data-i18n="skills.title_2">Tools</span>
     </h2>
-    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;" data-i18n="skills.subtitle">
       Technologies I work with daily — from backend APIs to machine learning pipelines.
     </p>
 
@@ -45,6 +45,7 @@ import skillsData from '../data/skills.json';
               <h3
                 class="text-sm font-bold tracking-widest uppercase"
                 style="color: var(--text-primary); letter-spacing: 0.12em;"
+                data-i18n={`skills.categories.${category.name}`}
               >
                 {category.name}
               </h3>
@@ -92,7 +93,7 @@ import skillsData from '../data/skills.json';
         class="text-xs tracking-widest uppercase mb-5"
         style="color: var(--text-secondary); letter-spacing: 0.2em;"
       >
-        // Quick Reference
+        <span data-i18n="skills.quickRef">// Quick Reference</span>
       </p>
       <div class="flex flex-wrap gap-2">
         {skillsData.categories.flatMap(c => c.skills).map((skill) => (

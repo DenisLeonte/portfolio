@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface TypingEffectProps {
   phrases: string[];
@@ -9,20 +9,44 @@ interface TypingEffectProps {
 }
 
 export default function TypingEffect({
-  phrases,
+  phrases: initialPhrases,
   typingSpeed = 75,
   deletingSpeed = 35,
   pauseAfterTyping = 2200,
   pauseAfterDeleting = 400,
 }: TypingEffectProps) {
+  const [phrases, setPhrases] = useState(initialPhrases);
   const [displayText, setDisplayText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const phrasesRef = useRef(phrases);
+  phrasesRef.current = phrases;
+
+  // Listen for language changes and swap phrases
+  useEffect(() => {
+    const handler = () => {
+      const i18n = (window as any).__i18n;
+      if (i18n) {
+        const newPhrases = i18n.tArray('hero.typingPhrases', i18n.getCurrentLang());
+        if (newPhrases.length > 0) {
+          setPhrases(newPhrases);
+          // Reset typing state to start fresh with new phrases
+          setPhraseIndex(0);
+          setCharIndex(0);
+          setDisplayText('');
+          setIsDeleting(false);
+          setIsPaused(false);
+        }
+      }
+    };
+    document.addEventListener('langchange', handler);
+    return () => document.removeEventListener('langchange', handler);
+  }, []);
 
   const tick = useCallback(() => {
-    const currentPhrase = phrases[phraseIndex] ?? '';
+    const currentPhrase = phrasesRef.current[phraseIndex] ?? '';
 
     if (isPaused) return;
 
@@ -49,12 +73,12 @@ export default function TypingEffect({
         setIsPaused(true);
         setTimeout(() => {
           setIsDeleting(false);
-          setPhraseIndex((p) => (p + 1) % phrases.length);
+          setPhraseIndex((p) => (p + 1) % phrasesRef.current.length);
           setIsPaused(false);
         }, pauseAfterDeleting);
       }
     }
-  }, [charIndex, isDeleting, isPaused, phraseIndex, phrases, pauseAfterTyping, pauseAfterDeleting]);
+  }, [charIndex, isDeleting, isPaused, phraseIndex, pauseAfterTyping, pauseAfterDeleting]);
 
   useEffect(() => {
     const delay = isDeleting ? deletingSpeed : typingSpeed;

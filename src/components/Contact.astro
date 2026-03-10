@@ -20,11 +20,11 @@ const hasEmailJS = !!(
     <div class="core"></div>
   </div>
   <div class="container mx-auto">
-    <p class="section-label gsap-hidden">Contact</p>
+    <p class="section-label gsap-hidden" data-i18n="contact.label">Contact</p>
     <h2 class="section-title gsap-hidden">
-      Let's <span>Connect</span>
+      <span data-i18n="contact.title_1">Let's </span><span data-i18n="contact.title_2">Connect</span>
     </h2>
-    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;">
+    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;" data-i18n="contact.subtitle">
       Have a project in mind, want to collaborate, or just want to say hi? Drop me a message — I read every one.
     </p>
 
@@ -42,7 +42,7 @@ const hasEmailJS = !!(
               <div class="w-3 h-3 rounded-full" style="background: rgba(255,200,80,0.6);"></div>
               <div class="w-3 h-3 rounded-full" style="background: rgba(22,163,74,0.7);"></div>
             </div>
-            <span class="text-xs ml-2" style="color: var(--text-secondary); letter-spacing: 0.08em;">
+            <span class="text-xs ml-2" style="color: var(--text-secondary); letter-spacing: 0.08em;" data-i18n="contact.terminal">
               ~ send-message
             </span>
           </div>
@@ -53,10 +53,10 @@ const hasEmailJS = !!(
               class="text-center py-8"
               style="border: 1px dashed rgba(22,163,74,0.2); border-radius: 6px;"
             >
-              <p class="text-sm mb-3" style="color: var(--text-secondary);">
+              <p class="text-sm mb-3" style="color: var(--text-secondary);" data-i18n="contact.configureEmailJS">
                 Configure EmailJS to enable the contact form.
               </p>
-              <p class="text-xs" style="color: var(--green-muted);">
+              <p class="text-xs" style="color: var(--green-muted);" data-i18n-html="contact.configureEmailJSSub">
                 Copy <code>.env.example</code> → <code>.env</code> and add your EmailJS credentials.
               </p>
             </div>
@@ -71,7 +71,7 @@ const hasEmailJS = !!(
         <!-- Direct email -->
         {profile.email && !profile.email.startsWith('[') && (
           <div class="gsap-hidden">
-            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--green-muted);">// Email</p>
+            <p class="text-xs tracking-widest uppercase mb-2" style="color: var(--green-muted);" data-i18n="contact.emailLabel">// Email</p>
             <a
               href={`mailto:${profile.email}`}
               class="text-sm hover:text-green-primary transition-colors break-all"
@@ -84,7 +84,7 @@ const hasEmailJS = !!(
 
         <!-- Social Links -->
         <div class="gsap-hidden">
-          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--green-muted);">// Social</p>
+          <p class="text-xs tracking-widest uppercase mb-4" style="color: var(--green-muted);" data-i18n="contact.socialLabel">// Social</p>
           <div class="flex gap-3">
             <!-- GitHub -->
             {profile.socialLinks.github && !profile.socialLinks.github.startsWith('[') && (
@@ -128,15 +128,15 @@ const hasEmailJS = !!(
               class="w-2 h-2 rounded-full"
               style="background: var(--green-primary); box-shadow: 0 0 8px rgba(22,163,74,0.5); animation: pulseGlow 2s ease-in-out infinite;"
             ></div>
-            <span class="text-sm font-medium" style="color: var(--text-primary);">Open to opportunities</span>
+            <span class="text-sm font-medium" style="color: var(--text-primary);" data-i18n="contact.openTo">Open to opportunities</span>
           </div>
-          <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary);" data-i18n="contact.available">
             Available for freelance projects, full-time roles, and interesting collaborations.
           </p>
         </div>
 
         <!-- Response time note -->
-        <p class="text-xs gsap-hidden" style="color: var(--text-secondary); opacity: 0.6;">
+        <p class="text-xs gsap-hidden" style="color: var(--text-secondary); opacity: 0.6;" data-i18n="contact.responseTime">
           // Typical response time: 24–48 hours
         </p>
       </div>

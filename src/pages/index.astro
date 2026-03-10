@@ -18,6 +18,7 @@ const pageDescription = `Full-Stack Software Engineer with 2+ years of experienc
   <a
     href="#about"
     class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-bg-primary focus:text-green-primary focus:outline-none focus:ring-2 focus:ring-green-primary"
+    data-i18n="a11y.skipToMain"
   >
     Skip to main content
   </a>
@@ -42,13 +43,14 @@ const pageDescription = `Full-Stack Software Engineer with 2+ years of experienc
       </div>
 
       <div class="container mx-auto relative z-10">
-        <p class="section-label gsap-hidden">05. Get In Touch</p>
+        <p class="section-label gsap-hidden" data-i18n="cta.label">05. Get In Touch</p>
         <h2 class="section-title gsap-hidden">
-          Let's <span>Work Together</span>
+          <span data-i18n="cta.title_1">Let's </span><span data-i18n="cta.title_2">Work Together</span>
         </h2>
         <p
           class="gsap-hidden mx-auto mb-10"
           style="color: var(--text-secondary); max-width: 32rem; font-size: 0.95rem; line-height: 1.7;"
+          data-i18n="cta.subtitle"
         >
           Have a project in mind or just want to say hi? I'm always open to new opportunities and interesting conversations.
         </p>
@@ -61,7 +63,7 @@ const pageDescription = `Full-Stack Software Engineer with 2+ years of experienc
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
           </svg>
-          Contact Me
+          <span data-i18n="cta.btn">Contact Me</span>
         </a>
       </div>
     </section>
@@ -69,11 +71,11 @@ const pageDescription = `Full-Stack Software Engineer with 2+ years of experienc
     <!-- Tech Stack Reference -->
     <section id="tech-ref" class="relative py-16 px-6 text-center">
       <div class="container mx-auto">
-        <p class="gsap-hidden" style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 1.5rem;">
+        <p class="gsap-hidden" style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 1.5rem;" data-i18n="techRef.question">
           Want to know how this website is being developed?
         </p>
         <a href="/tech" class="gsap-hidden btn-primary inline-flex items-center gap-2">
-          View Tech Stack &amp; Pipeline
+          <span data-i18n="techRef.btn">View Tech Stack &amp; Pipeline</span>
         </a>
       </div>
     </section>

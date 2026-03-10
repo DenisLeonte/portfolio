@@ -1,0 +1,205 @@
+{
+  "nav": {
+    "about": "Despre",
+    "skills": "Skills",
+    "projects": "Proiecte",
+    "experience": "Experiență",
+    "showcase": "Showcase",
+    "tech": "Tech",
+    "contact": "Contact",
+    "theme": "Temă",
+    "language": "Limbă"
+  },
+  "hero": {
+    "greeting": "Salut, sunt",
+    "subtitle": "Construiesc aplicații robuste și scalabile, de la backend la frontend.",
+    "viewWork": "Vezi Proiectele",
+    "getInTouch": "Contactează-mă",
+    "scroll": "DERULEAZĂ",
+    "typingPhrases": [
+      "Full-Stack Software Engineer",
+      "Spring Boot & React Developer",
+      "Pasionat de AI & Big Data"
+    ]
+  },
+  "about": {
+    "label": "01. Despre Mine",
+    "title_1": "Cine ",
+    "title_2": "Sunt",
+    "bio": "Sunt un Full-Stack Software Engineer cu 2 ani de experiență în dezvoltarea aplicațiilor enterprise. Dețin o diplomă de Master în High Performance Computing și Big Data Analysis, ceea ce îmi alimentează pasiunea pentru construirea soluțiilor performante, bazate pe date.\n\nÎn prezent lucrez la .msg Systems România pe un proiect Mercedes-Benz Group AG, unde dezvolt și integrez sisteme complexe folosind Spring Boot, Angular și tehnologii cloud moderne. Mă regăsesc la intersecția dintre arhitectura backend și experiențele frontend intuitive.\n\nÎn afara muncii, de obicei gătesc ceva nou, intru într-un rabbit hole despre mașini, privesc cerul nopții sau îmi fac o cafea decentă — uneori toate în aceeași seară.",
+    "letsTalk": "Hai să Vorbim",
+    "viewGithub": "Vezi GitHub",
+    "highlights": {
+      "yearsExp": "Ani de Experiență",
+      "masters": "Diplomă de Master",
+      "currentRole": "Rol Actual"
+    },
+    "config": {
+      "role": "Full-Stack Engineer",
+      "openToChat": "true",
+      "hobbies": ["gătit", "mașini", "astronomie", "cafea"]
+    }
+  },
+  "skills": {
+    "label": "02. Tech Stack",
+    "title_1": "Skills & ",
+    "title_2": "Tools",
+    "subtitle": "Tehnologii cu care lucrez zilnic — de la API-uri backend la pipeline-uri de machine learning.",
+    "quickRef": "// Quick Reference",
+    "categories": {
+      "Backend": "Backend",
+      "Frontend": "Frontend",
+      "AI / Machine Learning": "AI / Machine Learning",
+      "DevOps & Tools": "DevOps & Tools",
+      "Databases": "Databases",
+      "Languages": "Limbaje"
+    }
+  },
+  "projects": {
+    "label": "03. Proiecte",
+    "title_1": "Ce am ",
+    "title_2": "Construit",
+    "subtitle": "O selecție de proiecte care demonstrează munca mea în sisteme backend, interfețe frontend și pipeline-uri de date.",
+    "featured": "Featured",
+    "otherProjects": "// Alte Proiecte",
+    "screenshot": "Screenshot",
+    "github": "GitHub",
+    "liveDemo": "Live Demo",
+    "demo": "Demo",
+    "cta": {
+      "label": "// vezi mai mult",
+      "heading": "Vrei să vezi ce altceva pot construi?",
+      "sub": "Acestea sunt doar câteva highlights. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
+      "btn": "Vezi Showcase-ul"
+    },
+    "emptyState": "Adaugă proiectele tale în"
+  },
+  "experience": {
+    "label": "04. Experiență",
+    "title_1": "Parcursul ",
+    "title_2": "Meu",
+    "subtitle": "Repere profesionale și realizări academice care mi-au modelat cariera.",
+    "work": "// work",
+    "education": "// education",
+    "present": "Prezent",
+    "entries": [
+      {
+        "id": "edu-2",
+        "role": "Licență — Matematică pentru Informatică",
+        "description": "Cunoștințe aprofundate de matematică și fundamente ale OOP, structuri de date, baze de date, web development, AI și analiză matematică, algebră, geometrie, statistică și probabilități."
+      },
+      {
+        "id": "edu-1",
+        "role": "Master — High Performance Computing și Big Data Analysis",
+        "description": "Studii avansate în distributed computing, algoritmi paraleli, machine learning și pipeline-uri de procesare a datelor la scară largă."
+      },
+      {
+        "id": "exp-1",
+        "role": "System Integration / Full-Stack Developer",
+        "description": "Lucrez pe un proiect Mercedes-Benz Group AG — dezvolt aplicații Spring Boot, API integration, database management și integrare platforme enterprise. Colaborez cu echipe internaționale din România și Germania."
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "title_1": "Hai să ne ",
+    "title_2": "Conectăm",
+    "subtitle": "Ai un proiect în minte, vrei să colaborăm sau doar vrei să spui salut? Trimite-mi un mesaj — le citesc pe toate.",
+    "terminal": "~ send-message",
+    "emailLabel": "// Email",
+    "socialLabel": "// Social",
+    "openTo": "Deschis la oportunități",
+    "available": "Disponibil pentru proiecte freelance, roluri full-time și colaborări interesante.",
+    "responseTime": "// Timp tipic de răspuns: 24–48 ore",
+    "configureEmailJS": "Configurează EmailJS pentru a activa formularul de contact.",
+    "configureEmailJSSub": "Copiază <code>.env.example</code> → <code>.env</code> și adaugă credențialele EmailJS.",
+    "form": {
+      "name": "// Nume",
+      "email": "// Email",
+      "message": "// Mesaj",
+      "namePlaceholder": "Ion Popescu",
+      "emailPlaceholder": "ion@exemplu.ro",
+      "messagePlaceholder": "Spune-mi despre proiectul tău sau doar salută...",
+      "nameRequired": "Numele este obligatoriu.",
+      "emailRequired": "Email-ul este obligatoriu.",
+      "emailInvalid": "Te rog introdu un email valid.",
+      "messageMin": "Mesajul trebuie să aibă cel puțin 10 caractere.",
+      "sending": "Se trimite...",
+      "send": "./send",
+      "sendFlag": "--message",
+      "success": "Mesaj trimis! Îți voi răspunde în curând.",
+      "error": "Ceva nu a mers bine. Încearcă să-mi trimiți email direct."
+    }
+  },
+  "cta": {
+    "label": "05. Ia Legătura",
+    "title_1": "Hai să ",
+    "title_2": "Lucrăm Împreună",
+    "subtitle": "Ai un proiect în minte sau doar vrei să spui salut? Sunt mereu deschis la oportunități noi și conversații interesante.",
+    "btn": "Contactează-mă"
+  },
+  "techRef": {
+    "question": "Vrei să știi cum este dezvoltat acest website?",
+    "btn": "Vezi Tech Stack & Pipeline"
+  },
+  "footer": {
+    "builtWith": "Construit cu",
+    "top": "sus"
+  },
+  "showcase": {
+    "label": "00. Showcase",
+    "title_1": "Ce Pot ",
+    "title_2": "Construi",
+    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și codat de la zero cu design distinct, animații reale și UI production-ready. Fără teme, fără page builders.",
+    "ctaCopy": "Ai nevoie de ceva custom?",
+    "letsTalk": "Hai să vorbim →",
+    "viewTemplate": "Vezi Template-ul →",
+    "bottomText": "Fiecare template este proiectat și construit de la zero — fără teme, fără page builders.",
+    "bottomBtn": "Ia Legătura →",
+    "cards": {
+      "restaurant": {
+        "category": "Restaurant & Cafenea",
+        "description": "O experiență de dining elegantă cu secțiuni de meniu animate, CTA pentru rezervări și estetică mediteraneană caldă."
+      },
+      "ecommerce": {
+        "category": "E-commerce & Produs",
+        "description": "Un showcase de produse elegant cu galerii interactive, UI de coș și design minimalist modern."
+      },
+      "agency": {
+        "category": "Agenție Creativă",
+        "description": "Un site de agenție bold, cu efecte de scroll dinamice, showcase de echipă și contoare animate."
+      },
+      "blog": {
+        "category": "Blog & Revistă",
+        "description": "O experiență de lectură curată, axată pe tipografie, cu toggle dark/light mode și bară de progres."
+      },
+      "realestate": {
+        "category": "Imobiliare & Proprietăți",
+        "description": "Un showcase de proprietăți cu carusele de imagini, secțiuni de cartier și layout-uri elegante de detalii."
+      }
+    }
+  },
+  "techPage": {
+    "heroLabel": "// tech_stack --verbose",
+    "heroTitle_1": "Sub ",
+    "heroTitle_2": "Capotă",
+    "heroSubtitle": "Fiecare tool din acest portofoliu a fost ales deliberat. Iată breakdown-ul complet — de la rendering engine până la deployment pipeline.",
+    "pipelineLabel": "// deployment_flow --graph",
+    "pipelineTitle_1": "Deployment ",
+    "pipelineTitle_2": "Pipeline",
+    "pipelineSubtitle": "Trei environment-uri, două merge paths, un singur production endpoint. Environment-urile de preview și staging sunt hostuite pe o instanță Cloudflare.",
+    "legendTitle": "// environment_map",
+    "legendBranch": "Branch",
+    "legendEnv": "Environment",
+    "legendHost": "Host"
+  },
+  "a11y": {
+    "skipToMain": "Sari la conținutul principal",
+    "backToTop": "Înapoi sus",
+    "toggleMenu": "Comută meniul",
+    "primaryNav": "Navigație principală"
+  },
+  "projectDescriptions": {
+    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea."
+  }
+}
