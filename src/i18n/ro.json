@@ -1,11 +1,11 @@
 {
   "nav": {
     "about": "Despre",
-    "skills": "Abilități",
+    "skills": "Skills",
     "projects": "Proiecte",
     "experience": "Experiență",
-    "showcase": "Galerie",
-    "tech": "Tehnologii",
+    "showcase": "Showcase",
+    "tech": "Tech",
     "contact": "Contact",
     "theme": "Temă",
     "language": "Limbă"
@@ -17,8 +17,8 @@
     "getInTouch": "Contactează-mă",
     "scroll": "DERULEAZĂ",
     "typingPhrases": [
-      "Inginer Software Full-Stack",
-      "Dezvoltator Spring Boot & React",
+      "Full-Stack Software Engineer",
+      "Spring Boot & React Developer",
       "Pasionat de AI & Big Data"
     ]
   },
@@ -26,7 +26,7 @@
     "label": "01. Despre Mine",
     "title_1": "Cine ",
     "title_2": "Sunt",
-    "bio": "Sunt un Inginer Software Full-Stack cu 2 ani de experiență în dezvoltarea aplicațiilor de nivel enterprise. Dețin o diplomă de Master în High Performance Computing și Analiza Big Data, ceea ce îmi alimentează pasiunea pentru construirea soluțiilor performante, bazate pe date.\n\nÎn prezent lucrez la .msg Systems România pe un proiect Mercedes-Benz Group AG, unde dezvolt și integrez sisteme complexe folosind Spring Boot, Angular și tehnologii cloud moderne. Mă regăsesc la intersecția dintre arhitectura backend și experiențele frontend intuitive.\n\nÎn afara muncii, de obicei gătesc ceva nou, intru într-un rabbit hole despre mașini, privesc cerul nopții sau îmi fac o cafea decentă — uneori toate în aceeași seară.",
+    "bio": "Sunt un Full-Stack Software Engineer cu 2 ani de experiență în dezvoltarea aplicațiilor enterprise. Dețin o diplomă de Master în High Performance Computing și Big Data Analysis, ceea ce îmi alimentează pasiunea pentru construirea soluțiilor performante, bazate pe date.\n\nÎn prezent lucrez la .msg Systems România pe un proiect Mercedes-Benz Group AG, unde dezvolt și integrez sisteme complexe folosind Spring Boot, Angular și tehnologii cloud moderne. Mă regăsesc la intersecția dintre arhitectura backend și experiențele frontend intuitive.\n\nÎn afara muncii, de obicei gătesc ceva nou, intru într-un rabbit hole despre mașini, privesc cerul nopții sau îmi fac o cafea decentă — uneori toate în aceeași seară.",
     "letsTalk": "Hai să Vorbim",
     "viewGithub": "Vezi GitHub",
     "highlights": {
@@ -35,24 +35,24 @@
       "currentRole": "Rol Actual"
     },
     "config": {
-      "role": "Inginer Full-Stack",
+      "role": "Full-Stack Engineer",
       "openToChat": "true",
       "hobbies": ["gătit", "mașini", "astronomie", "cafea"]
     }
   },
   "skills": {
-    "label": "02. Stivă Tehnică",
-    "title_1": "Abilități & ",
-    "title_2": "Instrumente",
+    "label": "02. Tech Stack",
+    "title_1": "Skills & ",
+    "title_2": "Tools",
     "subtitle": "Tehnologii cu care lucrez zilnic — de la API-uri backend la pipeline-uri de machine learning.",
-    "quickRef": "// Referință Rapidă",
+    "quickRef": "// Quick Reference",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
       "AI / Machine Learning": "AI / Machine Learning",
-      "DevOps & Tools": "DevOps & Instrumente",
-      "Databases": "Baze de Date",
-      "Languages": "Limbi"
+      "DevOps & Tools": "DevOps & Tools",
+      "Databases": "Databases",
+      "Languages": "Limbaje"
     }
   },
   "projects": {
@@ -60,17 +60,17 @@
     "title_1": "Ce am ",
     "title_2": "Construit",
     "subtitle": "O selecție de proiecte care demonstrează munca mea în sisteme backend, interfețe frontend și pipeline-uri de date.",
-    "featured": "Recomandat",
+    "featured": "Featured",
     "otherProjects": "// Alte Proiecte",
-    "screenshot": "Captură de ecran",
+    "screenshot": "Screenshot",
     "github": "GitHub",
-    "liveDemo": "Demo Live",
+    "liveDemo": "Live Demo",
     "demo": "Demo",
     "cta": {
       "label": "// vezi mai mult",
       "heading": "Vrei să vezi ce altceva pot construi?",
-      "sub": "Acestea sunt doar câteva exemple. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
-      "btn": "Vezi Galeria"
+      "sub": "Acestea sunt doar câteva highlights. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
+      "btn": "Vezi Showcase-ul"
     },
     "emptyState": "Adaugă proiectele tale în"
   },
@@ -79,24 +79,24 @@
     "title_1": "Parcursul ",
     "title_2": "Meu",
     "subtitle": "Repere profesionale și realizări academice care mi-au modelat cariera.",
-    "work": "// muncă",
-    "education": "// educație",
+    "work": "// work",
+    "education": "// education",
     "present": "Prezent",
     "entries": [
       {
         "id": "edu-2",
         "role": "Licență — Matematică pentru Informatică",
-        "description": "Cunoștințe aprofundate de matematică și fundamente ale POO, structuri de date, baze de date, dezvoltare web, AI și analiză matematică, algebră, geometrie, statistică și probabilități."
+        "description": "Cunoștințe aprofundate de matematică și fundamente ale OOP, structuri de date, baze de date, web development, AI și analiză matematică, algebră, geometrie, statistică și probabilități."
       },
       {
         "id": "edu-1",
-        "role": "Master — High Performance Computing și Analiza Big Data",
-        "description": "Studii avansate în calcul distribuit, algoritmi paraleli, machine learning și pipeline-uri de procesare a datelor la scară largă."
+        "role": "Master — High Performance Computing și Big Data Analysis",
+        "description": "Studii avansate în distributed computing, algoritmi paraleli, machine learning și pipeline-uri de procesare a datelor la scară largă."
       },
       {
         "id": "exp-1",
-        "role": "Integrare Sisteme / Dezvoltator Full-Stack",
-        "description": "Lucrez pe un proiect Mercedes-Benz Group AG — dezvolt aplicații Spring Boot, integrare API, gestionarea bazelor de date și integrare platforme enterprise. Colaborez cu echipe internaționale din România și Germania."
+        "role": "System Integration / Full-Stack Developer",
+        "description": "Lucrez pe un proiect Mercedes-Benz Group AG — dezvolt aplicații Spring Boot, API integration, database management și integrare platforme enterprise. Colaborez cu echipe internaționale din România și Germania."
       }
     ]
   },
@@ -105,7 +105,7 @@
     "title_1": "Hai să ne ",
     "title_2": "Conectăm",
     "subtitle": "Ai un proiect în minte, vrei să colaborăm sau doar vrei să spui salut? Trimite-mi un mesaj — le citesc pe toate.",
-    "terminal": "~ trimite-mesaj",
+    "terminal": "~ send-message",
     "emailLabel": "// Email",
     "socialLabel": "// Social",
     "openTo": "Deschis la oportunități",
@@ -125,8 +125,8 @@
       "emailInvalid": "Te rog introdu un email valid.",
       "messageMin": "Mesajul trebuie să aibă cel puțin 10 caractere.",
       "sending": "Se trimite...",
-      "send": "./trimite",
-      "sendFlag": "--mesaj",
+      "send": "./send",
+      "sendFlag": "--message",
       "success": "Mesaj trimis! Îți voi răspunde în curând.",
       "error": "Ceva nu a mers bine. Încearcă să-mi trimiți email direct."
     }
@@ -140,36 +140,36 @@
   },
   "techRef": {
     "question": "Vrei să știi cum este dezvoltat acest website?",
-    "btn": "Vezi Stiva Tehnică & Pipeline"
+    "btn": "Vezi Tech Stack & Pipeline"
   },
   "footer": {
     "builtWith": "Construit cu",
     "top": "sus"
   },
   "showcase": {
-    "label": "00. Galerie",
+    "label": "00. Showcase",
     "title_1": "Ce Pot ",
     "title_2": "Construi",
-    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și codat de la zero cu estetică distinctă, animații reale și interfață de calitate producție. Fără teme, fără page builders.",
-    "ctaCopy": "Ai nevoie de ceva personalizat?",
+    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și codat de la zero cu design distinct, animații reale și UI production-ready. Fără teme, fără page builders.",
+    "ctaCopy": "Ai nevoie de ceva custom?",
     "letsTalk": "Hai să vorbim →",
     "viewTemplate": "Vezi Template-ul →",
     "bottomText": "Fiecare template este proiectat și construit de la zero — fără teme, fără page builders.",
     "bottomBtn": "Ia Legătura →"
   },
   "techPage": {
-    "heroLabel": "// stivă_tehnică --detaliat",
+    "heroLabel": "// tech_stack --verbose",
     "heroTitle_1": "Sub ",
     "heroTitle_2": "Capotă",
-    "heroSubtitle": "Fiecare instrument din acest portofoliu a fost ales deliberat. Iată defalcarea completă — de la motorul de randare până la pipeline-ul de deployment.",
-    "pipelineLabel": "// flux_deployment --graf",
-    "pipelineTitle_1": "Pipeline de ",
-    "pipelineTitle_2": "Deployment",
-    "pipelineSubtitle": "Trei medii, două căi de merge, un singur endpoint de producție. Mediile de preview și staging sunt găzduite pe o instanță Cloudflare.",
-    "legendTitle": "// hartă_medii",
+    "heroSubtitle": "Fiecare tool din acest portofoliu a fost ales deliberat. Iată breakdown-ul complet — de la rendering engine până la deployment pipeline.",
+    "pipelineLabel": "// deployment_flow --graph",
+    "pipelineTitle_1": "Deployment ",
+    "pipelineTitle_2": "Pipeline",
+    "pipelineSubtitle": "Trei environment-uri, două merge paths, un singur production endpoint. Environment-urile de preview și staging sunt hostuite pe o instanță Cloudflare.",
+    "legendTitle": "// environment_map",
     "legendBranch": "Branch",
-    "legendEnv": "Mediu",
-    "legendHost": "Gazdă"
+    "legendEnv": "Environment",
+    "legendHost": "Host"
   },
   "a11y": {
     "skipToMain": "Sari la conținutul principal",
