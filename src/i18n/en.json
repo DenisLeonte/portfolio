@@ -155,7 +155,29 @@
     "letsTalk": "Let's talk →",
     "viewTemplate": "View Template →",
     "bottomText": "Each template is designed and built from scratch — no themes, no page builders.",
-    "bottomBtn": "Get In Touch →"
+    "bottomBtn": "Get In Touch →",
+    "cards": {
+      "restaurant": {
+        "category": "Restaurant & Café",
+        "description": "An elegant dining experience with animated menu sections, reservation CTA, and warm Mediterranean aesthetics."
+      },
+      "ecommerce": {
+        "category": "E-commerce & Product",
+        "description": "A sleek product showcase with interactive galleries, cart UI, and modern minimalist design."
+      },
+      "agency": {
+        "category": "Creative Agency",
+        "description": "A bold, high-energy agency site with dynamic scroll effects, team showcase, and animated counters."
+      },
+      "blog": {
+        "category": "Blog & Magazine",
+        "description": "A clean, typography-focused reading experience with dark/light mode toggle and reading progress bar."
+      },
+      "realestate": {
+        "category": "Real Estate & Property",
+        "description": "A property listing showcase with image carousels, neighborhood sections, and elegant property detail layouts."
+      }
+    }
   },
   "techPage": {
     "heroLabel": "// tech_stack --verbose",

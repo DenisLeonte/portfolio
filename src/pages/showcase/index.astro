@@ -63,10 +63,10 @@ import showcase from '../../data/showcase.json';
             <!-- Card body -->
             <div class="showcase-card__body">
               <div class="showcase-card__meta">
-                <span class="showcase-card__category">{entry.category}</span>
+                <span class="showcase-card__category" data-i18n={`showcase.cards.${entry.id}.category`}>{entry.category}</span>
               </div>
               <h2 class="showcase-card__name">{entry.name}</h2>
-              <p class="showcase-card__desc">{entry.description}</p>
+              <p class="showcase-card__desc" data-i18n={`showcase.cards.${entry.id}.description`}>{entry.description}</p>
               <div class="showcase-card__tech">
                 {entry.techHighlights.map((tech) => (
                   <span class="tech-badge">{tech}</span>

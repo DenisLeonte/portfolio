@@ -155,7 +155,29 @@
     "letsTalk": "Parliamo →",
     "viewTemplate": "Vedi Template →",
     "bottomText": "Ogni template e progettato e costruito da zero — nessun tema, nessun page builder.",
-    "bottomBtn": "Contattami →"
+    "bottomBtn": "Contattami →",
+    "cards": {
+      "restaurant": {
+        "category": "Ristorante & Caffè",
+        "description": "Un'elegante esperienza gastronomica con sezioni menu animate, CTA per prenotazioni ed estetica mediterranea calda."
+      },
+      "ecommerce": {
+        "category": "E-commerce & Prodotto",
+        "description": "Una vetrina prodotti elegante con gallerie interattive, UI carrello e design minimalista moderno."
+      },
+      "agency": {
+        "category": "Agenzia Creativa",
+        "description": "Un sito agenzia audace e dinamico con effetti di scroll, vetrina team e contatori animati."
+      },
+      "blog": {
+        "category": "Blog & Rivista",
+        "description": "Un'esperienza di lettura pulita e tipografica con toggle dark/light mode e barra di avanzamento lettura."
+      },
+      "realestate": {
+        "category": "Immobiliare & Proprietà",
+        "description": "Una vetrina immobiliare con caroselli di immagini, sezioni quartiere e layout eleganti per i dettagli."
+      }
+    }
   },
   "techPage": {
     "heroLabel": "// stack_tecnico --dettagliato",

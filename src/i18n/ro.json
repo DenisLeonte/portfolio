@@ -155,7 +155,29 @@
     "letsTalk": "Hai să vorbim →",
     "viewTemplate": "Vezi Template-ul →",
     "bottomText": "Fiecare template este proiectat și construit de la zero — fără teme, fără page builders.",
-    "bottomBtn": "Ia Legătura →"
+    "bottomBtn": "Ia Legătura →",
+    "cards": {
+      "restaurant": {
+        "category": "Restaurant & Cafenea",
+        "description": "O experiență de dining elegantă cu secțiuni de meniu animate, CTA pentru rezervări și estetică mediteraneană caldă."
+      },
+      "ecommerce": {
+        "category": "E-commerce & Produs",
+        "description": "Un showcase de produse elegant cu galerii interactive, UI de coș și design minimalist modern."
+      },
+      "agency": {
+        "category": "Agenție Creativă",
+        "description": "Un site de agenție bold, cu efecte de scroll dinamice, showcase de echipă și contoare animate."
+      },
+      "blog": {
+        "category": "Blog & Revistă",
+        "description": "O experiență de lectură curată, axată pe tipografie, cu toggle dark/light mode și bară de progres."
+      },
+      "realestate": {
+        "category": "Imobiliare & Proprietăți",
+        "description": "Un showcase de proprietăți cu carusele de imagini, secțiuni de cartier și layout-uri elegante de detalii."
+      }
+    }
   },
   "techPage": {
     "heroLabel": "// tech_stack --verbose",
