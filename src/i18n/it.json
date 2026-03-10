@@ -1,11 +1,11 @@
 {
   "nav": {
-    "about": "Chi Sono",
-    "skills": "Competenze",
+    "about": "About",
+    "skills": "Skills",
     "projects": "Progetti",
     "experience": "Esperienza",
-    "showcase": "Vetrina",
-    "tech": "Tecnologie",
+    "showcase": "Showcase",
+    "tech": "Tech",
     "contact": "Contatto",
     "theme": "Tema",
     "language": "Lingua"

@@ -37,7 +37,7 @@ const navLinks = [
     </a>
 
     <!-- Desktop Nav Links + Language Toggle + Theme Toggle -->
-    <div class="hidden md:flex items-center gap-8" role="list">
+    <div class="hidden md:flex items-center gap-5" role="list">
       {navLinks.map((link) => (
         <a href={link.href} class="nav-link" role="listitem" data-i18n={`nav.${link.key}`}>
           {link.label}
