@@ -627,12 +627,12 @@ h1, h2, h3, h4 { margin: 0 0 1rem; line-height: 1.2; }
 
 /* ── Portfolio Coda ──────────────────────────────────────────── */
 .cr-coda {
-  background: #080808;
-  color: rgba(255,255,255,0.5);
+  background: #E7EDEB;
+  color: #475569;
   padding: 24px;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   letter-spacing: 0.05em;
   display: flex;
   flex-wrap: wrap;
@@ -641,15 +641,29 @@ h1, h2, h3, h4 { margin: 0 0 1rem; line-height: 1.2; }
   gap: 12px;
 }
 
+html.dark .cr-coda {
+  background: #080808;
+  color: rgba(255,255,255,0.5);
+}
+
 .cr-coda a {
-  color: #00ff41;
+  color: #4D8260;
   text-decoration: none;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: opacity 0.2s;
+}
+
+html.dark .cr-coda a {
+  color: #00ff41;
+  opacity: 0.8;
 }
 
 .cr-coda a:hover { opacity: 1; }
 
 .cr-coda__sep {
+  color: rgba(15,23,42,0.2);
+}
+
+html.dark .cr-coda__sep {
   color: rgba(255,255,255,0.2);
 }

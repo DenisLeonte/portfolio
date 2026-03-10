@@ -40,13 +40,18 @@ const { templateName, slug } = Astro.props;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(231, 237, 235, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(22, 163, 74, 0.2);
+    border-bottom: 1px solid rgba(105, 164, 129, 0.25);
     font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.03em;
+  }
+
+  :global(html.dark) .demo-bar {
+    background: rgba(8, 8, 8, 0.92);
+    border-bottom-color: rgba(0, 255, 65, 0.2);
   }
 
   .demo-bar__back,
@@ -54,37 +59,56 @@ const { templateName, slug } = Astro.props;
     display: flex;
     align-items: center;
     gap: 5px;
-    color: rgba(15, 23, 42, 0.55);
+    color: #334155;
     text-decoration: none;
     transition: color 0.2s ease;
     white-space: nowrap;
   }
 
-  .demo-bar__back:hover {
-    color: #16a34a;
+  :global(html.dark) .demo-bar__back,
+  :global(html.dark) .demo-bar__cta {
+    color: rgba(255, 255, 255, 0.55);
   }
 
+  .demo-bar__back:hover,
   .demo-bar__cta:hover {
-    color: #16a34a;
+    color: #4D8260;
+  }
+
+  :global(html.dark) .demo-bar__back:hover,
+  :global(html.dark) .demo-bar__cta:hover {
+    color: #00ff41;
   }
 
   .demo-bar__badge {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: rgba(15, 23, 42, 0.4);
-    font-size: 10px;
+    color: #475569;
+    font-size: 12px;
     text-align: center;
   }
 
+  :global(html.dark) .demo-bar__badge {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
   .demo-bar__diamond {
-    color: rgba(22, 163, 74, 0.6);
-    font-size: 8px;
+    color: #69A481;
+    font-size: 10px;
+  }
+
+  :global(html.dark) .demo-bar__diamond {
+    color: rgba(0, 255, 65, 0.6);
   }
 
   .demo-bar__badge strong {
-    color: rgba(15, 23, 42, 0.7);
+    color: #1e293b;
     font-weight: 600;
+  }
+
+  :global(html.dark) .demo-bar__badge strong {
+    color: rgba(255, 255, 255, 0.7);
   }
 
   @media (max-width: 480px) {
@@ -93,7 +117,7 @@ const { templateName, slug } = Astro.props;
     }
 
     .demo-bar__cta {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 </style>
