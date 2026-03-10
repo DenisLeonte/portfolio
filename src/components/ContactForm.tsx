@@ -8,6 +8,7 @@ const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID as string;
 const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY as string;
 
 function ti(key: string): string {
+  if (typeof window === 'undefined') return key;
   const i18n = (window as any).__i18n;
   if (i18n) return i18n.t(key, i18n.getCurrentLang());
   return key;

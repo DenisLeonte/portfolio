@@ -636,12 +636,12 @@ h1, h2, h3, h4 { margin: 0 0 1rem; line-height: 1.2; }
 
 /* ── Portfolio Coda ──────────────────────────────────────────── */
 .ec-coda {
-  background: #080808;
-  color: rgba(255,255,255,0.45);
+  background: #E7EDEB;
+  color: #475569;
   padding: 20px 24px;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   letter-spacing: 0.05em;
   display: flex;
   flex-wrap: wrap;
@@ -650,6 +650,10 @@ h1, h2, h3, h4 { margin: 0 0 1rem; line-height: 1.2; }
   gap: 12px;
 }
 
-.ec-coda a { color: #00ff41; opacity: 0.8; text-decoration: none; transition: opacity 0.2s; }
+html.dark .ec-coda { background: #080808; color: rgba(255,255,255,0.45); }
+
+.ec-coda a { color: #4D8260; opacity: 0.9; text-decoration: none; transition: opacity 0.2s; }
+html.dark .ec-coda a { color: #00ff41; opacity: 0.8; }
 .ec-coda a:hover { opacity: 1; }
-.ec-coda__sep { color: rgba(255,255,255,0.18); }
+.ec-coda__sep { color: rgba(15,23,42,0.18); }
+html.dark .ec-coda__sep { color: rgba(255,255,255,0.18); }
