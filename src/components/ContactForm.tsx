@@ -26,6 +26,10 @@ export default function ContactForm() {
     return () => document.removeEventListener('langchange', handler);
   }, []);
 
+  const MAX_NAME_LENGTH = 100;
+  const MAX_EMAIL_LENGTH = 254;
+  const MAX_MESSAGE_LENGTH = 5000;
+
   const validate = useCallback((form: HTMLFormElement): Record<string, string> => {
     const errs: Record<string, string> = {};
     const name = (form.elements.namedItem('user_name') as HTMLInputElement)?.value.trim();
@@ -33,13 +37,18 @@ export default function ContactForm() {
     const message = (form.elements.namedItem('message') as HTMLTextAreaElement)?.value.trim();
 
     if (!name) errs.user_name = ti('contact.form.nameRequired');
+    else if (name.length > MAX_NAME_LENGTH) errs.user_name = ti('contact.form.nameTooLong');
     if (!email) {
       errs.user_email = ti('contact.form.emailRequired');
+    } else if (email.length > MAX_EMAIL_LENGTH) {
+      errs.user_email = ti('contact.form.emailInvalid');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       errs.user_email = ti('contact.form.emailInvalid');
     }
     if (!message || message.length < 10) {
       errs.message = ti('contact.form.messageMin');
+    } else if (message.length > MAX_MESSAGE_LENGTH) {
+      errs.message = ti('contact.form.messageTooLong');
     }
 
     return errs;
@@ -64,8 +73,7 @@ export default function ContactForm() {
       });
       setStatus('success');
       formRef.current.reset();
-    } catch (err) {
-      console.error('EmailJS error:', err);
+    } catch {
       setStatus('error');
     } finally {
       setTimeout(() => setStatus('idle'), 6000);
@@ -100,6 +108,7 @@ export default function ContactForm() {
           }}
           disabled={status === 'sending'}
           autoComplete="name"
+          maxLength={MAX_NAME_LENGTH}
         />
         {errors.user_name && (
           <p
@@ -133,6 +142,7 @@ export default function ContactForm() {
           }}
           disabled={status === 'sending'}
           autoComplete="email"
+          maxLength={MAX_EMAIL_LENGTH}
         />
         {errors.user_email && (
           <p
@@ -167,6 +177,7 @@ export default function ContactForm() {
             minHeight: '140px',
           }}
           disabled={status === 'sending'}
+          maxLength={MAX_MESSAGE_LENGTH}
         />
         {errors.message && (
           <p

@@ -47,7 +47,6 @@ const allTranslations = JSON.stringify({ en, ro, it });
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -76,6 +75,10 @@ const allTranslations = JSON.stringify({ en, ro, it });
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.site)} />
 
+    <!-- Security Headers (meta-tag equivalents for static hosting) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -86,9 +89,6 @@ const allTranslations = JSON.stringify({ en, ro, it });
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Sitemap -->
-    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -308,8 +308,8 @@ const allTranslations = JSON.stringify({ en, ro, it });
         // Must run after all ScrollTriggers are registered so that
         // ScrollTrigger.refresh() doesn't displace the scroll position.
         const hash = window.location.hash;
-        if (hash) {
-          const target = document.querySelector(hash);
+        if (hash && /^#[a-zA-Z][\w-]*$/.test(hash)) {
+          const target = document.getElementById(hash.slice(1));
           if (target) {
             ScrollTrigger.refresh();
             // Two rAFs ensure we execute after GSAP's synchronous refresh
@@ -386,10 +386,17 @@ const allTranslations = JSON.stringify({ en, ro, it });
         });
 
         // Apply HTML translations (for elements needing innerHTML like configureEmailJSSub)
+        // Sanitize to prevent XSS — only allow a strict subset of safe tags
+        const ALLOWED_TAGS = new Set(['code', 'strong', 'em', 'br', 'span']);
+        function sanitizeHtml(html: string): string {
+          return html.replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>/g, (match, tag) => {
+            return ALLOWED_TAGS.has(tag.toLowerCase()) ? match : '';
+          });
+        }
         document.querySelectorAll<HTMLElement>('[data-i18n-html]').forEach((el) => {
           const key = el.dataset.i18nHtml!;
           const val = t(key, lang);
-          el.innerHTML = val;
+          el.innerHTML = sanitizeHtml(val);
         });
 
         // Apply placeholder translations
@@ -403,9 +410,15 @@ const allTranslations = JSON.stringify({ en, ro, it });
         if (bioContainer) {
           const bioText = t('about.bio', lang);
           const paragraphs = bioText.split('\n\n').filter(Boolean);
-          bioContainer.innerHTML = paragraphs
-            .map((p: string) => `<p class="gsap-hidden mb-5" style="color: var(--text-secondary); line-height: 1.85; font-size: 0.95rem; opacity: 1; transform: none;">${p}</p>`)
-            .join('');
+          // Use DOM API with textContent to prevent XSS
+          bioContainer.innerHTML = '';
+          paragraphs.forEach((text: string) => {
+            const p = document.createElement('p');
+            p.className = 'gsap-hidden mb-5';
+            p.style.cssText = 'color: var(--text-secondary); line-height: 1.85; font-size: 0.95rem; opacity: 1; transform: none;';
+            p.textContent = text;
+            bioContainer.appendChild(p);
+          });
         }
 
         // ── Dynamic content: About hobbies ──
@@ -413,16 +426,30 @@ const allTranslations = JSON.stringify({ en, ro, it });
         if (hobbiesContainer) {
           const hobbies = tArray('about.config.hobbies', lang);
           if (hobbies.length) {
-            hobbiesContainer.innerHTML = hobbies
-              .map((h: string, i: number) => `<span style="color: #e8b84b;">"${h}"</span>${i < hobbies.length - 1 ? '<span>,</span>' : ''}`)
-              .join(' ');
+            // Use DOM API with textContent to prevent XSS
+            hobbiesContainer.innerHTML = '';
+            hobbies.forEach((h: string, i: number) => {
+              const span = document.createElement('span');
+              span.style.color = '#e8b84b';
+              span.textContent = `"${h}"`;
+              hobbiesContainer.appendChild(span);
+              if (i < hobbies.length - 1) {
+                const comma = document.createElement('span');
+                comma.textContent = ',';
+                hobbiesContainer.appendChild(comma);
+                hobbiesContainer.appendChild(document.createTextNode(' '));
+              }
+            });
           }
         }
 
         // ── Dynamic content: Timeline entries (role + description) ──
         const entries = getNestedValue(allTranslations[lang], 'experience.entries') as Array<{id: string; role: string; description: string}> | undefined;
         if (entries && Array.isArray(entries)) {
+          // Validate entry IDs to prevent CSS selector injection
+          const safeIdPattern = /^[\w-]+$/;
           for (const entry of entries) {
+            if (!safeIdPattern.test(entry.id)) continue;
             document.querySelectorAll<HTMLElement>(`.timeline-role[data-entry-id="${entry.id}"]`).forEach((el) => {
               el.textContent = entry.role;
             });
