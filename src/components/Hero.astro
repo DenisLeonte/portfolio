@@ -7,7 +7,7 @@ import profile from '../data/profile.json';
 <section
   id="hero"
   class="relative flex items-center justify-center overflow-hidden"
-  style="min-height: 100dvh; min-height: 100vh;"
+  style="min-height: 100vh; min-height: 100dvh;"
 >
   <!-- Three.js Canvas (React island — loads immediately) -->
   <HeroCanvas client:load />
@@ -42,9 +42,8 @@ import profile from '../data/profile.json';
     <!-- Main heading -->
     <h1
       class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tight opacity-0"
-      style="color: var(--text-primary);"
+      style="color: var(--text-primary); letter-spacing: -0.03em; line-height: 1.0;"
       id="hero-heading"
-      style="letter-spacing: -0.03em; line-height: 1.0;"
     >
       <span data-i18n="hero.greeting">Hi, I'm</span>{' '}
       <span

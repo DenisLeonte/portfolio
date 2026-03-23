@@ -83,8 +83,7 @@ const sorted = [...experience].sort((a, b) => {
                   <!-- Company & Role -->
                   <h3
                     class="text-lg font-bold mb-1"
-                    style="color: var(--text-primary);"
-                    style="letter-spacing: -0.02em;"
+                    style="color: var(--text-primary); letter-spacing: -0.02em;"
                   >
                     {entry.company}
                   </h3>
@@ -157,8 +156,7 @@ const sorted = [...experience].sort((a, b) => {
                   </div>
                   <h3
                     class="text-base font-bold mb-1"
-                    style="color: var(--text-primary);"
-                    style="letter-spacing: -0.02em;"
+                    style="color: var(--text-primary); letter-spacing: -0.02em;"
                   >
                     {entry.company}
                   </h3>
@@ -196,7 +194,7 @@ const sorted = [...experience].sort((a, b) => {
 
 <script>
   const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
-  if (canvas) {
+  if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const ctx = canvas.getContext('2d')!;
     const CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF<>{}[]01';
     const FONT_SIZE = 13;

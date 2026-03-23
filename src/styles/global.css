@@ -19,7 +19,7 @@
   --bg-secondary: #f8fafc;
   --bg-card: rgba(105, 164, 129, 0.04);
   --text-primary: #0f172a;
-  --text-secondary: #64748b;
+  --text-secondary: #546070;
   --border-green: rgba(105, 164, 129, 0.2);
   --border-green-hover: rgba(105, 164, 129, 0.5);
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
@@ -304,7 +304,19 @@ a:hover {
   overflow: hidden;
 }
 
+@media (min-width: 640px) {
+  .section-wrapper {
+    padding: 4rem 1.5rem;
+  }
+}
+
 @media (min-width: 768px) {
+  .section-wrapper {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .section-wrapper {
     padding: 8rem 2rem;
   }
@@ -314,6 +326,11 @@ a:hover {
   max-width: 1100px;
   margin: 0 auto;
   width: 100%;
+}
+
+/* Offset sections from the fixed navbar when navigating via anchor links */
+section[id] {
+  scroll-margin-top: 80px;
 }
 
 .section-label {
@@ -412,6 +429,7 @@ a:hover {
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  touch-action: manipulation;
 }
 
 .btn-primary::before {
@@ -450,6 +468,7 @@ a:hover {
   cursor: pointer;
   transition: all 0.25s ease;
   text-decoration: none;
+  touch-action: manipulation;
 }
 
 .btn-secondary:hover {
@@ -682,6 +701,7 @@ html.dark .skill-card {
   text-transform: uppercase;
   position: relative;
   padding-bottom: 2px;
+  touch-action: manipulation;
 }
 
 .nav-link::after {

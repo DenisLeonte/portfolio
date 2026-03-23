@@ -115,7 +115,7 @@ const otherProjects = projects.filter((p) => !p.featured);
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn-secondary"
-                    style="padding: 0.5rem 1rem; font-size: 0.75rem;"
+                    style="padding: 0.6rem 1rem; font-size: 0.75rem; min-height: 44px;"
                     aria-label={`View ${project.name} source code on GitHub`}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -130,7 +130,7 @@ const otherProjects = projects.filter((p) => !p.featured);
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn-primary"
-                    style="padding: 0.5rem 1rem; font-size: 0.75rem;"
+                    style="padding: 0.6rem 1rem; font-size: 0.75rem; min-height: 44px;"
                     aria-label={`View ${project.name} live demo`}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -153,9 +153,10 @@ const otherProjects = projects.filter((p) => !p.featured);
       <div>
         <h3
           class="text-sm tracking-widest uppercase mb-6 gsap-hidden"
-          style="color: var(--text-secondary);"
+          style="color: var(--green-primary); display: flex; align-items: center; gap: 0.75rem;"
+          data-i18n="projects.otherProjects"
         >
-          // Other Projects
+          Other Projects
         </h3>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {otherProjects.map((project) => (
@@ -176,12 +177,12 @@ const otherProjects = projects.filter((p) => !p.featured);
               </div>
               <div class="flex gap-3">
                 {project.githubUrl && !project.githubUrl.startsWith('[') && (
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.7rem;">
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.6rem 0.75rem; font-size: 0.75rem; min-height: 44px;" aria-label={`View ${project.name} source code on GitHub`}>
                     GitHub
                   </a>
                 )}
                 {project.liveUrl && !project.liveUrl.startsWith('[') && (
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 0.35rem 0.75rem; font-size: 0.7rem;">
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 0.6rem 0.75rem; font-size: 0.75rem; min-height: 44px;" aria-label={`View ${project.name} live demo`}>
                     Demo
                   </a>
                 )}

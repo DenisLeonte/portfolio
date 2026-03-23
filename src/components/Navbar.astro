@@ -50,7 +50,7 @@ const navLinks = [
     <!-- Mobile: Hamburger only -->
     <button
       id="hamburger"
-      class="md:hidden flex flex-col gap-[5px] p-2 group"
+      class="md:hidden flex flex-col gap-[5px] p-2 group min-h-[44px] min-w-[44px] items-center justify-center"
       aria-label="Toggle menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
@@ -169,6 +169,13 @@ const navLinks = [
     link.addEventListener('click', () => {
       if (menuOpen) toggleMenu();
     });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (menuOpen && !navbar.contains(e.target as Node)) {
+      toggleMenu();
+    }
   });
 
   // ─── Active Section Highlighting (Intersection Observer) ─────

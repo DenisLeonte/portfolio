@@ -112,6 +112,7 @@ export default function ContactForm() {
         />
         {errors.user_name && (
           <p
+            role="alert"
             style={{
               color: 'rgba(255,100,100,0.9)',
               fontSize: '0.75rem',
@@ -146,6 +147,7 @@ export default function ContactForm() {
         />
         {errors.user_email && (
           <p
+            role="alert"
             style={{
               color: 'rgba(255,100,100,0.9)',
               fontSize: '0.75rem',
@@ -181,6 +183,7 @@ export default function ContactForm() {
         />
         {errors.message && (
           <p
+            role="alert"
             style={{
               color: 'rgba(255,100,100,0.9)',
               fontSize: '0.75rem',

@@ -225,7 +225,7 @@ const allTranslations = JSON.stringify({ en, ro, it });
         if (timelineItems.length) {
           timelineItems.forEach((item, index) => {
             const isLeft = index % 2 === 0;
-            gsap.set(item, { opacity: 0, x: isLeft ? -60 : 60 });
+            gsap.set(item, { opacity: 0, x: isLeft ? -30 : 30 });
             gsap.to(item, {
               scrollTrigger: {
                 trigger: item,
