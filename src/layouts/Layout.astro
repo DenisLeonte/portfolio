@@ -112,9 +112,6 @@ const allTranslations = JSON.stringify({ en, ro, it });
     <div id="scroll-progress" aria-hidden="true"></div>
     <!-- Theme sweep overlay -->
     <div id="theme-sweep" aria-hidden="true"></div>
-    <!-- Custom terminal cursor (desktop only) -->
-    <div class="cursor-block" id="cursor-block" aria-hidden="true" style="display:none;"></div>
-
     <slot />
 
     <!-- GSAP ScrollTrigger initialization (runs after DOM is ready) -->
@@ -548,26 +545,5 @@ const allTranslations = JSON.stringify({ en, ro, it });
       }
     </script>
 
-    <!-- Custom terminal cursor (desktop only) -->
-    <script>
-      const cursor = document.getElementById('cursor-block');
-      if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        cursor.style.display = 'block';
-        let cx = -100, cy = -100;
-        let rafId = 0;
-        document.addEventListener('mousemove', (e) => {
-          cx = e.clientX;
-          cy = e.clientY;
-          if (rafId) return;
-          rafId = requestAnimationFrame(() => {
-            rafId = 0;
-            cursor.style.left = cx + 'px';
-            cursor.style.top  = cy + 'px';
-          });
-        }, { passive: true });
-        document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
-        document.addEventListener('mouseenter', () => { cursor.style.opacity = '0.65'; });
-      }
-    </script>
   </body>
 </html>
