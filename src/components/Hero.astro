@@ -26,9 +26,15 @@ import profile from '../data/profile.json';
     class="relative z-10 text-center px-6 max-w-4xl mx-auto"
     style="padding-top: clamp(2.5rem, 6vw, 5rem);"
   >
+    <!-- Available badge -->
+    <div class="available-badge mb-6" id="hero-badge">
+      <span class="available-dot"></span>
+      <span data-i18n="hero.available">Available for opportunities</span>
+    </div>
+
     <!-- Terminal prompt line -->
     <div
-      class="terminal-prompt mb-6 text-sm opacity-0"
+      class="terminal-prompt mb-4 text-sm opacity-0"
       id="hero-prompt"
       aria-hidden="true"
     >
@@ -89,6 +95,14 @@ import profile from '../data/profile.json';
       <a href="/contact" class="btn-secondary" data-i18n="hero.getInTouch">
         Get In Touch
       </a>
+      <a href="/resume.pdf" download class="btn-secondary" data-i18n="hero.resume">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Resume
+      </a>
     </div>
   </div>
 
@@ -110,8 +124,7 @@ import profile from '../data/profile.json';
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      // Just show everything instantly
-      ['#hero-prompt', '#hero-heading', '#hero-typing', '#hero-subtitle', '#hero-cta', '#hero-scroll'].forEach(
+      ['#hero-badge', '#hero-prompt', '#hero-heading', '#hero-typing', '#hero-subtitle', '#hero-cta', '#hero-scroll'].forEach(
         (id) => {
           const el = document.querySelector(id) as HTMLElement;
           if (el) el.style.opacity = '1';
@@ -120,8 +133,12 @@ import profile from '../data/profile.json';
       return;
     }
 
+    // Badge fades in first
+    gsap.to('#hero-badge', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.1 });
+    gsap.set('#hero-badge', { y: 20 });
+
     // Staggered entrance animation
-    const tl = gsap.timeline({ delay: 0.3 });
+    const tl = gsap.timeline({ delay: 0.4 });
 
     tl.to('#hero-prompt', {
       opacity: 1,

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 import profile from '../data/profile.json';
 import en from '../i18n/en.json';
 import ro from '../i18n/ro.json';
@@ -90,6 +91,9 @@ const allTranslations = JSON.stringify({ en, ro, it });
       rel="stylesheet"
     />
 
+    <!-- View Transitions (page-to-page animations) -->
+    <ViewTransitions />
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -104,6 +108,13 @@ const allTranslations = JSON.stringify({ en, ro, it });
   </head>
 
   <body>
+    <!-- Scroll progress bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <!-- Theme sweep overlay -->
+    <div id="theme-sweep" aria-hidden="true"></div>
+    <!-- Custom terminal cursor (desktop only) -->
+    <div class="cursor-block" id="cursor-block" aria-hidden="true" style="display:none;"></div>
+
     <slot />
 
     <!-- GSAP ScrollTrigger initialization (runs after DOM is ready) -->
@@ -521,6 +532,42 @@ const allTranslations = JSON.stringify({ en, ro, it });
 
       // Expose for React components
       (window as any).__i18n = { t, tArray, getCurrentLang, setLang };
+    </script>
+
+    <!-- Scroll progress bar -->
+    <script>
+      const progressBar = document.getElementById('scroll-progress');
+      if (progressBar) {
+        const update = () => {
+          const scrolled = window.scrollY;
+          const total = document.documentElement.scrollHeight - window.innerHeight;
+          progressBar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+        };
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      }
+    </script>
+
+    <!-- Custom terminal cursor (desktop only) -->
+    <script>
+      const cursor = document.getElementById('cursor-block');
+      if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        cursor.style.display = 'block';
+        let cx = -100, cy = -100;
+        let rafId = 0;
+        document.addEventListener('mousemove', (e) => {
+          cx = e.clientX;
+          cy = e.clientY;
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => {
+            rafId = 0;
+            cursor.style.left = cx + 'px';
+            cursor.style.top  = cy + 'px';
+          });
+        }, { passive: true });
+        document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+        document.addEventListener('mouseenter', () => { cursor.style.opacity = '0.65'; });
+      }
     </script>
   </body>
 </html>

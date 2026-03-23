@@ -1206,3 +1206,188 @@ html.dark #matrix-canvas {
     scroll-behavior: auto;
   }
 }
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--green-secondary), var(--green-primary));
+  box-shadow: 0 0 8px var(--green-glow-strong);
+  z-index: 10000;
+  pointer-events: none;
+  transition: width 80ms linear;
+}
+
+/* ============================================================
+   AVAILABLE BADGE
+   ============================================================ */
+.available-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border-green);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  color: var(--green-muted);
+  background: var(--bg-card);
+  cursor: default;
+  user-select: none;
+  opacity: 0;
+  transition: border-color 0.3s ease;
+}
+.available-badge:hover {
+  border-color: var(--border-green-hover);
+}
+.available-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-primary);
+  flex-shrink: 0;
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   THEME SWEEP OVERLAY
+   ============================================================ */
+#theme-sweep {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 255, 65, 0.05) 3px,
+    rgba(0, 255, 65, 0.05) 4px
+  );
+  transform: translateY(-100%);
+  opacity: 0;
+}
+#theme-sweep.sweeping {
+  animation: themeSweep 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes themeSweep {
+  0%   { transform: translateY(-100%); opacity: 0.9; }
+  60%  { transform: translateY(0%);    opacity: 0.5; }
+  100% { transform: translateY(100%);  opacity: 0;   }
+}
+@media (prefers-reduced-motion: reduce) {
+  #theme-sweep { display: none; }
+}
+
+/* ============================================================
+   CUSTOM TERMINAL CURSOR (desktop hover devices only)
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-block {
+    position: fixed;
+    width: 9px;
+    height: 17px;
+    background: var(--green-primary);
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%);
+    will-change: left, top;
+    animation: blink 1s step-end infinite;
+  }
+  html.light .cursor-block {
+    mix-blend-mode: multiply;
+    opacity: 0.45;
+  }
+}
+
+/* ============================================================
+   COMMAND PALETTE
+   ============================================================ */
+.cmd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9990;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 14vh 1rem 2rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.12s ease;
+}
+.cmd-palette {
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-green);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 40px var(--green-glow);
+  animation: slideDown 0.14s ease;
+}
+@keyframes slideDown {
+  from { transform: translateY(-14px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* ============================================================
+   PRINT STYLESHEET
+   ============================================================ */
+@media print {
+  #navbar,
+  #scroll-progress,
+  #hero-scroll,
+  .cursor-block,
+  canvas,
+  .scanlines,
+  .bg-aurora,
+  .bg-sparkles,
+  .bg-dot-grid,
+  .bg-crosshatch,
+  .bg-spotlight,
+  .bg-supernova,
+  #theme-sweep,
+  footer button,
+  .projects-cta__btn,
+  .btn-secondary[href="/contact"] {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+  }
+  .glass-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    background: #fff !important;
+  }
+  .section-wrapper {
+    padding: 1.5rem 0 !important;
+  }
+  .section-title {
+    color: #000 !important;
+    text-shadow: none !important;
+  }
+  .section-title span,
+  .glow-text {
+    color: #000 !important;
+    text-shadow: none !important;
+  }
+  a { color: #000 !important; text-decoration: underline; }
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 8pt;
+    color: #666;
+  }
+  a[href^="#"]::after { content: ''; }
+}

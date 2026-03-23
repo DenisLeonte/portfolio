@@ -20,7 +20,9 @@
       "Ingegnere Software Full-Stack",
       "Sviluppatore Spring Boot & React",
       "Appassionato di AI & Big Data"
-    ]
+    ],
+    "resume": "CV",
+    "available": "Disponibile per opportunità"
   },
   "about": {
     "label": "01. Chi Sono",
@@ -37,8 +39,14 @@
     "config": {
       "role": "Ingegnere Full-Stack",
       "openToChat": "true",
-      "hobbies": ["cucinare", "auto", "astronomia", "caffe"]
-    }
+      "hobbies": [
+        "cucinare",
+        "auto",
+        "astronomia",
+        "caffe"
+      ]
+    },
+    "resume": "CV"
   },
   "skills": {
     "label": "02. Stack Tecnico",
@@ -144,7 +152,8 @@
   },
   "footer": {
     "builtWith": "Costruito con",
-    "top": "su"
+    "top": "su",
+    "copyEmail": "Copia Email"
   },
   "showcase": {
     "label": "00. Vetrina",

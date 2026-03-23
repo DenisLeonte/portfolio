@@ -1,6 +1,29 @@
 ---
 import experience from '../data/experience.json';
 
+function parseDateStr(d: string): Date | null {
+  if (d === 'Present') return new Date(2026, 2, 23); // today's date as constant
+  const parts = d.split('/');
+  if (parts.length !== 2) return null;
+  const month = parseInt(parts[0], 10);
+  const year  = parseInt(parts[1], 10);
+  if (isNaN(month) || isNaN(year)) return null;
+  return new Date(year, month - 1);
+}
+
+function getDuration(start: string, end: string): string {
+  const s = parseDateStr(start);
+  const e = parseDateStr(end);
+  if (!s || !e) return '';
+  const totalMonths = (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
+  if (totalMonths <= 0) return '';
+  const years  = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  if (years === 0) return `${months}mo`;
+  if (months === 0) return `${years}y`;
+  return `${years}y ${months}mo`;
+}
+
 // Sort entries — "Present" sorts to top, then by startDate desc
 const sorted = [...experience].sort((a, b) => {
   if (a.endDate === 'Present') return -1;
@@ -95,19 +118,26 @@ const sorted = [...experience].sort((a, b) => {
                     {entry.role}
                   </p>
 
-                  <!-- Date range -->
+                  <!-- Date range + duration -->
                   <p
-                    class="text-xs mb-3"
-                    style="color: var(--text-secondary); letter-spacing: 0.05em;"
+                    class="text-xs mb-3 flex items-center gap-2 flex-wrap"
+                    style={`color: var(--text-secondary); letter-spacing: 0.05em; ${isLeft ? 'justify-content: flex-end;' : ''}`}
                   >
-                    {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
-                    {' — '}
-                    {entry.endDate === 'Present' ? (
-                      <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
-                    ) : entry.endDate.startsWith('[') ? (
-                      'Date'
-                    ) : (
-                      entry.endDate
+                    <span>
+                      {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
+                      {' — '}
+                      {entry.endDate === 'Present' ? (
+                        <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
+                      ) : entry.endDate.startsWith('[') ? (
+                        'Date'
+                      ) : (
+                        entry.endDate
+                      )}
+                    </span>
+                    {getDuration(entry.startDate, entry.endDate) && (
+                      <span style="color: var(--green-muted); font-size: 0.65rem; padding: 0.1rem 0.45rem; border: 1px solid var(--border-green); border-radius: 999px;">
+                        {getDuration(entry.startDate, entry.endDate)}
+                      </span>
                     )}
                   </p>
 
@@ -163,12 +193,19 @@ const sorted = [...experience].sort((a, b) => {
                   <p class="text-xs font-medium mb-2 timeline-role" style="color: var(--green-primary);" data-entry-id={entry.id}>
                     {entry.role}
                   </p>
-                  <p class="text-xs mb-3" style="color: var(--text-secondary);">
-                    {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
-                    {' — '}
-                    {entry.endDate === 'Present' ? (
-                      <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
-                    ) : entry.endDate}
+                  <p class="text-xs mb-3 flex items-center gap-2 flex-wrap" style="color: var(--text-secondary);">
+                    <span>
+                      {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
+                      {' — '}
+                      {entry.endDate === 'Present' ? (
+                        <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
+                      ) : entry.endDate}
+                    </span>
+                    {getDuration(entry.startDate, entry.endDate) && (
+                      <span style="color: var(--green-muted); font-size: 0.65rem; padding: 0.1rem 0.45rem; border: 1px solid var(--border-green); border-radius: 999px;">
+                        {getDuration(entry.startDate, entry.endDate)}
+                      </span>
+                    )}
                   </p>
                   {entry.description && (
                     <p class="text-sm timeline-desc" style="color: var(--text-secondary); line-height: 1.7;" data-entry-id={entry.id}>

@@ -4,6 +4,11 @@ import projects from '../data/projects.json';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const featuredProjects = projects.filter((p) => p.featured);
 const otherProjects = projects.filter((p) => !p.featured);
+
+// Collect all unique tech tags (skip placeholders)
+const allTags = [...new Set(
+  projects.flatMap((p) => p.techStack.filter((t) => !t.startsWith('[')))
+)].sort();
 ---
 
 <section id="projects" class="section-wrapper">
@@ -14,9 +19,31 @@ const otherProjects = projects.filter((p) => !p.featured);
     <h2 class="section-title gsap-hidden">
       <span data-i18n="projects.title_1">What I've </span><span data-i18n="projects.title_2">Built</span>
     </h2>
-    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;" data-i18n="projects.subtitle">
+    <p class="gsap-hidden mb-6 md:mb-8" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;" data-i18n="projects.subtitle">
       A selection of projects that showcase my work across backend systems, frontend interfaces, and data pipelines.
     </p>
+
+    <!-- Tech filter pills -->
+    {allTags.length > 0 && (
+      <div id="project-filters" class="gsap-hidden flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter projects by technology">
+        <button
+          class="filter-btn active"
+          data-filter="all"
+          aria-pressed="true"
+        >
+          All
+        </button>
+        {allTags.map((tag) => (
+          <button
+            class="filter-btn"
+            data-filter={tag}
+            aria-pressed="false"
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+    )}
 
     <!-- Featured Projects -->
     {featuredProjects.length > 0 && (
@@ -25,6 +52,7 @@ const otherProjects = projects.filter((p) => !p.featured);
           <article
             class="project-card glass-card group"
             style="opacity: 0; transform: translateY(40px); display: flex; flex-direction: column;"
+            data-tech={project.techStack.join(',')}
           >
             <!-- Project image / placeholder -->
             <div
@@ -160,7 +188,7 @@ const otherProjects = projects.filter((p) => !p.featured);
         </h3>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {otherProjects.map((project) => (
-            <article class="project-card glass-card p-5 group" style="opacity: 0; transform: translateY(30px);">
+            <article class="project-card glass-card p-5 group" style="opacity: 0; transform: translateY(30px);" data-tech={project.techStack.join(',')}>
               <h3
                 class="text-base font-bold mb-2 group-hover:text-green-primary transition-colors"
                 style="color: var(--text-primary);"
@@ -228,3 +256,64 @@ const otherProjects = projects.filter((p) => !p.featured);
     )}
   </div>
 </section>
+
+<style>
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    border: 1px solid var(--border-green);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    touch-action: manipulation;
+  }
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--green-glow);
+    border-color: var(--green-primary);
+    color: var(--green-primary);
+  }
+  .project-card {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .project-card.hidden-by-filter {
+    opacity: 0 !important;
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const projectCards = document.querySelectorAll<HTMLElement>('.project-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'all';
+
+      filterBtns.forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+
+      projectCards.forEach((card) => {
+        if (filter === 'all') {
+          card.classList.remove('hidden-by-filter');
+          card.style.display = '';
+        } else {
+          const tags = (card.dataset.tech ?? '').split(',');
+          const match = tags.some((t) => t.trim() === filter);
+          card.classList.toggle('hidden-by-filter', !match);
+          card.style.display = match ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>

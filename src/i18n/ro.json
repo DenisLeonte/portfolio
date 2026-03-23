@@ -20,7 +20,9 @@
       "Full-Stack Software Engineer",
       "Spring Boot & React Developer",
       "Pasionat de AI & Big Data"
-    ]
+    ],
+    "resume": "CV",
+    "available": "Disponibil pentru oportunități"
   },
   "about": {
     "label": "01. Despre Mine",
@@ -37,8 +39,14 @@
     "config": {
       "role": "Full-Stack Engineer",
       "openToChat": "true",
-      "hobbies": ["gătit", "mașini", "astronomie", "cafea"]
-    }
+      "hobbies": [
+        "gătit",
+        "mașini",
+        "astronomie",
+        "cafea"
+      ]
+    },
+    "resume": "CV"
   },
   "skills": {
     "label": "02. Tech Stack",
@@ -144,7 +152,8 @@
   },
   "footer": {
     "builtWith": "Construit cu",
-    "top": "sus"
+    "top": "sus",
+    "copyEmail": "Copiază Email"
   },
   "showcase": {
     "label": "00. Showcase",

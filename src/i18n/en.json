@@ -15,6 +15,8 @@
     "subtitle": "Building robust, scalable applications from backend to frontend.",
     "viewWork": "View My Work",
     "getInTouch": "Get In Touch",
+    "resume": "Resume",
+    "available": "Available for opportunities",
     "scroll": "SCROLL",
     "typingPhrases": [
       "Full-Stack Software Engineer",
@@ -29,6 +31,7 @@
     "bio": "I'm a Full-Stack Software Engineer with 2 years of experience building enterprise-grade applications. I hold a Master's degree in High Performance Computing and Big Data Analysis, which fuels my passion for building performant, data-driven solutions.\n\nCurrently working at .msg Systems Romania on a Mercedes-Benz Group AG project, where I develop and integrate complex systems using Spring Boot, Angular, and modern cloud technologies. I thrive at the intersection of backend architecture and intuitive frontend experiences.\n\nOutside of work I'm usually cooking something new, going down a rabbit hole about cars, staring at the night sky, or making a decent cup of coffee — sometimes all in the same evening.",
     "letsTalk": "Let's Talk",
     "viewGithub": "View GitHub",
+    "resume": "Resume",
     "highlights": {
       "yearsExp": "Years Experience",
       "masters": "Master's Degree",
@@ -144,7 +147,8 @@
   },
   "footer": {
     "builtWith": "Built with",
-    "top": "top"
+    "top": "top",
+    "copyEmail": "Copy Email"
   },
   "showcase": {
     "label": "00. Showcase",

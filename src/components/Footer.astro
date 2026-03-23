@@ -46,7 +46,7 @@ const displayVersion = `v${major}.${minor}`;
         </p>
       </div>
 
-      <!-- Center: Social Links -->
+      <!-- Center: Social Links + Copy Email -->
       <div class="flex items-center gap-4">
         {profile.socialLinks.github && !profile.socialLinks.github.startsWith('[') && (
           <a
@@ -78,6 +78,23 @@ const displayVersion = `v${major}.${minor}`;
         )}
       </div>
 
+      <!-- Copy email -->
+      <button
+        id="copy-email-btn"
+        class="btn-secondary text-xs"
+        style="padding: 0.5rem 1rem;"
+        aria-label={`Copy email address: ${profile.email}`}
+        data-email={profile.email}
+      >
+        <svg id="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        <svg id="check-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none; color: var(--green-primary);">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <span id="copy-label" data-i18n="footer.copyEmail">Copy Email</span>
+      </button>
+
       <!-- Right: Back to top -->
       <button
         id="back-to-top"
@@ -98,4 +115,38 @@ const displayVersion = `v${major}.${minor}`;
   document.getElementById('back-to-top')?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  const copyBtn = document.getElementById('copy-email-btn') as HTMLButtonElement | null;
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const email = copyBtn.dataset.email ?? '';
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = email;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      const copyIcon  = document.getElementById('copy-icon')!;
+      const checkIcon = document.getElementById('check-icon')!;
+      const label     = document.getElementById('copy-label')!;
+      copyIcon.style.display  = 'none';
+      checkIcon.style.display = '';
+      label.textContent = 'Copied!';
+      copyBtn.style.borderColor = 'var(--green-primary)';
+      setTimeout(() => {
+        copyIcon.style.display  = '';
+        checkIcon.style.display = 'none';
+        const i18n = (window as any).__i18n;
+        label.textContent = i18n ? i18n.t('footer.copyEmail', i18n.getCurrentLang()) : 'Copy Email';
+        copyBtn.style.borderColor = '';
+      }, 2000);
+    });
+  }
 </script>

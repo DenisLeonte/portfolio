@@ -153,8 +153,18 @@ const { twoWay = false } = Astro.props;
     });
   }
 
+  function triggerSweep() {
+    const sweep = document.getElementById('theme-sweep');
+    if (!sweep) return;
+    sweep.classList.remove('sweeping');
+    void (sweep as HTMLElement).offsetWidth;
+    sweep.classList.add('sweeping');
+    sweep.addEventListener('animationend', () => sweep.classList.remove('sweeping'), { once: true });
+  }
+
   function applyTheme(theme: string) {
     const html = document.documentElement;
+    triggerSweep();
     html.classList.add('theme-transitioning');
     html.classList.remove('dark', 'light');
     if (theme === 'dark')  html.classList.add('dark');
