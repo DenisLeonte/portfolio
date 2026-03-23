@@ -429,6 +429,7 @@ section[id] {
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   touch-action: manipulation;
 }
 
