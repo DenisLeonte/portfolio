@@ -514,7 +514,9 @@ const techStack = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
+    ScrollTrigger.getAll().forEach((st) => st.kill());
+
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;

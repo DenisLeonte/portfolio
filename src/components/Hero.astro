@@ -120,7 +120,7 @@ import profile from '../data/profile.json';
 <script>
   import gsap from 'gsap';
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {

@@ -121,7 +121,10 @@ const allTranslations = JSON.stringify({ en, ro, it });
 
       gsap.registerPlugin(ScrollTrigger);
 
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('astro:page-load', () => {
+        // Kill stale ScrollTriggers from the previous page
+        ScrollTrigger.getAll().forEach((st) => st.kill());
+
         // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) {
@@ -508,14 +511,8 @@ const allTranslations = JSON.stringify({ en, ro, it });
         applyTranslations(lang);
       }
 
-      // ─── Initial render ────────────────────────────────────────
-      const initialLang = getCurrentLang();
-      // Apply after DOM is interactive
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => applyTranslations(initialLang));
-      } else {
-        applyTranslations(initialLang);
-      }
+      // ─── Initial render + re-apply on every View Transition ───
+      document.addEventListener('astro:page-load', () => applyTranslations(getCurrentLang()));
 
       // ─── Button clicks ─────────────────────────────────────────
       document.addEventListener('click', (e) => {
@@ -533,16 +530,19 @@ const allTranslations = JSON.stringify({ en, ro, it });
 
     <!-- Scroll progress bar -->
     <script>
-      const progressBar = document.getElementById('scroll-progress');
-      if (progressBar) {
-        const update = () => {
+      let _scrollHandler: (() => void) | null = null;
+      document.addEventListener('astro:page-load', () => {
+        const progressBar = document.getElementById('scroll-progress');
+        if (!progressBar) return;
+        if (_scrollHandler) window.removeEventListener('scroll', _scrollHandler);
+        _scrollHandler = () => {
           const scrolled = window.scrollY;
           const total = document.documentElement.scrollHeight - window.innerHeight;
           progressBar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
         };
-        window.addEventListener('scroll', update, { passive: true });
-        update();
-      }
+        window.addEventListener('scroll', _scrollHandler, { passive: true });
+        _scrollHandler();
+      });
     </script>
 
   </body>
