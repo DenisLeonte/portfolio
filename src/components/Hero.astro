@@ -1,218 +1,277 @@
 ---
-import HeroCanvas from './HeroCanvas.tsx';
-import TypingEffect from './TypingEffect.tsx';
 import profile from '../data/profile.json';
+import pkg from '../../package.json';
+const version = pkg.version;
 ---
 
-<section
-  id="hero"
-  class="relative flex items-center justify-center overflow-hidden"
-  style="min-height: 100vh; min-height: 100dvh;"
->
-  <!-- Three.js Canvas (React island — loads immediately) -->
-  <HeroCanvas client:load />
-
-  <!-- Scanline overlay -->
-  <div class="scanlines absolute inset-0 pointer-events-none z-[1]"></div>
-
-  <!-- Radial glow at center -->
-  <div
-    class="absolute inset-0 pointer-events-none z-[1]"
-    style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(22,163,74,0.04) 0%, transparent 70%);"
-  ></div>
-
-  <!-- Hero Content -->
-  <div
-    class="relative z-10 text-center px-6 max-w-4xl mx-auto"
-    style="padding-top: clamp(2.5rem, 6vw, 5rem); padding-bottom: clamp(5rem, 10vw, 7rem);"
-  >
-    <!-- Available badge -->
-    <div class="available-badge mb-6" id="hero-badge">
-      <span class="available-dot"></span>
-      <span data-i18n="hero.available">Available for opportunities</span>
+<section id="hero" data-fx="aurora">
+  <div class="hero-top-bar">
+    <div class="htb-left">
+      <span class="htb-muted">// status</span>
+      <span class="htb-green">● available for work</span>
     </div>
-
-    <!-- Terminal prompt line -->
-    <div
-      class="terminal-prompt mb-4 text-sm opacity-0"
-      id="hero-prompt"
-      aria-hidden="true"
-    >
-      <span style="color: var(--green-secondary);">user@portfolio</span>
-      <span style="color: rgba(100,116,139,0.6);">:</span>
-      <span style="color: #2563eb;">~</span>
-      <span style="color: rgba(100,116,139,0.6);">$</span>
-      <span style="color: rgba(100,116,139,0.5); margin-left: 0.5rem;">whoami</span>
+    <div class="htb-center">
+      <span>Cluj, Romania</span>
+      <span class="htb-sep">·</span>
+      <span id="hero-time">--:--:--</span>
     </div>
-
-    <!-- Main heading -->
-    <h1
-      class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tight opacity-0"
-      style="color: var(--text-primary); letter-spacing: -0.03em; line-height: 1.0;"
-      id="hero-heading"
-    >
-      <span data-i18n="hero.greeting">Hi, I'm</span>{' '}
-      <span
-        class="glow-text"
-        style="color: var(--green-primary);"
-      >
-        {profile.name}.
-      </span>
-    </h1>
-
-    <!-- Typing phrase subtitle -->
-    <div
-      class="text-xl md:text-2xl lg:text-3xl mb-8 h-10 flex items-center justify-center opacity-0"
-      id="hero-typing"
-      style="font-weight: 500; letter-spacing: -0.01em;"
-    >
-      <TypingEffect
-        client:load
-        phrases={profile.typingPhrases}
-      />
-    </div>
-
-    <!-- Subtitle -->
-    <p
-      class="text-base md:text-lg mb-6 md:mb-12 opacity-0"
-      id="hero-subtitle"
-      style="color: var(--text-secondary); max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.7;"
-    >
-      <span data-i18n="hero.subtitle">{profile.heroSubtitle}</span>
-    </p>
-
-    <!-- CTA Buttons -->
-    <div
-      class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0"
-      id="hero-cta"
-    >
-      <a href="#projects" class="btn-primary">
-        <span data-i18n="hero.viewWork">View My Work</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-      <a href="/contact" class="btn-secondary" data-i18n="hero.getInTouch">
-        Get In Touch
-      </a>
-      <a href="/resume.pdf" download class="btn-secondary" data-i18n="hero.resume">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        Resume
-      </a>
+    <div class="htb-right">
+      <span>v{version}</span>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div
-    class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 scroll-indicator opacity-0"
-    id="hero-scroll"
-    aria-hidden="true"
-  >
-    <span style="font-size: 0.65rem; letter-spacing: 0.25em;" data-i18n="hero.scroll">SCROLL</span>
-    <div class="chevron mt-2"></div>
+  <pre class="hero-ascii" id="hero-ascii" aria-hidden="true">
+   ░▒▓██████▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+   ░▒▓██████▓▒░</pre>
+
+  <h1 class="hero-stack">
+    <span class="line"><span>Full-stack</span></span>
+    <span class="line"><span><span class="amp">&amp;</span><span class="outline">backend</span></span></span>
+    <span class="line"><span><span class="amp">&amp;</span>frontend</span></span>
+    <span class="line"><span><span class="amp">&amp;</span><span class="outline">data ops</span></span></span>
+  </h1>
+
+  <div class="hero-bottom">
+    <div class="hb-block">
+      <div class="hb-lbl">/ who</div>
+      <div class="hb-val big">{profile.name}</div>
+      <div class="hb-sub">Software Engineer</div>
+    </div>
+    <div class="hb-block">
+      <div class="hb-lbl">/ currently</div>
+      <div class="hb-val">
+        Building enterprise systems at <span class="hb-green">.msg Systems</span> on a Mercedes-Benz Group project.
+      </div>
+    </div>
+    <div class="hb-cta">
+      <a href="#projects" class="btn-v2 btn-v2-primary">View Work →</a>
+      <a href="/resume.pdf" download class="btn-v2">Resume ↗</a>
+    </div>
   </div>
 </section>
 
+<style>
+  #hero {
+    min-height: 100dvh;
+    padding: 120px 32px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 1;
+    background: var(--bg);
+  }
+
+  .hero-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+    margin-bottom: 80px;
+  }
+  .htb-left, .htb-center, .htb-right { display: flex; gap: 12px; align-items: center; }
+  .htb-muted { color: var(--text-faint); }
+  .htb-green { color: var(--green); }
+  .htb-sep { color: var(--text-faint); }
+
+  .hero-ascii {
+    position: absolute;
+    top: 120px; right: 32px;
+    font-family: var(--mono);
+    font-size: 9px;
+    line-height: 1.1;
+    color: var(--text-faint);
+    white-space: pre;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.6;
+    text-align: right;
+  }
+
+  .hero-stack {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(48px, 11.5vw, 180px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 48px;
+    color: var(--text);
+  }
+  .hero-stack .line {
+    display: block;
+    overflow: hidden;
+  }
+  .hero-stack .line span {
+    display: inline-block;
+    animation: lineUp 1s cubic-bezier(0.22,1,0.36,1) forwards;
+    transform: translateY(110%);
+  }
+  .hero-stack .line:nth-child(1) span { animation-delay: 0.1s; }
+  .hero-stack .line:nth-child(2) span { animation-delay: 0.25s; }
+  .hero-stack .line:nth-child(3) span { animation-delay: 0.4s; }
+  .hero-stack .line:nth-child(4) span { animation-delay: 0.55s; }
+
+  .amp {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--green);
+    margin-right: 0.1em;
+  }
+  .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--text);
+  }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+    align-items: start;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .hb-lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hb-val {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .hb-val.big { font-size: 22px; font-weight: 500; }
+  .hb-sub { color: var(--text-dim); font-size: 13px; margin-top: 4px; }
+  .hb-green { color: var(--green); }
+
+  .hb-cta {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .btn-v2 {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 14px 22px;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    touch-action: manipulation;
+  }
+  .btn-v2:hover,
+  .btn-v2:active { border-color: var(--text); color: var(--text); }
+  .btn-v2-primary {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--bg);
+  }
+  .btn-v2-primary:hover { background: var(--bone); border-color: var(--bone); color: var(--bg); }
+
+  @keyframes lineUp {
+    from { transform: translateY(110%); }
+    to   { transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 1100px) {
+    .hero-bottom { grid-template-columns: 1fr 1fr; }
+    .hb-cta { grid-column: span 2; justify-content: flex-start; }
+  }
+  @media (max-width: 720px) {
+    #hero {
+      padding: 90px 16px 40px;
+      justify-content: space-between;
+      min-height: 100dvh;
+    }
+    .hero-ascii { display: none; }
+    .hero-top-bar {
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+      font-size: 9px;
+      margin-bottom: 0;
+    }
+    .htb-right { display: none; }
+    .hero-stack { font-size: clamp(64px, 18vw, 100px); margin-bottom: 0; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 16px; }
+    .hb-cta { grid-column: span 1; justify-content: flex-start; flex-wrap: wrap; }
+    .btn-v2 { font-size: 10px; padding: 12px 16px; }
+  }
+  @media (max-width: 420px) {
+    .hero-stack { font-size: clamp(56px, 16vw, 90px); }
+    .hb-val.big { font-size: 18px; }
+  }
+</style>
+
 <script>
-  import gsap from 'gsap';
-
-  document.addEventListener('astro:page-load', () => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion) {
-      ['#hero-badge', '#hero-prompt', '#hero-heading', '#hero-typing', '#hero-subtitle', '#hero-cta', '#hero-scroll'].forEach(
-        (id) => {
-          const el = document.querySelector(id) as HTMLElement;
-          if (el) el.style.opacity = '1';
-        }
-      );
-      return;
+  // Live clock
+  function tick() {
+    const el = document.getElementById('hero-time');
+    if (el) {
+      el.textContent = new Date().toLocaleTimeString('en-GB', { hour12: false }) + ' EET';
     }
+  }
+  tick();
+  setInterval(tick, 1000);
 
-    // Badge fades in first
-    gsap.to('#hero-badge', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.1 });
-    gsap.set('#hero-badge', { y: 20 });
-
-    // Staggered entrance animation
-    const tl = gsap.timeline({ delay: 0.4 });
-
-    tl.to('#hero-prompt', {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-    })
-      .to(
-        '#hero-heading',
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        },
-        '-=0.2'
-      )
-      .to(
-        '#hero-typing',
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        },
-        '-=0.4'
-      )
-      .to(
-        '#hero-subtitle',
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        },
-        '-=0.3'
-      )
-      .to(
-        '#hero-cta',
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        },
-        '-=0.3'
-      )
-      .to(
-        '#hero-scroll',
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        },
-        '-=0.2'
-      );
-
-    // Set initial positions
-    gsap.set(['#hero-prompt', '#hero-heading', '#hero-typing', '#hero-subtitle', '#hero-cta', '#hero-scroll'], {
-      y: 30,
-    });
-
-    // Fade out scroll indicator after user scrolls 50px
-    const scrollEl = document.querySelector('#hero-scroll') as HTMLElement | null;
-    if (scrollEl) {
-      const hideOnScroll = () => {
-        if (window.scrollY > 50) {
-          scrollEl.style.transition = 'opacity 0.5s ease';
-          scrollEl.style.opacity = '0';
-          window.removeEventListener('scroll', hideOnScroll);
-        }
-      };
-      window.addEventListener('scroll', hideOnScroll, { passive: true });
-    }
-  });
+  // ASCII pulse
+  const asciiFrames = [
+`   ░▒▓██████▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+  ░▒▓█▓▒░░▒▓█▓▒░
+   ░▒▓██████▓▒░`,
+`   ▒▓██████▓░
+  ▓█▓▒░░▒▓█▓░
+  █▓▒░░▒▓█▓▒
+  ▓▒░░▒▓█▓▒░
+  ▒░░▒▓█▓▒░▒
+   ▓██████▓▒`,
+`   ▓████████░
+  █░░▒▓▓▓▒░█
+  █░▒▓██▓▒░░
+  █░░▒▓▓▒░░░
+  █▓▒░░░▒▓░░
+   ████████▓`,
+  ];
+  let idx = 0;
+  setInterval(() => {
+    idx = (idx + 1) % asciiFrames.length;
+    const el = document.getElementById('hero-ascii');
+    if (el) el.textContent = asciiFrames[idx];
+  }, 600);
 </script>
