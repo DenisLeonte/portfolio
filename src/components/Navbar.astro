@@ -8,6 +8,7 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
 
 <nav id="navbar" aria-label="Primary navigation">
   <a href={a('#hero')} class="nav-logo" aria-label="Back to top">
+    <img src="/favicon.svg" alt="LD" class="nav-logo-img" width="24" height="24" />
     <span class="nav-logo-blink"></span>
     <span>DENIS.EXE</span>
   </a>
@@ -20,9 +21,13 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
     <li><a href="/tech"          data-i18n="nav.tech">Tech</a></li>
   </ul>
 
+  <a href="/" class="nav-domain" aria-label="Go to homepage">denistechs.com</a>
+
   <div class="nav-right">
-    <LanguageToggle />
-    <ThemeToggle />
+    <div class="nav-toggles">
+      <LanguageToggle />
+      <ThemeToggle />
+    </div>
     <a href="/contact" class="nav-cta" data-i18n="nav.contact">Let's Talk</a>
     <button
       id="hamburger"
@@ -58,7 +63,7 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
     padding: 14px 32px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 0;
     background: color-mix(in srgb, var(--bg) 80%, transparent);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--line);
@@ -75,13 +80,23 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    flex-shrink: 0;
+  }
+  .nav-logo-img {
+    width: 24px; height: 24px;
+    border-radius: 4px;
+    display: block;
+    flex-shrink: 0;
   }
   .nav-logo-blink {
-    width: 8px; height: 8px;
+    width: 6px; height: 6px;
     background: var(--green);
     box-shadow: 0 0 8px var(--green);
     animation: blink-dot 1.4s ease-in-out infinite;
+    flex-shrink: 0;
   }
   @keyframes blink-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
@@ -89,6 +104,7 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
     display: flex;
     gap: 28px;
     list-style: none;
+    margin-left: 40px;
   }
   .nav-links a {
     color: var(--text-dim);
@@ -113,6 +129,12 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-left: auto;
+  }
+  .nav-toggles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .nav-cta {
@@ -184,16 +206,37 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
   .mobile-toggles {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding-top: 16px;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    margin-top: 4px;
+  }
+
+  .nav-domain {
+    display: none;
   }
 
   @media (max-width: 768px) {
     nav#navbar { padding: 12px 16px; }
     .nav-links { display: none; }
+    .nav-toggles { display: none; }
     .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
-    #mobile-menu { padding: 20px 16px; }
+    .nav-domain {
+      display: block;
+      flex: 1;
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: lowercase;
+      touch-action: manipulation;
+      padding-left: 12px;
+    }
+    .nav-domain:active { color: var(--green); }
   }
 </style>
 
