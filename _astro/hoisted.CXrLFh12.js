@@ -1,0 +1,1 @@
+import"./ViewTransitions.astro_astro_type_script_index_0_lang.lLIxE8sI.js";import"./hoisted.CWZBxjdK.js";document.addEventListener("astro:page-load",()=>{const s=document.querySelectorAll(".showcase-card"),r=new IntersectionObserver(e=>{e.forEach(t=>{t.isIntersecting&&(t.target.classList.add("visible"),r.unobserve(t.target))})},{threshold:.08});s.forEach(e=>r.observe(e))});
