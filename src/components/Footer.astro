@@ -37,7 +37,7 @@ const displayVersion = `v${major}.${minor}`;
 
 <style>
   footer {
-    padding: 32px 32px 24px;
+    padding: 32px 32px calc(24px + env(safe-area-inset-bottom));
     background: var(--bg);
     border-top: 1px solid var(--line);
     display: grid;
@@ -66,8 +66,13 @@ const displayVersion = `v${major}.${minor}`;
     color: var(--text-dim);
     text-decoration: none;
     transition: color 0.15s;
+    touch-action: manipulation;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
   }
-  .footer-col a:hover { color: var(--green); }
+  .footer-col a:hover,
+  .footer-col a:active { color: var(--green); }
 
   .footer-green { color: var(--green); }
   .footer-dim { color: var(--text-faint); margin-top: 4px; }
@@ -87,7 +92,7 @@ const displayVersion = `v${major}.${minor}`;
     footer { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 480px) {
-    footer { grid-template-columns: 1fr; padding: 24px 16px; }
+    footer { grid-template-columns: 1fr; padding: 24px 16px calc(24px + env(safe-area-inset-bottom)); }
   }
 </style>
 

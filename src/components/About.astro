@@ -155,7 +155,7 @@ import profile from '../data/profile.json';
     padding: 120px 32px;
     position: relative;
     z-index: 1;
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   .section-inner { max-width: 1400px; margin: 0 auto; }
@@ -396,10 +396,11 @@ import profile from '../data/profile.json';
 </style>
 
 <script>
-  // Window dragging
+  // Window dragging — desktop only (skip on touch devices)
+  const isTouchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   let zCounter = 10;
 
-  document.querySelectorAll('[data-win]').forEach(win => {
+  if (!isTouchOnly) document.querySelectorAll('[data-win]').forEach(win => {
     const w = win as HTMLElement;
     const header = w.querySelector('.win-header') as HTMLElement;
     const closeBtn = w.querySelector('.win-x') as HTMLButtonElement;

@@ -56,7 +56,7 @@ const version = pkg.version;
 
 <style>
   #hero {
-    min-height: 100vh;
+    min-height: 100dvh;
     padding: 120px 32px 0;
     position: relative;
     display: flex;
@@ -186,8 +186,10 @@ const version = pkg.version;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    touch-action: manipulation;
   }
-  .btn-v2:hover { border-color: var(--text); color: var(--text); }
+  .btn-v2:hover,
+  .btn-v2:active { border-color: var(--text); color: var(--text); }
   .btn-v2-primary {
     background: var(--green);
     border-color: var(--green);

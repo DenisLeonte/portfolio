@@ -559,12 +559,17 @@ const allTranslations = JSON.stringify({ en, ro, it });
       (function () {
         var FX_IDS = ['aurora', 'sparkles', 'dots', 'crosshatch', 'spotlight', 'supernova'];
 
+        var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
         function applyFx(v) {
           FX_IDS.forEach(function (id) {
             var el = document.getElementById('bg-' + id);
             if (el) el.classList.toggle('active', id === v);
           });
-          if (v === 'sparkles') startSparkles(); else stopSparkles();
+          // Skip canvas animation on touch devices — saves battery
+          if (!isTouchDevice) {
+            if (v === 'sparkles') startSparkles(); else stopSparkles();
+          }
         }
 
         var sparkleAnim = null;
@@ -610,14 +615,17 @@ const allTranslations = JSON.stringify({ en, ro, it });
           if (canvas) { var ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height); }
         }
 
-        // Spotlight follows mouse
-        window.addEventListener('mousemove', function (e) {
-          var sl = document.getElementById('bg-spotlight');
-          if (sl) {
-            sl.style.setProperty('--mx', e.clientX + 'px');
-            sl.style.setProperty('--my', e.clientY + 'px');
-          }
-        });
+        // Spotlight follows mouse — skip on touch-only devices
+        var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+        if (!isTouch) {
+          window.addEventListener('mousemove', function (e) {
+            var sl = document.getElementById('bg-spotlight');
+            if (sl) {
+              sl.style.setProperty('--mx', e.clientX + 'px');
+              sl.style.setProperty('--my', e.clientY + 'px');
+            }
+          }, { passive: true });
+        }
 
         // Scroll-driven FX
         var sectionFxMap = {

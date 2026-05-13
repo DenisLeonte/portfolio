@@ -1251,6 +1251,43 @@ html.dark #matrix-canvas {
 }
 
 /* ============================================================
+   MOBILE: TOUCH UX
+   ============================================================ */
+
+/* 44px minimum touch targets & no 300ms tap delay on interactive rows */
+.channel,
+.project-row,
+.skill-row,
+.timeline-row,
+.showcase-card,
+.tech-row {
+  touch-action: manipulation;
+}
+
+/* Press feedback for touch (rows that use padding-left hover) */
+@media (hover: none) {
+  .channel:active       { padding-left: 12px; color: var(--green, currentColor); }
+  .project-row:active   { padding-left: 24px; background: var(--bg2); }
+  .skill-row:active     { padding-left: 16px; }
+  .tech-row:active      { padding-left: 12px; background: var(--bg3); }
+  .showcase-card:active { background: var(--bg3); }
+}
+
+/* Ensure contact-page channel links also get it */
+.contact-inner .channel { touch-action: manipulation; }
+
+/* Contact form: 16px min font-size to prevent iOS auto-zoom */
+@media (max-width: 768px) {
+  .form-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
