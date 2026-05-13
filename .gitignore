@@ -27,3 +27,4 @@ pnpm-debug.log*
 .idea/
 *.swp
 *.swo
+.claude/settings.local.json
