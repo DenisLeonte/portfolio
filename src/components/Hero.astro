@@ -1,5 +1,7 @@
 ---
 import profile from '../data/profile.json';
+import pkg from '../../package.json';
+const version = pkg.version;
 ---
 
 <section id="hero" data-fx="aurora">
@@ -14,7 +16,7 @@ import profile from '../data/profile.json';
       <span id="hero-time">--:--:--</span>
     </div>
     <div class="htb-right">
-      <span>v6.0 — desktop edition</span>
+      <span>v{version}</span>
     </div>
   </div>
 
