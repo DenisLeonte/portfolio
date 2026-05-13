@@ -1,320 +1,202 @@
 ---
 import experience from '../data/experience.json';
 
-function parseDateStr(d: string): Date | null {
-  if (d === 'Present') return new Date(2026, 2, 23); // today's date as constant
-  const parts = d.split('/');
-  if (parts.length !== 2) return null;
-  const month = parseInt(parts[0], 10);
-  const year  = parseInt(parts[1], 10);
-  if (isNaN(month) || isNaN(year)) return null;
-  return new Date(year, month - 1);
-}
-
-function getDuration(start: string, end: string): string {
-  const s = parseDateStr(start);
-  const e = parseDateStr(end);
-  if (!s || !e) return '';
-  const totalMonths = (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
-  if (totalMonths <= 0) return '';
-  const years  = Math.floor(totalMonths / 12);
-  const months = totalMonths % 12;
-  if (years === 0) return `${months}mo`;
-  if (months === 0) return `${years}y`;
-  return `${years}y ${months}mo`;
-}
-
-// Sort entries — "Present" sorts to top, then by startDate desc
+// Sort: work on top, then by start date desc
 const sorted = [...experience].sort((a, b) => {
   if (a.endDate === 'Present') return -1;
   if (b.endDate === 'Present') return 1;
-  return 0;
+  // Education sorted newer first
+  const aYear = parseInt(a.startDate.split('/')[1], 10);
+  const bYear = parseInt(b.startDate.split('/')[1], 10);
+  return bYear - aYear;
 });
+
+function formatDate(d: string) {
+  if (d === 'Present') return 'Now';
+  const [m, y] = d.split('/');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${months[parseInt(m,10) - 1]} ${y}`;
+}
 ---
 
-<section
-  id="experience"
-  class="section-wrapper"
-  style="background: var(--bg-secondary);"
->
-  <canvas id="matrix-canvas" aria-hidden="true"></canvas>
-  <!-- Top border -->
-  <div
-    class="absolute top-0 left-0 right-0 h-px"
-    style="background: linear-gradient(90deg, transparent, rgba(22,163,74,0.2), transparent);"
-    aria-hidden="true"
-  ></div>
-
-  <div class="container mx-auto">
-    <p class="section-label gsap-hidden" data-i18n="experience.label">04. Experience</p>
-    <h2 class="section-title gsap-hidden">
-      <span data-i18n="experience.title_1">My </span><span data-i18n="experience.title_2">Journey</span>
-    </h2>
-    <p class="gsap-hidden mb-8 md:mb-16" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;" data-i18n="experience.subtitle">
-      Professional milestones and academic achievements that shaped my career.
-    </p>
-
-    <!-- Timeline Container -->
-    <div class="relative">
-      <!-- Vertical line (desktop: center, mobile: left) -->
-      <div
-        class="timeline-line hidden md:block"
-        aria-hidden="true"
-      ></div>
-
-      <!-- Mobile: left-side vertical line -->
-      <div
-        class="md:hidden absolute top-0 bottom-0"
-        style="left: 1.25rem; width: 1px; background: linear-gradient(to bottom, transparent, rgba(22,163,74,0.3), transparent);"
-        aria-hidden="true"
-      ></div>
-
-      <div class="flex flex-col gap-6 md:gap-12">
-        {sorted.map((entry, index) => {
-          const isLeft = entry.type === 'work';
-          const isWork = entry.type === 'work';
-
-          return (
-            <div
-              class="timeline-item relative flex items-start gap-6 md:gap-0"
-              style="opacity: 0;"
-            >
-              <!-- Desktop: left content block -->
-              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? 'md:order-1 text-right pr-8' : 'md:order-3 text-left pl-8'}`}>
-                <div
-                  class="glass-card p-6 inline-block w-full"
-                  style={`text-align: ${isLeft ? 'right' : 'left'};`}
-                >
-                  <!-- Logo + Type badge -->
-                  <div class={`flex items-center gap-3 mb-3 ${isLeft ? 'justify-end' : 'justify-start'}`}>
-                    {entry.logo && (
-                      <img
-                        src={entry.logo}
-                        alt={`${entry.company} logo`}
-                        style="height: 32px; width: 90px; object-fit: contain;"
-                      />
-                    )}
-                    <span
-                      class="inline-block text-xs uppercase tracking-widest"
-                      style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
-                      data-i18n={isWork ? 'experience.work' : 'experience.education'}
-                    >
-                      {isWork ? '// work' : '// education'}
-                    </span>
-                  </div>
-
-                  <!-- Company & Role -->
-                  <h3
-                    class="text-lg font-bold mb-1"
-                    style="color: var(--text-primary); letter-spacing: -0.02em;"
-                  >
-                    {entry.company}
-                  </h3>
-                  <p
-                    class="text-sm font-medium mb-2 timeline-role"
-                    style="color: var(--green-primary);"
-                    data-entry-id={entry.id}
-                  >
-                    {entry.role}
-                  </p>
-
-                  <!-- Date range + duration -->
-                  <p
-                    class="text-xs mb-3 flex items-center gap-2 flex-wrap"
-                    style={`color: var(--text-secondary); letter-spacing: 0.05em; ${isLeft ? 'justify-content: flex-end;' : ''}`}
-                  >
-                    <span>
-                      {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
-                      {' — '}
-                      {entry.endDate === 'Present' ? (
-                        <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
-                      ) : entry.endDate.startsWith('[') ? (
-                        'Date'
-                      ) : (
-                        entry.endDate
-                      )}
-                    </span>
-                    {getDuration(entry.startDate, entry.endDate) && (
-                      <span style="color: var(--green-muted); font-size: 0.65rem; padding: 0.1rem 0.45rem; border: 1px solid var(--border-green); border-radius: 999px;">
-                        {getDuration(entry.startDate, entry.endDate)}
-                      </span>
-                    )}
-                  </p>
-
-                  {entry.description && (
-                    <p class="text-sm timeline-desc" style="color: var(--text-secondary); line-height: 1.7;" data-entry-id={entry.id}>
-                      {entry.description}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <!-- Center dot (desktop) -->
-              <div class="hidden md:flex md:order-2 items-start justify-center w-16 pt-6 flex-shrink-0 z-10">
-                <div class="timeline-dot"></div>
-              </div>
-
-              <!-- Right empty space (desktop) -->
-              <div class={`hidden md:block md:w-[calc(50%-2rem)] ${isLeft ? 'md:order-3' : 'md:order-1'}`}></div>
-
-              <!-- Mobile layout (always full-width left-aligned) -->
-              <div class="md:hidden flex items-start gap-5 w-full pl-10">
-                <!-- Dot -->
-                <div
-                  class="absolute left-[1rem] top-[1.5rem] timeline-dot -translate-x-1/2"
-                  style="width: 10px; height: 10px;"
-                  aria-hidden="true"
-                ></div>
-
-                <!-- Content -->
-                <div class="glass-card p-5 flex-1">
-                  <div class="flex items-center gap-3 mb-2">
-                    {entry.logo && (
-                      <img
-                        src={entry.logo}
-                        alt={`${entry.company} logo`}
-                        style="height: 26px; width: 75px; object-fit: contain;"
-                      />
-                    )}
-                    <span
-                      class="inline-block text-xs uppercase tracking-widest"
-                      style={`color: ${isWork ? 'var(--green-primary)' : '#60a5fa'}; letter-spacing: 0.15em;`}
-                      data-i18n={isWork ? 'experience.work' : 'experience.education'}
-                    >
-                      {isWork ? '// work' : '// education'}
-                    </span>
-                  </div>
-                  <h3
-                    class="text-base font-bold mb-1"
-                    style="color: var(--text-primary); letter-spacing: -0.02em;"
-                  >
-                    {entry.company}
-                  </h3>
-                  <p class="text-xs font-medium mb-2 timeline-role" style="color: var(--green-primary);" data-entry-id={entry.id}>
-                    {entry.role}
-                  </p>
-                  <p class="text-xs mb-3 flex items-center gap-2 flex-wrap" style="color: var(--text-secondary);">
-                    <span>
-                      {entry.startDate.startsWith('[') ? 'Date — ' : entry.startDate}
-                      {' — '}
-                      {entry.endDate === 'Present' ? (
-                        <span style="color: var(--green-primary);" data-i18n="experience.present">Present</span>
-                      ) : entry.endDate}
-                    </span>
-                    {getDuration(entry.startDate, entry.endDate) && (
-                      <span style="color: var(--green-muted); font-size: 0.65rem; padding: 0.1rem 0.45rem; border: 1px solid var(--border-green); border-radius: 999px;">
-                        {getDuration(entry.startDate, entry.endDate)}
-                      </span>
-                    )}
-                  </p>
-                  {entry.description && (
-                    <p class="text-sm timeline-desc" style="color: var(--text-secondary); line-height: 1.7;" data-entry-id={entry.id}>
-                      {entry.description}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="meta">
+        <div class="section-num">04 / career</div>
+        <div class="section-tag">timeline</div>
       </div>
+      <h2 class="section-title">
+        The <em>path</em>, from algebra hall to enterprise stack.
+      </h2>
+    </div>
+
+    <div class="timeline">
+      {sorted.map(entry => (
+        <div class="timeline-row">
+          <div class="tl-date">
+            <span class={`tl-dot ${entry.type}`}></span>
+            {formatDate(entry.startDate)} — {formatDate(entry.endDate)}
+          </div>
+          <div class="tl-info">
+            <div class="tl-company">{entry.company}</div>
+            <div class="tl-role timeline-role" data-entry-id={entry.id}>{entry.role}</div>
+            <span class={`tl-type ${entry.type}`}>
+              {entry.type === 'work' ? '// work' : '// education'}
+            </span>
+          </div>
+          <div class="tl-desc timeline-desc" data-entry-id={entry.id}>
+            {entry.description}
+          </div>
+        </div>
+      ))}
     </div>
   </div>
-
-  <!-- Bottom border -->
-  <div
-    class="absolute bottom-0 left-0 right-0 h-px"
-    style="background: linear-gradient(90deg, transparent, rgba(22,163,74,0.2), transparent);"
-    aria-hidden="true"
-  ></div>
 </section>
 
-<script>
-  const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
-  if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const ctx = canvas.getContext('2d')!;
-    const CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF<>{}[]01';
-    const FONT_SIZE = 13;
-    let cols: number[], drops: number[];
-
-    const resize = () => {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      cols  = Math.floor(canvas.width / FONT_SIZE);
-      const rows = Math.floor(canvas.height / FONT_SIZE);
-      drops = Array.from({ length: cols }, () => Math.floor(Math.random() * rows));
-    };
-
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    // ─── Theme-aware matrix colors ────────────────────────────────
-    const getIsDark = () => {
-      const h = document.documentElement;
-      if (h.classList.contains('dark')) return true;
-      if (h.classList.contains('light')) return false;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    };
-
-    const getMatrixColors = (dark: boolean) => dark
-      ? { bg: 'rgba(8,8,8,0.08)',       bright: '#ffffff', mid: '#00ff41', dim: '#005520' }
-      : { bg: 'rgba(248,250,252,0.18)', bright: '#14532d', mid: '#166534', dim: '#16a34a' };
-
-    let colors = getMatrixColors(getIsDark());
-
-    document.addEventListener('themechange', () => {
-      colors = getMatrixColors(getIsDark());
-    });
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if ((localStorage.getItem('theme') ?? 'system') === 'system') {
-        colors = getMatrixColors(getIsDark());
-      }
-    });
-
-    const draw = () => {
-      ctx.fillStyle = colors.bg;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.font = `${FONT_SIZE}px "JetBrains Mono", monospace`;
-
-      for (let i = 0; i < cols; i++) {
-        const char = CHARS[Math.floor(Math.random() * CHARS.length)];
-        const brightness = Math.random();
-
-        if (brightness > 0.95) {
-          ctx.fillStyle = colors.bright;
-        } else if (brightness > 0.7) {
-          ctx.fillStyle = colors.mid;
-        } else {
-          ctx.fillStyle = colors.dim;
-        }
-
-        ctx.fillText(char, i * FONT_SIZE, drops[i] * FONT_SIZE);
-
-        if (drops[i] * FONT_SIZE > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    };
-
-    // Pre-warm: run frames synchronously so the canvas looks mid-stream
-    // when the user first scrolls into view, avoiding the "all columns
-    // starting at once" first-wave effect.
-    for (let f = 0; f < 150; f++) draw();
-
-    let intervalId: ReturnType<typeof setInterval> | null = null;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          if (!intervalId) intervalId = setInterval(draw, 50);
-        } else {
-          if (intervalId) { clearInterval(intervalId); intervalId = null; }
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(canvas);
+<style>
+  #experience {
+    background: var(--bg2);
+    padding: 120px 32px;
+    position: relative;
+    z-index: 1;
   }
+
+  .section-inner { max-width: 1400px; margin: 0 auto; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  .meta { display: flex; flex-direction: column; gap: 8px; }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .section-tag::before { content: '— '; opacity: 0.5; }
+  .section-title {
+    font-family: var(--sans);
+    font-size: clamp(28px, 4vw, 60px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0;
+  }
+  .section-title em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--green);
+  }
+
+  /* Timeline rows */
+  .timeline { display: flex; flex-direction: column; }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 60px;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .timeline-row.visible { opacity: 1; transform: translateY(0); }
+  .timeline-row:last-child { border-bottom: 1px solid var(--line); }
+
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding-top: 4px;
+  }
+  .tl-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .tl-dot.work { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .tl-dot.education { background: var(--warm); box-shadow: 0 0 6px var(--warm); }
+
+  .tl-company {
+    font-family: var(--sans);
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .tl-role {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tl-type {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .tl-type.work { border-color: var(--green); color: var(--green); }
+  .tl-type.education { border-color: oklch(0.62 0.27 265); color: oklch(0.62 0.27 265); }
+
+  .tl-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 1100px) {
+    .section-head { grid-template-columns: 1fr; gap: 24px; }
+    .timeline-row { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+  }
+  @media (max-width: 720px) {
+    #experience { padding: 80px 16px; }
+    .tl-company { font-size: 20px; }
+    .timeline-row { gap: 8px; padding: 24px 0; }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const rows = document.querySelectorAll('.timeline-row');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    rows.forEach(r => io.observe(r));
+  });
 </script>

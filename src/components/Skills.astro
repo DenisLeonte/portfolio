@@ -1,239 +1,184 @@
 ---
 import skillsData from '../data/skills.json';
 
-function skillLabel(level: number): string {
-  if (level >= 90) return 'Expert';
-  if (level >= 80) return 'Proficient';
-  if (level >= 70) return 'Intermediate';
-  return 'Learning';
-}
-
-const categoryIcons: Record<string, string> = {
-  Backend: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
-  Frontend: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
-  'AI / Machine Learning': `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>`,
-  'DevOps & Tools': `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
-  Databases: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
-  Languages: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-};
+// Flatten all skills into a single ranked list (exclude spoken languages)
+const allSkills = skillsData.categories
+  .filter(cat => cat.name !== 'Languages')
+  .flatMap(cat => cat.skills.map(s => ({ name: s.name, cat: cat.name, pct: s.level })))
+  .sort((a, b) => b.pct - a.pct);
 ---
 
-<section id="skills" class="section-wrapper" style="background: var(--bg-secondary);">
-  <div class="bg-dot-grid" aria-hidden="true"></div>
-  <canvas id="wave-canvas" aria-hidden="true"></canvas>
-  <!-- Subtle top border -->
-  <div
-    class="absolute top-0 left-0 right-0 h-px"
-    style="background: linear-gradient(90deg, transparent, rgba(22,163,74,0.2), transparent);"
-    aria-hidden="true"
-  ></div>
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="meta">
+        <div class="section-num">02 / skills</div>
+        <div class="section-tag">stack</div>
+      </div>
+      <h2 class="section-title">
+        Things I <em>actually</em> ship with, scored honestly.
+      </h2>
+    </div>
 
-  <div class="container mx-auto">
-    <p class="section-label gsap-hidden" data-i18n="skills.label">02. Tech Stack</p>
-    <h2 class="section-title gsap-hidden">
-      <span data-i18n="skills.title_1">Skills & </span><span data-i18n="skills.title_2">Tools</span>
-    </h2>
-    <p class="gsap-hidden mb-6 md:mb-12" style="color: var(--text-secondary); max-width: 36rem; font-size: 0.9rem;" data-i18n="skills.subtitle">
-      Technologies I work with daily — from backend APIs to machine learning pipelines.
-    </p>
-
-    <!-- Skill Categories Grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {skillsData.categories.map((category, catIdx) => (
-        <div
-          class="skill-card gsap-hidden"
-          style={`
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition-delay: ${catIdx * 60}ms;
-          `}
-        >
-          <!-- Category Header -->
-          <div class="flex items-center gap-3 mb-5">
-            <span
-              class="text-lg flex-shrink-0"
-              style="color: var(--green-primary); filter: drop-shadow(0 0 4px rgba(22,163,74,0.25));"
-              set:html={categoryIcons[category.name] ?? ''}
-            />
-            <div>
-              <h3
-                class="text-sm font-bold tracking-widest uppercase"
-                style="color: var(--text-primary); letter-spacing: 0.12em;"
-                data-i18n={`skills.categories.${category.name}`}
-              >
-                {category.name}
-              </h3>
-              <div
-                class="h-px w-8 mt-1"
-                style="background: var(--green-primary); box-shadow: 0 0 4px rgba(22,163,74,0.4);"
-              ></div>
-            </div>
+    <div class="skills-list" id="skills-list">
+      {allSkills.map((skill, i) => (
+        <div class="skill-row">
+          <div class="skill-num">{String(i + 1).padStart(2, '0')}</div>
+          <div class="skill-name">{skill.name}</div>
+          <div class="skill-cat">{skill.cat}</div>
+          <div class="skill-pct">
+            <span class="num">{skill.pct}</span> / 100
           </div>
-
-          <!-- Skills List -->
-          <ul class="flex flex-col gap-3" role="list">
-            {category.skills.map((skill) => (
-              <li role="listitem">
-                <div class="flex items-center justify-between mb-1">
-                  <span
-                    class="text-sm"
-                    style="color: var(--text-primary); font-size: 0.8rem;"
-                  >
-                    {skill.name}
-                  </span>
-                  <span
-                    class="text-xs"
-                    style="color: var(--green-muted); font-size: 0.68rem; letter-spacing: 0.05em;"
-                  >
-                    {skillLabel(skill.level)}
-                  </span>
-                </div>
-                <div class="skill-bar-track" role="progressbar" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={`${skill.name} proficiency: ${skill.level}%`}>
-                  <div
-                    class="skill-bar-fill"
-                    style={`width: ${skill.level}%;`}
-                  ></div>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div class="skill-bar" style={`--w:${skill.pct}%`}></div>
         </div>
       ))}
     </div>
-
-    <!-- Bottom badge row — all skills flat -->
-    <div class="mt-8 md:mt-12 gsap-hidden">
-      <p
-        class="text-xs tracking-widest uppercase mb-5"
-        style="color: var(--text-secondary); letter-spacing: 0.2em;"
-      >
-        <span data-i18n="skills.quickRef">// Quick Reference</span>
-      </p>
-      <div class="flex flex-wrap gap-2">
-        {skillsData.categories.flatMap(c => c.skills).map((skill) => (
-          <span class="tech-badge">{skill.name}</span>
-        ))}
-      </div>
-    </div>
   </div>
-
-  <!-- Subtle bottom border -->
-  <div
-    class="absolute bottom-0 left-0 right-0 h-px"
-    style="background: linear-gradient(90deg, transparent, rgba(22,163,74,0.2), transparent);"
-    aria-hidden="true"
-  ></div>
 </section>
 
-<script>
-  const canvas = document.getElementById('wave-canvas') as HTMLCanvasElement;
-  if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const ctx = canvas.getContext('2d')!;
-    let animId: number;
-    let t = 0;
-    const isMobile = window.innerWidth < 768;
-
-    const resize = () => {
-      const dpr = Math.min(devicePixelRatio, 2);
-      canvas.width  = canvas.offsetWidth  * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
-      ctx.scale(dpr, dpr);
-    };
-    resize();
-    let resizeTimer: ReturnType<typeof setTimeout>;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resize, 150);
-    }, { passive: true });
-
-    // ─── Theme-aware wave colors ──────────────────────────────────
-    const lightColors = [
-      'rgba(22,163,74,0.50)',
-      'rgba(22,163,74,0.32)',
-      'rgba(21,128,61,0.22)',
-      'rgba(22,163,74,0.18)',
-      'rgba(34,197,94,0.14)',
-    ];
-    const darkColors = [
-      'rgba(0,255,65,0.35)',
-      'rgba(0,255,65,0.20)',
-      'rgba(0,200,50,0.15)',
-      'rgba(0,255,65,0.12)',
-      'rgba(80,255,120,0.10)',
-    ];
-
-    const getIsDark = () => {
-      const h = document.documentElement;
-      if (h.classList.contains('dark')) return true;
-      if (h.classList.contains('light')) return false;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    };
-
-    // Wave layer definitions — 3 layers on mobile, 5 on desktop
-    const layerBase = [
-      { amp: 0.28, freq: 1.4, speed: 0.00050, lw: 1.5 },
-      { amp: 0.20, freq: 2.3, speed: 0.00075, lw: 1.0 },
-      { amp: 0.36, freq: 0.8, speed: 0.00030, lw: 2.0 },
-      { amp: 0.14, freq: 4.1, speed: 0.00120, lw: 0.8 },
-      { amp: 0.24, freq: 1.9, speed: 0.00060, lw: 1.2 },
-    ];
-
-    let currentColors = getIsDark() ? darkColors : lightColors;
-
-    const allLayers = layerBase.map((l, i) => ({ ...l, get color() { return currentColors[i]; } }));
-    const layers = isMobile ? allLayers.slice(0, 3) : allLayers;
-    const step   = isMobile ? 4 : 2;
-
-    document.addEventListener('themechange', () => {
-      currentColors = getIsDark() ? darkColors : lightColors;
-    });
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if ((localStorage.getItem('theme') ?? 'system') === 'system') {
-        currentColors = getIsDark() ? darkColors : lightColors;
-      }
-    });
-
-    const draw = () => {
-      // Draw in CSS pixel space (context is pre-scaled by DPR)
-      const W = canvas.offsetWidth;
-      const H = canvas.offsetHeight;
-      ctx.clearRect(0, 0, W, H);
-
-      for (const layer of layers) {
-        ctx.beginPath();
-        ctx.strokeStyle = layer.color;
-        ctx.lineWidth   = layer.lw;
-        if (!isMobile) {
-          ctx.shadowBlur  = 6;
-          ctx.shadowColor = getIsDark() ? 'rgba(0,255,65,0.2)' : 'rgba(22,163,74,0.2)';
-        }
-
-        const baseY = H * 0.5;
-        const amp   = isMobile ? Math.min(H * layer.amp, 60) : H * layer.amp;
-
-        for (let x = 0; x <= W; x += step) {
-          const phase = (x / W) * Math.PI * 2 * layer.freq + t * layer.speed * 60;
-          const y = baseY + Math.sin(phase) * amp;
-          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-        if (!isMobile) ctx.shadowBlur = 0;
-      }
-
-      t = (t + 1) % 100000;
-      animId = requestAnimationFrame(draw);
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          animId = requestAnimationFrame(draw);
-        } else {
-          cancelAnimationFrame(animId);
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(canvas);
+<style>
+  #skills {
+    background: var(--bg2);
+    padding: 120px 32px;
+    position: relative;
+    z-index: 1;
   }
+
+  .section-inner { max-width: 1400px; margin: 0 auto; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  .meta { display: flex; flex-direction: column; gap: 8px; }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .section-tag::before { content: '— '; opacity: 0.5; }
+  .section-title {
+    font-family: var(--sans);
+    font-size: clamp(28px, 4vw, 60px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0;
+  }
+  .section-title em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--green);
+  }
+
+  /* Skills list */
+  .skills-list { display: flex; flex-direction: column; }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 200px 120px 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    transition: padding 0.3s, background 0.2s;
+    cursor: default;
+  }
+  .skill-row:last-child { border-bottom: 1px solid var(--line); }
+  .skill-row:hover { padding-left: 16px; }
+
+  .skill-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .skill-name {
+    font-family: var(--sans);
+    font-size: clamp(18px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    transition: color 0.2s;
+  }
+  .skill-row:hover .skill-name { color: var(--green); }
+
+  .skill-cat {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .skill-pct {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+  .skill-pct .num { color: var(--green); }
+
+  .skill-bar {
+    height: 2px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-bar::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    transition: width 1s cubic-bezier(0.22,1,0.36,1);
+  }
+  .skill-bar.animate::after { width: var(--w); }
+
+  @media (max-width: 1100px) {
+    .section-head { grid-template-columns: 1fr; gap: 24px; }
+    .skill-row { grid-template-columns: 40px 1fr 140px 80px; }
+    .skill-row .skill-bar { display: none; }
+  }
+  @media (max-width: 720px) {
+    #skills { padding: 80px 16px; }
+    .skill-row { grid-template-columns: 40px 1fr 60px; gap: 12px; padding: 18px 0; }
+    .skill-cat { display: none; }
+    .skill-name { font-size: 18px; }
+  }
+  @media (max-width: 420px) {
+    .skill-num { display: none; }
+    .skill-row { grid-template-columns: 1fr 56px; }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const section = document.getElementById('skills');
+    if (!section) return;
+
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        document.querySelectorAll('.skill-bar').forEach((bar, i) => {
+          setTimeout(() => bar.classList.add('animate'), i * 60);
+        });
+        io.disconnect();
+      }
+    }, { threshold: 0.15 });
+
+    io.observe(section);
+  });
 </script>

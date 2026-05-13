@@ -1,8 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================================
+   V2 DESIGN SYSTEM — Editorial Dark Portfolio
+   ============================================================ */
+:root {
+  /* Type */
+  --mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  --sans: 'Space Grotesk', sans-serif;
+  --serif: 'Instrument Serif', serif;
+
+  /* Surface (dark defaults) */
+  --bg:  #0a0908;
+  --bg2: #131210;
+  --bg3: #1c1a17;
+  --bone: #f4f2eb;
+  --bone-dim: #d8d5cc;
+
+  /* Accent */
+  --green: oklch(0.82 0.22 145);
+  --blue:  oklch(0.62 0.27 265);
+  --warm:  oklch(0.85 0.12 70);
+  --red:   oklch(0.7  0.22 25);
+
+  /* Text */
+  --text:       #ebe9e4;
+  --text-dim:   rgba(235,233,228,0.5);
+  --text-faint: rgba(235,233,228,0.25);
+
+  /* Lines */
+  --line:        rgba(235,233,228,0.08);
+  --line-strong: rgba(235,233,228,0.18);
+}
+
+/* Light-mode surface overrides */
+html.light {
+  --bg:  #f4f2eb;
+  --bg2: #ebe9e0;
+  --bg3: #e2dfd4;
+  --green: oklch(0.5 0.18 145);
+  --blue:  oklch(0.45 0.22 265);
+  --warm:  oklch(0.6 0.12 70);
+  --red:   oklch(0.55 0.22 25);
+  --text:       #1c1a17;
+  --text-dim:   rgba(28,26,23,0.55);
+  --text-faint: rgba(28,26,23,0.3);
+  --line:        rgba(28,26,23,0.12);
+  --line-strong: rgba(28,26,23,0.22);
+}
+
+@media (prefers-color-scheme: light) {
+  html:not(.dark):not(.light) {
+    --bg:  #f4f2eb;
+    --bg2: #ebe9e0;
+    --bg3: #e2dfd4;
+    --green: oklch(0.5 0.18 145);
+    --blue:  oklch(0.45 0.22 265);
+    --warm:  oklch(0.6 0.12 70);
+    --red:   oklch(0.55 0.22 25);
+    --text:       #1c1a17;
+    --text-dim:   rgba(28,26,23,0.55);
+    --text-faint: rgba(28,26,23,0.3);
+    --line:        rgba(28,26,23,0.12);
+    --line-strong: rgba(28,26,23,0.22);
+  }
+}
 
 /* ============================================================
    CSS CUSTOM PROPERTIES — LIGHT (default)
@@ -222,10 +287,10 @@ html.theme-transitioning *::after {
 }
 
 html {
-  background-color: var(--bg-primary);
+  background-color: var(--bg);
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--green-muted) var(--bg-secondary);
+  scrollbar-color: var(--green) var(--bg2);
 }
 
 ::-webkit-scrollbar {
@@ -251,24 +316,15 @@ html {
 }
 
 body {
-  font-family: var(--font-mono);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  font-family: var(--sans);
+  background-color: var(--bg);
+  color: var(--text);
   overflow-x: hidden;
   line-height: 1.7;
   position: relative;
 }
 
-/* Noise grain overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: var(--noise-opacity);
-  pointer-events: none;
-  z-index: 1000;
-}
+/* Noise grain overlay — handled by .noise div in Layout.astro */
 
 /* ============================================================
    TYPOGRAPHY

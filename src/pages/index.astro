@@ -10,75 +10,125 @@ import Footer from '../components/Footer.astro';
 import CommandPalette from '../components/CommandPalette.tsx';
 import profile from '../data/profile.json';
 
-const pageTitle = `${profile.name} — ${profile.title}`;
+const pageTitle = `${profile.name} — denis.exe`;
 const pageDescription = `Full-Stack Software Engineer with 2+ years of experience. Spring Boot, React, Angular, AI & Big Data. Currently at Mercedes-Benz Group AG.`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <!-- Skip to main content (accessibility) -->
-  <a
-    href="#about"
-    class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-bg-primary focus:text-green-primary focus:outline-none focus:ring-2 focus:ring-green-primary"
-    data-i18n="a11y.skipToMain"
-  >
-    Skip to main content
-  </a>
+  <a href="#about" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4">Skip to main content</a>
 
   <Navbar />
   <CommandPalette client:load />
 
   <main id="main">
     <Hero />
+
+    <!-- Marquee 1: Tech Stack -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="mi">JAVA</span>
+        <span class="mi outline">Spring Boot</span>
+        <span class="mi">TypeScript</span>
+        <span class="mi outline">React</span>
+        <span class="mi">Angular</span>
+        <span class="mi outline">PostgreSQL</span>
+        <span class="mi">Docker</span>
+        <span class="mi outline">Python</span>
+        <span class="mi">PyTorch</span>
+        <!-- duplicate for seamless loop -->
+        <span class="mi">JAVA</span>
+        <span class="mi outline">Spring Boot</span>
+        <span class="mi">TypeScript</span>
+        <span class="mi outline">React</span>
+        <span class="mi">Angular</span>
+        <span class="mi outline">PostgreSQL</span>
+        <span class="mi">Docker</span>
+        <span class="mi outline">Python</span>
+        <span class="mi">PyTorch</span>
+      </div>
+    </div>
+
     <About />
+
+    <!-- Marquee 2: Available -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track reverse">
+        <span class="mi outline">Available for opportunities</span>
+        <span class="mi">Available for opportunities</span>
+        <span class="mi outline">Available for opportunities</span>
+        <span class="mi">Available for opportunities</span>
+        <span class="mi outline">Available for opportunities</span>
+        <span class="mi">Available for opportunities</span>
+      </div>
+    </div>
+
     <Skills />
     <Projects />
     <Timeline />
 
-    <!-- Contact Me CTA -->
-    <section id="cta" class="relative py-24 px-6 text-center overflow-hidden">
-      <!-- Background rings (consistent with Contact section) -->
-      <div class="bg-supernova" aria-hidden="true">
-        <div class="ring-center"></div>
-        <div class="ring-a"></div>
-        <div class="ring-b"></div>
-        <div class="core"></div>
+    <!-- Marquee 3: CTA -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="mi">Let's build something</span>
+        <span class="mi outline">Let's build something</span>
+        <span class="mi">Let's build something</span>
+        <span class="mi outline">Let's build something</span>
+        <span class="mi">Let's build something</span>
+        <span class="mi outline">Let's build something</span>
       </div>
+    </div>
 
-      <div class="container mx-auto relative z-10">
-        <p class="section-label gsap-hidden" data-i18n="cta.label">05. Get In Touch</p>
-        <h2 class="section-title gsap-hidden">
-          <span data-i18n="cta.title_1">Let's </span><span data-i18n="cta.title_2">Work Together</span>
+    <!-- Contact -->
+    <section id="contact">
+      <div class="contact-inner">
+        <div class="contact-num">05 / contact</div>
+        <h2 class="contact-title">
+          Let's <em>talk.</em><br>
+          <span class="contact-outline">Send a signal.</span>
         </h2>
-        <p
-          class="gsap-hidden mx-auto mb-10"
-          style="color: var(--text-secondary); max-width: 32rem; font-size: 0.95rem; line-height: 1.7;"
-          data-i18n="cta.subtitle"
-        >
-          Have a project in mind or just want to say hi? I'm always open to new opportunities and interesting conversations.
-        </p>
-        <a
-          href="/contact"
-          class="gsap-hidden btn-primary inline-flex items-center gap-2"
-          style="font-size: 1rem; padding: 0.85rem 2.25rem;"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          <span data-i18n="cta.btn">Contact Me</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Tech Stack Reference -->
-    <section id="tech-ref" class="relative py-16 px-6 text-center">
-      <div class="container mx-auto">
-        <p class="gsap-hidden" style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 1.5rem;" data-i18n="techRef.question">
-          Want to know how this website is being developed?
-        </p>
-        <a href="/tech" class="gsap-hidden btn-primary inline-flex items-center gap-2">
-          <span data-i18n="techRef.btn">View Tech Stack &amp; Pipeline</span>
-        </a>
+        <div class="contact-grid">
+          <p class="contact-sub">
+            Open to full-time roles, contract work, or just nerding out about distributed systems and espresso.
+            Drop a line — I read everything.
+          </p>
+          <div class="contact-channels">
+            <a class="channel" href={`mailto:${profile.email}`}>
+              <div>
+                <div class="channel-name">Email</div>
+                <div class="channel-sub">{profile.email}</div>
+              </div>
+              <div class="channel-arrow">↗</div>
+            </a>
+            <a class="channel" href={profile.socialLinks.github} target="_blank" rel="noopener">
+              <div>
+                <div class="channel-name">GitHub</div>
+                <div class="channel-sub">/DenisLeonte</div>
+              </div>
+              <div class="channel-arrow">↗</div>
+            </a>
+            <a class="channel" href={profile.socialLinks.linkedin} target="_blank" rel="noopener">
+              <div>
+                <div class="channel-name">LinkedIn</div>
+                <div class="channel-sub">/in/leontedenis</div>
+              </div>
+              <div class="channel-arrow">↗</div>
+            </a>
+            <a class="channel" href="/resume.pdf" target="_blank">
+              <div>
+                <div class="channel-name">Resume</div>
+                <div class="channel-sub">PDF, 1 page</div>
+              </div>
+              <div class="channel-arrow">↗</div>
+            </a>
+            <a class="channel channel-cta" href="/contact">
+              <div>
+                <div class="channel-name">Contact Form</div>
+                <div class="channel-sub">Send a message directly</div>
+              </div>
+              <div class="channel-arrow">↗</div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -86,3 +136,137 @@ const pageDescription = `Full-Stack Software Engineer with 2+ years of experienc
   <Footer />
 </Layout>
 
+<style is:global>
+  /* Marquee */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0;
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 48px;
+    animation: scroll-x 30s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .marquee-track.reverse { animation-direction: reverse; }
+  .mi {
+    font-family: var(--sans);
+    font-size: clamp(24px, 6vw, 90px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .mi::after {
+    content: '✦';
+    font-size: 0.4em;
+    color: var(--green);
+  }
+  .mi:last-child::after { display: none; }
+  .mi.outline {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text);
+  }
+  @keyframes scroll-x {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Contact section */
+  #contact {
+    background: var(--bg);
+    padding: 160px 32px 120px;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-inner { max-width: 1400px; margin: 0 auto; }
+  .contact-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .contact-title {
+    font-family: var(--sans);
+    font-size: clamp(48px, 9vw, 160px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 60px;
+    color: var(--text);
+  }
+  .contact-title em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--green);
+  }
+  .contact-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--text);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    border-top: 1px solid var(--line);
+    padding-top: 60px;
+  }
+  .contact-sub {
+    font-size: 18px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 460px;
+  }
+  .contact-channels { display: flex; flex-direction: column; }
+  .channel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--text);
+    transition: padding 0.2s;
+  }
+  .channel:hover { padding-left: 12px; }
+  .channel:first-child { border-top: 1px solid var(--line); }
+  .channel-name {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .channel-sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+  .channel-arrow {
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--text-faint);
+    transition: color 0.2s;
+  }
+  .channel:hover .channel-arrow { color: var(--green); }
+  .channel-cta { border-color: var(--green); }
+  .channel-cta .channel-name { color: var(--green); }
+  .channel-cta .channel-arrow { color: var(--green); }
+
+  @media (max-width: 768px) {
+    #contact { padding: 80px 16px; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
