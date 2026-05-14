@@ -16,20 +16,52 @@ import profile from '../data/profile.json';
 
     <div class="desktop-board" id="desktop-board">
 
-      <!-- Icons -->
-      <div class="desktop-icon" style="top:24px;right:24px" tabindex="0" aria-label="Work folder">
+      <!-- Icons: column A — window spawners (right:108px) -->
+      <div class="desktop-icon" style="top:24px;right:108px" tabindex="0" aria-label="About" data-spawns="win-about">
+        <div class="desktop-icon-img">
+          <svg width="20" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>ABOUT.MD</div>
+      </div>
+      <div class="desktop-icon" style="top:140px;right:108px" tabindex="0" aria-label="Hobbies" data-spawns="win-hobbies">
+        <div class="desktop-icon-img">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        </div>
+        <div>HOBBIES</div>
+      </div>
+      <div class="desktop-icon" style="top:256px;right:108px" tabindex="0" aria-label="Stats" data-spawns="win-stats">
+        <div class="desktop-icon-img">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg>
+        </div>
+        <div>STATS.TXT</div>
+      </div>
+      <div class="desktop-icon" style="top:372px;right:108px" tabindex="0" aria-label="Config" data-spawns="win-config">
+        <div class="desktop-icon-img">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+        </div>
+        <div>CONFIG</div>
+      </div>
+      <div class="desktop-icon" style="top:488px;right:108px" tabindex="0" aria-label="Now playing" data-spawns="win-now">
+        <div class="desktop-icon-img">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div>NOW.WAV</div>
+      </div>
+      <div class="desktop-icon" style="top:604px;right:108px" tabindex="0" aria-label="Work folder" data-spawns="win-work">
         <div class="desktop-icon-img">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h6l2 2h10v11H3z"/></svg>
         </div>
         <div>WORK</div>
       </div>
-      <div class="desktop-icon" style="top:140px;right:24px" tabindex="0" aria-label="Resume">
+
+      <!-- Icons: column B — utilities (right:24px) -->
+      <div class="desktop-icon" style="top:24px;right:24px" tabindex="0" aria-label="Resume" data-icon="resume">
         <div class="desktop-icon-img">
           <svg width="20" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 3H6v18h12V7zM14 3v4h4M9 12h6M9 16h6M9 8h2"/></svg>
         </div>
         <div>RESUME</div>
       </div>
-      <div class="desktop-icon" style="top:256px;right:24px" tabindex="0" aria-label="Bugs">
+      <div class="desktop-icon" style="top:140px;right:24px" tabindex="0" aria-label="Bugs" data-icon="bugs">
         <div class="desktop-icon-img">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 7h14M9 7V4h6v3M7 7l1 14h8l1-14M10 11v6M14 11v6"/></svg>
         </div>
@@ -37,13 +69,12 @@ import profile from '../data/profile.json';
       </div>
 
       <!-- about-me.md window -->
-      <div class="win win-about" data-win>
+      <div id="win-about" class="win win-about" data-win data-no-restore>
         <div class="win-header" aria-label="Drag window">
           <div class="win-dots">
             <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
           </div>
           <div class="win-title">about-me.md</div>
-          <button class="win-x" aria-label="Close">×</button>
         </div>
         <div class="win-body">
           <div class="win-hi">Hi, I'm Denis.</div>
@@ -59,13 +90,12 @@ import profile from '../data/profile.json';
       </div>
 
       <!-- ~/.hobbies window -->
-      <div class="win win-hobbies" data-win>
+      <div id="win-hobbies" class="win win-hobbies" data-win data-no-restore>
         <div class="win-header">
           <div class="win-dots">
             <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
           </div>
           <div class="win-title">~/.hobbies</div>
-          <button class="win-x" aria-label="Close">×</button>
         </div>
         <div class="win-body" style="padding:8px 18px 18px">
           <ul>
@@ -79,13 +109,12 @@ import profile from '../data/profile.json';
       </div>
 
       <!-- stats.txt window -->
-      <div class="win win-stats" data-win>
+      <div id="win-stats" class="win win-stats" data-win data-no-restore>
         <div class="win-header">
           <div class="win-dots">
             <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
           </div>
           <div class="win-title">stats.txt</div>
-          <button class="win-x" aria-label="Close">×</button>
         </div>
         <div class="win-body">
           <div class="stat-row"><span class="k">years coding</span><span class="v">5+</span></div>
@@ -98,13 +127,12 @@ import profile from '../data/profile.json';
       </div>
 
       <!-- denis.config.json window -->
-      <div class="win win-config" data-win>
+      <div id="win-config" class="win win-config" data-win data-no-restore>
         <div class="win-header">
           <div class="win-dots">
             <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
           </div>
           <div class="win-title">denis.config.json</div>
-          <button class="win-x" aria-label="Close">×</button>
         </div>
         <div class="win-body">
           <div class="cfg"><span class="p">{"{"}</span></div>
@@ -120,13 +148,12 @@ import profile from '../data/profile.json';
       </div>
 
       <!-- now playing window -->
-      <div class="win win-now" data-win>
+      <div id="win-now" class="win win-now" data-win data-no-restore>
         <div class="win-header">
           <div class="win-dots">
             <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
           </div>
           <div class="win-title">now playing</div>
-          <button class="win-x" aria-label="Close">×</button>
         </div>
         <div class="win-body">
           <div class="now-track">
@@ -140,11 +167,41 @@ import profile from '../data/profile.json';
         </div>
       </div>
 
+      <div class="desktop-statusbar">
+        <div class="desktop-statusbar-left">
+          <span class="desktop-statusbar-dot"></span>
+          <span>Denis OS</span>
+          <span id="hint-count-bar"></span>
+        </div>
+        <time id="desktop-clock" aria-live="polite"></time>
+      </div>
+
+      <div id="bugs-toast" class="bugs-toast" aria-live="polite"></div>
+
+      <!-- work.log window (spawned by WORK icon) -->
+      <div id="win-work" class="win win-work" data-win data-no-restore style="display:none">
+        <div class="win-header" aria-label="Drag window">
+          <div class="win-dots">
+            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          </div>
+          <div class="win-title">work.log</div>
+        </div>
+        <div class="win-body">
+          <div class="wl-row"><span class="wl-k">role</span><span class="wl-v">full-stack engineer</span></div>
+          <div class="wl-row"><span class="wl-k">company</span><span class="wl-v">.msg Systems Romania</span></div>
+          <div class="wl-row"><span class="wl-k">client</span><span class="wl-v">Mercedes-Benz Group</span></div>
+          <div class="wl-row"><span class="wl-k">stack</span><span class="wl-v">Spring Boot · Angular</span></div>
+          <div class="wl-row"><span class="wl-k"></span><span class="wl-v">Docker · PostgreSQL</span></div>
+          <div class="wl-row"><span class="wl-k">exp</span><span class="wl-v">2+ years</span></div>
+          <div class="wl-sep"></div>
+          <a href="#projects" class="wl-link">see all projects ↗</a>
+        </div>
+      </div>
     </div>
 
     <div class="desktop-hint">
       <span>tip: drag the windows around ⤬</span>
-      <span>5 / 5 files open</span>
+      <span id="hint-count"></span>
     </div>
   </div>
 </section>
@@ -202,14 +259,42 @@ import profile from '../data/profile.json';
   .desktop-board {
     position: relative;
     height: 880px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     background:
-      linear-gradient(rgba(235,233,228,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(235,233,228,0.03) 1px, transparent 1px);
-    background-size: 24px 24px;
+      linear-gradient(rgba(235,233,228,0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(235,233,228,0.055) 1px, transparent 1px),
+      var(--bg2);
+    background-size: 24px 24px, 24px 24px, auto;
+    box-shadow: 0 0 0 1px var(--line), 0 24px 80px rgba(0,0,0,0.25);
     overflow: hidden;
     max-width: 1400px;
     margin: 0 auto;
+  }
+
+  .desktop-statusbar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 28px;
+    background: var(--bg3);
+    border-top: 1px solid var(--line-strong);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    user-select: none;
+    z-index: 200;
+  }
+  .desktop-statusbar-left { display: flex; align-items: center; gap: 16px; }
+  .desktop-statusbar-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: blink-dot 1.4s ease-in-out infinite;
   }
 
   /* Icons */
@@ -271,12 +356,8 @@ import profile from '../data/profile.json';
   .dot.y { background: oklch(0.78 0.16 85); }
   .dot.g { background: oklch(0.78 0.18 145); }
   .win-title { font-size: 11px; color: var(--text); flex: 1; letter-spacing: 0.05em; }
-  .win-x {
-    background: none; border: none; cursor: pointer;
-    color: var(--text-faint); transition: color 0.15s; font-size: 16px; line-height: 1;
-    padding: 0; display: flex; align-items: center;
-  }
-  .win-x:hover { color: var(--red); }
+  .dot.r { cursor: pointer; }
+  .dot.r:hover { filter: brightness(1.3); }
   .win-body {
     padding: 18px;
     color: var(--text-dim);
@@ -360,6 +441,37 @@ import profile from '../data/profile.json';
   }
   @keyframes progress { from{width:0} to{width:100%} }
 
+  /* Work window */
+  .win-work { top: 180px; left: 200px; width: 380px; z-index: 5; }
+  .wl-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 11px;
+  }
+  .wl-row:last-of-type { border-bottom: 0; }
+  .wl-k { color: var(--text-faint); letter-spacing: 0.05em; min-width: 72px; }
+  .wl-v { color: var(--text); text-align: right; }
+  .wl-sep { height: 1px; background: var(--line-strong); margin: 12px 0 10px; }
+  .wl-link {
+    display: inline-block; font-family: var(--mono); font-size: 10px;
+    color: var(--green); text-decoration: none; letter-spacing: 0.08em;
+    padding: 5px 10px; border: 1px solid var(--green);
+    transition: background 0.15s, color 0.15s;
+  }
+  .wl-link:hover { background: var(--green); color: var(--bg); }
+
+  .bugs-toast {
+    position: absolute;
+    bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
+    background: var(--bg3); border: 1px solid var(--green);
+    font-family: var(--mono); font-size: 11px; color: var(--green);
+    padding: 10px 18px; letter-spacing: 0.08em;
+    opacity: 0; transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none; white-space: nowrap; z-index: 100;
+  }
+  .bugs-toast.show {
+    opacity: 1; transform: translateX(-50%) translateY(0);
+  }
+
   .desktop-hint {
     display: flex; justify-content: space-between;
     margin-top: 16px;
@@ -396,20 +508,58 @@ import profile from '../data/profile.json';
 </style>
 
 <script>
-  // Window dragging — desktop only (skip on touch devices)
   const isTouchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   let zCounter = 10;
 
+  const allWins = () => Array.from(document.querySelectorAll<HTMLElement>('[data-win]'));
+  const updateCount = () => {
+    const total = allWins().length;
+    const open  = allWins().filter(w => w.style.display !== 'none').length;
+    const el = document.getElementById('hint-count');
+    if (el) el.textContent = `${open} / ${total} files open`;
+    const bar = document.getElementById('hint-count-bar');
+    if (bar) bar.textContent = `${open} / ${total} open`;
+  };
+
+  const updateClock = () => {
+    const el = document.getElementById('desktop-clock');
+    if (!el) return;
+    const now = new Date();
+    el.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  const spawnWin = (w: HTMLElement) => {
+    if (w.style.display === 'none') {
+      w.style.display = '';
+      w.style.transform = 'scale(0.85)';
+      w.style.opacity = '0';
+      w.style.transition = 'transform 0.2s, opacity 0.2s';
+      zCounter++;
+      w.style.zIndex = String(zCounter);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        w.style.transform = '';
+        w.style.opacity = '';
+        updateCount();
+      }));
+    } else {
+      zCounter++;
+      w.style.zIndex = String(zCounter);
+    }
+  };
+
+  // Window dragging + close — desktop only
   if (!isTouchOnly) document.querySelectorAll('[data-win]').forEach(win => {
     const w = win as HTMLElement;
     const header = w.querySelector('.win-header') as HTMLElement;
-    const closeBtn = w.querySelector('.win-x') as HTMLButtonElement;
+    const closeBtn = w.querySelector('.dot.r') as HTMLElement;
 
     let dragging = false;
     let startX = 0, startY = 0, origX = 0, origY = 0;
 
     header?.addEventListener('mousedown', (e: MouseEvent) => {
-      if ((e.target as Element).classList.contains('win-x')) return;
+      if ((e.target as Element).classList.contains('r')) return;
       dragging = true;
       zCounter++;
       w.style.zIndex = String(zCounter);
@@ -427,8 +577,14 @@ import profile from '../data/profile.json';
 
     window.addEventListener('mousemove', (e: MouseEvent) => {
       if (!dragging) return;
-      w.style.left = origX + (e.clientX - startX) + 'px';
-      w.style.top  = origY + (e.clientY - startY) + 'px';
+      const board = document.getElementById('desktop-board')!.getBoundingClientRect();
+      const statusBarH = 28;
+      const newX = origX + (e.clientX - startX);
+      const newY = origY + (e.clientY - startY);
+      const maxX = board.width  - w.offsetWidth;
+      const maxY = board.height - w.offsetHeight - statusBarH;
+      w.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
+      w.style.top  = Math.max(0, Math.min(newY, maxY)) + 'px';
     });
 
     window.addEventListener('mouseup', () => { dragging = false; });
@@ -439,13 +595,47 @@ import profile from '../data/profile.json';
       w.style.opacity = '0';
       setTimeout(() => {
         w.style.display = 'none';
-        setTimeout(() => {
-          w.style.display = '';
-          w.style.transform = '';
-          w.style.opacity = '';
-          w.style.transition = '';
-        }, 2500);
+        w.style.transform = '';
+        w.style.opacity = '';
+        w.style.transition = '';
+        updateCount();
       }, 200);
     });
   });
+
+  // Window-spawning icons (data-spawns)
+  document.querySelectorAll<HTMLElement>('.desktop-icon[data-spawns]').forEach(icon => {
+    const winId = icon.dataset.spawns!;
+    const trigger = () => {
+      const win = document.getElementById(winId) as HTMLElement | null;
+      if (win) spawnWin(win);
+    };
+    icon.addEventListener('click', trigger);
+    icon.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
+    });
+  });
+
+  // Utility icons (data-icon: resume, bugs)
+  document.querySelectorAll<HTMLElement>('.desktop-icon[data-icon]').forEach(icon => {
+    const action = icon.dataset.icon;
+    const trigger = () => {
+      if (action === 'resume') {
+        const a = document.createElement('a');
+        a.href = '/resume.pdf'; a.download = 'resume.pdf';
+        a.click();
+      } else if (action === 'bugs') {
+        const toast = document.getElementById('bugs-toast')!;
+        toast.textContent = '> 0 bugs found. (trust me.)';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+    };
+    icon.addEventListener('click', trigger);
+    icon.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
+    });
+  });
+
+  updateCount();
 </script>

@@ -21,8 +21,6 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
     <li><a href="/tech"          data-i18n="nav.tech">Tech</a></li>
   </ul>
 
-  <a href="/" class="nav-domain" aria-label="Go to homepage">denistechs.com</a>
-
   <div class="nav-right">
     <div class="nav-toggles">
       <LanguageToggle />
@@ -212,31 +210,12 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
     margin-top: 4px;
   }
 
-  .nav-domain {
-    display: none;
-  }
-
   @media (max-width: 768px) {
     nav#navbar { padding: 12px 16px; }
     .nav-links { display: none; }
     .nav-toggles { display: none; }
     .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
-    .nav-domain {
-      display: block;
-      flex: 1;
-      text-align: left;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--text);
-      text-decoration: none;
-      text-transform: lowercase;
-      touch-action: manipulation;
-      padding-left: 12px;
-    }
-    .nav-domain:active { color: var(--green); }
   }
 </style>
 
