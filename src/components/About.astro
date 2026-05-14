@@ -167,6 +167,15 @@ import profile from '../data/profile.json';
         </div>
       </div>
 
+      <div class="desktop-statusbar">
+        <div class="desktop-statusbar-left">
+          <span class="desktop-statusbar-dot"></span>
+          <span>Denis OS</span>
+          <span id="hint-count-bar"></span>
+        </div>
+        <time id="desktop-clock" aria-live="polite"></time>
+      </div>
+
       <div id="bugs-toast" class="bugs-toast" aria-live="polite"></div>
 
       <!-- work.log window (spawned by WORK icon) -->
@@ -250,14 +259,42 @@ import profile from '../data/profile.json';
   .desktop-board {
     position: relative;
     height: 880px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     background:
-      linear-gradient(rgba(235,233,228,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(235,233,228,0.03) 1px, transparent 1px);
-    background-size: 24px 24px;
+      linear-gradient(rgba(235,233,228,0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(235,233,228,0.055) 1px, transparent 1px),
+      var(--bg2);
+    background-size: 24px 24px, 24px 24px, auto;
+    box-shadow: 0 0 0 1px var(--line), 0 24px 80px rgba(0,0,0,0.25);
     overflow: hidden;
     max-width: 1400px;
     margin: 0 auto;
+  }
+
+  .desktop-statusbar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 28px;
+    background: var(--bg3);
+    border-top: 1px solid var(--line-strong);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    user-select: none;
+    z-index: 200;
+  }
+  .desktop-statusbar-left { display: flex; align-items: center; gap: 16px; }
+  .desktop-statusbar-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: blink-dot 1.4s ease-in-out infinite;
   }
 
   /* Icons */
@@ -480,7 +517,18 @@ import profile from '../data/profile.json';
     const open  = allWins().filter(w => w.style.display !== 'none').length;
     const el = document.getElementById('hint-count');
     if (el) el.textContent = `${open} / ${total} files open`;
+    const bar = document.getElementById('hint-count-bar');
+    if (bar) bar.textContent = `${open} / ${total} open`;
   };
+
+  const updateClock = () => {
+    const el = document.getElementById('desktop-clock');
+    if (!el) return;
+    const now = new Date();
+    el.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+  updateClock();
+  setInterval(updateClock, 10000);
 
   const spawnWin = (w: HTMLElement) => {
     if (w.style.display === 'none') {
