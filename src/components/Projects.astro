@@ -7,9 +7,9 @@ import projects from '../data/projects.json';
     <div class="section-head">
       <div class="meta">
         <div class="section-num">03 / work</div>
-        <div class="section-tag">case studies & side quests</div>
+        <div class="section-tag" data-i18n="projects.sectionTag">case studies & side quests</div>
       </div>
-      <h2 class="section-title">
+      <h2 class="section-title" data-i18n-html="projects.sectionTitle">
         Selected <em>work</em> from production lines and late nights.
       </h2>
     </div>
@@ -45,10 +45,10 @@ import projects from '../data/projects.json';
     </div>
 
     <div class="more-strip">
-      <div class="more-text">
+      <div class="more-text" data-i18n-html="projects.moreText">
         More <em>where that came from</em> — restaurants, e-commerce, agencies.
       </div>
-      <a href="/showcase" class="btn-v2 btn-v2-primary">View Showcase →</a>
+      <a href="/showcase" class="btn-v2 btn-v2-primary" data-i18n="projects.viewShowcase">View Showcase →</a>
     </div>
   </div>
 </section>
@@ -95,7 +95,7 @@ import projects from '../data/projects.json';
     color: var(--text);
     margin-bottom: 0;
   }
-  .section-title em {
+  .section-title em, .section-title :global(em) {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 400;
@@ -210,7 +210,7 @@ import projects from '../data/projects.json';
     color: var(--text);
     line-height: 1.2;
   }
-  .more-text em { color: var(--green); }
+  .more-text em, .more-text :global(em) { color: var(--green); }
 
   .btn-v2 {
     font-family: var(--mono);

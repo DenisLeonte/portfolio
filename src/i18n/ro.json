@@ -22,7 +22,13 @@
       "Pasionat de AI & Big Data"
     ],
     "resume": "CV",
-    "available": "Disponibil pentru oportunități"
+    "available": "Disponibil pentru oportunități",
+    "status": "disponibil pentru muncă",
+    "softwareEngineer": "Inginer Software",
+    "currentlyText": "Construiesc sisteme enterprise la <span class=\"hb-green\">.msg Systems</span> pe un proiect Mercedes-Benz Group.",
+    "viewWorkBtn": "Vezi Proiectele →",
+    "resumeBtn": "CV ↗",
+    "letsBuild": "Hai să construim ceva"
   },
   "about": {
     "label": "01. Despre Mine",
@@ -46,7 +52,20 @@
         "cafea"
       ]
     },
-    "resume": "CV"
+    "resume": "CV",
+    "sectionTitle": "Un mic tur al <em>stației de lucru</em>.<br>Mișcă ferestrele, aruncă o privire prin fișiere — asta sunt eu.",
+    "desktopHint": "sfat: trage ferestrele ⤬",
+    "winAbout": {
+      "p1": "Sunt un <strong>inginer full-stack</strong> cu 2+ ani de experiență în aplicații enterprise. Dețin un M.Sc. în <strong>High Performance Computing & Big Data</strong>, ceea ce mă face să prețuiesc designul performant și orientat spre date.",
+      "p2": "Job de zi: <strong>.msg Systems Romania</strong> pe un proiect Mercedes-Benz Group — Spring Boot, Angular și middleware-ul haotic din lumea reală.",
+      "p3": "Mod noapte: gătit, mașini, cerul nopții și căutarea espresso-ului perfect.",
+      "github": "github ↗",
+      "howItWorks": "cum funcționează site-ul ↗",
+      "resume": "resume.pdf ↗"
+    },
+    "winWork": {
+      "seeAll": "vezi toate proiectele ↗"
+    }
   },
   "skills": {
     "label": "02. Tech Stack",
@@ -54,6 +73,8 @@
     "title_2": "Tools",
     "subtitle": "Tehnologii cu care lucrez zilnic — de la API-uri backend la pipeline-uri de machine learning.",
     "quickRef": "// Quick Reference",
+    "sectionTag": "stack",
+    "sectionTitle": "Lucruri cu care <em>chiar</em> livrez, notate sincer.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
@@ -80,7 +101,11 @@
       "sub": "Acestea sunt doar câteva highlights. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
       "btn": "Vezi Showcase-ul"
     },
-    "emptyState": "Adaugă proiectele tale în"
+    "emptyState": "Adaugă proiectele tale în",
+    "sectionTag": "studii de caz & proiecte personale",
+    "sectionTitle": "<em>Muncă</em> selectată din linii de producție și nopți târzii.",
+    "moreText": "Mai mult <em>pe aceeași linie</em> — restaurante, e-commerce, agenții.",
+    "viewShowcase": "Vezi Showcase-ul →"
   },
   "experience": {
     "label": "04. Experiență",
@@ -121,6 +146,20 @@
     "responseTime": "// Timp tipic de răspuns: 24–48 ore",
     "configureEmailJS": "Configurează EmailJS pentru a activa formularul de contact.",
     "configureEmailJSSub": "Copiază <code>.env.example</code> → <code>.env</code> și adaugă credențialele EmailJS.",
+    "sectionTag": "trimite un semnal",
+    "talkTitle1": "Hai să <em>vorbim.</em>",
+    "talkTitle2": "Trimite un semnal.",
+    "talkSub": "Deschis pentru roluri full-time, contract, sau doar o discuție despre sisteme distribuite și espresso. Scrie-mi — citesc tot.",
+    "formLabel": "// compose_message",
+    "directChannels": "// direct_channels",
+    "channelEmail": "Email",
+    "channelLinkedIn": "LinkedIn",
+    "channelGitHub": "GitHub",
+    "channelResume": "CV",
+    "resumeSub": "PDF, 1 pagină",
+    "statusSub": "Full-time, contract, sau doar o discuție despre sisteme distribuite și espresso.",
+    "contactForm": "Formular de Contact",
+    "contactFormSub": "Trimite un mesaj direct",
     "form": {
       "name": "// Nume",
       "email": "// Email",
@@ -153,7 +192,18 @@
   "footer": {
     "builtWith": "Construit cu",
     "top": "sus",
-    "copyEmail": "Copiază Email"
+    "copyEmail": "Copiază Email",
+    "work": "proiecte",
+    "contact": "contact",
+    "elsewhere": "în altă parte",
+    "github": "github ↗",
+    "linkedin": "linkedin ↗",
+    "colophon": "colophon ↗",
+    "localTime": "ora locală",
+    "status": "status",
+    "openForWork": "● disponibil pentru muncă",
+    "repliesWithin": "răspuns în 24h",
+    "craftedIn": "Creat în Cluj."
   },
   "showcase": {
     "label": "00. Showcase",
@@ -209,6 +259,7 @@
     "primaryNav": "Navigație principală"
   },
   "projectDescriptions": {
-    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea."
+    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea.",
+    "project-2": "O aplicație web personală pentru urmărirea obiceiurilor și obiectivelor. Urmărește rutinele zilnice, vizualizează streak-urile și rămâi consistent — totul într-o interfață curată și minimalistă."
   }
 }

@@ -8,7 +8,7 @@ const version = pkg.version;
   <div class="hero-top-bar">
     <div class="htb-left">
       <span class="htb-muted">// status</span>
-      <span class="htb-green">● available for work</span>
+      <span class="htb-green" data-i18n="hero.status">● available for work</span>
     </div>
     <div class="htb-center">
       <span>Cluj, Romania</span>
@@ -39,17 +39,17 @@ const version = pkg.version;
     <div class="hb-block">
       <div class="hb-lbl">/ who</div>
       <div class="hb-val big">{profile.name}</div>
-      <div class="hb-sub">Software Engineer</div>
+      <div class="hb-sub" data-i18n="hero.softwareEngineer">Software Engineer</div>
     </div>
     <div class="hb-block">
       <div class="hb-lbl">/ currently</div>
-      <div class="hb-val">
+      <div class="hb-val" data-i18n-html="hero.currentlyText">
         Building enterprise systems at <span class="hb-green">.msg Systems</span> on a Mercedes-Benz Group project.
       </div>
     </div>
     <div class="hb-cta">
-      <a href="#projects" class="btn-v2 btn-v2-primary">View Work →</a>
-      <a href="/resume.pdf" download class="btn-v2">Resume ↗</a>
+      <a href="#projects" class="btn-v2 btn-v2-primary" data-i18n="hero.viewWorkBtn">View Work →</a>
+      <a href="/resume.pdf" download class="btn-v2" data-i18n="hero.resumeBtn">Resume ↗</a>
     </div>
   </div>
 </section>
@@ -161,7 +161,7 @@ const version = pkg.version;
   }
   .hb-val.big { font-size: 22px; font-weight: 500; }
   .hb-sub { color: var(--text-dim); font-size: 13px; margin-top: 4px; }
-  .hb-green { color: var(--green); }
+  .hb-green, :global(.hb-green) { color: var(--green); }
 
   .hb-cta {
     display: flex;

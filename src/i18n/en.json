@@ -22,7 +22,13 @@
       "Full-Stack Software Engineer",
       "Spring Boot & React Developer",
       "AI & Big Data Enthusiast"
-    ]
+    ],
+    "status": "available for work",
+    "softwareEngineer": "Software Engineer",
+    "currentlyText": "Building enterprise systems at <span class=\"hb-green\">.msg Systems</span> on a Mercedes-Benz Group project.",
+    "viewWorkBtn": "View Work →",
+    "resumeBtn": "Resume ↗",
+    "letsBuild": "Let's build something"
   },
   "about": {
     "label": "01. About Me",
@@ -41,6 +47,19 @@
       "role": "Full-Stack Engineer",
       "openToChat": "true",
       "hobbies": ["cooking", "cars", "astronomy", "coffee"]
+    },
+    "sectionTitle": "A small <em>workstation</em> tour.<br>Move the windows, peek at the files — that's me.",
+    "desktopHint": "tip: drag the windows around ⤬",
+    "winAbout": {
+      "p1": "I'm a <strong>full-stack engineer</strong> with 2+ years building enterprise apps. I hold an M.Sc. in <strong>High Performance Computing & Big Data</strong>, which keeps me biased toward performant, data-driven design.",
+      "p2": "Day job: <strong>.msg Systems Romania</strong> on a Mercedes-Benz Group project — Spring Boot, Angular, and the messy real-world middleware between them.",
+      "p3": "Night mode: cooking, cars, the night sky, and the pursuit of a better espresso shot.",
+      "github": "github ↗",
+      "howItWorks": "how this site works ↗",
+      "resume": "resume.pdf ↗"
+    },
+    "winWork": {
+      "seeAll": "see all projects ↗"
     }
   },
   "skills": {
@@ -49,6 +68,8 @@
     "title_2": "Tools",
     "subtitle": "Technologies I work with daily — from backend APIs to machine learning pipelines.",
     "quickRef": "// Quick Reference",
+    "sectionTag": "stack",
+    "sectionTitle": "Things I <em>actually</em> ship with, scored honestly.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
@@ -75,7 +96,11 @@
       "sub": "These are just a few highlights. See the full range of what I can design and build — from restaurant sites to e-commerce stores to creative agencies.",
       "btn": "View the Showcase"
     },
-    "emptyState": "Add your projects to"
+    "emptyState": "Add your projects to",
+    "sectionTag": "case studies & side quests",
+    "sectionTitle": "Selected <em>work</em> from production lines and late nights.",
+    "moreText": "More <em>where that came from</em> — restaurants, e-commerce, agencies.",
+    "viewShowcase": "View Showcase →"
   },
   "experience": {
     "label": "04. Experience",
@@ -116,6 +141,20 @@
     "responseTime": "// Typical response time: 24–48 hours",
     "configureEmailJS": "Configure EmailJS to enable the contact form.",
     "configureEmailJSSub": "Copy <code>.env.example</code> → <code>.env</code> and add your EmailJS credentials.",
+    "sectionTag": "send a signal",
+    "talkTitle1": "Let's <em>talk.</em>",
+    "talkTitle2": "Send a signal.",
+    "talkSub": "Open to full-time roles, contract work, or just nerding out about distributed systems and espresso. Drop a line — I read everything.",
+    "formLabel": "// compose_message",
+    "directChannels": "// direct_channels",
+    "channelEmail": "Email",
+    "channelLinkedIn": "LinkedIn",
+    "channelGitHub": "GitHub",
+    "channelResume": "Resume",
+    "resumeSub": "PDF, 1 page",
+    "statusSub": "Full-time, contract, or just a chat about distributed systems and espresso.",
+    "contactForm": "Contact Form",
+    "contactFormSub": "Send a message directly",
     "form": {
       "name": "// Name",
       "email": "// Email",
@@ -148,7 +187,18 @@
   "footer": {
     "builtWith": "Built with",
     "top": "top",
-    "copyEmail": "Copy Email"
+    "copyEmail": "Copy Email",
+    "work": "work",
+    "contact": "contact",
+    "elsewhere": "elsewhere",
+    "github": "github ↗",
+    "linkedin": "linkedin ↗",
+    "colophon": "colophon ↗",
+    "localTime": "local time",
+    "status": "status",
+    "openForWork": "● open for work",
+    "repliesWithin": "replies within 24h",
+    "craftedIn": "Crafted in Cluj."
   },
   "showcase": {
     "label": "00. Showcase",
@@ -204,6 +254,7 @@
     "primaryNav": "Primary navigation"
   },
   "projectDescriptions": {
-    "project-1": "A professional service website built for my father's plumbing & HVAC business in Suceava, Romania. Features service listings, contact details, and structured SEO markup to help local customers find the business."
+    "project-1": "A professional service website built for my father's plumbing & HVAC business in Suceava, Romania. Features service listings, contact details, and structured SEO markup to help local customers find the business.",
+    "project-2": "A personal habit and goal tracking web app. Track daily routines, visualise streaks, and stay consistent — all in a clean, minimal interface."
   }
 }

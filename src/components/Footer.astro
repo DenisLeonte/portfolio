@@ -8,29 +8,29 @@ const displayVersion = `v${major}.${minor}`;
 <footer>
   <div class="footer-col">
     <strong>denis.exe</strong>
-    <a href="#hero">↑ top</a>
-    <a href="#projects">work</a>
-    <a href="/contact">contact</a>
+    <a href="#hero" data-i18n="footer.top">↑ top</a>
+    <a href="#projects" data-i18n="footer.work">work</a>
+    <a href="/contact" data-i18n="footer.contact">contact</a>
   </div>
   <div class="footer-col">
-    <strong>elsewhere</strong>
-    <a href={profile.socialLinks.github} target="_blank" rel="noopener">github ↗</a>
-    <a href={profile.socialLinks.linkedin} target="_blank" rel="noopener">linkedin ↗</a>
-    <a href="/tech">colophon ↗</a>
+    <strong data-i18n="footer.elsewhere">elsewhere</strong>
+    <a href={profile.socialLinks.github} target="_blank" rel="noopener" data-i18n="footer.github">github ↗</a>
+    <a href={profile.socialLinks.linkedin} target="_blank" rel="noopener" data-i18n="footer.linkedin">linkedin ↗</a>
+    <a href="/tech" data-i18n="footer.colophon">colophon ↗</a>
   </div>
   <div class="footer-col">
-    <strong>local time</strong>
+    <strong data-i18n="footer.localTime">local time</strong>
     <span id="footer-time" class="footer-green">--:--:--</span>
     <div class="footer-dim">Cluj-Napoca, RO</div>
   </div>
   <div class="footer-col">
-    <strong>status</strong>
-    <span class="footer-green">● open for work</span>
-    <div class="footer-dim">replies within 24h</div>
+    <strong data-i18n="footer.status">status</strong>
+    <span class="footer-green" data-i18n="footer.openForWork">● open for work</span>
+    <div class="footer-dim" data-i18n="footer.repliesWithin">replies within 24h</div>
   </div>
 
   <div class="footer-mega">
-    <div>© 2026 — {profile.name}. Crafted in Cluj.</div>
+    <div>© 2026 — {profile.name}. <span data-i18n="footer.craftedIn">Crafted in Cluj.</span></div>
     <div>{displayVersion} · desktop remix</div>
   </div>
 </footer>

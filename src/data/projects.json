@@ -8,5 +8,15 @@
     "liveUrl": "https://instalatiisuceava.ro",
     "image": "/images/projects/project-1.png",
     "featured": true
+  },
+  {
+    "id": "project-2",
+    "name": "DenisTechs Tracker",
+    "description": "A personal habit and goal tracking web app. Track daily routines, visualise streaks, and stay consistent — all in a clean, minimal interface.",
+    "techStack": ["React", "TypeScript", "TailwindCSS"],
+    "githubUrl": "",
+    "liveUrl": "https://tracker.denistechs.com",
+    "image": "/images/projects/project-2.png",
+    "featured": true
   }
 ]
