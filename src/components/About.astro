@@ -577,8 +577,14 @@ import profile from '../data/profile.json';
 
     window.addEventListener('mousemove', (e: MouseEvent) => {
       if (!dragging) return;
-      w.style.left = origX + (e.clientX - startX) + 'px';
-      w.style.top  = origY + (e.clientY - startY) + 'px';
+      const board = document.getElementById('desktop-board')!.getBoundingClientRect();
+      const statusBarH = 28;
+      const newX = origX + (e.clientX - startX);
+      const newY = origY + (e.clientY - startY);
+      const maxX = board.width  - w.offsetWidth;
+      const maxY = board.height - w.offsetHeight - statusBarH;
+      w.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
+      w.style.top  = Math.max(0, Math.min(newY, maxY)) + 'px';
     });
 
     window.addEventListener('mouseup', () => { dragging = false; });
