@@ -22,7 +22,13 @@
       "Appassionato di AI & Big Data"
     ],
     "resume": "CV",
-    "available": "Disponibile per opportunità"
+    "available": "Disponibile per opportunità",
+    "status": "disponibile per lavoro",
+    "softwareEngineer": "Ingegnere Software",
+    "currentlyText": "Sviluppo sistemi enterprise presso <span class=\"hb-green\">.msg Systems</span> su un progetto Mercedes-Benz Group.",
+    "viewWorkBtn": "Vedi i Progetti →",
+    "resumeBtn": "CV ↗",
+    "letsBuild": "Costruiamo qualcosa"
   },
   "about": {
     "label": "01. Chi Sono",
@@ -67,6 +73,8 @@
     "title_2": "Strumenti",
     "subtitle": "Tecnologie con cui lavoro ogni giorno — dalle API backend alle pipeline di machine learning.",
     "quickRef": "// Riferimento Rapido",
+    "sectionTag": "stack",
+    "sectionTitle": "Cose con cui <em>davvero</em> consegno, valutate onestamente.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
@@ -93,7 +101,11 @@
       "sub": "Questi sono solo alcuni punti salienti. Scopri la gamma completa di quello che posso progettare e costruire — dai siti per ristoranti ai negozi e-commerce alle agenzie creative.",
       "btn": "Vedi la Vetrina"
     },
-    "emptyState": "Aggiungi i tuoi progetti in"
+    "emptyState": "Aggiungi i tuoi progetti in",
+    "sectionTag": "case study & progetti personali",
+    "sectionTitle": "<em>Lavoro</em> selezionato da linee di produzione e notti tardive.",
+    "moreText": "Ce n'è ancora <em>di più</em> — ristoranti, e-commerce, agenzie.",
+    "viewShowcase": "Vedi la Vetrina →"
   },
   "experience": {
     "label": "04. Esperienza",
@@ -134,6 +146,20 @@
     "responseTime": "// Tempo tipico di risposta: 24–48 ore",
     "configureEmailJS": "Configura EmailJS per abilitare il modulo di contatto.",
     "configureEmailJSSub": "Copia <code>.env.example</code> → <code>.env</code> e aggiungi le credenziali EmailJS.",
+    "sectionTag": "invia un segnale",
+    "talkTitle1": "Parliamo <em>davvero.</em>",
+    "talkTitle2": "Invia un segnale.",
+    "talkSub": "Aperto a ruoli full-time, contratti, o solo una chiacchierata su sistemi distribuiti ed espresso. Scrivimi — leggo tutto.",
+    "formLabel": "// compose_message",
+    "directChannels": "// direct_channels",
+    "channelEmail": "Email",
+    "channelLinkedIn": "LinkedIn",
+    "channelGitHub": "GitHub",
+    "channelResume": "CV",
+    "resumeSub": "PDF, 1 pagina",
+    "statusSub": "Full-time, contratti, o solo una chiacchierata su sistemi distribuiti ed espresso.",
+    "contactForm": "Modulo di Contatto",
+    "contactFormSub": "Invia un messaggio direttamente",
     "form": {
       "name": "// Nome",
       "email": "// Email",
@@ -166,7 +192,18 @@
   "footer": {
     "builtWith": "Costruito con",
     "top": "su",
-    "copyEmail": "Copia Email"
+    "copyEmail": "Copia Email",
+    "work": "progetti",
+    "contact": "contatto",
+    "elsewhere": "altrove",
+    "github": "github ↗",
+    "linkedin": "linkedin ↗",
+    "colophon": "colophon ↗",
+    "localTime": "ora locale",
+    "status": "status",
+    "openForWork": "● disponibile per lavoro",
+    "repliesWithin": "risposta entro 24h",
+    "craftedIn": "Realizzato a Cluj."
   },
   "showcase": {
     "label": "00. Vetrina",

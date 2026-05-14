@@ -14,23 +14,23 @@ const hasEmailJS = !!(
     <div class="section-head">
       <div class="meta">
         <div class="section-num">05 / contact</div>
-        <div class="section-tag">send a signal</div>
+        <div class="section-tag" data-i18n="contact.sectionTag">send a signal</div>
       </div>
       <h1 class="section-title">
-        Let's <em>talk.</em><br>
-        <span class="title-outline">Send a signal.</span>
+        <span data-i18n-html="contact.talkTitle1">Let's <em>talk.</em></span><br>
+        <span class="title-outline" data-i18n="contact.talkTitle2">Send a signal.</span>
       </h1>
     </div>
 
     <div class="contact-body">
       <!-- Form column -->
       <div class="form-col">
-        <div class="form-label">// compose_message</div>
+        <div class="form-label" data-i18n="contact.formLabel">// compose_message</div>
 
         {!hasEmailJS ? (
           <div class="form-placeholder">
-            <p class="placeholder-text">Configure EmailJS to enable the contact form.</p>
-            <p class="placeholder-sub">Copy <code>.env.example</code> → <code>.env</code> and add your credentials.</p>
+            <p class="placeholder-text" data-i18n="contact.configureEmailJS">Configure EmailJS to enable the contact form.</p>
+            <p class="placeholder-sub" data-i18n-html="contact.configureEmailJSSub">Copy <code>.env.example</code> → <code>.env</code> and add your credentials.</p>
           </div>
         ) : (
           <ContactForm client:visible />
@@ -39,13 +39,13 @@ const hasEmailJS = !!(
 
       <!-- Info column -->
       <div class="info-col">
-        <div class="info-label">// direct_channels</div>
+        <div class="info-label" data-i18n="contact.directChannels">// direct_channels</div>
 
         <div class="channels">
           {profile.email && !profile.email.startsWith('[') && (
             <a class="channel" href={`mailto:${profile.email}`}>
               <div>
-                <div class="channel-name">Email</div>
+                <div class="channel-name" data-i18n="contact.channelEmail">Email</div>
                 <div class="channel-sub">{profile.email}</div>
               </div>
               <div class="channel-arrow">↗</div>
@@ -55,7 +55,7 @@ const hasEmailJS = !!(
           {profile.socialLinks.linkedin && !profile.socialLinks.linkedin.startsWith('[') && (
             <a class="channel" href={profile.socialLinks.linkedin} target="_blank" rel="noopener">
               <div>
-                <div class="channel-name">LinkedIn</div>
+                <div class="channel-name" data-i18n="contact.channelLinkedIn">LinkedIn</div>
                 <div class="channel-sub">/in/leontedenis</div>
               </div>
               <div class="channel-arrow">↗</div>
@@ -65,7 +65,7 @@ const hasEmailJS = !!(
           {profile.socialLinks.github && !profile.socialLinks.github.startsWith('[') && (
             <a class="channel" href={profile.socialLinks.github} target="_blank" rel="noopener">
               <div>
-                <div class="channel-name">GitHub</div>
+                <div class="channel-name" data-i18n="contact.channelGitHub">GitHub</div>
                 <div class="channel-sub">/DenisLeonte</div>
               </div>
               <div class="channel-arrow">↗</div>
@@ -74,8 +74,8 @@ const hasEmailJS = !!(
 
           <a class="channel" href="/resume.pdf" target="_blank">
             <div>
-              <div class="channel-name">Resume</div>
-              <div class="channel-sub">PDF, 1 page</div>
+              <div class="channel-name" data-i18n="contact.channelResume">Resume</div>
+              <div class="channel-sub" data-i18n="contact.resumeSub">PDF, 1 page</div>
             </div>
             <div class="channel-arrow">↗</div>
           </a>
@@ -84,12 +84,12 @@ const hasEmailJS = !!(
         <div class="status-card">
           <div class="status-dot"></div>
           <div>
-            <div class="status-title">Open to opportunities</div>
-            <div class="status-sub">Full-time, contract, or just a chat about distributed systems and espresso.</div>
+            <div class="status-title" data-i18n="contact.openTo">Open to opportunities</div>
+            <div class="status-sub" data-i18n="contact.statusSub">Full-time, contract, or just a chat about distributed systems and espresso.</div>
           </div>
         </div>
 
-        <div class="response-note">// Typical response: 24–48 hours</div>
+        <div class="response-note" data-i18n="contact.responseTime">// Typical response: 24–48 hours</div>
       </div>
     </div>
   </div>
@@ -139,7 +139,7 @@ const hasEmailJS = !!(
     color: var(--text);
     margin: 0;
   }
-  .section-title em {
+  .section-title em, .section-title :global(em) {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 400;

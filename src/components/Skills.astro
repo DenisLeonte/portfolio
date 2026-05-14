@@ -13,9 +13,9 @@ const allSkills = skillsData.categories
     <div class="section-head">
       <div class="meta">
         <div class="section-num">02 / skills</div>
-        <div class="section-tag">stack</div>
+        <div class="section-tag" data-i18n="skills.sectionTag">stack</div>
       </div>
-      <h2 class="section-title">
+      <h2 class="section-title" data-i18n-html="skills.sectionTitle">
         Things I <em>actually</em> ship with, scored honestly.
       </h2>
     </div>
@@ -78,7 +78,7 @@ const allSkills = skillsData.categories
     color: var(--text);
     margin-bottom: 0;
   }
-  .section-title em {
+  .section-title em, .section-title :global(em) {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 400;
