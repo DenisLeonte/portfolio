@@ -141,6 +141,27 @@ import profile from '../data/profile.json';
       </div>
 
       <div id="bugs-toast" class="bugs-toast" aria-live="polite"></div>
+
+      <!-- work.log window (spawned by WORK icon) -->
+      <div id="win-work" class="win win-work" data-win data-no-restore style="display:none">
+        <div class="win-header" aria-label="Drag window">
+          <div class="win-dots">
+            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          </div>
+          <div class="win-title">work.log</div>
+          <button class="win-x" aria-label="Close">×</button>
+        </div>
+        <div class="win-body">
+          <div class="wl-row"><span class="wl-k">role</span><span class="wl-v">full-stack engineer</span></div>
+          <div class="wl-row"><span class="wl-k">company</span><span class="wl-v">.msg Systems Romania</span></div>
+          <div class="wl-row"><span class="wl-k">client</span><span class="wl-v">Mercedes-Benz Group</span></div>
+          <div class="wl-row"><span class="wl-k">stack</span><span class="wl-v">Spring Boot · Angular</span></div>
+          <div class="wl-row"><span class="wl-k"></span><span class="wl-v">Docker · PostgreSQL</span></div>
+          <div class="wl-row"><span class="wl-k">exp</span><span class="wl-v">2+ years</span></div>
+          <div class="wl-sep"></div>
+          <a href="#projects" class="wl-link">see all projects ↗</a>
+        </div>
+      </div>
     </div>
 
     <div class="desktop-hint">
@@ -361,6 +382,24 @@ import profile from '../data/profile.json';
   }
   @keyframes progress { from{width:0} to{width:100%} }
 
+  /* Work window */
+  .win-work { top: 180px; left: 200px; width: 380px; z-index: 5; }
+  .wl-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 11px;
+  }
+  .wl-row:last-of-type { border-bottom: 0; }
+  .wl-k { color: var(--text-faint); letter-spacing: 0.05em; min-width: 72px; }
+  .wl-v { color: var(--text); text-align: right; }
+  .wl-sep { height: 1px; background: var(--line-strong); margin: 12px 0 10px; }
+  .wl-link {
+    display: inline-block; font-family: var(--mono); font-size: 10px;
+    color: var(--green); text-decoration: none; letter-spacing: 0.08em;
+    padding: 5px 10px; border: 1px solid var(--green);
+    transition: background 0.15s, color 0.15s;
+  }
+  .wl-link:hover { background: var(--green); color: var(--bg); }
+
   .bugs-toast {
     position: absolute;
     bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
@@ -453,12 +492,12 @@ import profile from '../data/profile.json';
       w.style.opacity = '0';
       setTimeout(() => {
         w.style.display = 'none';
-        setTimeout(() => {
-          w.style.display = '';
-          w.style.transform = '';
-          w.style.opacity = '';
-          w.style.transition = '';
-        }, 2500);
+        w.style.transform = '';
+        w.style.opacity = '';
+        w.style.transition = '';
+        if (!w.dataset.noRestore) {
+          setTimeout(() => { w.style.display = ''; }, 2500);
+        }
       }, 200);
     });
   });
@@ -469,8 +508,22 @@ import profile from '../data/profile.json';
 
     const trigger = () => {
       if (action === 'work') {
-        const el = document.getElementById('projects');
-        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const workWin = document.getElementById('win-work') as HTMLElement;
+        if (workWin.style.display === 'none') {
+          workWin.style.display = '';
+          workWin.style.transform = 'scale(0.85)';
+          workWin.style.opacity = '0';
+          workWin.style.transition = 'transform 0.2s, opacity 0.2s';
+          zCounter++;
+          workWin.style.zIndex = String(zCounter);
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            workWin.style.transform = '';
+            workWin.style.opacity = '';
+          }));
+        } else {
+          zCounter++;
+          workWin.style.zIndex = String(zCounter);
+        }
       } else if (action === 'resume') {
         const a = document.createElement('a');
         a.href = '/resume.pdf'; a.download = 'resume.pdf';
