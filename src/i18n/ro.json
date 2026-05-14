@@ -46,7 +46,20 @@
         "cafea"
       ]
     },
-    "resume": "CV"
+    "resume": "CV",
+    "sectionTitle": "Un mic tur al <em>stației de lucru</em>.<br>Mișcă ferestrele, aruncă o privire prin fișiere — asta sunt eu.",
+    "desktopHint": "sfat: trage ferestrele ⤬",
+    "winAbout": {
+      "p1": "Sunt un <strong>inginer full-stack</strong> cu 2+ ani de experiență în aplicații enterprise. Dețin un M.Sc. în <strong>High Performance Computing & Big Data</strong>, ceea ce mă face să prețuiesc designul performant și orientat spre date.",
+      "p2": "Job de zi: <strong>.msg Systems Romania</strong> pe un proiect Mercedes-Benz Group — Spring Boot, Angular și middleware-ul haotic din lumea reală.",
+      "p3": "Mod noapte: gătit, mașini, cerul nopții și căutarea espresso-ului perfect.",
+      "github": "github ↗",
+      "howItWorks": "cum funcționează site-ul ↗",
+      "resume": "resume.pdf ↗"
+    },
+    "winWork": {
+      "seeAll": "vezi toate proiectele ↗"
+    }
   },
   "skills": {
     "label": "02. Tech Stack",
@@ -209,6 +222,7 @@
     "primaryNav": "Navigație principală"
   },
   "projectDescriptions": {
-    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea."
+    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea.",
+    "project-2": "O aplicație web personală pentru urmărirea obiceiurilor și obiectivelor. Urmărește rutinele zilnice, vizualizează streak-urile și rămâi consistent — totul într-o interfață curată și minimalistă."
   }
 }

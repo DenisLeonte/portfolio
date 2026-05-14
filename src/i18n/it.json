@@ -46,7 +46,20 @@
         "caffe"
       ]
     },
-    "resume": "CV"
+    "resume": "CV",
+    "sectionTitle": "Un piccolo tour della <em>postazione di lavoro</em>.<br>Sposta le finestre, sbircia i file — questo sono io.",
+    "desktopHint": "suggerimento: trascina le finestre ⤬",
+    "winAbout": {
+      "p1": "Sono un <strong>ingegnere full-stack</strong> con 2+ anni di esperienza in app enterprise. Ho un M.Sc. in <strong>High Performance Computing & Big Data</strong>, che mi porta a privilegiare design performanti e orientati ai dati.",
+      "p2": "Lavoro di giorno: <strong>.msg Systems Romania</strong> su un progetto Mercedes-Benz Group — Spring Boot, Angular e il middleware caotico del mondo reale.",
+      "p3": "Modalità notte: cucinare, auto, il cielo notturno e la ricerca dell'espresso perfetto.",
+      "github": "github ↗",
+      "howItWorks": "come funziona il sito ↗",
+      "resume": "resume.pdf ↗"
+    },
+    "winWork": {
+      "seeAll": "vedi tutti i progetti ↗"
+    }
   },
   "skills": {
     "label": "02. Stack Tecnico",
@@ -209,6 +222,7 @@
     "primaryNav": "Navigazione principale"
   },
   "projectDescriptions": {
-    "project-1": "Un sito web professionale di servizi costruito per l'attivita di idraulica e HVAC di mio padre a Suceava, Romania. Include elenchi di servizi, dettagli di contatto e markup SEO strutturato per aiutare i clienti locali a trovare l'attivita."
+    "project-1": "Un sito web professionale di servizi costruito per l'attivita di idraulica e HVAC di mio padre a Suceava, Romania. Include elenchi di servizi, dettagli di contatto e markup SEO strutturato per aiutare i clienti locali a trovare l'attivita.",
+    "project-2": "Un'app web personale per il monitoraggio di abitudini e obiettivi. Traccia le routine quotidiane, visualizza le streak e mantieni la costanza — tutto in un'interfaccia pulita e minimale."
   }
 }

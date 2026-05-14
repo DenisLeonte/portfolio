@@ -9,7 +9,7 @@ import profile from '../data/profile.json';
         <div class="section-num">01 / about</div>
         <div class="section-tag">desktop</div>
       </div>
-      <h2 class="section-title">
+      <h2 class="section-title" data-i18n-html="about.sectionTitle">
         A small <em>workstation</em> tour.<br>Move the windows, peek at the files — that's me.
       </h2>
     </div>
@@ -78,13 +78,13 @@ import profile from '../data/profile.json';
         </div>
         <div class="win-body">
           <div class="win-hi">Hi, I'm Denis.</div>
-          <p>I'm a <strong>full-stack engineer</strong> with 2+ years building enterprise apps. I hold an M.Sc. in <strong>High Performance Computing & Big Data</strong>, which keeps me biased toward performant, data-driven design.</p>
-          <p>Day job: <strong>.msg Systems Romania</strong> on a Mercedes-Benz Group project — Spring Boot, Angular, and the messy real-world middleware between them.</p>
-          <p>Night mode: cooking, cars, the night sky, and the pursuit of a better espresso shot.</p>
+          <p data-i18n-html="about.winAbout.p1">I'm a <strong>full-stack engineer</strong> with 2+ years building enterprise apps. I hold an M.Sc. in <strong>High Performance Computing & Big Data</strong>, which keeps me biased toward performant, data-driven design.</p>
+          <p data-i18n-html="about.winAbout.p2">Day job: <strong>.msg Systems Romania</strong> on a Mercedes-Benz Group project — Spring Boot, Angular, and the messy real-world middleware between them.</p>
+          <p data-i18n-html="about.winAbout.p3">Night mode: cooking, cars, the night sky, and the pursuit of a better espresso shot.</p>
           <div class="win-links">
-            <a href={profile.socialLinks.github} target="_blank" rel="noopener">github ↗</a>
-            <a href="/tech">how this site works ↗</a>
-            <a href="/resume.pdf" download>resume.pdf ↗</a>
+            <a href={profile.socialLinks.github} target="_blank" rel="noopener" data-i18n="about.winAbout.github">github ↗</a>
+            <a href="/tech" data-i18n="about.winAbout.howItWorks">how this site works ↗</a>
+            <a href="/resume.pdf" download data-i18n="about.winAbout.resume">resume.pdf ↗</a>
           </div>
         </div>
       </div>
@@ -194,13 +194,13 @@ import profile from '../data/profile.json';
           <div class="wl-row"><span class="wl-k"></span><span class="wl-v">Docker · PostgreSQL</span></div>
           <div class="wl-row"><span class="wl-k">exp</span><span class="wl-v">2+ years</span></div>
           <div class="wl-sep"></div>
-          <a href="#projects" class="wl-link">see all projects ↗</a>
+          <a href="#projects" class="wl-link" data-i18n="about.winWork.seeAll">see all projects ↗</a>
         </div>
       </div>
     </div>
 
     <div class="desktop-hint">
-      <span>tip: drag the windows around ⤬</span>
+      <span data-i18n="about.desktopHint">tip: drag the windows around ⤬</span>
       <span id="hint-count"></span>
     </div>
   </div>

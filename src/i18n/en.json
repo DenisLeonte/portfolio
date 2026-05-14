@@ -41,6 +41,19 @@
       "role": "Full-Stack Engineer",
       "openToChat": "true",
       "hobbies": ["cooking", "cars", "astronomy", "coffee"]
+    },
+    "sectionTitle": "A small <em>workstation</em> tour.<br>Move the windows, peek at the files — that's me.",
+    "desktopHint": "tip: drag the windows around ⤬",
+    "winAbout": {
+      "p1": "I'm a <strong>full-stack engineer</strong> with 2+ years building enterprise apps. I hold an M.Sc. in <strong>High Performance Computing & Big Data</strong>, which keeps me biased toward performant, data-driven design.",
+      "p2": "Day job: <strong>.msg Systems Romania</strong> on a Mercedes-Benz Group project — Spring Boot, Angular, and the messy real-world middleware between them.",
+      "p3": "Night mode: cooking, cars, the night sky, and the pursuit of a better espresso shot.",
+      "github": "github ↗",
+      "howItWorks": "how this site works ↗",
+      "resume": "resume.pdf ↗"
+    },
+    "winWork": {
+      "seeAll": "see all projects ↗"
     }
   },
   "skills": {
@@ -204,6 +217,7 @@
     "primaryNav": "Primary navigation"
   },
   "projectDescriptions": {
-    "project-1": "A professional service website built for my father's plumbing & HVAC business in Suceava, Romania. Features service listings, contact details, and structured SEO markup to help local customers find the business."
+    "project-1": "A professional service website built for my father's plumbing & HVAC business in Suceava, Romania. Features service listings, contact details, and structured SEO markup to help local customers find the business.",
+    "project-2": "A personal habit and goal tracking web app. Track daily routines, visualise streaks, and stay consistent — all in a clean, minimal interface."
   }
 }
