@@ -213,8 +213,14 @@
     "ctaCopy": "Ai nevoie de ceva custom?",
     "letsTalk": "Hai să vorbim →",
     "viewTemplate": "Vezi Template-ul →",
-    "bottomText": "Fiecare template este proiectat și construit de la zero — fără teme, fără page builders.",
+    "sectionTag": "studii de caz",
+    "titleTagline": "Fără teme, fără page builders.",
+    "heroSub": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și codat de la zero cu design distinct, animații reale și UI production-ready.",
+    "bottomText": "Fiecare template proiectat și construit de la zero —<br><em>fără teme, fără page builders.</em>",
     "bottomBtn": "Ia Legătura →",
+    "demoBar": {
+      "cta": "Îți place? Hai să vorbim"
+    },
     "cards": {
       "restaurant": {
         "category": "Restaurant & Cafenea",

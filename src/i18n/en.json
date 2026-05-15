@@ -208,8 +208,14 @@
     "ctaCopy": "Need something custom?",
     "letsTalk": "Let's talk →",
     "viewTemplate": "View Template →",
-    "bottomText": "Each template is designed and built from scratch — no themes, no page builders.",
+    "sectionTag": "case studies",
+    "titleTagline": "No themes, no builders.",
+    "heroSub": "Each template below is a fully interactive mini-site — designed and coded from scratch with distinct aesthetics, real animations, and production-quality UI.",
+    "bottomText": "Each template designed and built from scratch —<br><em>no themes, no page builders.</em>",
     "bottomBtn": "Get In Touch →",
+    "demoBar": {
+      "cta": "Like this? Let's talk"
+    },
     "cards": {
       "restaurant": {
         "category": "Restaurant & Café",

@@ -15,16 +15,16 @@ import showcase from '../../data/showcase.json';
         <div class="section-head">
           <div class="meta">
             <div class="section-num">00 / showcase</div>
-            <div class="section-tag">case studies</div>
+            <div class="section-tag" data-i18n="showcase.sectionTag">case studies</div>
           </div>
           <h1 class="section-title">
-            What I Can <em>Build.</em><br>
-            <span class="title-outline">No themes, no builders.</span>
+            <span data-i18n="showcase.title_1">What I Can </span><em data-i18n="showcase.title_2">Build.</em><br>
+            <span class="title-outline" data-i18n="showcase.titleTagline">No themes, no builders.</span>
           </h1>
         </div>
         <p class="hero-sub">
-          Each template below is a fully interactive mini-site — designed and coded from scratch with distinct aesthetics, real animations, and production-quality UI.
-          Need something custom? <a href="/contact" class="hero-link">Let's talk →</a>
+          <span data-i18n="showcase.heroSub">Each template below is a fully interactive mini-site — designed and coded from scratch with distinct aesthetics, real animations, and production-quality UI.</span>
+          <span data-i18n="showcase.ctaCopy">Need something custom?</span> <a href="/contact" class="hero-link" data-i18n="showcase.letsTalk">Let's talk →</a>
         </p>
       </div>
     </section>
@@ -42,16 +42,16 @@ import showcase from '../../data/showcase.json';
                   <div class="thumb-placeholder">{entry.name.charAt(0)}</div>
                 )}
                 <div class="card-overlay">
-                  <span class="overlay-text">View Template →</span>
+                  <span class="overlay-text" data-i18n="showcase.viewTemplate">View Template →</span>
                 </div>
               </div>
               <div class="card-body">
                 <div class="card-meta">
                   <span class="card-num">{String(i + 1).padStart(2, '0')}</span>
-                  <span class="card-cat">{entry.category}</span>
+                  <span class="card-cat" data-i18n={`showcase.cards.${entry.slug}.category`}>{entry.category}</span>
                 </div>
                 <div class="card-name">{entry.name}</div>
-                <div class="card-desc">{entry.description}</div>
+                <div class="card-desc" data-i18n={`showcase.cards.${entry.slug}.description`}>{entry.description}</div>
                 <div class="card-tags">
                   {entry.techHighlights.map(t => (
                     <span class="ctag">{t}</span>
@@ -68,11 +68,11 @@ import showcase from '../../data/showcase.json';
     <section id="showcase-cta">
       <div class="page-inner">
         <div class="cta-inner">
-          <div class="cta-text">
+          <div class="cta-text" data-i18n-html="showcase.bottomText">
             Each template designed and built from scratch —<br>
             <em>no themes, no page builders.</em>
           </div>
-          <a href="/contact" class="btn-cta">Get In Touch →</a>
+          <a href="/contact" class="btn-cta" data-i18n="showcase.bottomBtn">Get In Touch →</a>
         </div>
       </div>
     </section>

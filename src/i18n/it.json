@@ -213,8 +213,14 @@
     "ctaCopy": "Hai bisogno di qualcosa di personalizzato?",
     "letsTalk": "Parliamo →",
     "viewTemplate": "Vedi Template →",
-    "bottomText": "Ogni template è progettato e costruito da zero — nessun tema, nessun page builder.",
+    "sectionTag": "casi studio",
+    "titleTagline": "Nessun tema, nessun builder.",
+    "heroSub": "Ogni template qui sotto è un mini-sito completamente interattivo — progettato e codificato da zero con estetica distinta, animazioni reali e interfaccia di qualità produzione.",
+    "bottomText": "Ogni template progettato e costruito da zero —<br><em>nessun tema, nessun page builder.</em>",
     "bottomBtn": "Contattami →",
+    "demoBar": {
+      "cta": "Ti piace? Parliamo"
+    },
     "cards": {
       "restaurant": {
         "category": "Ristorante & Caffè",
