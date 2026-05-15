@@ -103,7 +103,7 @@
     },
     "emptyState": "Aggiungi i tuoi progetti in",
     "sectionTag": "case study & progetti personali",
-    "sectionTitle": "<em>Lavoro</em> selezionato da linee di produzione e notti tardive.",
+    "sectionTitle": "<em>Lavori</em> reali — dall'ambiente di produzione alle notti insonni.",
     "moreText": "Ce n'è ancora <em>di più</em> — ristoranti, e-commerce, agenzie.",
     "viewShowcase": "Vedi la Vetrina →"
   },
@@ -228,11 +228,11 @@
       },
       "ecommerce": {
         "category": "E-commerce & Prodotto",
-        "description": "Una vetrina prodotti elegante con gallerie interattive, UI carrello e design minimalista moderno."
+        "description": "Una vetrina prodotti elegante con gallerie interattive, carrello della spesa e design minimalista moderno."
       },
       "agency": {
         "category": "Agenzia Creativa",
-        "description": "Un sito agenzia audace e dinamico con effetti di scroll, vetrina team e contatori animati."
+        "description": "Un sito agenzia audace e dinamico con effetti di scroll, presentazione del team e contatori animati."
       },
       "blog": {
         "category": "Blog & Rivista",
@@ -274,6 +274,6 @@
   },
   "projectDescriptions": {
     "project-1": "Un sito web professionale di servizi costruito per l'attività di idraulica e HVAC di mio padre a Suceava, Romania. Include elenchi di servizi, dettagli di contatto e markup SEO strutturato per aiutare i clienti locali a trovare l'attività.",
-    "project-2": "Un'app web personale per il monitoraggio di abitudini e obiettivi. Traccia le routine quotidiane, visualizza le streak e mantieni la costanza — tutto in un'interfaccia pulita e minimale."
+    "project-2": "Un'app web personale per il monitoraggio di abitudini e obiettivi. Traccia le routine quotidiane, visualizza le serie consecutive e mantieni la costanza — tutto in un'interfaccia pulita e minimale."
   }
 }

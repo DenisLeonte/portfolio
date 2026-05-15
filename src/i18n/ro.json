@@ -34,7 +34,7 @@
     "label": "01. Despre Mine",
     "title_1": "Cine ",
     "title_2": "Sunt",
-    "bio": "Sunt un Full-Stack Software Engineer cu 2 ani de experiență în dezvoltarea aplicațiilor enterprise. Dețin o diplomă de Master în High Performance Computing și Big Data Analysis, ceea ce îmi alimentează pasiunea pentru construirea soluțiilor performante, bazate pe date.\n\nÎn prezent lucrez la .msg Systems România pe un proiect Mercedes-Benz Group AG, unde dezvolt și integrez sisteme complexe folosind Spring Boot, Angular și tehnologii cloud moderne. Mă regăsesc la intersecția dintre arhitectura backend și experiențele frontend intuitive.\n\nÎn afara muncii, de obicei gătesc ceva nou, intru într-un rabbit hole despre mașini, privesc cerul nopții sau îmi fac o cafea decentă — uneori toate în aceeași seară.",
+    "bio": "Sunt un Full-Stack Software Engineer cu 2 ani de experiență în dezvoltarea aplicațiilor enterprise. Am un Master în High Performance Computing și Big Data Analysis, care mă orientează natural spre soluții performante și bine gândite.\n\nLucrez la .msg Systems România pe un proiect Mercedes-Benz Group AG, unde construiesc și integrez sisteme complexe cu Spring Boot, Angular și tehnologii cloud moderne. Îmi place să lucrez atât la un backend solid, cât și la un frontend pe care oamenii chiar vor să-l folosească.\n\nÎn afara orelor de muncă gătesc ceva nou, mă pierd în detalii despre mașini, privesc cerul nopții sau încerc să fac o cafea bună — uneori pe toate în aceeași seară.",
     "letsTalk": "Hai să Vorbim",
     "viewGithub": "Vezi GitHub",
     "highlights": {
@@ -56,7 +56,7 @@
     "sectionTitle": "Un mic tur al <em>stației de lucru</em>.<br>Mișcă ferestrele, aruncă o privire prin fișiere — asta sunt eu.",
     "desktopHint": "sfat: trage ferestrele ⤬",
     "winAbout": {
-      "p1": "Sunt un <strong>inginer full-stack</strong> cu 2+ ani de experiență în aplicații enterprise. Dețin un M.Sc. în <strong>High Performance Computing & Big Data</strong>, ceea ce mă face să prețuiesc designul performant și orientat spre date.",
+      "p1": "Sunt un <strong>inginer full-stack</strong> cu 2+ ani de experiență în aplicații enterprise. Am un M.Sc. în <strong>High Performance Computing & Big Data</strong>, care mă orientează spre soluții performante și bine construite.",
       "p2": "Job de zi: <strong>.msg Systems Romania</strong> pe un proiect Mercedes-Benz Group — Spring Boot, Angular și middleware-ul haotic din lumea reală.",
       "p3": "Mod noapte: gătit, mașini, cerul nopții și căutarea espresso-ului perfect.",
       "github": "github ↗",
@@ -103,7 +103,7 @@
     },
     "emptyState": "Adaugă proiectele tale în",
     "sectionTag": "studii de caz & proiecte personale",
-    "sectionTitle": "<em>Muncă</em> selectată din linii de producție și nopți târzii.",
+    "sectionTitle": "<em>Lucruri</em> construite pentru producție, în nopți lungi.",
     "moreText": "Mai mult <em>din același registru</em> — restaurante, e-commerce, agenții.",
     "viewShowcase": "Vezi Showcase-ul →"
   },
@@ -209,13 +209,13 @@
     "label": "00. Showcase",
     "title_1": "Ce Pot ",
     "title_2": "Construi",
-    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și codat de la zero cu design distinct, animații reale și UI production-ready. Fără teme, fără page builders.",
+    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și construit de la zero cu estetică distinctă, animații reale și interfață de calitate profesională. Fără teme, fără page builders.",
     "ctaCopy": "Ai nevoie de ceva custom?",
     "letsTalk": "Hai să vorbim →",
     "viewTemplate": "Vezi Template-ul →",
     "sectionTag": "studii de caz",
     "titleTagline": "Fără teme, fără page builders.",
-    "heroSub": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și codat de la zero cu design distinct, animații reale și UI production-ready.",
+    "heroSub": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și construit de la zero cu estetică distinctă, animații reale și interfață de calitate profesională.",
     "bottomText": "Fiecare template proiectat și construit de la zero —<br><em>fără teme, fără page builders.</em>",
     "bottomBtn": "Ia Legătura →",
     "demoBar": {
@@ -228,11 +228,11 @@
       },
       "ecommerce": {
         "category": "E-commerce & Produs",
-        "description": "Un showcase de produse elegant cu galerii interactive, UI de coș și design minimalist modern."
+        "description": "O prezentare elegantă de produse cu galerii interactive, coș de cumpărături și design minimalist modern."
       },
       "agency": {
         "category": "Agenție Creativă",
-        "description": "Un site de agenție bold, cu efecte de scroll dinamice, showcase de echipă și contoare animate."
+        "description": "Un site de agenție îndrăzneț, cu efecte de scroll dinamice, secțiune de echipă și contoare animate."
       },
       "blog": {
         "category": "Blog & Revistă",
@@ -240,7 +240,7 @@
       },
       "realestate": {
         "category": "Imobiliare & Proprietăți",
-        "description": "Un showcase de proprietăți cu carusele de imagini, secțiuni de cartier și layout-uri elegante de detalii."
+        "description": "O prezentare de proprietăți cu galerii de imagini, secțiuni de cartier și pagini elegante de detalii."
       }
     }
   },
@@ -249,7 +249,7 @@
     "heroTitle_1": "Sub ",
     "heroTitle_2": "Capotă",
     "heroTagline": "Detalii complete.",
-    "heroSubtitle": "Fiecare unealtă din acest portofoliu a fost aleasă deliberat. Iată prezentarea completă — de la motorul de randare până la pipeline-ul de deployment.",
+    "heroSubtitle": "Fiecare tehnologie din acest portofoliu a fost aleasă cu un motiv. Iată tot ce stă în spate — de la motorul de rendering până la pipeline-ul de deployment.",
     "pipelineLabel": "// deployment_flow --graph",
     "pipelineSectionTag": "flux de deploy",
     "pipelineTitle_1": "Pipeline de ",
@@ -274,6 +274,6 @@
   },
   "projectDescriptions": {
     "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea.",
-    "project-2": "O aplicație web personală pentru urmărirea obiceiurilor și obiectivelor. Urmărește rutinele zilnice, vizualizează streak-urile și rămâi consistent — totul într-o interfață curată și minimalistă."
+    "project-2": "O aplicație web personală pentru urmărirea obiceiurilor și obiectivelor. Monitorizează rutinele zilnice, vizualizează zilele consecutive și rămâi consecvent — totul într-o interfață curată și minimalistă."
   }
 }
