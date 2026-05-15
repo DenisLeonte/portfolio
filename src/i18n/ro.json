@@ -248,15 +248,23 @@
     "heroLabel": "// tech_stack --verbose",
     "heroTitle_1": "Sub ",
     "heroTitle_2": "Capotă",
-    "heroSubtitle": "Fiecare tool din acest portofoliu a fost ales deliberat. Iată breakdown-ul complet — de la rendering engine până la deployment pipeline.",
+    "heroTagline": "Detalii complete.",
+    "heroSubtitle": "Fiecare unealtă din acest portofoliu a fost aleasă deliberat. Iată prezentarea completă — de la motorul de randare până la pipeline-ul de deployment.",
     "pipelineLabel": "// deployment_flow --graph",
-    "pipelineTitle_1": "Deployment ",
-    "pipelineTitle_2": "Pipeline",
-    "pipelineSubtitle": "Trei environment-uri, două merge paths, un singur production endpoint. Environment-urile de preview și staging sunt hostuite pe o instanță Cloudflare.",
+    "pipelineSectionTag": "flux de deploy",
+    "pipelineTitle_1": "Pipeline de ",
+    "pipelineTitle_2": "Deployment",
+    "pipelineSubtitle": "Trei medii, două căi de merge, un singur endpoint de producție. Mediile de preview și staging sunt găzduite pe o instanță Cloudflare.",
     "legendTitle": "// environment_map",
     "legendBranch": "Branch",
-    "legendEnv": "Environment",
-    "legendHost": "Host"
+    "legendEnv": "Mediu",
+    "legendHost": "Host",
+    "categories": {
+      "framework": "Framework & Limbaj",
+      "styling": "Stilizare & Animație",
+      "infrastructure": "Infrastructură",
+      "services": "Servicii"
+    }
   },
   "a11y": {
     "skipToMain": "Sari la conținutul principal",

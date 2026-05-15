@@ -147,7 +147,7 @@
     "configureEmailJS": "Configura EmailJS per abilitare il modulo di contatto.",
     "configureEmailJSSub": "Copia <code>.env.example</code> → <code>.env</code> e aggiungi le credenziali EmailJS.",
     "sectionTag": "invia un segnale",
-    "talkTitle1": "Parliamo <em>davvero.</em>",
+    "talkTitle1": "Parliamo.",
     "talkTitle2": "Invia un segnale.",
     "talkSub": "Aperto a ruoli full-time, contratti, o solo una chiacchierata su sistemi distribuiti ed espresso. Scrivimi — leggo tutto.",
     "formLabel": "// compose_message",
@@ -248,15 +248,23 @@
     "heroLabel": "// stack_tecnico --dettagliato",
     "heroTitle_1": "Sotto il ",
     "heroTitle_2": "Cofano",
+    "heroTagline": "Panoramica completa.",
     "heroSubtitle": "Ogni strumento in questo portfolio è stato scelto deliberatamente. Ecco la panoramica completa — dal motore di rendering alla pipeline di deployment.",
     "pipelineLabel": "// flusso_deployment --grafo",
+    "pipelineSectionTag": "flusso di deploy",
     "pipelineTitle_1": "Pipeline di ",
     "pipelineTitle_2": "Deployment",
     "pipelineSubtitle": "Tre ambienti, due percorsi di merge, un unico endpoint di produzione. Gli ambienti di preview e staging sono ospitati su un'istanza Cloudflare.",
     "legendTitle": "// mappa_ambienti",
     "legendBranch": "Branch",
     "legendEnv": "Ambiente",
-    "legendHost": "Host"
+    "legendHost": "Host",
+    "categories": {
+      "framework": "Framework & Linguaggio",
+      "styling": "Stile & Animazione",
+      "infrastructure": "Infrastruttura",
+      "services": "Servizi"
+    }
   },
   "a11y": {
     "skipToMain": "Vai al contenuto principale",
