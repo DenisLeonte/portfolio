@@ -89,7 +89,7 @@
     "title_1": "Ce am ",
     "title_2": "Construit",
     "subtitle": "O selecție de proiecte care demonstrează munca mea în sisteme backend, interfețe frontend și pipeline-uri de date.",
-    "featured": "Featured",
+    "featured": "Recomandat",
     "otherProjects": "// Alte Proiecte",
     "screenshot": "Screenshot",
     "github": "GitHub",
@@ -98,13 +98,13 @@
     "cta": {
       "label": "// vezi mai mult",
       "heading": "Vrei să vezi ce altceva pot construi?",
-      "sub": "Acestea sunt doar câteva highlights. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
+      "sub": "Acestea sunt doar câteva exemple. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
       "btn": "Vezi Showcase-ul"
     },
     "emptyState": "Adaugă proiectele tale în",
     "sectionTag": "studii de caz & proiecte personale",
     "sectionTitle": "<em>Muncă</em> selectată din linii de producție și nopți târzii.",
-    "moreText": "Mai mult <em>pe aceeași linie</em> — restaurante, e-commerce, agenții.",
+    "moreText": "Mai mult <em>din același registru</em> — restaurante, e-commerce, agenții.",
     "viewShowcase": "Vezi Showcase-ul →"
   },
   "experience": {
@@ -112,8 +112,8 @@
     "title_1": "Parcursul ",
     "title_2": "Meu",
     "subtitle": "Repere profesionale și realizări academice care mi-au modelat cariera.",
-    "work": "// work",
-    "education": "// education",
+    "work": "// muncă",
+    "education": "// educație",
     "present": "Prezent",
     "entries": [
       {
