@@ -114,7 +114,7 @@
       {
         "id": "edu-2",
         "role": "Bachelor's — Maths for Informatics",
-        "description": "In depth mathematical knowledge and fundamentals of OOP, data structures, DB's, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities."
+        "description": "In-depth mathematical knowledge and fundamentals of OOP, data structures, databases, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities."
       },
       {
         "id": "edu-1",
@@ -208,8 +208,14 @@
     "ctaCopy": "Need something custom?",
     "letsTalk": "Let's talk →",
     "viewTemplate": "View Template →",
-    "bottomText": "Each template is designed and built from scratch — no themes, no page builders.",
+    "sectionTag": "case studies",
+    "titleTagline": "No themes, no builders.",
+    "heroSub": "Each template below is a fully interactive mini-site — designed and coded from scratch with distinct aesthetics, real animations, and production-quality UI.",
+    "bottomText": "Each template designed and built from scratch —<br><em>no themes, no page builders.</em>",
     "bottomBtn": "Get In Touch →",
+    "demoBar": {
+      "cta": "Like this? Let's talk"
+    },
     "cards": {
       "restaurant": {
         "category": "Restaurant & Café",
@@ -237,15 +243,23 @@
     "heroLabel": "// tech_stack --verbose",
     "heroTitle_1": "Under the ",
     "heroTitle_2": "Hood",
+    "heroTagline": "Full breakdown.",
     "heroSubtitle": "Every tool in this portfolio was chosen deliberately. Here's the full breakdown — from the rendering engine down to the deployment pipeline.",
     "pipelineLabel": "// deployment_flow --graph",
+    "pipelineSectionTag": "deployment flow",
     "pipelineTitle_1": "Deployment ",
     "pipelineTitle_2": "Pipeline",
     "pipelineSubtitle": "Three environments, two merge paths, one production endpoint. Preview and staging environments are hosted on a Cloudflare instance.",
     "legendTitle": "// environment_map",
     "legendBranch": "Branch",
     "legendEnv": "Environment",
-    "legendHost": "Host"
+    "legendHost": "Host",
+    "categories": {
+      "framework": "Framework & Language",
+      "styling": "Styling & Animation",
+      "infrastructure": "Infrastructure",
+      "services": "Services"
+    }
   },
   "a11y": {
     "skipToMain": "Skip to main content",
