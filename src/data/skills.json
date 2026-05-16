@@ -6,9 +6,7 @@
       "skills": [
         { "name": "Java", "level": 90 },
         { "name": "Spring Boot", "level": 88 },
-        { "name": "Hibernate", "level": 82 },
-        { "name": "REST APIs", "level": 90 },
-        { "name": "Python", "level": 80 }
+        { "name": "REST APIs", "level": 90 }
       ]
     },
     {
@@ -16,19 +14,14 @@
       "icon": "🖥️",
       "skills": [
         { "name": "React", "level": 85 },
-        { "name": "Angular", "level": 82 },
-        { "name": "TypeScript", "level": 85 },
-        { "name": "TailwindCSS", "level": 88 },
-        { "name": "HTML / CSS", "level": 90 }
+        { "name": "TypeScript", "level": 85 }
       ]
     },
     {
       "name": "AI / Machine Learning",
       "icon": "🤖",
       "skills": [
-        { "name": "PyTorch", "level": 75 },
-        { "name": "TensorFlow", "level": 70 },
-        { "name": "Scikit-learn", "level": 72 }
+        { "name": "PyTorch", "level": 75 }
       ]
     },
     {
@@ -36,18 +29,14 @@
       "icon": "🛠️",
       "skills": [
         { "name": "Docker", "level": 80 },
-        { "name": "Kubernetes", "level": 72 },
-        { "name": "Git", "level": 90 },
-        { "name": "CI / CD", "level": 78 }
+        { "name": "Git", "level": 90 }
       ]
     },
     {
       "name": "Databases",
       "icon": "🗄️",
       "skills": [
-        { "name": "PostgreSQL", "level": 82 },
-        { "name": "MySQL", "level": 80 },
-        { "name": "Redis", "level": 70 }
+        { "name": "PostgreSQL", "level": 82 }
       ]
     },
     {
