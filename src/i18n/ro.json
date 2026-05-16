@@ -22,13 +22,19 @@
       "Pasionat de AI & Big Data"
     ],
     "resume": "CV",
-    "available": "Disponibil pentru oportunități"
+    "available": "Disponibil pentru oportunități",
+    "status": "disponibil pentru muncă",
+    "softwareEngineer": "Inginer Software",
+    "currentlyText": "Construiesc sisteme enterprise la <span class=\"hb-green\">.msg Systems</span> pe un proiect Mercedes-Benz Group.",
+    "viewWorkBtn": "Vezi Proiectele →",
+    "resumeBtn": "CV ↗",
+    "letsBuild": "Hai să construim ceva"
   },
   "about": {
     "label": "01. Despre Mine",
     "title_1": "Cine ",
     "title_2": "Sunt",
-    "bio": "Sunt un Full-Stack Software Engineer cu 2 ani de experiență în dezvoltarea aplicațiilor enterprise. Dețin o diplomă de Master în High Performance Computing și Big Data Analysis, ceea ce îmi alimentează pasiunea pentru construirea soluțiilor performante, bazate pe date.\n\nÎn prezent lucrez la .msg Systems România pe un proiect Mercedes-Benz Group AG, unde dezvolt și integrez sisteme complexe folosind Spring Boot, Angular și tehnologii cloud moderne. Mă regăsesc la intersecția dintre arhitectura backend și experiențele frontend intuitive.\n\nÎn afara muncii, de obicei gătesc ceva nou, intru într-un rabbit hole despre mașini, privesc cerul nopții sau îmi fac o cafea decentă — uneori toate în aceeași seară.",
+    "bio": "Sunt un Full-Stack Software Engineer cu 2 ani de experiență în dezvoltarea aplicațiilor enterprise. Am un Master în High Performance Computing și Big Data Analysis, care mă orientează natural spre soluții performante și bine gândite.\n\nLucrez la .msg Systems România pe un proiect Mercedes-Benz Group AG, unde construiesc și integrez sisteme complexe cu Spring Boot, Angular și tehnologii cloud moderne. Îmi place să lucrez atât la un backend solid, cât și la un frontend pe care oamenii chiar vor să-l folosească.\n\nÎn afara orelor de muncă gătesc ceva nou, mă pierd în detalii despre mașini, privesc cerul nopții sau încerc să fac o cafea bună — uneori pe toate în aceeași seară.",
     "letsTalk": "Hai să Vorbim",
     "viewGithub": "Vezi GitHub",
     "highlights": {
@@ -46,7 +52,20 @@
         "cafea"
       ]
     },
-    "resume": "CV"
+    "resume": "CV",
+    "sectionTitle": "Un mic tur al <em>stației de lucru</em>.<br>Mișcă ferestrele, aruncă o privire prin fișiere — asta sunt eu.",
+    "desktopHint": "sfat: trage ferestrele ⤬",
+    "winAbout": {
+      "p1": "Sunt un <strong>inginer full-stack</strong> cu 2+ ani de experiență în aplicații enterprise. Am un M.Sc. în <strong>High Performance Computing & Big Data</strong>, care mă orientează spre soluții performante și bine construite.",
+      "p2": "Job de zi: <strong>.msg Systems Romania</strong> pe un proiect Mercedes-Benz Group — Spring Boot, Angular și middleware-ul haotic din lumea reală.",
+      "p3": "Mod noapte: gătit, mașini, cerul nopții și căutarea espresso-ului perfect.",
+      "github": "github ↗",
+      "howItWorks": "cum funcționează site-ul ↗",
+      "resume": "resume.pdf ↗"
+    },
+    "winWork": {
+      "seeAll": "vezi toate proiectele ↗"
+    }
   },
   "skills": {
     "label": "02. Tech Stack",
@@ -54,6 +73,8 @@
     "title_2": "Tools",
     "subtitle": "Tehnologii cu care lucrez zilnic — de la API-uri backend la pipeline-uri de machine learning.",
     "quickRef": "// Quick Reference",
+    "sectionTag": "stack",
+    "sectionTitle": "Lucruri cu care <em>chiar</em> livrez, notate onest.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
@@ -68,7 +89,7 @@
     "title_1": "Ce am ",
     "title_2": "Construit",
     "subtitle": "O selecție de proiecte care demonstrează munca mea în sisteme backend, interfețe frontend și pipeline-uri de date.",
-    "featured": "Featured",
+    "featured": "Recomandat",
     "otherProjects": "// Alte Proiecte",
     "screenshot": "Screenshot",
     "github": "GitHub",
@@ -77,18 +98,22 @@
     "cta": {
       "label": "// vezi mai mult",
       "heading": "Vrei să vezi ce altceva pot construi?",
-      "sub": "Acestea sunt doar câteva highlights. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
+      "sub": "Acestea sunt doar câteva exemple. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
       "btn": "Vezi Showcase-ul"
     },
-    "emptyState": "Adaugă proiectele tale în"
+    "emptyState": "Adaugă proiectele tale în",
+    "sectionTag": "studii de caz & proiecte personale",
+    "sectionTitle": "<em>Lucruri</em> construite pentru producție, în nopți lungi.",
+    "moreText": "Mai mult <em>din același registru</em> — restaurante, e-commerce, agenții.",
+    "viewShowcase": "Vezi Showcase-ul →"
   },
   "experience": {
     "label": "04. Experiență",
     "title_1": "Parcursul ",
     "title_2": "Meu",
     "subtitle": "Repere profesionale și realizări academice care mi-au modelat cariera.",
-    "work": "// work",
-    "education": "// education",
+    "work": "// muncă",
+    "education": "// educație",
     "present": "Prezent",
     "entries": [
       {
@@ -121,6 +146,20 @@
     "responseTime": "// Timp tipic de răspuns: 24–48 ore",
     "configureEmailJS": "Configurează EmailJS pentru a activa formularul de contact.",
     "configureEmailJSSub": "Copiază <code>.env.example</code> → <code>.env</code> și adaugă credențialele EmailJS.",
+    "sectionTag": "trimite un semnal",
+    "talkTitle1": "Hai să <em>vorbim.</em>",
+    "talkTitle2": "Trimite un semnal.",
+    "talkSub": "Deschis pentru roluri full-time, contract, sau doar o discuție despre sisteme distribuite și espresso. Scrie-mi — citesc tot.",
+    "formLabel": "// compose_message",
+    "directChannels": "// direct_channels",
+    "channelEmail": "Email",
+    "channelLinkedIn": "LinkedIn",
+    "channelGitHub": "GitHub",
+    "channelResume": "CV",
+    "resumeSub": "PDF, 1 pagină",
+    "statusSub": "Full-time, contract, sau doar o discuție despre sisteme distribuite și espresso.",
+    "contactForm": "Formular de Contact",
+    "contactFormSub": "Trimite un mesaj direct",
     "form": {
       "name": "// Nume",
       "email": "// Email",
@@ -153,18 +192,35 @@
   "footer": {
     "builtWith": "Construit cu",
     "top": "sus",
-    "copyEmail": "Copiază Email"
+    "copyEmail": "Copiază Email",
+    "work": "proiecte",
+    "contact": "contact",
+    "elsewhere": "în altă parte",
+    "github": "github ↗",
+    "linkedin": "linkedin ↗",
+    "colophon": "colophon ↗",
+    "localTime": "ora locală",
+    "status": "status",
+    "openForWork": "● disponibil pentru muncă",
+    "repliesWithin": "răspuns în 24h",
+    "craftedIn": "Creat în Cluj."
   },
   "showcase": {
     "label": "00. Showcase",
     "title_1": "Ce Pot ",
     "title_2": "Construi",
-    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și codat de la zero cu design distinct, animații reale și UI production-ready. Fără teme, fără page builders.",
+    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și construit de la zero cu estetică distinctă, animații reale și interfață de calitate profesională. Fără teme, fără page builders.",
     "ctaCopy": "Ai nevoie de ceva custom?",
     "letsTalk": "Hai să vorbim →",
     "viewTemplate": "Vezi Template-ul →",
-    "bottomText": "Fiecare template este proiectat și construit de la zero — fără teme, fără page builders.",
+    "sectionTag": "studii de caz",
+    "titleTagline": "Fără teme, fără page builders.",
+    "heroSub": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și construit de la zero cu estetică distinctă, animații reale și interfață de calitate profesională.",
+    "bottomText": "Fiecare template proiectat și construit de la zero —<br><em>fără teme, fără page builders.</em>",
     "bottomBtn": "Ia Legătura →",
+    "demoBar": {
+      "cta": "Îți place? Hai să vorbim"
+    },
     "cards": {
       "restaurant": {
         "category": "Restaurant & Cafenea",
@@ -172,11 +228,11 @@
       },
       "ecommerce": {
         "category": "E-commerce & Produs",
-        "description": "Un showcase de produse elegant cu galerii interactive, UI de coș și design minimalist modern."
+        "description": "O prezentare elegantă de produse cu galerii interactive, coș de cumpărături și design minimalist modern."
       },
       "agency": {
         "category": "Agenție Creativă",
-        "description": "Un site de agenție bold, cu efecte de scroll dinamice, showcase de echipă și contoare animate."
+        "description": "Un site de agenție îndrăzneț, cu efecte de scroll dinamice, secțiune de echipă și contoare animate."
       },
       "blog": {
         "category": "Blog & Revistă",
@@ -184,7 +240,7 @@
       },
       "realestate": {
         "category": "Imobiliare & Proprietăți",
-        "description": "Un showcase de proprietăți cu carusele de imagini, secțiuni de cartier și layout-uri elegante de detalii."
+        "description": "O prezentare de proprietăți cu galerii de imagini, secțiuni de cartier și pagini elegante de detalii."
       }
     }
   },
@@ -192,15 +248,23 @@
     "heroLabel": "// tech_stack --verbose",
     "heroTitle_1": "Sub ",
     "heroTitle_2": "Capotă",
-    "heroSubtitle": "Fiecare tool din acest portofoliu a fost ales deliberat. Iată breakdown-ul complet — de la rendering engine până la deployment pipeline.",
+    "heroTagline": "Detalii complete.",
+    "heroSubtitle": "Fiecare tehnologie din acest portofoliu a fost aleasă cu un motiv. Iată tot ce stă în spate — de la motorul de rendering până la pipeline-ul de deployment.",
     "pipelineLabel": "// deployment_flow --graph",
-    "pipelineTitle_1": "Deployment ",
-    "pipelineTitle_2": "Pipeline",
-    "pipelineSubtitle": "Trei environment-uri, două merge paths, un singur production endpoint. Environment-urile de preview și staging sunt hostuite pe o instanță Cloudflare.",
+    "pipelineSectionTag": "flux de deploy",
+    "pipelineTitle_1": "Pipeline de ",
+    "pipelineTitle_2": "Deployment",
+    "pipelineSubtitle": "Trei medii, două căi de merge, un singur endpoint de producție. Mediile de preview și staging sunt găzduite pe o instanță Cloudflare.",
     "legendTitle": "// environment_map",
     "legendBranch": "Branch",
-    "legendEnv": "Environment",
-    "legendHost": "Host"
+    "legendEnv": "Mediu",
+    "legendHost": "Host",
+    "categories": {
+      "framework": "Framework & Limbaj",
+      "styling": "Stilizare & Animație",
+      "infrastructure": "Infrastructură",
+      "services": "Servicii"
+    }
   },
   "a11y": {
     "skipToMain": "Sari la conținutul principal",
@@ -209,6 +273,7 @@
     "primaryNav": "Navigație principală"
   },
   "projectDescriptions": {
-    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea."
+    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea.",
+    "project-2": "O aplicație web personală pentru urmărirea obiceiurilor și obiectivelor. Monitorizează rutinele zilnice, vizualizează zilele consecutive și rămâi consecvent — totul într-o interfață curată și minimalistă."
   }
 }

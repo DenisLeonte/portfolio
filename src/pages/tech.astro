@@ -11,6 +11,7 @@ const pageDescription = `The technologies and deployment pipeline powering ${pro
 const techStack = [
   {
     category: 'Framework & Language',
+    categoryKey: 'techPage.categories.framework',
     code: '01',
     items: [
       { badge: 'AS', name: 'Astro', version: '4.16', desc: 'Static site generator with file-based routing and zero-JS-by-default React islands.' },
@@ -20,6 +21,7 @@ const techStack = [
   },
   {
     category: 'Styling & Animation',
+    categoryKey: 'techPage.categories.styling',
     code: '02',
     items: [
       { badge: 'TW', name: 'Tailwind CSS', version: '3.4', desc: 'Utility-first CSS layered with custom CSS properties for the v2 design system.' },
@@ -29,6 +31,7 @@ const techStack = [
   },
   {
     category: 'Infrastructure',
+    categoryKey: 'techPage.categories.infrastructure',
     code: '03',
     items: [
       { badge: 'GA', name: 'GitHub Actions', version: null, desc: 'CI/CD pipeline: auto-builds and deploys to GitHub Pages on every push to main.' },
@@ -38,6 +41,7 @@ const techStack = [
   },
   {
     category: 'Services',
+    categoryKey: 'techPage.categories.services',
     code: '04',
     items: [
       { badge: 'EJ', name: 'EmailJS', version: '4.4', desc: 'Client-side email delivery for the contact form — no backend required.' },
@@ -56,14 +60,14 @@ const techStack = [
         <div class="section-head">
           <div class="meta">
             <div class="section-num">00 / tech</div>
-            <div class="section-tag">stack</div>
+            <div class="section-tag" data-i18n="skills.sectionTag">stack</div>
           </div>
           <h1 class="section-title">
-            Under the <em>Hood.</em><br>
-            <span class="title-outline">Full breakdown.</span>
+            <span data-i18n="techPage.heroTitle_1">Under the </span><em data-i18n="techPage.heroTitle_2">Hood</em>.<br>
+            <span class="title-outline" data-i18n="techPage.heroTagline">Full breakdown.</span>
           </h1>
         </div>
-        <p class="hero-sub">
+        <p class="hero-sub" data-i18n="techPage.heroSubtitle">
           Every tool in this portfolio was chosen deliberately. Here's the full breakdown — from the rendering engine down to the deployment pipeline.
         </p>
       </div>
@@ -76,7 +80,7 @@ const techStack = [
           <div class="tech-group">
             <div class="group-header">
               <span class="group-code">{group.code}</span>
-              <span class="group-title">{group.category}</span>
+              <span class="group-title" data-i18n={group.categoryKey}>{group.category}</span>
             </div>
             <div class="tech-rows">
               {group.items.map((item, i) => (
@@ -101,14 +105,14 @@ const techStack = [
       <div class="page-inner">
         <div class="section-head" style="margin-bottom: 48px;">
           <div class="meta">
-            <div class="section-num">// pipeline</div>
-            <div class="section-tag">deployment flow</div>
+            <div class="section-num" data-i18n="techPage.pipelineLabel">// pipeline</div>
+            <div class="section-tag" data-i18n="techPage.pipelineSectionTag">deployment flow</div>
           </div>
           <h2 class="section-title-sm">
-            Deployment <em>Pipeline.</em>
+            <span data-i18n="techPage.pipelineTitle_1">Deployment </span><em data-i18n="techPage.pipelineTitle_2">Pipeline</em>.
           </h2>
         </div>
-        <p class="pipeline-sub">
+        <p class="pipeline-sub" data-i18n="techPage.pipelineSubtitle">
           Three environments, two merge paths, one production endpoint. Preview and staging are hosted on Cloudflare.
         </p>
 
@@ -117,12 +121,12 @@ const techStack = [
         </div>
 
         <div class="legend">
-          <div class="legend-label">// environment_map</div>
+          <div class="legend-label" data-i18n="techPage.legendTitle">// environment_map</div>
           <div class="legend-rows">
             <div class="legend-row legend-head">
-              <span>Branch</span>
-              <span>Environment</span>
-              <span>Host</span>
+              <span data-i18n="techPage.legendBranch">Branch</span>
+              <span data-i18n="techPage.legendEnv">Environment</span>
+              <span data-i18n="techPage.legendHost">Host</span>
             </div>
             <div class="legend-row">
               <span><code>feature/*</code></span>

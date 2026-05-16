@@ -22,13 +22,19 @@
       "Appassionato di AI & Big Data"
     ],
     "resume": "CV",
-    "available": "Disponibile per opportunità"
+    "available": "Disponibile per opportunità",
+    "status": "disponibile per lavoro",
+    "softwareEngineer": "Ingegnere Software",
+    "currentlyText": "Sviluppo sistemi enterprise presso <span class=\"hb-green\">.msg Systems</span> su un progetto Mercedes-Benz Group.",
+    "viewWorkBtn": "Vedi i Progetti →",
+    "resumeBtn": "CV ↗",
+    "letsBuild": "Costruiamo qualcosa"
   },
   "about": {
     "label": "01. Chi Sono",
     "title_1": "Chi ",
     "title_2": "Sono",
-    "bio": "Sono un Ingegnere Software Full-Stack con 2 anni di esperienza nella creazione di applicazioni enterprise. Ho una laurea magistrale in High Performance Computing e Analisi Big Data, che alimenta la mia passione per la creazione di soluzioni performanti e basate sui dati.\n\nAttualmente lavoro presso .msg Systems Romania su un progetto Mercedes-Benz Group AG, dove sviluppo e integro sistemi complessi utilizzando Spring Boot, Angular e tecnologie cloud moderne. Mi trovo al meglio all'intersezione tra architettura backend ed esperienze frontend intuitive.\n\nFuori dal lavoro di solito cucino qualcosa di nuovo, mi perdo in un rabbit hole sulle auto, guardo il cielo notturno o mi preparo un buon caffe — a volte tutto nella stessa serata.",
+    "bio": "Sono un Ingegnere Software Full-Stack con 2 anni di esperienza nella creazione di applicazioni enterprise. Ho una laurea magistrale in High Performance Computing e Analisi Big Data, che alimenta la mia passione per la creazione di soluzioni performanti e basate sui dati.\n\nAttualmente lavoro presso .msg Systems Romania su un progetto Mercedes-Benz Group AG, dove sviluppo e integro sistemi complessi utilizzando Spring Boot, Angular e tecnologie cloud moderne. Mi muovo con agio all'intersezione tra architettura backend ed esperienze frontend intuitive.\n\nFuori dal lavoro di solito cucino qualcosa di nuovo, mi perdo ad approfondire il mondo delle auto, guardo il cielo notturno o mi preparo un buon caffè — a volte tutto nella stessa serata.",
     "letsTalk": "Parliamo",
     "viewGithub": "Vedi GitHub",
     "highlights": {
@@ -43,10 +49,23 @@
         "cucinare",
         "auto",
         "astronomia",
-        "caffe"
+        "caffè"
       ]
     },
-    "resume": "CV"
+    "resume": "CV",
+    "sectionTitle": "Un piccolo tour della <em>postazione di lavoro</em>.<br>Sposta le finestre, sbircia i file — questo sono io.",
+    "desktopHint": "suggerimento: trascina le finestre ⤬",
+    "winAbout": {
+      "p1": "Sono un <strong>ingegnere full-stack</strong> con 2+ anni di esperienza in app enterprise. Ho un M.Sc. in <strong>High Performance Computing & Big Data</strong>, che mi porta a privilegiare design performanti e orientati ai dati.",
+      "p2": "Lavoro di giorno: <strong>.msg Systems Romania</strong> su un progetto Mercedes-Benz Group — Spring Boot, Angular e il middleware caotico del mondo reale.",
+      "p3": "Modalità notte: cucinare, auto, il cielo notturno e la ricerca dell'espresso perfetto.",
+      "github": "github ↗",
+      "howItWorks": "come funziona il sito ↗",
+      "resume": "resume.pdf ↗"
+    },
+    "winWork": {
+      "seeAll": "vedi tutti i progetti ↗"
+    }
   },
   "skills": {
     "label": "02. Stack Tecnico",
@@ -54,6 +73,8 @@
     "title_2": "Strumenti",
     "subtitle": "Tecnologie con cui lavoro ogni giorno — dalle API backend alle pipeline di machine learning.",
     "quickRef": "// Riferimento Rapido",
+    "sectionTag": "stack",
+    "sectionTitle": "Tecnologie con cui <em>davvero</em> lavoro, valutate onestamente.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
@@ -80,7 +101,11 @@
       "sub": "Questi sono solo alcuni punti salienti. Scopri la gamma completa di quello che posso progettare e costruire — dai siti per ristoranti ai negozi e-commerce alle agenzie creative.",
       "btn": "Vedi la Vetrina"
     },
-    "emptyState": "Aggiungi i tuoi progetti in"
+    "emptyState": "Aggiungi i tuoi progetti in",
+    "sectionTag": "case study & progetti personali",
+    "sectionTitle": "<em>Lavori</em> reali — dall'ambiente di produzione alle notti insonni.",
+    "moreText": "Ce n'è ancora <em>di più</em> — ristoranti, e-commerce, agenzie.",
+    "viewShowcase": "Vedi la Vetrina →"
   },
   "experience": {
     "label": "04. Esperienza",
@@ -94,7 +119,7 @@
       {
         "id": "edu-2",
         "role": "Laurea Triennale — Matematica per l'Informatica",
-        "description": "Conoscenze approfondite di matematica e fondamenti di OOP, strutture dati, database, sviluppo web, AI e analisi matematica, algebra, geometria, statistica e probabilita."
+        "description": "Conoscenze approfondite di matematica e fondamenti di OOP, strutture dati, database, sviluppo web, AI e analisi matematica, algebra, geometria, statistica e probabilità."
       },
       {
         "id": "edu-1",
@@ -116,11 +141,25 @@
     "terminal": "~ invia-messaggio",
     "emailLabel": "// Email",
     "socialLabel": "// Social",
-    "openTo": "Aperto a opportunita",
+    "openTo": "Aperto a opportunità",
     "available": "Disponibile per progetti freelance, ruoli full-time e collaborazioni interessanti.",
     "responseTime": "// Tempo tipico di risposta: 24–48 ore",
     "configureEmailJS": "Configura EmailJS per abilitare il modulo di contatto.",
     "configureEmailJSSub": "Copia <code>.env.example</code> → <code>.env</code> e aggiungi le credenziali EmailJS.",
+    "sectionTag": "invia un segnale",
+    "talkTitle1": "Parliamo.",
+    "talkTitle2": "Invia un segnale.",
+    "talkSub": "Aperto a ruoli full-time, contratti, o solo una chiacchierata su sistemi distribuiti ed espresso. Scrivimi — leggo tutto.",
+    "formLabel": "// compose_message",
+    "directChannels": "// direct_channels",
+    "channelEmail": "Email",
+    "channelLinkedIn": "LinkedIn",
+    "channelGitHub": "GitHub",
+    "channelResume": "CV",
+    "resumeSub": "PDF, 1 pagina",
+    "statusSub": "Full-time, contratti, o solo una chiacchierata su sistemi distribuiti ed espresso.",
+    "contactForm": "Modulo di Contatto",
+    "contactFormSub": "Invia un messaggio direttamente",
     "form": {
       "name": "// Nome",
       "email": "// Email",
@@ -128,22 +167,22 @@
       "namePlaceholder": "Mario Rossi",
       "emailPlaceholder": "mario@esempio.it",
       "messagePlaceholder": "Raccontami del tuo progetto o salutami...",
-      "nameRequired": "Il nome e obbligatorio.",
-      "emailRequired": "L'email e obbligatoria.",
+      "nameRequired": "Il nome è obbligatorio.",
+      "emailRequired": "L'email è obbligatoria.",
       "emailInvalid": "Inserisci un'email valida.",
       "messageMin": "Il messaggio deve avere almeno 10 caratteri.",
       "sending": "Invio in corso...",
       "send": "./invia",
       "sendFlag": "--messaggio",
-      "success": "Messaggio inviato! Ti rispondero presto.",
-      "error": "Qualcosa e andato storto. Prova a inviarmi un'email direttamente."
+      "success": "Messaggio inviato! Ti risponderò presto.",
+      "error": "Qualcosa è andato storto. Prova a inviarmi un'email direttamente."
     }
   },
   "cta": {
     "label": "05. Contattami",
     "title_1": "Lavoriamo ",
     "title_2": "Insieme",
-    "subtitle": "Hai un progetto in mente o vuoi solo salutare? Sono sempre aperto a nuove opportunita e conversazioni interessanti.",
+    "subtitle": "Hai un progetto in mente o vuoi solo salutare? Sono sempre aperto a nuove opportunità e conversazioni interessanti.",
     "btn": "Contattami"
   },
   "techRef": {
@@ -153,18 +192,35 @@
   "footer": {
     "builtWith": "Costruito con",
     "top": "su",
-    "copyEmail": "Copia Email"
+    "copyEmail": "Copia Email",
+    "work": "progetti",
+    "contact": "contatto",
+    "elsewhere": "altrove",
+    "github": "github ↗",
+    "linkedin": "linkedin ↗",
+    "colophon": "colophon ↗",
+    "localTime": "ora locale",
+    "status": "status",
+    "openForWork": "● disponibile per lavoro",
+    "repliesWithin": "risposta entro 24h",
+    "craftedIn": "Realizzato a Cluj."
   },
   "showcase": {
     "label": "00. Vetrina",
     "title_1": "Cosa Posso ",
     "title_2": "Costruire",
-    "subtitle": "Ogni template qui sotto e un mini-sito completamente interattivo — progettato e codificato da zero con estetica distinta, animazioni reali e interfaccia di qualita produzione. Nessun tema, nessun page builder.",
+    "subtitle": "Ogni template qui sotto è un mini-sito completamente interattivo — progettato e codificato da zero con estetica distinta, animazioni reali e interfaccia di qualità produzione. Nessun tema, nessun page builder.",
     "ctaCopy": "Hai bisogno di qualcosa di personalizzato?",
     "letsTalk": "Parliamo →",
     "viewTemplate": "Vedi Template →",
-    "bottomText": "Ogni template e progettato e costruito da zero — nessun tema, nessun page builder.",
+    "sectionTag": "casi studio",
+    "titleTagline": "Nessun tema, nessun builder.",
+    "heroSub": "Ogni template qui sotto è un mini-sito completamente interattivo — progettato e codificato da zero con estetica distinta, animazioni reali e interfaccia di qualità produzione.",
+    "bottomText": "Ogni template progettato e costruito da zero —<br><em>nessun tema, nessun page builder.</em>",
     "bottomBtn": "Contattami →",
+    "demoBar": {
+      "cta": "Ti piace? Parliamo"
+    },
     "cards": {
       "restaurant": {
         "category": "Ristorante & Caffè",
@@ -172,11 +228,11 @@
       },
       "ecommerce": {
         "category": "E-commerce & Prodotto",
-        "description": "Una vetrina prodotti elegante con gallerie interattive, UI carrello e design minimalista moderno."
+        "description": "Una vetrina prodotti elegante con gallerie interattive, carrello della spesa e design minimalista moderno."
       },
       "agency": {
         "category": "Agenzia Creativa",
-        "description": "Un sito agenzia audace e dinamico con effetti di scroll, vetrina team e contatori animati."
+        "description": "Un sito agenzia audace e dinamico con effetti di scroll, presentazione del team e contatori animati."
       },
       "blog": {
         "category": "Blog & Rivista",
@@ -192,15 +248,23 @@
     "heroLabel": "// stack_tecnico --dettagliato",
     "heroTitle_1": "Sotto il ",
     "heroTitle_2": "Cofano",
-    "heroSubtitle": "Ogni strumento in questo portfolio e stato scelto deliberatamente. Ecco la panoramica completa — dal motore di rendering alla pipeline di deployment.",
+    "heroTagline": "Panoramica completa.",
+    "heroSubtitle": "Ogni strumento in questo portfolio è stato scelto deliberatamente. Ecco la panoramica completa — dal motore di rendering alla pipeline di deployment.",
     "pipelineLabel": "// flusso_deployment --grafo",
+    "pipelineSectionTag": "flusso di deploy",
     "pipelineTitle_1": "Pipeline di ",
     "pipelineTitle_2": "Deployment",
     "pipelineSubtitle": "Tre ambienti, due percorsi di merge, un unico endpoint di produzione. Gli ambienti di preview e staging sono ospitati su un'istanza Cloudflare.",
     "legendTitle": "// mappa_ambienti",
     "legendBranch": "Branch",
     "legendEnv": "Ambiente",
-    "legendHost": "Host"
+    "legendHost": "Host",
+    "categories": {
+      "framework": "Framework & Linguaggio",
+      "styling": "Stile & Animazione",
+      "infrastructure": "Infrastruttura",
+      "services": "Servizi"
+    }
   },
   "a11y": {
     "skipToMain": "Vai al contenuto principale",
@@ -209,6 +273,7 @@
     "primaryNav": "Navigazione principale"
   },
   "projectDescriptions": {
-    "project-1": "Un sito web professionale di servizi costruito per l'attivita di idraulica e HVAC di mio padre a Suceava, Romania. Include elenchi di servizi, dettagli di contatto e markup SEO strutturato per aiutare i clienti locali a trovare l'attivita."
+    "project-1": "Un sito web professionale di servizi costruito per l'attività di idraulica e HVAC di mio padre a Suceava, Romania. Include elenchi di servizi, dettagli di contatto e markup SEO strutturato per aiutare i clienti locali a trovare l'attività.",
+    "project-2": "Un'app web personale per il monitoraggio di abitudini e obiettivi. Traccia le routine quotidiane, visualizza le serie consecutive e mantieni la costanza — tutto in un'interfaccia pulita e minimale."
   }
 }
