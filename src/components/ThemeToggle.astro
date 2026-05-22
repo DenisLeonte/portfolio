@@ -199,4 +199,10 @@ const { twoWay = false } = Astro.props;
       );
     }
   });
+
+  // ─── Re-sync indicator on every View Transition ──────────────────────────
+  document.addEventListener('astro:page-load', () => {
+    const stored = localStorage.getItem(THEME_KEY) ?? 'system';
+    updateUI(stored);
+  });
 </script>
