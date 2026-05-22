@@ -520,6 +520,21 @@ const allTranslations = JSON.stringify({ en, ro, it });
         applyTranslations(lang);
       }
 
+      // ─── Re-apply html classes/attrs immediately after each View Transition swap ───
+      // Astro resets <html> attributes to the incoming page's values during the swap,
+      // which removes the dynamically-added dark/light class and lang attrs.
+      document.addEventListener('astro:after-swap', () => {
+        const t = localStorage.getItem('theme');
+        const h = document.documentElement;
+        h.classList.remove('dark', 'light');
+        if (t === 'dark') h.classList.add('dark');
+        if (t === 'light') h.classList.add('light');
+
+        const lang = getCurrentLang();
+        h.setAttribute('lang', lang);
+        h.dataset.lang = lang;
+      });
+
       // ─── Initial render + re-apply on every View Transition ───
       document.addEventListener('astro:page-load', () => applyTranslations(getCurrentLang()));
 
