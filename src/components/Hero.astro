@@ -1,7 +1,6 @@
 ---
 import profile from '../data/profile.json';
-import pkg from '../../package.json';
-const version = pkg.version;
+const buildId = import.meta.env.PUBLIC_BUILD_SHA?.slice(0, 7) ?? 'local';
 ---
 
 <section id="hero" data-fx="aurora">
@@ -16,7 +15,7 @@ const version = pkg.version;
       <span id="hero-time">--:--:--</span>
     </div>
     <div class="htb-right">
-      <span>v{version}</span>
+      <span>build {buildId}</span>
     </div>
   </div>
 
@@ -241,7 +240,19 @@ const version = pkg.version;
   function tick() {
     const el = document.getElementById('hero-time');
     if (el) {
-      el.textContent = new Date().toLocaleTimeString('en-GB', { hour12: false }) + ' EET';
+      const now = new Date();
+      const time = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Bucharest',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      }).format(now);
+      const zone = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Bucharest',
+        timeZoneName: 'short',
+      }).formatToParts(now).find(part => part.type === 'timeZoneName')?.value;
+      el.textContent = `${time} ${zone ?? ''}`.trim();
     }
   }
   tick();

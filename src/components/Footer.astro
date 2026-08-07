@@ -1,8 +1,6 @@
 ---
 import profile from '../data/profile.json';
-import pkg from '../../package.json';
-const [major, minor] = pkg.version.split('.');
-const displayVersion = `v${major}.${minor}`;
+const buildId = import.meta.env.PUBLIC_BUILD_SHA?.slice(0, 7) ?? 'local';
 ---
 
 <footer>
@@ -31,7 +29,7 @@ const displayVersion = `v${major}.${minor}`;
 
   <div class="footer-mega">
     <div>© 2026 — {profile.name}. <span data-i18n="footer.craftedIn">Crafted in Cluj.</span></div>
-    <div>{displayVersion} · desktop remix</div>
+    <div>build {buildId} · desktop remix</div>
   </div>
 </footer>
 
@@ -99,7 +97,15 @@ const displayVersion = `v${major}.${minor}`;
 <script>
   function tickFooter() {
     const el = document.getElementById('footer-time');
-    if (el) el.textContent = new Date().toLocaleTimeString('en-GB', { hour12: false });
+    if (el) {
+      el.textContent = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Bucharest',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      }).format(new Date());
+    }
   }
   tickFooter();
   setInterval(tickFooter, 1000);
