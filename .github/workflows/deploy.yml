@@ -29,19 +29,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Bump minor version
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          npm version minor --no-git-tag-version
-          VERSION=$(node -p "require('./package.json').version")
-          echo "APP_VERSION=$VERSION" >> "$GITHUB_ENV"
-          git add package.json
-          git commit -m "chore: bump version to $VERSION [skip ci]"
-          git push
-
       - name: Build
         env:
+          PUBLIC_BUILD_SHA: ${{ github.sha }}
           PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.PUBLIC_EMAILJS_SERVICE_ID }}
           PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.PUBLIC_EMAILJS_TEMPLATE_ID }}
           PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.PUBLIC_EMAILJS_PUBLIC_KEY }}
@@ -53,7 +43,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
 
-      - name: Print deployed version
+      - name: Print deployed build
         run: |
-          echo "Deployed version ${{ env.APP_VERSION }}"
-          echo "## Deployed version ${{ env.APP_VERSION }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Deployed build ${GITHUB_SHA::7}"
+          echo "## Deployed build ${GITHUB_SHA::7}" >> "$GITHUB_STEP_SUMMARY"

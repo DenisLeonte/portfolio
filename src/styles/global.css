@@ -46,10 +46,10 @@ html.light {
   --warm:  oklch(0.6 0.12 70);
   --red:   oklch(0.55 0.22 25);
   --text:       #1c1a17;
-  --text-dim:   rgba(28,26,23,0.55);
-  --text-faint: rgba(28,26,23,0.3);
-  --line:        rgba(28,26,23,0.12);
-  --line-strong: rgba(28,26,23,0.22);
+  --text-dim:   rgba(28,26,23,0.68);
+  --text-faint: rgba(28,26,23,0.48);
+  --line:        rgba(28,26,23,0.16);
+  --line-strong: rgba(28,26,23,0.3);
 }
 
 @media (prefers-color-scheme: light) {
@@ -62,10 +62,10 @@ html.light {
     --warm:  oklch(0.6 0.12 70);
     --red:   oklch(0.55 0.22 25);
     --text:       #1c1a17;
-    --text-dim:   rgba(28,26,23,0.55);
-    --text-faint: rgba(28,26,23,0.3);
-    --line:        rgba(28,26,23,0.12);
-    --line-strong: rgba(28,26,23,0.22);
+    --text-dim:   rgba(28,26,23,0.68);
+    --text-faint: rgba(28,26,23,0.48);
+    --line:        rgba(28,26,23,0.16);
+    --line-strong: rgba(28,26,23,0.3);
   }
 }
 

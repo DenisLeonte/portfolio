@@ -69,7 +69,7 @@
     "subtitle": "Technologies I work with daily — from backend APIs to machine learning pipelines.",
     "quickRef": "// Quick Reference",
     "sectionTag": "stack",
-    "sectionTitle": "Things I <em>actually</em> ship with, scored honestly.",
+    "sectionTitle": "Things I <em>actually</em> ship with.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
