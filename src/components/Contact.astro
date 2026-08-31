@@ -35,6 +35,10 @@ const hasEmailJS = !!(
         ) : (
           <ContactForm client:visible />
         )}
+        <p class="form-privacy">
+          <span data-i18n="contact.privacyNotice">Your name, email address, and message are used only to reply to this inquiry.</span>{' '}
+          <a href="/privacy" data-i18n="contact.privacyLink">Read the privacy policy</a>.
+        </p>
       </div>
 
       <!-- Info column -->
@@ -89,7 +93,7 @@ const hasEmailJS = !!(
           </div>
         </div>
 
-        <div class="response-note" data-i18n="contact.responseTime">// Typical response: 24–48 hours</div>
+        <div class="response-note" data-i18n="contact.responseTime">// You'll receive a personal reply within 2 business days.</div>
       </div>
     </div>
   </div>
@@ -187,6 +191,15 @@ const hasEmailJS = !!(
   .placeholder-sub code {
     color: var(--green);
   }
+  .form-privacy {
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.7;
+    color: var(--text-faint);
+  }
+  .form-privacy a { color: var(--green); text-decoration: none; }
+  .form-privacy a:hover, .form-privacy a:focus-visible { text-decoration: underline; }
 
   /* Info column */
   .channels { display: flex; flex-direction: column; margin-bottom: 40px; }

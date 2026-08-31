@@ -23,10 +23,10 @@ function formatDate(d: string) {
   <div class="section-inner">
     <div class="section-head">
       <div class="meta">
-        <div class="section-num">04 / career</div>
-        <div class="section-tag">timeline</div>
+        <div class="section-num" data-i18n="experience.sectionNum">04 / career</div>
+        <div class="section-tag" data-i18n="experience.sectionTag">timeline</div>
       </div>
-      <h2 class="section-title">
+      <h2 class="section-title" data-i18n-html="experience.sectionTitle">
         The <em>path</em>, from algebra hall to enterprise stack.
       </h2>
     </div>
@@ -41,7 +41,7 @@ function formatDate(d: string) {
           <div class="tl-info">
             <div class="tl-company">{entry.company}</div>
             <div class="tl-role timeline-role" data-entry-id={entry.id}>{entry.role}</div>
-            <span class={`tl-type ${entry.type}`}>
+            <span class={`tl-type ${entry.type}`} data-i18n={entry.type === 'work' ? 'experience.work' : 'experience.education'}>
               {entry.type === 'work' ? '// work' : '// education'}
             </span>
           </div>

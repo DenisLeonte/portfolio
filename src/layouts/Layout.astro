@@ -10,16 +10,58 @@ export interface Props {
   title?: string;
   description?: string;
   image?: string;
+  robots?: string;
 }
 
 const {
   title = 'Leonte Denis — Full-Stack Software Engineer',
   description = 'Full-Stack Software Engineer with 2 years of experience. Spring Boot, React, Angular, AI & Big Data. Currently at Mercedes-Benz Group AG.',
-  image = '/og-image.png',
+  image,
+  robots = 'index, follow',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteURL = new URL('/', Astro.site);
+const personId = `${siteURL.href}#person`;
+const websiteId = `${siteURL.href}#website`;
+const webpageId = `${canonicalURL.href}#webpage`;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const allTranslations = JSON.stringify({ en, ro, it });
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: profile.name,
+      jobTitle: profile.title,
+      description: profile.heroSubtitle,
+      url: siteURL.href,
+      email: profile.email,
+      sameAs: [profile.socialLinks.github, profile.socialLinks.linkedin].filter(Boolean),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteURL.href,
+      name: 'denis.exe',
+      alternateName: `${profile.name} Portfolio`,
+      inLanguage: ['en', 'ro', 'it'],
+      publisher: { '@id': personId },
+    },
+    {
+      '@type': isHome ? 'ProfilePage' : 'WebPage',
+      '@id': webpageId,
+      url: canonicalURL.href,
+      name: title,
+      description,
+      isPartOf: { '@id': websiteId },
+      about: { '@id': personId },
+      ...(isHome ? { mainEntity: { '@id': personId } } : {}),
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -53,6 +95,7 @@ const allTranslations = JSON.stringify({ en, ro, it });
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <meta name="author" content="Leonte Denis" />
     <meta name="keywords" content="Full-Stack Developer, Spring Boot, React, Angular, Java, Software Engineer, Portfolio" />
 
@@ -67,14 +110,14 @@ const allTranslations = JSON.stringify({ en, ro, it });
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
 
     <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+    {image && <meta property="twitter:image" content={new URL(image, Astro.site)} />}
 
     <!-- Security Headers (meta-tag equivalents for static hosting) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -92,16 +135,7 @@ const allTranslations = JSON.stringify({ en, ro, it });
     <ViewTransitions />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": profile.name,
-      "jobTitle": profile.title,
-      "description": description,
-      "url": String(canonicalURL),
-      "email": profile.email,
-      "sameAs": [profile.socialLinks.github, profile.socialLinks.linkedin].filter(Boolean),
-    })} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
 
   <body>

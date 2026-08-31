@@ -3,14 +3,16 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="404 — Not Found | Leonte Denis"
-  description="Page not found."
+  title="Page Not Found | Leonte Denis"
+  description="That page could not be found. Return to the portfolio, browse selected work, or contact Leonte Denis."
+  robots="noindex, follow"
 >
   <main
     class="flex items-center justify-center"
     style="min-height: 100vh; min-height: 100dvh; padding: 2rem; background: var(--bg-primary);"
   >
     <div style="max-width: 38rem; width: 100%;">
+      <h1 class="sr-only">Page not found</h1>
       <!-- Terminal window chrome -->
       <div
         style="border: 1px solid var(--border-green); border-radius: 8px; overflow: hidden; box-shadow: 0 0 40px var(--green-glow);"
@@ -54,12 +56,12 @@ import Layout from '../layouts/Layout.astro';
               <span style="color: var(--green-secondary);">user@portfolio</span><span style="color: var(--text-secondary);">:</span><span style="color: #2563eb;">~</span><span style="color: var(--text-secondary);">$</span>
               <span style="color: var(--text-primary); margin-left: 0.5rem;">ls /pages/</span>
             </div>
-            <div style="color: var(--green-muted); margin-top: 0.15rem; padding-left: 0.25rem;">
-              <span style="color: var(--green-primary);">about/</span>&nbsp;&nbsp;
-              <span style="color: var(--green-primary);">skills/</span>&nbsp;&nbsp;
-              <span style="color: var(--green-primary);">projects/</span>&nbsp;&nbsp;
-              <span style="color: var(--green-primary);">experience/</span>&nbsp;&nbsp;
-              <span style="color: var(--green-primary);">contact/</span>
+            <div class="suggested-paths" style="color: var(--green-muted); margin-top: 0.15rem; padding-left: 0.25rem;">
+              <a href="/#about">about/</a>
+              <a href="/#projects">projects/</a>
+              <a href="/showcase">showcase/</a>
+              <a href="/tech">tech/</a>
+              <a href="/contact">contact/</a>
             </div>
 
             <!-- Command 3: suggestion -->
@@ -86,6 +88,7 @@ import Layout from '../layouts/Layout.astro';
                 </svg>
                 Execute: cd ~/home
               </a>
+              <a href="/contact" class="recovery-link">Contact me</a>
             </div>
           </div>
         </div>
@@ -98,6 +101,23 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </main>
 </Layout>
+
+<style>
+  .suggested-paths { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+  .suggested-paths a { color: var(--green-primary); text-decoration: none; }
+  .suggested-paths a:hover, .suggested-paths a:focus-visible { text-decoration: underline; }
+  .recovery-link {
+    display: inline-flex;
+    margin-left: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+    text-decoration: none;
+  }
+  .recovery-link:hover, .recovery-link:focus-visible { color: var(--green-primary); text-decoration: underline; }
+  @media (max-width: 480px) {
+    .recovery-link { margin: 0.75rem 0 0; display: flex; }
+  }
+</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

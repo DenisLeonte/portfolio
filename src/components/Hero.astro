@@ -48,8 +48,12 @@ const version = pkg.version;
       </div>
     </div>
     <div class="hb-cta">
-      <a href="#projects" class="btn-v2 btn-v2-primary" data-i18n="hero.viewWorkBtn">View Work →</a>
-      <a href="/resume.pdf" download class="btn-v2" data-i18n="hero.resumeBtn">Resume ↗</a>
+      <div class="hb-cta-actions">
+        <a href="/contact" class="btn-v2 btn-v2-primary" data-i18n="hero.startConversation">Start a conversation</a>
+        <a href="#projects" class="btn-v2" data-i18n="hero.viewWorkBtn">View selected work</a>
+        <a href="/resume.pdf" download class="btn-v2 btn-v2-text" data-i18n="hero.resumeBtn">Resume</a>
+      </div>
+      <div class="hb-response" data-i18n="responsePromise.compact">Replies within 2 business days.</div>
     </div>
   </div>
 </section>
@@ -165,10 +169,23 @@ const version = pkg.version;
 
   .hb-cta {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 10px;
     align-items: flex-end;
+    justify-content: flex-start;
+  }
+  .hb-cta-actions {
+    display: flex;
+    gap: 10px;
     justify-content: flex-end;
     flex-wrap: wrap;
+  }
+  .hb-response {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .btn-v2 {
@@ -196,6 +213,8 @@ const version = pkg.version;
     color: var(--bg);
   }
   .btn-v2-primary:hover { background: var(--bone); border-color: var(--bone); color: var(--bg); }
+  .btn-v2-text { border-color: transparent; padding-inline: 8px; color: var(--text-dim); }
+  .btn-v2-text:hover { border-color: transparent; color: var(--green); }
 
   @keyframes lineUp {
     from { transform: translateY(110%); }
@@ -208,7 +227,8 @@ const version = pkg.version;
 
   @media (max-width: 1100px) {
     .hero-bottom { grid-template-columns: 1fr 1fr; }
-    .hb-cta { grid-column: span 2; justify-content: flex-start; }
+    .hb-cta { grid-column: span 2; align-items: flex-start; }
+    .hb-cta-actions { justify-content: flex-start; }
   }
   @media (max-width: 720px) {
     #hero {
@@ -227,7 +247,7 @@ const version = pkg.version;
     .htb-right { display: none; }
     .hero-stack { font-size: clamp(64px, 18vw, 100px); margin-bottom: 0; }
     .hero-bottom { grid-template-columns: 1fr; gap: 16px; }
-    .hb-cta { grid-column: span 1; justify-content: flex-start; flex-wrap: wrap; }
+    .hb-cta { grid-column: span 1; align-items: flex-start; }
     .btn-v2 { font-size: 10px; padding: 12px 16px; }
   }
   @media (max-width: 420px) {

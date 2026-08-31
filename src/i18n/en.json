@@ -26,9 +26,22 @@
     "status": "available for work",
     "softwareEngineer": "Software Engineer",
     "currentlyText": "Building enterprise systems at <span class=\"hb-green\">.msg Systems</span> on a Mercedes-Benz Group project.",
-    "viewWorkBtn": "View Work →",
-    "resumeBtn": "Resume ↗",
+    "startConversation": "Start a conversation",
+    "viewWorkBtn": "View selected work",
+    "resumeBtn": "Resume",
     "letsBuild": "Let's build something"
+  },
+  "responsePromise": {
+    "full": "You'll receive a personal reply within 2 business days.",
+    "compact": "Replies within 2 business days."
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "contact": "Contact",
+    "showcase": "Showcase",
+    "tech": "Tech",
+    "privacy": "Privacy",
+    "thankYou": "Message received"
   },
   "about": {
     "label": "01. About Me",
@@ -104,6 +117,9 @@
   },
   "experience": {
     "label": "04. Experience",
+    "sectionNum": "04 / career",
+    "sectionTag": "timeline",
+    "sectionTitle": "The <em>path</em>, from algebra hall to enterprise stack.",
     "title_1": "My ",
     "title_2": "Journey",
     "subtitle": "Professional milestones and academic achievements that shaped my career.",
@@ -138,7 +154,7 @@
     "socialLabel": "// Social",
     "openTo": "Open to opportunities",
     "available": "Available for freelance projects, full-time roles, and interesting collaborations.",
-    "responseTime": "// Typical response time: 24–48 hours",
+    "responseTime": "// You'll receive a personal reply within 2 business days.",
     "configureEmailJS": "Configure EmailJS to enable the contact form.",
     "configureEmailJSSub": "Copy <code>.env.example</code> → <code>.env</code> and add your EmailJS credentials.",
     "sectionTag": "send a signal",
@@ -155,6 +171,8 @@
     "statusSub": "Full-time, contract, or just a chat about distributed systems and espresso.",
     "contactForm": "Contact Form",
     "contactFormSub": "Send a message directly",
+    "privacyNotice": "Your name, email address, and message are used only to reply to this inquiry.",
+    "privacyLink": "Read the privacy policy",
     "form": {
       "name": "// Name",
       "email": "// Email",
@@ -169,8 +187,101 @@
       "sending": "Sending...",
       "send": "./send",
       "sendFlag": "--message",
-      "success": "Message sent! I'll get back to you soon.",
+      "success": "Message sent. Redirecting to confirmation…",
       "error": "Something went wrong. Try emailing me directly."
+    }
+  },
+  "faq": {
+    "tag": "Before you send",
+    "title": "A few useful answers.",
+    "intro": "The practical details people usually want to know before getting in touch.",
+    "stillUnsure": "Still unsure whether your idea is a fit?",
+    "sendAnyway": "Send the message anyway",
+    "items": {
+      "1": {
+        "question": "What kinds of work are you open to?",
+        "answer": "Full-time roles, contract projects, and technically interesting collaborations."
+      },
+      "2": {
+        "question": "What can you design and build?",
+        "answer": "Full-stack web applications, backend services, integrations, data-driven tools, and polished public-facing websites."
+      },
+      "3": {
+        "question": "Which technologies do you work with?",
+        "answer": "Primarily Java and Spring Boot, Angular, React, TypeScript, relational databases, and modern deployment tooling."
+      },
+      "4": {
+        "question": "Do you work remotely or on-site?",
+        "answer": "I'm based in Cluj-Napoca and experienced working with international teams. The right arrangement depends on the opportunity."
+      },
+      "5": {
+        "question": "What should I include in an inquiry?",
+        "answer": "Share the goal, current situation, expected timeline, and any relevant technical or design constraints. A full specification is not required."
+      }
+    }
+  },
+  "thankYou": {
+    "eyebrow": "Inquiry delivered",
+    "title": "Thanks for reaching out.",
+    "copy": "Your message is in my inbox. You'll receive a personal reply within 2 business days.",
+    "viewWork": "View selected work",
+    "backHome": "Return home",
+    "whileWaiting": "While you wait",
+    "exploreTech": "Explore how this portfolio was built"
+  },
+  "privacy": {
+    "title": "Privacy policy.",
+    "intro": "This page explains what information this personal portfolio handles, why it is used, and the choices available to you.",
+    "lastUpdated": "Last updated:",
+    "date": "31 August 2026",
+    "toc": {
+      "title": "On this page",
+      "controller": "Controller",
+      "data": "Information handled",
+      "purpose": "Purpose and legal basis",
+      "services": "Service providers",
+      "retention": "Retention",
+      "rights": "Your rights",
+      "contact": "Contact"
+    },
+    "controller": {
+      "title": "1. Who controls the information",
+      "beforeName": "This is the personal portfolio of",
+      "afterName": ", based in Cluj-Napoca, Romania. It does not currently represent a registered business.",
+      "email": "For privacy questions, email"
+    },
+    "data": {
+      "title": "2. Information handled",
+      "form": "If you use the contact form, the site handles the name, email address, and message you provide. Please do not include sensitive personal information that is not needed for the inquiry.",
+      "preferences": "The site stores your selected theme and language locally in your browser. These preferences are not used to identify you and are not sent through the contact form."
+    },
+    "purpose": {
+      "title": "3. Purpose and legal basis",
+      "reply": "Contact details and messages are used only to read, manage, and reply to your inquiry. Depending on the nature of the message, processing is necessary to take steps at your request before a possible agreement, or is based on the legitimate interest in managing professional correspondence.",
+      "noMarketing": "This portfolio does not use submitted information for a mailing list, advertising profile, or automated decision-making."
+    },
+    "services": {
+      "title": "4. Service providers and external resources",
+      "emailjsBefore": "The contact form uses",
+      "emailjsAfter": "to deliver the message to the configured email inbox. EmailJS and the email provider therefore process the information needed to deliver and store that correspondence.",
+      "hosting": "The production site is served through GitHub Pages. Fonts are requested from Google Fonts, so those providers may receive ordinary connection information such as an IP address and browser details when their resources are loaded.",
+      "externalLinks": "Links to GitHub, LinkedIn, and other external sites are governed by those services' own privacy notices."
+    },
+    "retention": {
+      "title": "5. How long messages are kept",
+      "copy": "Messages are kept only for as long as needed to answer the inquiry, continue the resulting professional conversation, maintain reasonable correspondence records, or meet a legal obligation. Messages that are no longer needed are deleted."
+    },
+    "rights": {
+      "title": "6. Your privacy rights",
+      "copy": "Where applicable, you may ask for access to, correction of, deletion of, restriction of, or objection to the processing of your personal information. You may also request data portability when the legal conditions apply.",
+      "authorityBefore": "You can raise a concern with Romania's supervisory authority, the",
+      "authorityName": "National Supervisory Authority for Personal Data Processing (ANSPDCP)"
+    },
+    "contact": {
+      "title": "7. Contact and policy changes",
+      "beforeEmail": "To exercise a right or ask a privacy question, email",
+      "afterEmail": ". This policy may be updated when the site's forms, providers, or data practices change; the revision date above will change accordingly.",
+      "back": "Return to the contact page"
     }
   },
   "cta": {
@@ -197,7 +308,8 @@
     "localTime": "local time",
     "status": "status",
     "openForWork": "● open for work",
-    "repliesWithin": "replies within 24h",
+    "repliesWithin": "replies within 2 business days",
+    "privacy": "privacy",
     "craftedIn": "Crafted in Cluj."
   },
   "showcase": {
@@ -254,6 +366,10 @@
     "legendBranch": "Branch",
     "legendEnv": "Environment",
     "legendHost": "Host",
+    "nextLabel": "// see the work",
+    "nextTitle": "See these tools in context.",
+    "viewProjects": "View selected projects",
+    "startConversation": "Start a conversation",
     "categories": {
       "framework": "Framework & Language",
       "styling": "Styling & Animation",
@@ -269,6 +385,7 @@
   },
   "projectDescriptions": {
     "project-1": "A professional service website built for my father's plumbing & HVAC business in Suceava, Romania. Features service listings, contact details, and structured SEO markup to help local customers find the business.",
-    "project-2": "A personal habit and goal tracking web app. Track daily routines, visualise streaks, and stay consistent — all in a clean, minimal interface."
+    "project-2": "A personal habit and goal tracking web app. Track daily routines, visualise streaks, and stay consistent — all in a clean, minimal interface.",
+    "project-3": "A website for an Italian construction firm specialising in terrace waterproofing and renovation work across Rome and Lazio, with service information, completed projects, and a site-inspection inquiry flow."
   }
 }
