@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import profile from '../data/profile.json';
+
+const pageTitle = `Privacy Policy | ${profile.name}`;
+const pageDescription = `How ${profile.name}'s portfolio handles contact-form information, local preferences, third-party services, and privacy rights.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Navbar />
+  <main id="main" class="policy-page">
+    <div class="policy-shell">
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/', i18nKey: 'breadcrumbs.home' },
+        { label: 'Privacy', i18nKey: 'breadcrumbs.privacy' },
+      ]} />
+
+      <header class="policy-header">
+        <div class="policy-code">00 / privacy</div>
+        <h1 data-i18n="privacy.title">Privacy policy.</h1>
+        <p data-i18n="privacy.intro">This page explains what information this personal portfolio handles, why it is used, and the choices available to you.</p>
+        <div class="policy-updated"><span data-i18n="privacy.lastUpdated">Last updated:</span> <time datetime="2026-08-31" data-i18n="privacy.date">31 August 2026</time></div>
+      </header>
+
+      <div class="policy-layout">
+        <nav class="policy-toc" aria-label="Privacy policy contents">
+          <strong data-i18n="privacy.toc.title">On this page</strong>
+          <a href="#controller" data-i18n="privacy.toc.controller">Controller</a>
+          <a href="#data" data-i18n="privacy.toc.data">Information handled</a>
+          <a href="#purpose" data-i18n="privacy.toc.purpose">Purpose and legal basis</a>
+          <a href="#services" data-i18n="privacy.toc.services">Service providers</a>
+          <a href="#retention" data-i18n="privacy.toc.retention">Retention</a>
+          <a href="#rights" data-i18n="privacy.toc.rights">Your rights</a>
+          <a href="#contact-privacy" data-i18n="privacy.toc.contact">Contact</a>
+        </nav>
+
+        <article class="policy-content">
+          <section id="controller">
+            <h2 data-i18n="privacy.controller.title">1. Who controls the information</h2>
+            <p><span data-i18n="privacy.controller.beforeName">This is the personal portfolio of</span> <strong>{profile.name}</strong><span data-i18n="privacy.controller.afterName">, based in Cluj-Napoca, Romania. It does not currently represent a registered business.</span></p>
+            <p><span data-i18n="privacy.controller.email">For privacy questions, email</span> <a href={`mailto:${profile.email}`}>{profile.email}</a>.</p>
+          </section>
+
+          <section id="data">
+            <h2 data-i18n="privacy.data.title">2. Information handled</h2>
+            <p data-i18n="privacy.data.form">If you use the contact form, the site handles the name, email address, and message you provide. Please do not include sensitive personal information that is not needed for the inquiry.</p>
+            <p data-i18n="privacy.data.preferences">The site stores your selected theme and language locally in your browser. These preferences are not used to identify you and are not sent through the contact form.</p>
+          </section>
+
+          <section id="purpose">
+            <h2 data-i18n="privacy.purpose.title">3. Purpose and legal basis</h2>
+            <p data-i18n="privacy.purpose.reply">Contact details and messages are used only to read, manage, and reply to your inquiry. Depending on the nature of the message, processing is necessary to take steps at your request before a possible agreement, or is based on the legitimate interest in managing professional correspondence.</p>
+            <p data-i18n="privacy.purpose.noMarketing">This portfolio does not use submitted information for a mailing list, advertising profile, or automated decision-making.</p>
+          </section>
+
+          <section id="services">
+            <h2 data-i18n="privacy.services.title">4. Service providers and external resources</h2>
+            <p><span data-i18n="privacy.services.emailjsBefore">The contact form uses</span> <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" rel="noopener">EmailJS</a> <span data-i18n="privacy.services.emailjsAfter">to deliver the message to the configured email inbox. EmailJS and the email provider therefore process the information needed to deliver and store that correspondence.</span></p>
+            <p data-i18n="privacy.services.hosting">The production site is served through GitHub Pages. Fonts are requested from Google Fonts, so those providers may receive ordinary connection information such as an IP address and browser details when their resources are loaded.</p>
+            <p data-i18n="privacy.services.externalLinks">Links to GitHub, LinkedIn, and other external sites are governed by those services' own privacy notices.</p>
+          </section>
+
+          <section id="retention">
+            <h2 data-i18n="privacy.retention.title">5. How long messages are kept</h2>
+            <p data-i18n="privacy.retention.copy">Messages are kept only for as long as needed to answer the inquiry, continue the resulting professional conversation, maintain reasonable correspondence records, or meet a legal obligation. Messages that are no longer needed are deleted.</p>
+          </section>
+
+          <section id="rights">
+            <h2 data-i18n="privacy.rights.title">6. Your privacy rights</h2>
+            <p data-i18n="privacy.rights.copy">Where applicable, you may ask for access to, correction of, deletion of, restriction of, or objection to the processing of your personal information. You may also request data portability when the legal conditions apply.</p>
+            <p><span data-i18n="privacy.rights.authorityBefore">You can raise a concern with Romania's supervisory authority, the</span> <a href="https://www.dataprotection.ro/" target="_blank" rel="noopener" data-i18n="privacy.rights.authorityName">National Supervisory Authority for Personal Data Processing (ANSPDCP)</a>.</p>
+          </section>
+
+          <section id="contact-privacy">
+            <h2 data-i18n="privacy.contact.title">7. Contact and policy changes</h2>
+            <p><span data-i18n="privacy.contact.beforeEmail">To exercise a right or ask a privacy question, email</span> <a href={`mailto:${profile.email}`}>{profile.email}</a><span data-i18n="privacy.contact.afterEmail">. This policy may be updated when the site's forms, providers, or data practices change; the revision date above will change accordingly.</span></p>
+            <a class="policy-contact" href="/contact" data-i18n="privacy.contact.back">Return to the contact page</a>
+          </section>
+        </article>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .policy-page {
+    min-height: 100vh;
+    padding: 96px 32px 120px;
+    background: var(--bg);
+    position: relative;
+    z-index: 1;
+  }
+  .policy-shell { max-width: 1200px; margin: 0 auto; }
+  .policy-header {
+    margin-top: 72px;
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .policy-code, .policy-updated {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .policy-code { color: var(--green); }
+  .policy-updated { margin-top: 28px; color: var(--text-faint); }
+  h1 {
+    margin: 20px 0;
+    font-family: var(--sans);
+    font-size: clamp(48px, 9vw, 120px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    color: var(--text);
+  }
+  .policy-header p { max-width: 720px; margin: 0; color: var(--text-dim); font-size: 18px; line-height: 1.7; }
+  .policy-layout { display: grid; grid-template-columns: 220px minmax(0, 760px); gap: 100px; align-items: start; padding-top: 64px; }
+  .policy-toc { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 12px; font-family: var(--mono); font-size: 10px; }
+  .policy-toc strong { margin-bottom: 8px; color: var(--text); text-transform: uppercase; letter-spacing: 0.12em; }
+  .policy-toc a { color: var(--text-faint); text-decoration: none; }
+  .policy-toc a:hover, .policy-toc a:focus-visible { color: var(--green); }
+  .policy-content section { padding: 0 0 56px; scroll-margin-top: 96px; }
+  .policy-content h2 { margin: 0 0 20px; font-family: var(--sans); font-size: clamp(24px, 3vw, 36px); color: var(--text); letter-spacing: -0.02em; }
+  .policy-content p { margin: 0 0 18px; color: var(--text-dim); font-size: 15px; line-height: 1.85; }
+  .policy-content strong { color: var(--text); }
+  .policy-content a { color: var(--green); text-underline-offset: 4px; }
+  .policy-contact { display: inline-flex; margin-top: 12px; font-family: var(--mono); font-size: 11px; }
+  @media (max-width: 800px) {
+    .policy-page { padding: 80px 16px; }
+    .policy-header { margin-top: 48px; }
+    .policy-layout { grid-template-columns: 1fr; gap: 48px; }
+    .policy-toc { position: static; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+  }
+</style>

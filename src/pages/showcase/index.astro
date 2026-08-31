@@ -2,16 +2,21 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import showcase from '../../data/showcase.json';
 ---
 
-<Layout title="Showcase — What I Can Build" description="A curated gallery of website templates built from scratch — restaurant, e-commerce, agency, blog, and real estate designs.">
+<Layout title="Web Development Showcase | Leonte Denis" description="Explore interactive restaurant, e-commerce, agency, editorial, and real-estate websites designed and developed from scratch by Leonte Denis.">
   <Navbar />
 
   <main id="main">
     <!-- Hero -->
     <section id="showcase-hero">
       <div class="page-inner">
+        <Breadcrumbs items={[
+          { label: 'Home', href: '/', i18nKey: 'breadcrumbs.home' },
+          { label: 'Showcase', i18nKey: 'breadcrumbs.showcase' },
+        ]} />
         <div class="section-head">
           <div class="meta">
             <div class="section-num">00 / showcase</div>
@@ -37,7 +42,7 @@ import showcase from '../../data/showcase.json';
             <a href={`/showcase/${entry.slug}`} class="showcase-card" style={`--accent: ${entry.colorPreview};`}>
               <div class="card-thumb">
                 {entry.preview ? (
-                  <img src={entry.preview} alt={`${entry.name} preview`} loading="lazy" />
+                  <img src={entry.preview} alt={entry.alt} loading="lazy" />
                 ) : (
                   <div class="thumb-placeholder">{entry.name.charAt(0)}</div>
                 )}
@@ -102,6 +107,7 @@ import showcase from '../../data/showcase.json';
   }
 
   .page-inner { max-width: 1400px; margin: 0 auto; }
+  #showcase-hero :global(.breadcrumbs) { margin-bottom: 56px; }
 
   /* Header */
   .section-head {

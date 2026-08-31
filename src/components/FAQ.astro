@@ -1,0 +1,103 @@
+<section id="faq" aria-labelledby="faq-title">
+  <div class="faq-inner">
+    <div class="faq-heading">
+      <div>
+        <div class="faq-num">06 / faq</div>
+        <div class="faq-tag" data-i18n="faq.tag">Before you send</div>
+      </div>
+      <div>
+        <h2 id="faq-title" data-i18n="faq.title">A few useful answers.</h2>
+        <p data-i18n="faq.intro">The practical details people usually want to know before getting in touch.</p>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      {Array.from({ length: 5 }, (_, index) => index + 1).map((index) => (
+        <details>
+          <summary data-i18n={`faq.items.${index}.question`}>Question</summary>
+          <div class="answer" data-i18n={`faq.items.${index}.answer`}>Answer</div>
+        </details>
+      ))}
+    </div>
+
+    <div class="faq-cta">
+      <span data-i18n="faq.stillUnsure">Still unsure whether your idea is a fit?</span>
+      <a href="#contact-page" data-i18n="faq.sendAnyway">Send the message anyway</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  #faq {
+    position: relative;
+    z-index: 1;
+    padding: 0 32px 120px;
+    background: var(--bg);
+  }
+  .faq-inner { max-width: 1400px; margin: 0 auto; }
+  .faq-heading {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    padding: 60px 0;
+    border-top: 1px solid var(--line);
+  }
+  .faq-num, .faq-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .faq-num { color: var(--text-faint); margin-bottom: 8px; }
+  .faq-tag { color: var(--green); }
+  h2 {
+    margin: 0 0 16px;
+    font-family: var(--sans);
+    font-size: clamp(32px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text);
+  }
+  .faq-heading p {
+    max-width: 620px;
+    margin: 0;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .faq-list { border-top: 1px solid var(--line); }
+  details { border-bottom: 1px solid var(--line); }
+  summary {
+    padding: 24px 48px 24px 0;
+    font-family: var(--sans);
+    font-size: clamp(17px, 2vw, 24px);
+    color: var(--text);
+    cursor: pointer;
+  }
+  summary:hover, summary:focus-visible { color: var(--green); }
+  .answer {
+    max-width: 760px;
+    padding: 0 0 28px;
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .faq-cta {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+    margin-top: 40px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .faq-cta a { color: var(--green); text-decoration: none; }
+  .faq-cta a:hover, .faq-cta a:focus-visible { text-decoration: underline; }
+  @media (max-width: 720px) {
+    #faq { padding: 0 16px 80px; }
+    .faq-heading { grid-template-columns: 1fr; gap: 28px; padding: 48px 0; }
+    .faq-cta { align-items: flex-start; flex-direction: column; }
+  }
+</style>

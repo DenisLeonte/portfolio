@@ -7,6 +7,7 @@
     "githubUrl": "",
     "liveUrl": "https://instalatiisuceava.ro",
     "image": "/images/projects/project-1.png",
+    "alt": "Instalații Suceava service website homepage showing plumbing and HVAC services",
     "featured": true
   },
   {
@@ -17,6 +18,18 @@
     "githubUrl": "",
     "liveUrl": "https://tracker.denistechs.com",
     "image": "/images/projects/project-2.png",
+    "alt": "CalorieCount dashboard showing daily calories, macros, hydration, and goal progress",
+    "featured": true
+  },
+  {
+    "id": "project-3",
+    "name": "PLC Group",
+    "description": "A website for an Italian construction firm specialising in terrace waterproofing and renovation work across Rome and Lazio. It presents membrane installation, screed and flooring services, completed projects, and a site-inspection inquiry flow.",
+    "techStack": ["Astro", "TypeScript", "CSS"],
+    "githubUrl": "",
+    "liveUrl": "https://plc-group.it",
+    "image": "/images/projects/project-3.png",
+    "alt": "PLC Group website hero for waterproofing and renovation services in Rome and Lazio",
     "featured": true
   }
 ]
