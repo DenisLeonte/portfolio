@@ -73,6 +73,9 @@ export default function ContactForm() {
       });
       setStatus('success');
       formRef.current.reset();
+      window.setTimeout(() => {
+        window.location.assign('/thank-you');
+      }, 650);
     } catch {
       setStatus('error');
     } finally {

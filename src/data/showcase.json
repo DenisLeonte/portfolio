@@ -7,6 +7,7 @@
     "techHighlights": ["GSAP", "CSS Grid", "Scroll Animations", "Google Fonts"],
     "colorPreview": "#D4A574",
     "preview": "/images/showcase_pictures/cuisine.png",
+    "alt": "La Cucina restaurant homepage with a full-width dining hero and reservation call to action",
     "slug": "restaurant"
   },
   {
@@ -17,6 +18,7 @@
     "techHighlights": ["CSS Animations", "Flexbox", "Image Gallery", "Snap Scroll"],
     "colorPreview": "#C9A96E",
     "preview": "/images/showcase_pictures/luxe.png",
+    "alt": "Luxe Store fashion storefront with a minimalist product collection layout",
     "slug": "ecommerce"
   },
   {
@@ -27,6 +29,7 @@
     "techHighlights": ["GSAP", "Three.js", "Parallax", "SVG Animations"],
     "colorPreview": "#FF6B35",
     "preview":"/images/showcase_pictures/prism.png",
+    "alt": "Prism Studio creative agency homepage with bold typography and project imagery",
     "slug": "agency"
   },
   {
@@ -37,6 +40,7 @@
     "techHighlights": ["Dark/Light Mode", "CSS Grid", "Reading Progress", "Typography"],
     "colorPreview": "#C05746",
     "preview": "/images/showcase_pictures/inkwell.png",
+    "alt": "Inkwell editorial homepage with a featured long-form article and reading-focused layout",
     "slug": "blog"
   },
   {
@@ -47,6 +51,7 @@
     "techHighlights": ["Image Carousel", "CSS Grid", "Scroll Reveal", "Interactive Cards"],
     "colorPreview": "#2C5F2D",
     "preview": "/images/showcase_pictures/horizon.png",
+    "alt": "Horizon Homes property website with featured listings and residential photography",
     "slug": "realestate"
   }
 ]

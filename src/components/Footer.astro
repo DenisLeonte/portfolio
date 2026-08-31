@@ -3,14 +3,17 @@ import profile from '../data/profile.json';
 import pkg from '../../package.json';
 const [major, minor] = pkg.version.split('.');
 const displayVersion = `v${major}.${minor}`;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+const homeAnchor = (hash: string) => isHome ? hash : `/${hash}`;
 ---
 
 <footer>
   <div class="footer-col">
     <strong>denis.exe</strong>
-    <a href="#hero" data-i18n="footer.top">↑ top</a>
-    <a href="#projects" data-i18n="footer.work">work</a>
+    <a href={homeAnchor('#hero')} data-i18n="footer.top">↑ top</a>
+    <a href={homeAnchor('#projects')} data-i18n="footer.work">work</a>
     <a href="/contact" data-i18n="footer.contact">contact</a>
+    <a href="/privacy" data-i18n="footer.privacy">privacy</a>
   </div>
   <div class="footer-col">
     <strong data-i18n="footer.elsewhere">elsewhere</strong>
@@ -26,7 +29,7 @@ const displayVersion = `v${major}.${minor}`;
   <div class="footer-col">
     <strong data-i18n="footer.status">status</strong>
     <span class="footer-green" data-i18n="footer.openForWork">● open for work</span>
-    <div class="footer-dim" data-i18n="footer.repliesWithin">replies within 24h</div>
+    <div class="footer-dim" data-i18n="footer.repliesWithin">replies within 2 business days</div>
   </div>
 
   <div class="footer-mega">

@@ -7,7 +7,7 @@ interface Props {
 const { templateName, slug } = Astro.props;
 ---
 
-<div class="demo-bar" role="banner" aria-label="Template demo bar">
+<div class="demo-bar" role="banner" aria-label="Template demo bar" data-template={slug}>
   <a href="/showcase" class="demo-bar__back" aria-label="Back to Showcase">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -15,9 +15,12 @@ const { templateName, slug } = Astro.props;
     <span data-i18n="nav.showcase">Showcase</span>
   </a>
 
-  <div class="demo-bar__badge" aria-label="Template demo information">
-    <span class="demo-bar__diamond" aria-hidden="true">⬥</span>
-    <span>Template Demo · Built by <strong>Leonte Denis</strong></span>
+  <div class="demo-bar__badge" aria-label={`Breadcrumb: Home, Showcase, ${templateName}`}>
+    <a href="/">Home</a>
+    <span aria-hidden="true">/</span>
+    <a href="/showcase" data-i18n="nav.showcase">Showcase</a>
+    <span aria-hidden="true">/</span>
+    <strong>{templateName}</strong>
   </div>
 
   <a href="/contact" class="demo-bar__cta" aria-label="Contact Leonte Denis">
@@ -93,15 +96,6 @@ const { templateName, slug } = Astro.props;
     color: rgba(255, 255, 255, 0.4);
   }
 
-  .demo-bar__diamond {
-    color: #69A481;
-    font-size: 10px;
-  }
-
-  :global(html.dark) .demo-bar__diamond {
-    color: rgba(0, 255, 65, 0.6);
-  }
-
   .demo-bar__badge strong {
     color: #1e293b;
     font-weight: 600;
@@ -110,6 +104,10 @@ const { templateName, slug } = Astro.props;
   :global(html.dark) .demo-bar__badge strong {
     color: rgba(255, 255, 255, 0.7);
   }
+  .demo-bar__badge a { color: inherit; text-decoration: none; }
+  .demo-bar__badge a:hover, .demo-bar__badge a:focus-visible { color: #4D8260; }
+  :global(html.dark) .demo-bar__badge a:hover,
+  :global(html.dark) .demo-bar__badge a:focus-visible { color: #00ff41; }
 
   @media (max-width: 480px) {
     .demo-bar__badge {

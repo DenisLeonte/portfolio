@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import profile from '../data/profile.json';
+---
+
+<Layout
+  title={`Message Received | ${profile.name}`}
+  description={`Your message to ${profile.name} was received. Expect a personal reply within 2 business days.`}
+  robots="noindex, follow"
+>
+  <Navbar />
+  <main id="main" class="confirmation-page">
+    <div class="confirmation-inner">
+      <Breadcrumbs
+        includeSchema={false}
+        items={[
+          { label: 'Home', href: '/', i18nKey: 'breadcrumbs.home' },
+          { label: 'Message received', i18nKey: 'breadcrumbs.thankYou' },
+        ]}
+      />
+
+      <section class="confirmation-card" aria-labelledby="confirmation-title">
+        <div class="terminal-label">message_status: received</div>
+        <p class="eyebrow" data-i18n="thankYou.eyebrow">Inquiry delivered</p>
+        <h1 id="confirmation-title" data-i18n="thankYou.title">Thanks for reaching out.</h1>
+        <p class="confirmation-copy" data-i18n="thankYou.copy">
+          Your message is in my inbox. You'll receive a personal reply within 2 business days.
+        </p>
+        <div class="next-actions" aria-label="Next steps">
+          <a href="/showcase" class="btn-primary" data-i18n="thankYou.viewWork">View selected work</a>
+          <a href="/" class="secondary-link" data-i18n="thankYou.backHome">Return home</a>
+        </div>
+      </section>
+
+      <aside class="while-waiting">
+        <span data-i18n="thankYou.whileWaiting">While you wait</span>
+        <a href="/tech" data-i18n="thankYou.exploreTech">Explore how this portfolio was built</a>
+      </aside>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .confirmation-page {
+    min-height: 100vh;
+    padding: 96px 32px 120px;
+    background: var(--bg);
+    position: relative;
+    z-index: 1;
+  }
+  .confirmation-inner { max-width: 1120px; margin: 0 auto; }
+  .confirmation-card {
+    margin-top: 72px;
+    padding: clamp(32px, 7vw, 88px);
+    border: 1px solid var(--line-strong);
+    background: var(--bg2);
+    box-shadow: 0 0 48px color-mix(in srgb, var(--green) 8%, transparent);
+  }
+  .terminal-label, .eyebrow {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .terminal-label {
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--green);
+    font-size: 10px;
+  }
+  .eyebrow { margin: 48px 0 16px; color: var(--text-faint); font-size: 10px; }
+  h1 {
+    max-width: 800px;
+    margin: 0;
+    font-family: var(--sans);
+    font-size: clamp(46px, 8vw, 112px);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: var(--text);
+  }
+  .confirmation-copy {
+    max-width: 620px;
+    margin: 32px 0 0;
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .next-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 40px; }
+  .secondary-link { color: var(--text-dim); font-family: var(--mono); font-size: 11px; text-decoration: none; }
+  .secondary-link:hover, .secondary-link:focus-visible { color: var(--green); text-decoration: underline; }
+  .while-waiting {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+  }
+  .while-waiting a { color: var(--green); text-decoration: none; }
+  .while-waiting a:hover, .while-waiting a:focus-visible { text-decoration: underline; }
+  @media (max-width: 720px) {
+    .confirmation-page { padding: 80px 16px; }
+    .confirmation-card { margin-top: 48px; }
+    .while-waiting { flex-direction: column; }
+  }
+</style>

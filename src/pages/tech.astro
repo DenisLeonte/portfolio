@@ -3,10 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import PipelineFlow from '../components/PipelineFlow.tsx';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import profile from '../data/profile.json';
 
-const pageTitle = `Tech Stack — ${profile.name}`;
-const pageDescription = `The technologies and deployment pipeline powering ${profile.name}'s portfolio — Astro, React, GSAP, Cloudflare, and GitHub Actions.`;
+const pageTitle = `Portfolio Tech Stack & Deployment Pipeline | ${profile.name}`;
+const pageDescription = `Explore the Astro, React, TypeScript, animation, hosting, and deployment choices behind ${profile.name}'s software engineering portfolio.`;
 
 const techStack = [
   {
@@ -57,6 +58,10 @@ const techStack = [
     <!-- Hero -->
     <section id="tech-hero">
       <div class="page-inner">
+        <Breadcrumbs items={[
+          { label: 'Home', href: '/', i18nKey: 'breadcrumbs.home' },
+          { label: 'Tech', i18nKey: 'breadcrumbs.tech' },
+        ]} />
         <div class="section-head">
           <div class="meta">
             <div class="section-num">00 / tech</div>
@@ -145,6 +150,17 @@ const techStack = [
             </div>
           </div>
         </div>
+
+        <div class="tech-next">
+          <div>
+            <span data-i18n="techPage.nextLabel">// see the work</span>
+            <strong data-i18n="techPage.nextTitle">See these tools in context.</strong>
+          </div>
+          <div class="tech-next-links">
+            <a href="/#projects" data-i18n="techPage.viewProjects">View selected projects</a>
+            <a href="/contact" data-i18n="techPage.startConversation">Start a conversation</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -173,6 +189,7 @@ const techStack = [
   }
 
   .page-inner { max-width: 1400px; margin: 0 auto; }
+  #tech-hero :global(.breadcrumbs) { margin-bottom: 56px; }
 
   /* Header */
   .section-head {
@@ -366,6 +383,28 @@ const techStack = [
   }
   .legend-row a:hover { text-decoration: underline; }
   .legend-dim { color: var(--text-faint); font-style: italic; }
+  .tech-next {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    margin-top: 72px;
+    padding: 36px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .tech-next span, .tech-next a {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .tech-next span { display: block; color: var(--green); margin-bottom: 10px; }
+  .tech-next strong { color: var(--text); font-family: var(--sans); font-size: clamp(20px, 3vw, 34px); }
+  .tech-next-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .tech-next a { color: var(--text-dim); text-decoration: none; }
+  .tech-next a:last-child { color: var(--green); }
+  .tech-next a:hover, .tech-next a:focus-visible { text-decoration: underline; }
 
   @media (max-width: 1100px) {
     .section-head { grid-template-columns: 1fr; gap: 24px; }
@@ -382,6 +421,7 @@ const techStack = [
     .pipeline-wrap { height: calc(100vw * 1.38); }
     .legend-row { grid-template-columns: 100px 1fr; gap: 16px; }
     .legend-row span:last-child { display: none; }
+    .tech-next { align-items: flex-start; flex-direction: column; }
   }
 </style>
 

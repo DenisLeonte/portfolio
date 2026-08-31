@@ -23,7 +23,10 @@ import projects from '../data/projects.json';
           rel="noopener noreferrer"
         >
           <div class="project-num">{String(i + 1).padStart(2, '0')}</div>
-          <div class="project-name">{p.name}</div>
+          <div class="project-copy">
+            <div class="project-name">{p.name}</div>
+            <div class="project-desc" data-i18n={`projectDescriptions.${p.id}`}>{p.description}</div>
+          </div>
           <div class="project-meta">{p.techStack.filter(t => !t.startsWith('[')).slice(0, 2).join(' · ')}</div>
           <div class="project-tags-row">
             {p.techStack.filter(t => !t.startsWith('[')).map(t => (
@@ -31,15 +34,13 @@ import projects from '../data/projects.json';
             ))}
           </div>
           <div class="project-arrow">→</div>
-          <div class="project-preview">
-            <div class="project-preview-inner">
-              {p.image && !p.image.startsWith('[') ? (
-                <img src={p.image} alt={p.name} loading="lazy" />
-              ) : (
-                <div class="preview-placeholder">[ {p.name} ]</div>
-              )}
+          {p.image && !p.image.startsWith('[') && (
+            <div class="project-preview">
+              <div class="project-preview-inner">
+                <img src={p.image} alt={p.alt} loading="lazy" />
+              </div>
             </div>
-          </div>
+          )}
         </a>
       ))}
     </div>
@@ -135,6 +136,15 @@ import projects from '../data/projects.json';
     transition: color 0.2s;
   }
   .project-row:hover .project-name { color: var(--green); }
+  .project-desc {
+    max-width: 680px;
+    margin-top: 7px;
+    color: var(--text-faint);
+    font-size: 12px;
+    line-height: 1.55;
+    transition: color 0.2s;
+  }
+  .project-row:hover .project-desc { color: var(--text-dim); }
 
   .project-meta {
     font-family: var(--mono);
@@ -244,6 +254,13 @@ import projects from '../data/projects.json';
     .project-row { grid-template-columns: 36px 1fr 32px; gap: 12px; padding: 20px 0; }
     .project-meta { display: none; }
     .project-name { font-size: 20px; }
+    .project-desc {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: 11px;
+    }
     .more-strip { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
   @media (max-width: 420px) {

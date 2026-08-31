@@ -1,7 +1,7 @@
 {
   "nav": {
     "about": "Despre",
-    "skills": "Skills",
+    "skills": "Competențe",
     "projects": "Proiecte",
     "experience": "Experiență",
     "showcase": "Showcase",
@@ -12,7 +12,7 @@
   },
   "hero": {
     "greeting": "Salut, sunt",
-    "subtitle": "Construiesc aplicații robuste și scalabile, de la backend la frontend.",
+    "subtitle": "Dezvolt aplicații complete, de la logica din backend până la interfața pe care o vede utilizatorul.",
     "viewWork": "Vezi Proiectele",
     "getInTouch": "Contactează-mă",
     "scroll": "DERULEAZĂ",
@@ -22,13 +22,26 @@
       "Pasionat de AI & Big Data"
     ],
     "resume": "CV",
-    "available": "Disponibil pentru oportunități",
-    "status": "disponibil pentru muncă",
+    "available": "Deschis la oportunități",
+    "status": "deschis la colaborări",
     "softwareEngineer": "Inginer Software",
     "currentlyText": "Construiesc sisteme enterprise la <span class=\"hb-green\">.msg Systems</span> pe un proiect Mercedes-Benz Group.",
-    "viewWorkBtn": "Vezi Proiectele →",
-    "resumeBtn": "CV ↗",
+    "startConversation": "Hai să vorbim",
+    "viewWorkBtn": "Vezi proiectele",
+    "resumeBtn": "CV",
     "letsBuild": "Hai să construim ceva"
+  },
+  "responsePromise": {
+    "full": "Îți răspund în cel mult 2 zile lucrătoare.",
+    "compact": "Răspund în cel mult 2 zile lucrătoare."
+  },
+  "breadcrumbs": {
+    "home": "Acasă",
+    "contact": "Contact",
+    "showcase": "Showcase",
+    "tech": "Tech",
+    "privacy": "Confidențialitate",
+    "thankYou": "Mesaj primit"
   },
   "about": {
     "label": "01. Despre Mine",
@@ -74,7 +87,7 @@
     "subtitle": "Tehnologii cu care lucrez zilnic — de la API-uri backend la pipeline-uri de machine learning.",
     "quickRef": "// Quick Reference",
     "sectionTag": "stack",
-    "sectionTitle": "Lucruri cu care <em>chiar</em> livrez, notate onest.",
+    "sectionTitle": "Tehnologii pe care le folosesc în proiecte <em>reale</em> — fără liste umflate.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
@@ -88,7 +101,7 @@
     "label": "03. Proiecte",
     "title_1": "Ce am ",
     "title_2": "Construit",
-    "subtitle": "O selecție de proiecte care demonstrează munca mea în sisteme backend, interfețe frontend și pipeline-uri de date.",
+    "subtitle": "Câteva proiecte care arată cum lucrez, de la servicii backend și interfețe până la fluxuri de date.",
     "featured": "Recomandat",
     "otherProjects": "// Alte Proiecte",
     "screenshot": "Screenshot",
@@ -98,17 +111,20 @@
     "cta": {
       "label": "// vezi mai mult",
       "heading": "Vrei să vezi ce altceva pot construi?",
-      "sub": "Acestea sunt doar câteva exemple. Vezi gama completă a ceea ce pot proiecta și construi — de la site-uri de restaurante la magazine online și agenții creative.",
-      "btn": "Vezi Showcase-ul"
+      "sub": "Aici sunt doar câteva exemple. În showcase găsești și site-uri pentru restaurante, magazine online sau agenții creative.",
+      "btn": "Vezi toate exemplele"
     },
     "emptyState": "Adaugă proiectele tale în",
-    "sectionTag": "studii de caz & proiecte personale",
-    "sectionTitle": "<em>Lucruri</em> construite pentru producție, în nopți lungi.",
-    "moreText": "Mai mult <em>din același registru</em> — restaurante, e-commerce, agenții.",
-    "viewShowcase": "Vezi Showcase-ul →"
+    "sectionTag": "proiecte & experimente",
+    "sectionTitle": "<em>Proiecte</em> lansate și idei duse până la capăt.",
+    "moreText": "Și alte <em>direcții</em> — restaurante, e-commerce, agenții.",
+    "viewShowcase": "Vezi toate exemplele →"
   },
   "experience": {
     "label": "04. Experiență",
+    "sectionNum": "04 / carieră",
+    "sectionTag": "parcurs",
+    "sectionTitle": "De la <em>algebră</em> la sisteme enterprise.",
     "title_1": "Parcursul ",
     "title_2": "Meu",
     "subtitle": "Repere profesionale și realizări academice care mi-au modelat cariera.",
@@ -137,19 +153,19 @@
     "label": "Contact",
     "title_1": "Hai să ne ",
     "title_2": "Conectăm",
-    "subtitle": "Ai un proiect în minte, vrei să colaborăm sau doar vrei să spui salut? Trimite-mi un mesaj — le citesc pe toate.",
+    "subtitle": "Ai un proiect, o idee sau un rol despre care merită să discutăm? Scrie-mi.",
     "terminal": "~ send-message",
     "emailLabel": "// Email",
     "socialLabel": "// Social",
     "openTo": "Deschis la oportunități",
     "available": "Disponibil pentru proiecte freelance, roluri full-time și colaborări interesante.",
-    "responseTime": "// Timp tipic de răspuns: 24–48 ore",
+    "responseTime": "// răspund în cel mult 2 zile lucrătoare",
     "configureEmailJS": "Configurează EmailJS pentru a activa formularul de contact.",
     "configureEmailJSSub": "Copiază <code>.env.example</code> → <code>.env</code> și adaugă credențialele EmailJS.",
-    "sectionTag": "trimite un semnal",
+    "sectionTag": "scrie-mi",
     "talkTitle1": "Hai să <em>vorbim.</em>",
-    "talkTitle2": "Trimite un semnal.",
-    "talkSub": "Deschis pentru roluri full-time, contract, sau doar o discuție despre sisteme distribuite și espresso. Scrie-mi — citesc tot.",
+    "talkTitle2": "Scrie-mi.",
+    "talkSub": "Putem vorbi despre un rol full-time, un proiect sau, pur și simplu, despre sisteme distribuite și espresso. Citesc fiecare mesaj.",
     "formLabel": "// compose_message",
     "directChannels": "// direct_channels",
     "channelEmail": "Email",
@@ -157,9 +173,11 @@
     "channelGitHub": "GitHub",
     "channelResume": "CV",
     "resumeSub": "PDF, 1 pagină",
-    "statusSub": "Full-time, contract, sau doar o discuție despre sisteme distribuite și espresso.",
+    "statusSub": "Roluri full-time, proiecte sau o discuție bună despre sisteme distribuite și espresso.",
     "contactForm": "Formular de Contact",
-    "contactFormSub": "Trimite un mesaj direct",
+    "contactFormSub": "Scrie-mi direct",
+    "privacyNotice": "Folosesc numele, adresa de email și mesajul doar ca să-ți pot răspunde.",
+    "privacyLink": "Politica de confidențialitate",
     "form": {
       "name": "// Nume",
       "email": "// Email",
@@ -174,15 +192,108 @@
       "sending": "Se trimite...",
       "send": "./send",
       "sendFlag": "--message",
-      "success": "Mesaj trimis! Îți voi răspunde în curând.",
-      "error": "Ceva nu a mers bine. Încearcă să-mi trimiți email direct."
+      "success": "Mesaj trimis. Te redirecționez…",
+      "error": "Mesajul nu a plecat. Îmi poți scrie direct pe email."
+    }
+  },
+  "faq": {
+    "tag": "Înainte să-mi scrii",
+    "title": "Întrebări frecvente.",
+    "intro": "Pe scurt, lucrurile pe care sunt întrebat cel mai des.",
+    "stillUnsure": "Nu știi dacă te pot ajuta?",
+    "sendAnyway": "Scrie-mi și vedem",
+    "items": {
+      "1": {
+        "question": "Pentru ce tipuri de colaborări ești disponibil?",
+        "answer": "Sunt deschis la roluri full-time, proiecte pe bază de contract și colaborări cu o componentă tehnică serioasă."
+      },
+      "2": {
+        "question": "Ce poți proiecta și construi?",
+        "answer": "Aplicații web full-stack, servicii backend, integrări, produse bazate pe date și site-uri publice atent finisate."
+      },
+      "3": {
+        "question": "Cu ce tehnologii lucrezi?",
+        "answer": "Lucrez în principal cu Java și Spring Boot, Angular, React, TypeScript, baze de date relaționale și tool-uri de deployment."
+      },
+      "4": {
+        "question": "Lucrezi remote sau de la birou?",
+        "answer": "Sunt în Cluj-Napoca și lucrez deja cu echipe internaționale. Pentru restul, discutăm în funcție de rol sau proiect."
+      },
+      "5": {
+        "question": "Ce ar trebui să includ într-o solicitare?",
+        "answer": "Spune-mi ce vrei să obții, de unde pornești, ce termen ai în minte și dacă există limite tehnice sau de design. Nu trebuie să vii cu o specificație completă."
+      }
+    }
+  },
+  "thankYou": {
+    "eyebrow": "Mesaj primit",
+    "title": "Mulțumesc că mi-ai scris.",
+    "copy": "Mesajul a ajuns. Îți răspund în cel mult 2 zile lucrătoare.",
+    "viewWork": "Vezi proiectele",
+    "backHome": "Înapoi acasă",
+    "whileWaiting": "Între timp",
+    "exploreTech": "Vezi cum am construit portofoliul"
+  },
+  "privacy": {
+    "title": "Politica de confidențialitate.",
+    "intro": "Aici găsești ce date poate prelucra acest portofoliu, de ce sunt necesare și ce drepturi ai în legătură cu ele.",
+    "lastUpdated": "Ultima actualizare:",
+    "date": "31 august 2026",
+    "toc": {
+      "title": "Pe această pagină",
+      "controller": "Operatorul datelor",
+      "data": "Date prelucrate",
+      "purpose": "Scop și temei legal",
+      "services": "Furnizori externi",
+      "retention": "Păstrarea datelor",
+      "rights": "Drepturile tale",
+      "contact": "Contact"
+    },
+    "controller": {
+      "title": "1. Cine răspunde de date",
+      "beforeName": "Acesta este portofoliul personal al lui",
+      "afterName": ", din Cluj-Napoca, România. Portofoliul nu reprezintă, în acest moment, o firmă înregistrată.",
+      "email": "Pentru întrebări despre confidențialitate, scrie la"
+    },
+    "data": {
+      "title": "2. Ce date sunt prelucrate",
+      "form": "Dacă folosești formularul de contact, sunt prelucrate numele, adresa de email și mesajul pe care le trimiți. Te rog să nu incluzi date personale sensibile care nu sunt necesare pentru solicitarea ta.",
+      "preferences": "Tema și limba alese sunt salvate local în browser. Aceste preferințe nu te identifică și nu sunt trimise prin formularul de contact."
+    },
+    "purpose": {
+      "title": "3. De ce sunt folosite datele și în ce temei",
+      "reply": "Datele de contact și mesajul sunt folosite doar pentru gestionarea solicitării și pentru a-ți răspunde. În funcție de conținutul mesajului, prelucrarea poate fi necesară pentru demersuri făcute la cererea ta înaintea unei eventuale înțelegeri sau se bazează pe interesul legitim de a gestiona corespondența profesională.",
+      "noMarketing": "Datele trimise nu sunt folosite pentru newslettere, profilare publicitară sau decizii automate."
+    },
+    "services": {
+      "title": "4. Furnizori și resurse externe",
+      "emailjsBefore": "Formularul de contact folosește",
+      "emailjsAfter": "pentru a trimite mesajul în căsuța de email configurată. EmailJS și furnizorul de email prelucrează datele necesare livrării și păstrării corespondenței.",
+      "hosting": "Site-ul public este găzduit prin GitHub Pages, iar fonturile sunt încărcate de la Google Fonts. La încărcarea acestor resurse, furnizorii pot primi date tehnice obișnuite, precum adresa IP și informații despre browser.",
+      "externalLinks": "Linkurile către GitHub, LinkedIn și alte site-uri externe intră sub incidența propriilor politici de confidențialitate."
+    },
+    "retention": {
+      "title": "5. Cât timp sunt păstrate mesajele",
+      "copy": "Mesajele sunt păstrate doar cât este nevoie pentru a răspunde, pentru a continua discuția profesională, pentru evidențe rezonabile de corespondență sau pentru îndeplinirea unei obligații legale. Mesajele care nu mai sunt necesare sunt șterse."
+    },
+    "rights": {
+      "title": "6. Drepturile tale",
+      "copy": "În condițiile prevăzute de lege, poți cere accesul la date, corectarea sau ștergerea lor, restricționarea prelucrării ori te poți opune prelucrării. Poți solicita și portabilitatea datelor atunci când sunt îndeplinite condițiile legale.",
+      "authorityBefore": "Poți depune o plângere la autoritatea de supraveghere din România,",
+      "authorityName": "Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP)"
+    },
+    "contact": {
+      "title": "7. Contact și modificarea politicii",
+      "beforeEmail": "Pentru a-ți exercita un drept sau pentru orice întrebare despre confidențialitate, scrie la",
+      "afterEmail": ". Politica poate fi actualizată dacă se schimbă formularele, furnizorii sau modul în care sunt prelucrate datele. Data revizuirii va fi actualizată în partea de sus a paginii.",
+      "back": "Înapoi la pagina de contact"
     }
   },
   "cta": {
     "label": "05. Ia Legătura",
     "title_1": "Hai să ",
     "title_2": "Lucrăm Împreună",
-    "subtitle": "Ai un proiect în minte sau doar vrei să spui salut? Sunt mereu deschis la oportunități noi și conversații interesante.",
+    "subtitle": "Ai un proiect, un rol sau o idee despre care merită să discutăm? Scrie-mi.",
     "btn": "Contactează-mă"
   },
   "techRef": {
@@ -202,21 +313,22 @@
     "localTime": "ora locală",
     "status": "status",
     "openForWork": "● disponibil pentru muncă",
-    "repliesWithin": "răspuns în 24h",
+    "repliesWithin": "răspund în cel mult 2 zile lucrătoare",
+    "privacy": "confidențialitate",
     "craftedIn": "Creat în Cluj."
   },
   "showcase": {
     "label": "00. Showcase",
     "title_1": "Ce Pot ",
     "title_2": "Construi",
-    "subtitle": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și construit de la zero cu estetică distinctă, animații reale și interfață de calitate profesională. Fără teme, fără page builders.",
+    "subtitle": "Fiecare exemplu este un mini-site funcțional, proiectat și scris de la zero, cu stil propriu și animații reale. Fără teme și fără page builders.",
     "ctaCopy": "Ai nevoie de ceva custom?",
     "letsTalk": "Hai să vorbim →",
     "viewTemplate": "Vezi Template-ul →",
     "sectionTag": "studii de caz",
     "titleTagline": "Fără teme, fără page builders.",
-    "heroSub": "Fiecare template de mai jos este un mini-site complet interactiv — proiectat și construit de la zero cu estetică distinctă, animații reale și interfață de calitate profesională.",
-    "bottomText": "Fiecare template proiectat și construit de la zero —<br><em>fără teme, fără page builders.</em>",
+    "heroSub": "Fiecare exemplu este un mini-site funcțional, proiectat și scris de la zero, cu stil propriu și animații reale.",
+    "bottomText": "Fiecare exemplu este proiectat și scris de la zero —<br><em>fără teme și fără page builders.</em>",
     "bottomBtn": "Ia Legătura →",
     "demoBar": {
       "cta": "Îți place? Hai să vorbim"
@@ -224,23 +336,23 @@
     "cards": {
       "restaurant": {
         "category": "Restaurant & Cafenea",
-        "description": "O experiență de dining elegantă cu secțiuni de meniu animate, CTA pentru rezervări și estetică mediteraneană caldă."
+        "description": "Un site de restaurant cu meniu animat, rezervări la îndemână și o atmosferă mediteraneană caldă."
       },
       "ecommerce": {
         "category": "E-commerce & Produs",
-        "description": "O prezentare elegantă de produse cu galerii interactive, coș de cumpărături și design minimalist modern."
+        "description": "Un magazin online aerisit, cu galerii interactive, coș de cumpărături și un design minimalist."
       },
       "agency": {
         "category": "Agenție Creativă",
-        "description": "Un site de agenție îndrăzneț, cu efecte de scroll dinamice, secțiune de echipă și contoare animate."
+        "description": "Un site de agenție energic, cu efecte la scroll, prezentarea echipei și statistici animate."
       },
       "blog": {
         "category": "Blog & Revistă",
-        "description": "O experiență de lectură curată, axată pe tipografie, cu toggle dark/light mode și bară de progres."
+        "description": "Un layout de revistă axat pe tipografie, cu mod luminos/întunecat și indicator pentru progresul lecturii."
       },
       "realestate": {
         "category": "Imobiliare & Proprietăți",
-        "description": "O prezentare de proprietăți cu galerii de imagini, secțiuni de cartier și pagini elegante de detalii."
+        "description": "Un site imobiliar cu galerii foto, informații despre zonă și pagini clare pentru fiecare proprietate."
       }
     }
   },
@@ -259,6 +371,10 @@
     "legendBranch": "Branch",
     "legendEnv": "Mediu",
     "legendHost": "Host",
+    "nextLabel": "// vezi proiectele",
+    "nextTitle": "Vezi tehnologiile puse la treabă.",
+    "viewProjects": "Vezi proiectele",
+    "startConversation": "Hai să vorbim",
     "categories": {
       "framework": "Framework & Limbaj",
       "styling": "Stilizare & Animație",
@@ -273,7 +389,8 @@
     "primaryNav": "Navigație principală"
   },
   "projectDescriptions": {
-    "project-1": "Un website profesional de servicii construit pentru afacerea de instalații și HVAC a tatălui meu din Suceava, România. Include listări de servicii, detalii de contact și markup SEO structurat pentru a ajuta clienții locali să găsească afacerea.",
-    "project-2": "O aplicație web personală pentru urmărirea obiceiurilor și obiectivelor. Monitorizează rutinele zilnice, vizualizează zilele consecutive și rămâi consecvent — totul într-o interfață curată și minimalistă."
+    "project-1": "Site-ul firmei de instalații și HVAC a tatălui meu, din Suceava. Prezintă clar serviciile și datele de contact și include date structurate care ajută afacerea să apară în căutările locale.",
+    "project-2": "O aplicație personală pentru obiceiuri și obiective. Centralizează rutina zilnică, progresul și seriile de zile într-o interfață simplă, fără zgomot vizual.",
+    "project-3": "Site de prezentare pentru o firmă de construcții din Italia, specializată în impermeabilizarea și renovarea teraselor din Roma și Lazio. Include servicii, lucrări realizate și solicitări de inspecție la fața locului."
   }
 }

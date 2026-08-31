@@ -10,8 +10,8 @@ import Footer from '../components/Footer.astro';
 import CommandPalette from '../components/CommandPalette.tsx';
 import profile from '../data/profile.json';
 
-const pageTitle = `${profile.name} — denis.exe`;
-const pageDescription = `Full-Stack Software Engineer with 2+ years of experience. Spring Boot, React, Angular, AI & Big Data. Currently at Mercedes-Benz Group AG.`;
+const pageTitle = `${profile.name} | Full-Stack Software Engineer in Cluj-Napoca`;
+const pageDescription = `Full-stack software engineer in Cluj-Napoca building enterprise applications with Spring Boot, Angular, React, TypeScript, and data-driven technologies.`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -87,10 +87,19 @@ const pageDescription = `Full-Stack Software Engineer with 2+ years of experienc
           <span class="contact-outline" data-i18n="contact.talkTitle2">Send a signal.</span>
         </h2>
         <div class="contact-grid">
-          <p class="contact-sub" data-i18n="contact.talkSub">
-            Open to full-time roles, contract work, or just nerding out about distributed systems and espresso.
-            Drop a line — I read everything.
-          </p>
+          <div class="contact-copy">
+            <p class="contact-sub" data-i18n="contact.talkSub">
+              Open to full-time roles, contract work, or just nerding out about distributed systems and espresso.
+              Drop a line — I read everything.
+            </p>
+            <div class="contact-trust">
+              <strong data-i18n="responsePromise.full">You'll receive a personal reply within 2 business days.</strong>
+              <div>
+                <a href="/contact#faq" data-i18n="faq.title">A few useful answers.</a>
+                <a href="/privacy" data-i18n="footer.privacy">Privacy</a>
+              </div>
+            </div>
+          </div>
           <div class="contact-channels">
             <a class="channel" href={`mailto:${profile.email}`}>
               <div>
@@ -229,6 +238,19 @@ const pageDescription = `Full-Stack Software Engineer with 2+ years of experienc
     line-height: 1.6;
     max-width: 460px;
   }
+  .contact-trust {
+    max-width: 460px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .contact-trust strong { display: block; color: var(--green); font-weight: 400; margin-bottom: 10px; }
+  .contact-trust div { display: flex; gap: 18px; flex-wrap: wrap; }
+  .contact-trust a { color: var(--text-faint); text-decoration: none; }
+  .contact-trust a:hover, .contact-trust a:focus-visible { color: var(--text); text-decoration: underline; }
   .contact-channels { display: flex; flex-direction: column; }
   .channel {
     display: flex;

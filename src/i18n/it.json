@@ -12,7 +12,7 @@
   },
   "hero": {
     "greeting": "Ciao, sono",
-    "subtitle": "Creo applicazioni robuste e scalabili, dal backend al frontend.",
+    "subtitle": "Sviluppo applicazioni complete, dalla logica backend all'interfaccia che usa chi le apre.",
     "viewWork": "Vedi i Progetti",
     "getInTouch": "Contattami",
     "scroll": "SCORRI",
@@ -22,19 +22,32 @@
       "Appassionato di AI & Big Data"
     ],
     "resume": "CV",
-    "available": "Disponibile per opportunità",
-    "status": "disponibile per lavoro",
+    "available": "Disponibile a nuove opportunità",
+    "status": "disponibile a collaborare",
     "softwareEngineer": "Ingegnere Software",
     "currentlyText": "Sviluppo sistemi enterprise presso <span class=\"hb-green\">.msg Systems</span> su un progetto Mercedes-Benz Group.",
-    "viewWorkBtn": "Vedi i Progetti →",
-    "resumeBtn": "CV ↗",
+    "startConversation": "Parliamone",
+    "viewWorkBtn": "Vedi i progetti",
+    "resumeBtn": "CV",
     "letsBuild": "Costruiamo qualcosa"
+  },
+  "responsePromise": {
+    "full": "Ti rispondo entro 2 giorni lavorativi.",
+    "compact": "Rispondo entro 2 giorni lavorativi."
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "contact": "Contatto",
+    "showcase": "Showcase",
+    "tech": "Tech",
+    "privacy": "Privacy",
+    "thankYou": "Messaggio ricevuto"
   },
   "about": {
     "label": "01. Chi Sono",
     "title_1": "Chi ",
     "title_2": "Sono",
-    "bio": "Sono un Ingegnere Software Full-Stack con 2 anni di esperienza nella creazione di applicazioni enterprise. Ho una laurea magistrale in High Performance Computing e Analisi Big Data, che alimenta la mia passione per la creazione di soluzioni performanti e basate sui dati.\n\nAttualmente lavoro presso .msg Systems Romania su un progetto Mercedes-Benz Group AG, dove sviluppo e integro sistemi complessi utilizzando Spring Boot, Angular e tecnologie cloud moderne. Mi muovo con agio all'intersezione tra architettura backend ed esperienze frontend intuitive.\n\nFuori dal lavoro di solito cucino qualcosa di nuovo, mi perdo ad approfondire il mondo delle auto, guardo il cielo notturno o mi preparo un buon caffè — a volte tutto nella stessa serata.",
+    "bio": "Sono un software engineer full-stack con 2 anni di esperienza su applicazioni enterprise e una laurea magistrale in High Performance Computing e Big Data Analysis. Mi interessa costruire sistemi solidi, veloci e facili da usare.\n\nLavoro in .msg Systems Romania su un progetto Mercedes-Benz Group AG, dove sviluppo e integro sistemi con Spring Boot, Angular e tecnologie cloud. Mi piace seguire un prodotto per intero: dalla logica backend fino ai dettagli dell'interfaccia.\n\nFuori dal lavoro cucino, leggo di auto, guardo il cielo notturno e cerco di preparare un espresso migliore del precedente — non necessariamente in quest'ordine.",
     "letsTalk": "Parliamo",
     "viewGithub": "Vedi GitHub",
     "highlights": {
@@ -53,10 +66,10 @@
       ]
     },
     "resume": "CV",
-    "sectionTitle": "Un piccolo tour della <em>postazione di lavoro</em>.<br>Sposta le finestre, sbircia i file — questo sono io.",
+    "sectionTitle": "Un giro nella mia <em>postazione di lavoro</em>.<br>Sposta le finestre e dai un'occhiata ai file.",
     "desktopHint": "suggerimento: trascina le finestre ⤬",
     "winAbout": {
-      "p1": "Sono un <strong>ingegnere full-stack</strong> con 2+ anni di esperienza in app enterprise. Ho un M.Sc. in <strong>High Performance Computing & Big Data</strong>, che mi porta a privilegiare design performanti e orientati ai dati.",
+      "p1": "Sono un <strong>software engineer full-stack</strong> con 2+ anni di esperienza su applicazioni enterprise. Ho un M.Sc. in <strong>High Performance Computing & Big Data</strong> e tendo a preferire soluzioni solide, veloci e misurabili.",
       "p2": "Lavoro di giorno: <strong>.msg Systems Romania</strong> su un progetto Mercedes-Benz Group — Spring Boot, Angular e il middleware caotico del mondo reale.",
       "p3": "Modalità notte: cucinare, auto, il cielo notturno e la ricerca dell'espresso perfetto.",
       "github": "github ↗",
@@ -74,7 +87,7 @@
     "subtitle": "Tecnologie con cui lavoro ogni giorno — dalle API backend alle pipeline di machine learning.",
     "quickRef": "// Riferimento Rapido",
     "sectionTag": "stack",
-    "sectionTitle": "Tecnologie con cui <em>davvero</em> lavoro, valutate onestamente.",
+    "sectionTitle": "Tecnologie che uso in progetti <em>reali</em>, senza riempire la lista per fare scena.",
     "categories": {
       "Backend": "Backend",
       "Frontend": "Frontend",
@@ -88,7 +101,7 @@
     "label": "03. Progetti",
     "title_1": "Cosa Ho ",
     "title_2": "Costruito",
-    "subtitle": "Una selezione di progetti che mostrano il mio lavoro su sistemi backend, interfacce frontend e pipeline di dati.",
+    "subtitle": "Una selezione di progetti che racconta come lavoro, dai servizi backend alle interfacce e ai flussi di dati.",
     "featured": "In Evidenza",
     "otherProjects": "// Altri Progetti",
     "screenshot": "Screenshot",
@@ -98,20 +111,23 @@
     "cta": {
       "label": "// vedi altro",
       "heading": "Vuoi vedere cos'altro posso costruire?",
-      "sub": "Questi sono solo alcuni punti salienti. Scopri la gamma completa di quello che posso progettare e costruire — dai siti per ristoranti ai negozi e-commerce alle agenzie creative.",
-      "btn": "Vedi la Vetrina"
+      "sub": "Qui trovi solo alcuni esempi. Nella raccolta completa ci sono anche siti per ristoranti, e-commerce e agenzie creative.",
+      "btn": "Vedi tutti gli esempi"
     },
     "emptyState": "Aggiungi i tuoi progetti in",
-    "sectionTag": "case study & progetti personali",
-    "sectionTitle": "<em>Lavori</em> reali — dall'ambiente di produzione alle notti insonni.",
-    "moreText": "Ce n'è ancora <em>di più</em> — ristoranti, e-commerce, agenzie.",
-    "viewShowcase": "Vedi la Vetrina →"
+    "sectionTag": "progetti & sperimentazioni",
+    "sectionTitle": "<em>Progetti</em> pubblicati e idee portate fino in fondo.",
+    "moreText": "Altre <em>direzioni</em> — ristorazione, e-commerce, agenzie.",
+    "viewShowcase": "Vedi tutti gli esempi →"
   },
   "experience": {
     "label": "04. Esperienza",
+    "sectionNum": "04 / carriera",
+    "sectionTag": "percorso",
+    "sectionTitle": "Dall'<em>algebra</em> ai sistemi enterprise.",
     "title_1": "Il Mio ",
     "title_2": "Percorso",
-    "subtitle": "Traguardi professionali e risultati accademici che hanno plasmato la mia carriera.",
+    "subtitle": "Le esperienze professionali e gli studi che hanno definito il mio percorso fin qui.",
     "work": "// lavoro",
     "education": "// istruzione",
     "present": "Presente",
@@ -137,19 +153,19 @@
     "label": "Contatto",
     "title_1": "Restiamo in ",
     "title_2": "Contatto",
-    "subtitle": "Hai un progetto in mente, vuoi collaborare o vuoi solo salutare? Mandami un messaggio — li leggo tutti.",
+    "subtitle": "Hai un progetto, un'idea o un ruolo di cui vale la pena parlare? Scrivimi.",
     "terminal": "~ invia-messaggio",
     "emailLabel": "// Email",
     "socialLabel": "// Social",
     "openTo": "Aperto a opportunità",
     "available": "Disponibile per progetti freelance, ruoli full-time e collaborazioni interessanti.",
-    "responseTime": "// Tempo tipico di risposta: 24–48 ore",
+    "responseTime": "// rispondo entro 2 giorni lavorativi",
     "configureEmailJS": "Configura EmailJS per abilitare il modulo di contatto.",
     "configureEmailJSSub": "Copia <code>.env.example</code> → <code>.env</code> e aggiungi le credenziali EmailJS.",
-    "sectionTag": "invia un segnale",
+    "sectionTag": "scrivimi",
     "talkTitle1": "Parliamo.",
-    "talkTitle2": "Invia un segnale.",
-    "talkSub": "Aperto a ruoli full-time, contratti, o solo una chiacchierata su sistemi distribuiti ed espresso. Scrivimi — leggo tutto.",
+    "talkTitle2": "Scrivimi.",
+    "talkSub": "Possiamo parlare di un ruolo full-time, di un progetto o anche solo di sistemi distribuiti ed espresso. Leggo ogni messaggio.",
     "formLabel": "// compose_message",
     "directChannels": "// direct_channels",
     "channelEmail": "Email",
@@ -157,9 +173,11 @@
     "channelGitHub": "GitHub",
     "channelResume": "CV",
     "resumeSub": "PDF, 1 pagina",
-    "statusSub": "Full-time, contratti, o solo una chiacchierata su sistemi distribuiti ed espresso.",
+    "statusSub": "Ruoli full-time, progetti o una buona chiacchierata su sistemi distribuiti ed espresso.",
     "contactForm": "Modulo di Contatto",
-    "contactFormSub": "Invia un messaggio direttamente",
+    "contactFormSub": "Scrivimi direttamente",
+    "privacyNotice": "Uso nome, email e messaggio solo per rispondere alla tua richiesta.",
+    "privacyLink": "Informativa sulla privacy",
     "form": {
       "name": "// Nome",
       "email": "// Email",
@@ -174,15 +192,108 @@
       "sending": "Invio in corso...",
       "send": "./invia",
       "sendFlag": "--messaggio",
-      "success": "Messaggio inviato! Ti risponderò presto.",
-      "error": "Qualcosa è andato storto. Prova a inviarmi un'email direttamente."
+      "success": "Messaggio inviato. Ti reindirizzo…",
+      "error": "Il messaggio non è partito. Puoi scrivermi direttamente via email."
+    }
+  },
+  "faq": {
+    "tag": "Prima di scrivermi",
+    "title": "Domande frequenti.",
+    "intro": "In breve, le cose che mi vengono chieste più spesso.",
+    "stillUnsure": "Non sai se posso esserti utile?",
+    "sendAnyway": "Scrivimi e ne parliamo",
+    "items": {
+      "1": {
+        "question": "A quali tipi di lavoro sei interessato?",
+        "answer": "Valuto ruoli full-time, progetti a contratto e collaborazioni con una componente tecnica interessante."
+      },
+      "2": {
+        "question": "Cosa puoi progettare e costruire?",
+        "answer": "Applicazioni web full-stack, servizi backend, integrazioni, prodotti basati sui dati e siti pubblici curati nei dettagli."
+      },
+      "3": {
+        "question": "Con quali tecnologie lavori?",
+        "answer": "Lavoro soprattutto con Java e Spring Boot, Angular, React, TypeScript, database relazionali e strumenti di deployment."
+      },
+      "4": {
+        "question": "Lavori da remoto o in presenza?",
+        "answer": "Vivo a Cluj-Napoca e lavoro già con team internazionali. La modalità si decide in base al ruolo o al progetto."
+      },
+      "5": {
+        "question": "Cosa dovrei includere in una richiesta?",
+        "answer": "Dimmi cosa vuoi ottenere, da dove parti, quali tempi hai in mente e se ci sono vincoli tecnici o di design. Non serve una specifica completa."
+      }
+    }
+  },
+  "thankYou": {
+    "eyebrow": "Messaggio ricevuto",
+    "title": "Grazie per avermi scritto.",
+    "copy": "Il messaggio è arrivato. Ti rispondo entro 2 giorni lavorativi.",
+    "viewWork": "Vedi i progetti",
+    "backHome": "Torna alla home",
+    "whileWaiting": "Nel frattempo",
+    "exploreTech": "Scopri come ho costruito questo portfolio"
+  },
+  "privacy": {
+    "title": "Informativa sulla privacy.",
+    "intro": "Qui trovi quali dati può trattare questo portfolio, perché vengono usati e quali sono i tuoi diritti.",
+    "lastUpdated": "Ultimo aggiornamento:",
+    "date": "31 agosto 2026",
+    "toc": {
+      "title": "In questa pagina",
+      "controller": "Titolare",
+      "data": "Dati trattati",
+      "purpose": "Finalità e base giuridica",
+      "services": "Fornitori esterni",
+      "retention": "Conservazione",
+      "rights": "I tuoi diritti",
+      "contact": "Contatti"
+    },
+    "controller": {
+      "title": "1. Chi è il titolare del trattamento",
+      "beforeName": "Questo è il portfolio personale di",
+      "afterName": ", con sede a Cluj-Napoca, in Romania. Al momento il portfolio non rappresenta un'impresa registrata.",
+      "email": "Per domande sulla privacy, scrivi a"
+    },
+    "data": {
+      "title": "2. Quali dati vengono trattati",
+      "form": "Se usi il modulo di contatto, vengono trattati il nome, l'indirizzo email e il messaggio che invii. Ti chiedo di non inserire dati personali sensibili che non siano necessari per la richiesta.",
+      "preferences": "La lingua e il tema scelti vengono salvati localmente nel browser. Queste preferenze non servono a identificarti e non vengono inviate tramite il modulo di contatto."
+    },
+    "purpose": {
+      "title": "3. Finalità e base giuridica",
+      "reply": "I dati di contatto e il messaggio vengono usati soltanto per gestire la richiesta e risponderti. A seconda del contenuto, il trattamento può essere necessario per svolgere attività richieste da te prima di un eventuale accordo oppure può basarsi sul legittimo interesse a gestire la corrispondenza professionale.",
+      "noMarketing": "I dati inviati non vengono usati per newsletter, profilazione pubblicitaria o decisioni automatizzate."
+    },
+    "services": {
+      "title": "4. Fornitori e risorse esterne",
+      "emailjsBefore": "Il modulo di contatto usa",
+      "emailjsAfter": "per recapitare il messaggio alla casella email configurata. EmailJS e il provider di posta trattano quindi i dati necessari a consegnare e conservare la corrispondenza.",
+      "hosting": "Il sito pubblico è ospitato tramite GitHub Pages, mentre i font vengono caricati da Google Fonts. Quando queste risorse vengono richieste, i fornitori possono ricevere normali dati di connessione, come indirizzo IP e informazioni sul browser.",
+      "externalLinks": "I link a GitHub, LinkedIn e altri siti esterni sono soggetti alle informative privacy dei rispettivi servizi."
+    },
+    "retention": {
+      "title": "5. Per quanto tempo vengono conservati i messaggi",
+      "copy": "I messaggi vengono conservati solo per il tempo necessario a rispondere, proseguire l'eventuale conversazione professionale, mantenere una ragionevole traccia della corrispondenza o rispettare un obbligo di legge. I messaggi non più necessari vengono eliminati."
+    },
+    "rights": {
+      "title": "6. I tuoi diritti",
+      "copy": "Nei casi previsti dalla legge, puoi chiedere di accedere ai dati, correggerli o eliminarli, limitarne il trattamento oppure opporti al trattamento. Puoi inoltre richiedere la portabilità dei dati quando ne ricorrono le condizioni.",
+      "authorityBefore": "Puoi presentare un reclamo all'autorità di controllo rumena, la",
+      "authorityName": "Autorità nazionale di controllo del trattamento dei dati personali (ANSPDCP)"
+    },
+    "contact": {
+      "title": "7. Contatti e aggiornamenti dell'informativa",
+      "beforeEmail": "Per esercitare un diritto o fare una domanda sulla privacy, scrivi a",
+      "afterEmail": ". L'informativa può essere aggiornata se cambiano i moduli, i fornitori o le modalità di trattamento dei dati. In quel caso verrà aggiornata anche la data in alto.",
+      "back": "Torna alla pagina dei contatti"
     }
   },
   "cta": {
     "label": "05. Contattami",
     "title_1": "Lavoriamo ",
     "title_2": "Insieme",
-    "subtitle": "Hai un progetto in mente o vuoi solo salutare? Sono sempre aperto a nuove opportunità e conversazioni interessanti.",
+    "subtitle": "Hai un progetto, un ruolo o un'idea di cui vale la pena parlare? Scrivimi.",
     "btn": "Contattami"
   },
   "techRef": {
@@ -202,21 +313,22 @@
     "localTime": "ora locale",
     "status": "status",
     "openForWork": "● disponibile per lavoro",
-    "repliesWithin": "risposta entro 24h",
+    "repliesWithin": "rispondo entro 2 giorni lavorativi",
+    "privacy": "privacy",
     "craftedIn": "Realizzato a Cluj."
   },
   "showcase": {
     "label": "00. Vetrina",
     "title_1": "Cosa Posso ",
     "title_2": "Costruire",
-    "subtitle": "Ogni template qui sotto è un mini-sito completamente interattivo — progettato e codificato da zero con estetica distinta, animazioni reali e interfaccia di qualità produzione. Nessun tema, nessun page builder.",
+    "subtitle": "Ogni esempio è un mini-sito funzionante, progettato e scritto da zero con uno stile proprio e animazioni reali. Niente temi, niente page builder.",
     "ctaCopy": "Hai bisogno di qualcosa di personalizzato?",
     "letsTalk": "Parliamo →",
     "viewTemplate": "Vedi Template →",
     "sectionTag": "casi studio",
     "titleTagline": "Nessun tema, nessun builder.",
-    "heroSub": "Ogni template qui sotto è un mini-sito completamente interattivo — progettato e codificato da zero con estetica distinta, animazioni reali e interfaccia di qualità produzione.",
-    "bottomText": "Ogni template progettato e costruito da zero —<br><em>nessun tema, nessun page builder.</em>",
+    "heroSub": "Ogni esempio è un mini-sito funzionante, progettato e scritto da zero con uno stile proprio e animazioni reali.",
+    "bottomText": "Ogni esempio è progettato e scritto da zero —<br><em>niente temi, niente page builder.</em>",
     "bottomBtn": "Contattami →",
     "demoBar": {
       "cta": "Ti piace? Parliamo"
@@ -224,23 +336,23 @@
     "cards": {
       "restaurant": {
         "category": "Ristorante & Caffè",
-        "description": "Un'elegante esperienza gastronomica con sezioni menu animate, CTA per prenotazioni ed estetica mediterranea calda."
+        "description": "Un sito per ristoranti con menu animato, prenotazioni sempre a portata di mano e un'atmosfera mediterranea."
       },
       "ecommerce": {
         "category": "E-commerce & Prodotto",
-        "description": "Una vetrina prodotti elegante con gallerie interattive, carrello della spesa e design minimalista moderno."
+        "description": "Un e-commerce essenziale, con gallerie interattive, carrello e un design pulito che lascia spazio ai prodotti."
       },
       "agency": {
         "category": "Agenzia Creativa",
-        "description": "Un sito agenzia audace e dinamico con effetti di scroll, presentazione del team e contatori animati."
+        "description": "Un sito per agenzie dal ritmo deciso, con effetti allo scroll, presentazione del team e numeri animati."
       },
       "blog": {
         "category": "Blog & Rivista",
-        "description": "Un'esperienza di lettura pulita e tipografica con toggle dark/light mode e barra di avanzamento lettura."
+        "description": "Un layout editoriale centrato sulla tipografia, con tema chiaro/scuro e indicatore di avanzamento della lettura."
       },
       "realestate": {
         "category": "Immobiliare & Proprietà",
-        "description": "Una vetrina immobiliare con caroselli di immagini, sezioni quartiere e layout eleganti per i dettagli."
+        "description": "Un sito immobiliare con gallerie fotografiche, informazioni sul quartiere e schede chiare per ogni proprietà."
       }
     }
   },
@@ -259,6 +371,10 @@
     "legendBranch": "Branch",
     "legendEnv": "Ambiente",
     "legendHost": "Host",
+    "nextLabel": "// guarda i progetti",
+    "nextTitle": "Guarda questi strumenti all'opera.",
+    "viewProjects": "Vedi i progetti",
+    "startConversation": "Parliamone",
     "categories": {
       "framework": "Framework & Linguaggio",
       "styling": "Stile & Animazione",
@@ -273,7 +389,8 @@
     "primaryNav": "Navigazione principale"
   },
   "projectDescriptions": {
-    "project-1": "Un sito web professionale di servizi costruito per l'attività di idraulica e HVAC di mio padre a Suceava, Romania. Include elenchi di servizi, dettagli di contatto e markup SEO strutturato per aiutare i clienti locali a trovare l'attività.",
-    "project-2": "Un'app web personale per il monitoraggio di abitudini e obiettivi. Traccia le routine quotidiane, visualizza le serie consecutive e mantieni la costanza — tutto in un'interfaccia pulita e minimale."
+    "project-1": "Il sito dell'attività di idraulica e climatizzazione di mio padre, a Suceava. Presenta servizi e contatti in modo chiaro e usa dati strutturati per migliorare la visibilità nelle ricerche locali.",
+    "project-2": "Un'app personale per tenere sotto controllo abitudini e obiettivi. Riunisce routine quotidiane, progressi e serie di giorni in un'interfaccia semplice e senza distrazioni.",
+    "project-3": "Sito vetrina per un'impresa edile specializzata nell'impermeabilizzazione e nella ristrutturazione di terrazzi a Roma e nel Lazio. Presenta servizi, lavori realizzati e richieste di sopralluogo."
   }
 }
