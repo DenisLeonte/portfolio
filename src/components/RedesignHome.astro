@@ -3,6 +3,7 @@ import '../styles/redesign-home.css';
 import profile from '../data/profile.json';
 import projects from '../data/projects.json';
 import experience from '../data/experience.json';
+import showcase from '../data/showcase.json';
 import { CAREER_START, yearsSince, parseMonth, duration } from '../utils/experience';
 
 const years = yearsSince();
@@ -26,7 +27,7 @@ const projectMeta = [
   <nav class="blue-nav" aria-label="Primary navigation">
     <a class="blue-wordmark" href="#top" aria-label="Denis, home">DENIS</a>
     <div class="blue-nav-links">
-      <a href="#work">Work</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+      <a href="#work">Work</a><a href="/showcase">Showcase</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
       <span class="nav-divider" aria-hidden="true"></span>
       <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       <button type="button" class="blue-theme-toggle" aria-label="Switch to light theme">Light</button>
@@ -70,6 +71,24 @@ const projectMeta = [
           </article>
         );
       })}
+    </div>
+
+    <div class="templates-strip" aria-labelledby="templates-title">
+      <header class="templates-head">
+        <p class="mono-label" id="templates-title">TEMPLATES / {String(showcase.length).padStart(2, '0')}</p>
+        <a class="project-link" href="/showcase">Explore the showcase <span aria-hidden="true">↗</span></a>
+      </header>
+      <ul class="templates-list">
+        {showcase.map((item) => (
+          <li>
+            <a class="template-card" href={`/showcase/${item.slug}`}>
+              <span class="template-thumb"><img src={item.preview} alt={item.alt} loading="lazy" /></span>
+              <span class="template-name">{item.name}</span>
+              <span class="template-cat">{item.category}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
