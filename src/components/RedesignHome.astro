@@ -1,0 +1,112 @@
+---
+import '../styles/redesign-home.css';
+import profile from '../data/profile.json';
+import projects from '../data/projects.json';
+
+const projectMeta = [
+  { index: '01', category: 'WEB EXPERIENCE', title: 'Instalații Suceava', description: 'A clear, conversion-focused service website for a local plumbing and HVAC business.', tags: 'DESIGN / DEVELOPMENT / SEO' },
+  { index: '02', category: 'PRODUCT INTERFACE', title: 'DenisTechs Tracker', description: 'A focused personal dashboard for building habits, tracking nutrition, and staying consistent.', tags: 'PRODUCT / REACT / TYPESCRIPT' },
+  { index: '03', category: 'DIGITAL PRESENCE', title: 'PLC Group', description: 'A confident, multilingual website for an Italian construction and waterproofing company.', tags: 'ASTRO / CONTENT / DEVELOPMENT' },
+];
+---
+
+<main class="blue-portfolio" id="top">
+  <nav class="blue-nav" aria-label="Primary navigation">
+    <a class="blue-wordmark" href="#top" aria-label="Denis, home">DENIS</a>
+    <div class="blue-nav-links">
+      <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </nav>
+
+  <section class="blue-hero" aria-labelledby="hero-title">
+    <canvas class="hero-wave" id="hero-wave" aria-hidden="true"></canvas>
+    <div class="hero-copy">
+      <p class="mono-label">INDEPENDENT DEVELOPER &amp; MAKER</p>
+      <h1 id="hero-title">A curious mind.<br />A <span>builder's</span> instinct.</h1>
+      <p class="hero-intro">I'm Denis. I turn ideas into websites, interfaces,<br class="hide-mobile" /> and connected things.</p>
+      <a class="text-link" href="#work">Explore selected work <span class="arrow" aria-hidden="true">↘</span></a>
+    </div>
+    <p class="hero-note hero-note--top" aria-hidden="true">CURIOSITY<br />DRIVES<br />BETTER<br />THINGS</p>
+    <p class="hero-note hero-note--bottom" aria-hidden="true">IDEAS<br />CODE<br />THINGS<br />A BRIGHTER<br />TOMORROW</p>
+  </section>
+
+  <section class="blue-work" id="work" aria-labelledby="work-title">
+    <header class="section-heading">
+      <p class="mono-label">SELECTED WORK / {String(projects.length).padStart(2, '0')}</p>
+      <h2 id="work-title">Built with intent.</h2>
+    </header>
+    <div class="project-grid">
+      {projects.map((project, index) => {
+        const meta = projectMeta[index];
+        return (
+          <article class={`blue-project project-${index + 1}`}>
+            <div class="project-kicker"><span>{meta.index}</span><span>/</span><span>{meta.category}</span></div>
+            <a class="project-cover" href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${meta.title}`}>
+              <img src={project.image} alt={project.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+            </a>
+            <div class="project-details">
+              <h3>{meta.title}</h3>
+              <p class="project-desc">{meta.description}</p>
+              <div class="project-meta">
+                <p class="project-tags">{meta.tags}</p>
+                <a class="project-link" href={project.liveUrl} target="_blank" rel="noopener noreferrer">View project <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="blue-about" id="about" aria-labelledby="about-title">
+    <div>
+      <p class="mono-label">ABOUT / DENIS LEONTE</p>
+      <h2 id="about-title">Software is the medium.<br /><span>Curiosity is the method.</span></h2>
+    </div>
+    <div class="about-copy">
+      <p>I'm a full-stack software engineer working across backend architecture, frontend systems, and the space where they meet.</p>
+      <p>My daily toolkit includes Spring Boot, Angular, TypeScript, PostgreSQL, Docker, and enough coffee to keep the abstractions honest.</p>
+      <a class="text-link" href="/resume.pdf" target="_blank">Read my résumé</a>
+    </div>
+  </section>
+
+  <section class="blue-contact" id="contact" aria-labelledby="contact-title">
+    <p class="mono-label">HAVE A PROJECT OR AN INTERESTING PROBLEM?</p>
+    <h2 id="contact-title">Let's make something<br /><span>worth remembering.</span></h2>
+    <div class="contact-actions">
+      <a class="contact-primary" href={`mailto:${profile.email}`}>Start a conversation</a>
+      <a href={profile.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </section>
+
+  <footer class="blue-footer">
+    <div class="footer-left">
+      <span class="footer-rule" aria-hidden="true"></span>
+      <span>ALWAYS CURIOUS. ALWAYS BUILDING.</span>
+    </div>
+    <a class="footer-cta" href={`mailto:${profile.email}`}>Let's talk <span aria-hidden="true">↗</span></a>
+  </footer>
+</main>
+
+<script>
+  import { mountBlueWave } from '../scripts/blue-wave.js';
+
+  function initPortfolio() {
+    const nav = document.querySelector<HTMLElement>('.blue-nav');
+    const projects = document.querySelectorAll<HTMLElement>('.blue-project');
+    const waveCanvas = document.querySelector<HTMLCanvasElement>('#hero-wave');
+    const stopWave = waveCanvas ? mountBlueWave(waveCanvas) : undefined;
+    const onScroll = () => nav?.classList.toggle('is-scrolled', window.scrollY > 24);
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')), { threshold: 0.12 });
+    projects.forEach((project) => observer.observe(project));
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => { stopWave?.(); observer.disconnect(); window.removeEventListener('scroll', onScroll); };
+  }
+  let stop: undefined | (() => void);
+  document.addEventListener('astro:page-load', () => { stop?.(); stop = initPortfolio(); });
+  document.addEventListener('astro:before-swap', () => stop?.());
+</script>
