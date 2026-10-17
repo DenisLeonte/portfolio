@@ -1,17 +1,17 @@
 [
   {
     "id": "edu-2",
-    "company": "Babes Bolyai University",
-    "role": "Bachelors's — Maths for Informatics",
+    "company": "Babeș-Bolyai University",
+    "role": "Bachelor's — Mathematics for Informatics",
     "startDate": "10/2021",
     "endDate": "06/2024",
-    "description": "In depth mathematical knowledge and foundamentals of OOP, data structures, DB's, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities.",
+    "description": "In depth mathematical knowledge and fundamentals of OOP, data structures, databases, web development, AI and mathematical analysis, algebra, geometry, statistics and probabilities.",
     "type": "education",
     "logo": ""
   },
   {
     "id": "edu-1",
-    "company": "Babes Bolyai University",
+    "company": "Babeș-Bolyai University",
     "role": "Master's — High Performance Computing and Big Data Analysis",
     "startDate": "10/2024",
     "endDate": "06/2026",
