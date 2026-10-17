@@ -7,7 +7,7 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
 ---
 
 <nav id="navbar" aria-label="Primary navigation">
-  <a href={a('#hero')} class="nav-logo" aria-label="Back to top">
+  <a href={a('#top')} class="nav-logo" aria-label="Back to top">
     <img src="/favicon.svg" alt="Leonte Denis portfolio logo" class="nav-logo-img" width="24" height="24" />
     <span class="nav-logo-blink"></span>
     <span>DENIS.EXE</span>
@@ -15,8 +15,8 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
 
   <ul class="nav-links" role="list">
     <li><a href={a('#about')}    data-i18n="nav.about">About</a></li>
-    <li><a href={a('#skills')}   data-i18n="nav.skills">Skills</a></li>
-    <li><a href={a('#projects')} data-i18n="nav.projects">Work</a></li>
+    <li><a href={a('#experience')} data-i18n="nav.experience">Experience</a></li>
+    <li><a href={a('#work')} data-i18n="nav.projects">Work</a></li>
     <li><a href="/showcase"      data-i18n="nav.showcase">Showcase</a></li>
     <li><a href="/tech"          data-i18n="nav.tech">Tech</a></li>
   </ul>
@@ -42,8 +42,8 @@ const a = (hash: string) => isHome ? hash : `/${hash}`;
 <!-- Mobile Menu -->
 <div id="mobile-menu" aria-hidden="true">
   <a href={a('#about')}    data-i18n="nav.about">About</a>
-  <a href={a('#skills')}   data-i18n="nav.skills">Skills</a>
-  <a href={a('#projects')} data-i18n="nav.projects">Work</a>
+  <a href={a('#experience')} data-i18n="nav.experience">Experience</a>
+  <a href={a('#work')} data-i18n="nav.projects">Work</a>
   <a href="/showcase"      data-i18n="nav.showcase">Showcase</a>
   <a href="/tech"          data-i18n="nav.tech">Tech</a>
   <a href="/contact"       data-i18n="nav.contact">Contact</a>
