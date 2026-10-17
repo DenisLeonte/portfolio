@@ -5,6 +5,7 @@ import profile from '../data/profile.json';
 import en from '../i18n/en.json';
 import ro from '../i18n/ro.json';
 import it from '../i18n/it.json';
+import { yearsSince } from '../utils/experience';
 
 export interface Props {
   title?: string;
@@ -17,7 +18,7 @@ export interface Props {
 
 const {
   title = 'Leonte Denis — Full-Stack Software Engineer',
-  description = 'Full-Stack Software Engineer with 2 years of experience. Spring Boot, React, Angular, AI & Big Data. Currently at Mercedes-Benz Group AG.',
+  description = `Full-Stack Software Engineer with ${yearsSince()}+ years of experience. Spring Boot, React, Angular, AI & Big Data. Currently at Mercedes-Benz Group AG.`,
   image,
   robots = 'index, follow',
   bodyClass = '',
@@ -144,20 +145,7 @@ const structuredData = {
   </head>
 
   <body class={bodyClass}>
-    <!-- Fixed background layers -->
-    {bodyClass !== 'home-redesign' && (
-      <>
-        <div class="grid-bg" aria-hidden="true"></div>
-        <div class="bg-aurora" id="bg-aurora" aria-hidden="true"><div class="bg-aurora-3"></div></div>
-        <div class="bg-sparkles" id="bg-sparkles" aria-hidden="true"><canvas id="sparkles-canvas"></canvas></div>
-        <div class="bg-crosshatch" id="bg-crosshatch" aria-hidden="true"></div>
-        <div class="bg-dots" id="bg-dots" aria-hidden="true"></div>
-        <div class="bg-spotlight" id="bg-spotlight" aria-hidden="true"></div>
-        <div class="bg-supernova" id="bg-supernova" aria-hidden="true"></div>
-        <div class="scanlines" aria-hidden="true"></div>
-        <div class="noise" aria-hidden="true"></div>
-      </>
-    )}
+    <!-- The blue redesign has no ambient background layers; the FX script below no-ops without them. -->
 
     <!-- Scroll progress bar -->
     <div id="scroll-progress" aria-hidden="true"></div>

@@ -75,8 +75,7 @@ export default function CommandPalette() {
 
   const commands: Command[] = [
     { id: 'nav-about',      label: 'About',           hint: '#about',      category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('about') },
-    { id: 'nav-skills',     label: 'Skills',          hint: '#skills',     category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('skills') },
-    { id: 'nav-projects',   label: 'Projects',        hint: '#projects',   category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('projects') },
+    { id: 'nav-projects',   label: 'Projects',        hint: '#work',       category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('work') },
     { id: 'nav-experience', label: 'Experience',      hint: '#experience', category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('experience') },
     { id: 'nav-contact',    label: 'Contact',         hint: '/contact',    category: 'navigate', icon: NAV_ICON, run: () => { window.location.href = '/contact'; } },
     { id: 'nav-showcase',   label: 'Showcase',        hint: '/showcase',   category: 'navigate', icon: NAV_ICON, run: () => { window.location.href = '/showcase'; } },

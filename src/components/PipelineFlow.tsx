@@ -523,8 +523,8 @@ const initialEdges: Edge[] = [
 export default function PipelineFlow() {
   const dark = useIsDark();
 
-  const arrowColor = dark ? 'rgba(0,255,65,0.6)' : 'rgba(22,163,74,0.6)';
-  const bgDotColor = dark ? 'rgba(0,255,65,0.06)' : 'rgba(22,163,74,0.06)';
+  const arrowColor = dark ? 'rgba(84,168,255,0.6)' : 'rgba(21,87,212,0.6)';
+  const bgDotColor = dark ? 'rgba(84,168,255,0.06)' : 'rgba(21,87,212,0.06)';
 
   const arrow = {
     type: MarkerType.ArrowClosed,

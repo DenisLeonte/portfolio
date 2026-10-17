@@ -218,8 +218,8 @@ export default function ContactForm() {
                 display: 'inline-block',
                 width: '14px',
                 height: '14px',
-                border: '2px solid rgba(22,163,74,0.3)',
-                borderTopColor: '#16a34a',
+                border: '2px solid rgba(33,124,255,0.3)',
+                borderTopColor: '#217cff',
                 borderRadius: '50%',
                 animation: 'spin 0.7s linear infinite',
               }}
