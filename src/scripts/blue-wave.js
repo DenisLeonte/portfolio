@@ -122,7 +122,9 @@ function updateRibbon(mesh, time, offset) {
   pos.needsUpdate = true;
 }
 
-export function mountBlueWave(canvas) {
+// `outro` mirrors the ribbon to the left for the closing contact section.
+export function mountBlueWave(canvas, { variant = 'hero' } = {}) {
+  const outro = variant === 'outro';
   const renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: true,
@@ -187,7 +189,11 @@ export function mountBlueWave(canvas) {
     const mobile = w < 600;
     const tablet = w >= 600 && w < 1024;
 
-    if (mobile) {
+    if (outro) {
+      group.position.set(mobile ? -0.4 : -2.6, mobile ? -1.2 : -0.2, 0);
+      group.scale.set(mobile ? -0.62 : -1.0, mobile ? 0.62 : 1.0, 1);
+      bloomPass.strength = mobile ? 0.22 : 0.32;
+    } else if (mobile) {
       group.position.set(1.2, 1.6, 0);
       group.scale.setScalar(0.48);
       bloomPass.strength = 0.25;
@@ -208,11 +214,21 @@ export function mountBlueWave(canvas) {
   };
 
   const render = () => {
-    const time = reduced ? 2.4 : clock.getElapsedTime() + timeOffset;
+    const time = reduced ? 2.4 : clock.getElapsedTime() + timeOffset + (outro ? 40 : 0);
     ribbons.forEach(({ mesh, offset }) => updateRibbon(mesh, time, offset));
     composer.render();
-    if (!reduced) raf = requestAnimationFrame(render);
+    if (!reduced && visible) raf = requestAnimationFrame(render);
   };
+
+  // Only animate while the canvas is on screen, so two waves cost one.
+  let visible = true;
+  const visibility = new IntersectionObserver(([entry]) => {
+    const wasVisible = visible;
+    visible = entry.isIntersecting;
+    if (visible && !wasVisible && !reduced) raf = requestAnimationFrame(render);
+    if (!visible) cancelAnimationFrame(raf);
+  });
+  visibility.observe(canvas);
 
   resize();
   render();
@@ -220,6 +236,7 @@ export function mountBlueWave(canvas) {
 
   return () => {
     cancelAnimationFrame(raf);
+    visibility.disconnect();
     window.removeEventListener('resize', resize);
     ribbons.forEach(({ geometry, material }) => {
       geometry.dispose();

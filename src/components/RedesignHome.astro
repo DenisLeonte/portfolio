@@ -47,7 +47,7 @@ const projectMeta = [
   </section>
 
   <section class="blue-work" id="work" aria-labelledby="work-title">
-    <header class="section-heading">
+    <header class="section-heading" data-reveal>
       <p class="mono-label">SELECTED WORK / {String(projects.length).padStart(2, '0')}</p>
       <h2 id="work-title">Built with intent.</h2>
     </header>
@@ -56,8 +56,9 @@ const projectMeta = [
         const meta = projectMeta[index];
         return (
           <article class={`blue-project project-${index + 1}`}>
+            <span class="project-index" aria-hidden="true">{meta.index}</span>
             <div class="project-kicker"><span>{meta.index}</span><span>/</span><span>{meta.category}</span></div>
-            <a class="project-cover" href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${meta.title}`}>
+            <a class="project-cover" data-cursor="View site" href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${meta.title}`}>
               <img src={project.image} alt={project.alt} loading={index === 0 ? 'eager' : 'lazy'} />
             </a>
             <div class="project-details">
@@ -92,8 +93,17 @@ const projectMeta = [
     </div>
   </section>
 
+  <section class="blue-stats" aria-label="At a glance">
+    <ul class="stats-list">
+      <li data-reveal><span class="stat-num" data-count-to={years} data-years-since={CAREER_START}>{years}</span><span class="stat-plus">+</span><span class="stat-label">YEARS SHIPPING<br />ENTERPRISE SOFTWARE</span></li>
+      <li data-reveal><span class="stat-num" data-count-to={projects.length}>{String(projects.length).padStart(2, '0')}</span><span class="stat-label">LIVE CLIENT<br />WEBSITES</span></li>
+      <li data-reveal><span class="stat-num" data-count-to={showcase.length}>{String(showcase.length).padStart(2, '0')}</span><span class="stat-label">HAND-BUILT<br />TEMPLATES</span></li>
+      <li data-reveal><span class="stat-num">M.Sc.</span><span class="stat-label">HIGH PERFORMANCE<br />COMPUTING &amp; BIG DATA</span></li>
+    </ul>
+  </section>
+
   <section class="blue-about" id="about" aria-labelledby="about-title">
-    <div>
+    <div data-reveal>
       <p class="mono-label">ABOUT / DENIS LEONTE</p>
       <h2 id="about-title">Software is the medium.<br /><span>Curiosity is the method.</span></h2>
     </div>
@@ -105,13 +115,16 @@ const projectMeta = [
   </section>
 
   <section class="blue-record" id="experience" aria-labelledby="record-title">
-    <header class="section-heading">
+    <header class="section-heading" data-reveal>
       <p class="mono-label">EXPERIENCE &amp; EDUCATION / NEWEST FIRST</p>
       <h2 id="record-title">Where I've been.</h2>
     </header>
+    <div class="record-track">
+    <span class="record-rail" aria-hidden="true"><span class="record-rail-fill"></span></span>
     <ol class="record-list">
       {record.map((item) => (
-        <li class="record-row">
+        <li class="record-row" data-reveal>
+          <span class="record-node" aria-hidden="true"></span>
           <p class="record-when"><span>{item.from} — {item.to}</span><span class="record-span">{item.span}</span></p>
           <div class="record-what">
             <h3>{item.role}</h3>
@@ -122,11 +135,13 @@ const projectMeta = [
         </li>
       ))}
     </ol>
+    </div>
   </section>
 
   <section class="blue-contact" id="contact" aria-labelledby="contact-title">
+    <canvas class="hero-wave outro-wave" id="outro-wave" aria-hidden="true"></canvas>
     <p class="mono-label">HAVE A PROJECT OR AN INTERESTING PROBLEM?</p>
-    <h2 id="contact-title">Let's make something<br /><span>worth remembering.</span></h2>
+    <h2 id="contact-title" data-reveal>Let's make something<br /><span>worth remembering.</span></h2>
     <div class="contact-actions">
       <a class="contact-primary" href={`mailto:${profile.email}`}>Start a conversation</a>
       <a href={profile.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -141,6 +156,7 @@ const projectMeta = [
     </div>
     <a class="footer-cta" href={`mailto:${profile.email}`}>Let's talk <span aria-hidden="true">↗</span></a>
   </footer>
+  <div class="work-cursor" aria-hidden="true"></div>
 </main>
 
 <script>
@@ -181,6 +197,9 @@ const projectMeta = [
     const projects = document.querySelectorAll<HTMLElement>('.blue-project');
     const waveCanvas = document.querySelector<HTMLCanvasElement>('#hero-wave');
     const stopWave = waveCanvas ? mountBlueWave(waveCanvas) : undefined;
+    const outroCanvas = document.querySelector<HTMLCanvasElement>('#outro-wave');
+    const stopOutro = outroCanvas ? mountBlueWave(outroCanvas, { variant: 'outro' }) : undefined;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const onScroll = () => nav?.classList.toggle('is-scrolled', window.scrollY > 24);
     const toggle = document.querySelector<HTMLButtonElement>('.blue-theme-toggle');
     const onToggle = () => setTheme(isDark() ? 'light' : 'dark');
@@ -189,12 +208,68 @@ const projectMeta = [
     // The page is static, so refresh the experience figure on each visit.
     document.querySelectorAll<HTMLElement>('[data-years-since]').forEach((el) => {
       el.textContent = String(yearsSince(el.dataset.yearsSince));
+      if (el.dataset.countTo) el.dataset.countTo = el.textContent;
     });
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')), { threshold: 0.12 });
     projects.forEach((project) => observer.observe(project));
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => { stopWave?.(); observer.disconnect(); window.removeEventListener('scroll', onScroll); toggle?.removeEventListener('click', onToggle); };
+
+    // Reveal headings, stats and experience rows once, as they scroll in.
+    const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+      entry.target.querySelectorAll<HTMLElement>('[data-count-to]').forEach(countUp);
+    }), { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+
+    // Experience rail fills as the section scrolls past the middle of the viewport.
+    const track = document.querySelector<HTMLElement>('.record-track');
+    const rows = document.querySelectorAll<HTMLElement>('.record-row');
+    const updateRail = () => {
+      if (!track) return;
+      const rect = track.getBoundingClientRect();
+      const mid = window.innerHeight * 0.6;
+      const progress = Math.min(1, Math.max(0, (mid - rect.top) / rect.height));
+      track.style.setProperty('--rail', progress.toFixed(3));
+      rows.forEach((row) => row.classList.toggle('is-lit', row.getBoundingClientRect().top + 30 < mid));
+    };
+
+    // Floating "View site" label that follows the pointer over project covers.
+    const cursor = document.querySelector<HTMLElement>('.work-cursor');
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const onMove = (e: PointerEvent) => {
+      if (!cursor) return;
+      const target = (e.target as Element).closest<HTMLElement>('[data-cursor]');
+      cursor.classList.toggle('is-active', !!target);
+      if (target) cursor.textContent = target.dataset.cursor ?? '';
+      cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    };
+    if (cursor && finePointer && !reduced) document.addEventListener('pointermove', onMove, { passive: true });
+
+    const onScrollAll = () => { onScroll(); updateRail(); };
+    window.addEventListener('scroll', onScrollAll, { passive: true });
+    window.addEventListener('resize', updateRail);
+    onScrollAll();
+    return () => {
+      stopWave?.(); stopOutro?.(); observer.disconnect(); revealObserver.disconnect();
+      window.removeEventListener('scroll', onScrollAll); window.removeEventListener('resize', updateRail);
+      document.removeEventListener('pointermove', onMove);
+      toggle?.removeEventListener('click', onToggle);
+    };
+  }
+
+  function countUp(el: HTMLElement) {
+    const target = Number(el.dataset.countTo);
+    const pad = el.textContent?.trim().length ?? 1;
+    if (!Number.isFinite(target) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / 1100);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(target * eased)).padStart(pad, '0');
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   }
   let stop: undefined | (() => void);
   document.addEventListener('astro:page-load', () => { stop?.(); stop = initPortfolio(); });

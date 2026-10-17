@@ -237,6 +237,89 @@ body.home-redesign #theme-sweep { display: none; }
 
 .blue-portfolio a:focus-visible { outline: 2px solid var(--bp-blue-bright); outline-offset: 5px; }
 
+/* ─── MOTION & TEXTURE BELOW THE HERO ─────────── */
+[data-reveal] { opacity: 0; transform: translateY(34px); filter: blur(6px); transition: opacity .8s ease, transform .9s cubic-bezier(.2,.7,.2,1), filter .8s ease; }
+[data-reveal].is-visible { opacity: 1; transform: none; filter: none; }
+.record-row[data-reveal]:nth-child(2) { transition-delay: .08s; }
+.record-row[data-reveal]:nth-child(3) { transition-delay: .16s; }
+.stats-list li:nth-child(2) { transition-delay: .1s; }
+.stats-list li:nth-child(3) { transition-delay: .2s; }
+.stats-list li:nth-child(4) { transition-delay: .3s; }
+
+/* Oversized outlined index behind each project */
+.blue-project { position: relative; }
+.project-index {
+  position: absolute; z-index: 0; top: -.42em; right: -.04em; pointer-events: none;
+  font: 600 clamp(96px, 11vw, 190px)/1 'Space Grotesk', sans-serif; letter-spacing: -.07em;
+  color: transparent; -webkit-text-stroke: 1px var(--bp-line);
+  transition: -webkit-text-stroke-color .4s ease, transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.blue-project:hover .project-index { -webkit-text-stroke-color: var(--bp-blue-bright); transform: translateY(-6px); }
+.blue-project > :not(.project-index) { position: relative; z-index: 1; }
+/* Scan line sweeping across a cover on hover */
+.project-cover::before {
+  content: ''; position: absolute; z-index: 2; inset: 0 auto 0 -30%; width: 30%; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(84, 168, 255, .22), transparent);
+  transform: skewX(-12deg); opacity: 0;
+}
+.project-cover:hover::before { animation: cover-sweep .9s ease forwards; }
+@keyframes cover-sweep { from { left: -30%; opacity: 1; } to { left: 115%; opacity: 1; } }
+
+.work-cursor {
+  position: fixed; z-index: 50; left: 0; top: 0; pointer-events: none;
+  margin: -44px 0 0 -44px; width: 88px; height: 88px; border-radius: 50%;
+  display: grid; place-items: center; text-align: center;
+  background: var(--bp-blue); color: #fff; font: 500 9px/1.3 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase;
+  opacity: 0; scale: .4; transition: opacity .2s ease, scale .25s cubic-bezier(.2,.7,.2,1);
+}
+.work-cursor.is-active { opacity: 1; scale: 1; }
+
+/* Stats band */
+.blue-stats {
+  position: relative; padding: 70px clamp(24px, 7vw, 116px);
+  border-top: 1px solid var(--bp-line);
+  background:
+    linear-gradient(var(--bp-line) 1px, transparent 1px) 0 0 / 100% 25%,
+    radial-gradient(circle at 50% 120%, var(--bp-glow), transparent 60%);
+}
+.stats-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px; }
+.stats-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 6px; padding-left: 18px; border-left: 1px solid var(--bp-blue-bright); }
+.stat-num { font-size: clamp(52px, 6vw, 92px); font-weight: 500; letter-spacing: -.06em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat-plus { font-size: clamp(30px, 3vw, 46px); color: var(--bp-blue-bright); }
+.stat-label { flex-basis: 100%; margin-top: 12px; color: var(--bp-tags); font: 500 9px/1.6 'JetBrains Mono', monospace; letter-spacing: .2em; }
+
+/* About: faint blueprint grid fading out from the heading */
+.blue-about { position: relative; }
+.blue-about::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .55;
+  background-image: linear-gradient(var(--bp-line) 1px, transparent 1px), linear-gradient(90deg, var(--bp-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at 18% 40%, #000 0%, transparent 62%);
+  mask-image: radial-gradient(ellipse at 18% 40%, #000 0%, transparent 62%);
+}
+.blue-about > * { position: relative; }
+
+/* Experience: rail that fills with scroll, nodes light up as rows pass */
+.record-track { position: relative; padding-left: 34px; }
+.record-rail { position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--bp-line); }
+.record-rail-fill {
+  position: absolute; inset: 0; transform-origin: top; transform: scaleY(var(--rail, 0));
+  background: linear-gradient(to bottom, var(--bp-blue-bright), var(--bp-blue));
+  box-shadow: 0 0 12px var(--bp-blue-bright);
+}
+.record-row { position: relative; transition: background .25s ease; }
+.record-row:hover { background: linear-gradient(90deg, var(--bp-glow), transparent 70%); }
+.record-node {
+  position: absolute; left: -33px; top: 34px; width: 11px; height: 11px; border-radius: 50%;
+  border: 1px solid var(--bp-line); background: var(--bp-bg); transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.record-row.is-lit .record-node { background: var(--bp-blue-bright); border-color: var(--bp-blue-bright); box-shadow: 0 0 0 5px var(--bp-glow); }
+
+/* Contact: the hero wave returns, mirrored, to close the page */
+.blue-contact { position: relative; overflow: hidden; }
+.blue-contact > :not(canvas) { position: relative; z-index: 2; }
+.outro-wave { height: 100%; opacity: .85; }
+
 /* ─── RESPONSIVE ──────────────────────────────── */
 @media (max-width: 900px) {
   .blue-nav { height: 68px; }
@@ -254,6 +337,7 @@ body.home-redesign #theme-sweep { display: none; }
   .record-row { grid-template-columns: 140px minmax(0, 1fr); gap: 14px 28px; }
   .record-desc { grid-column: 2; }
   .record-type { display: none; }
+  .stats-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; }
 }
 
 @media (max-width: 600px) {
@@ -276,6 +360,10 @@ body.home-redesign #theme-sweep { display: none; }
   .record-row { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; }
   .record-when { flex-direction: row; gap: 14px; }
   .record-desc { grid-column: auto; }
+  .record-track { padding-left: 26px; }
+  .record-node { left: -25px; top: 28px; }
+  .blue-stats { padding: 56px 20px; }
+  .project-index { font-size: 92px; }
   .blue-about h2 { font-size: 44px; }
   .about-copy > p { font-size: 16px; }
   .blue-contact h2 { font-size: 52px; }
@@ -287,4 +375,6 @@ body.home-redesign #theme-sweep { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .project-cover img { transition: none; }
   .blue-project { opacity: 1; transform: none; transition: none; }
+  [data-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
+  .project-cover:hover::before { animation: none; }
 }
