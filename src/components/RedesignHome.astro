@@ -58,7 +58,7 @@ const projectMeta = [
           <article class={`blue-project project-${index + 1}`}>
             <span class="project-index" aria-hidden="true">{meta.index}</span>
             <div class="project-kicker"><span>{meta.index}</span><span>/</span><span>{meta.category}</span></div>
-            <a class="project-cover" data-cursor="View site" href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${meta.title}`}>
+            <a class="project-cover" href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${meta.title}`}>
               <img src={project.image} alt={project.alt} loading={index === 0 ? 'eager' : 'lazy'} />
             </a>
             <div class="project-details">
@@ -156,7 +156,6 @@ const projectMeta = [
     </div>
     <a class="footer-cta" href={`mailto:${profile.email}`}>Let's talk <span aria-hidden="true">↗</span></a>
   </footer>
-  <div class="work-cursor" aria-hidden="true"></div>
 </main>
 
 <script>
@@ -234,18 +233,6 @@ const projectMeta = [
       rows.forEach((row) => row.classList.toggle('is-lit', row.getBoundingClientRect().top + 30 < mid));
     };
 
-    // Floating "View site" label that follows the pointer over project covers.
-    const cursor = document.querySelector<HTMLElement>('.work-cursor');
-    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    const onMove = (e: PointerEvent) => {
-      if (!cursor) return;
-      const target = (e.target as Element).closest<HTMLElement>('[data-cursor]');
-      cursor.classList.toggle('is-active', !!target);
-      if (target) cursor.textContent = target.dataset.cursor ?? '';
-      cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-    };
-    if (cursor && finePointer && !reduced) document.addEventListener('pointermove', onMove, { passive: true });
-
     const onScrollAll = () => { onScroll(); updateRail(); };
     window.addEventListener('scroll', onScrollAll, { passive: true });
     window.addEventListener('resize', updateRail);
@@ -253,7 +240,6 @@ const projectMeta = [
     return () => {
       stopWave?.(); stopOutro?.(); observer.disconnect(); revealObserver.disconnect();
       window.removeEventListener('scroll', onScrollAll); window.removeEventListener('resize', updateRail);
-      document.removeEventListener('pointermove', onMove);
       toggle?.removeEventListener('click', onToggle);
     };
   }
