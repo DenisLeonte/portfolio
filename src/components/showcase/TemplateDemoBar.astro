@@ -46,7 +46,7 @@ const { templateName, slug } = Astro.props;
     background: rgba(231, 237, 235, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(105, 164, 129, 0.25);
+    border-bottom: 1px solid rgba(33, 124, 255, 0.25);
     font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
     font-size: 13px;
     letter-spacing: 0.03em;
@@ -54,7 +54,7 @@ const { templateName, slug } = Astro.props;
 
   :global(html.dark) .demo-bar {
     background: rgba(8, 8, 8, 0.92);
-    border-bottom-color: rgba(0, 255, 65, 0.2);
+    border-bottom-color: rgba(84, 168, 255, 0.2);
   }
 
   .demo-bar__back,
@@ -80,7 +80,7 @@ const { templateName, slug } = Astro.props;
 
   :global(html.dark) .demo-bar__back:hover,
   :global(html.dark) .demo-bar__cta:hover {
-    color: #00ff41;
+    color: #54a8ff;
   }
 
   .demo-bar__badge {
@@ -107,7 +107,7 @@ const { templateName, slug } = Astro.props;
   .demo-bar__badge a { color: inherit; text-decoration: none; }
   .demo-bar__badge a:hover, .demo-bar__badge a:focus-visible { color: #4D8260; }
   :global(html.dark) .demo-bar__badge a:hover,
-  :global(html.dark) .demo-bar__badge a:focus-visible { color: #00ff41; }
+  :global(html.dark) .demo-bar__badge a:focus-visible { color: #54a8ff; }
 
   @media (max-width: 480px) {
     .demo-bar__badge {

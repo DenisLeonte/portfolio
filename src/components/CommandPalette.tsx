@@ -75,8 +75,7 @@ export default function CommandPalette() {
 
   const commands: Command[] = [
     { id: 'nav-about',      label: 'About',           hint: '#about',      category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('about') },
-    { id: 'nav-skills',     label: 'Skills',          hint: '#skills',     category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('skills') },
-    { id: 'nav-projects',   label: 'Projects',        hint: '#projects',   category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('projects') },
+    { id: 'nav-projects',   label: 'Projects',        hint: '#work',       category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('work') },
     { id: 'nav-experience', label: 'Experience',      hint: '#experience', category: 'navigate', icon: NAV_ICON, run: () => smoothScrollTo('experience') },
     { id: 'nav-contact',    label: 'Contact',         hint: '/contact',    category: 'navigate', icon: NAV_ICON, run: () => { window.location.href = '/contact'; } },
     { id: 'nav-showcase',   label: 'Showcase',        hint: '/showcase',   category: 'navigate', icon: NAV_ICON, run: () => { window.location.href = '/showcase'; } },
@@ -84,8 +83,8 @@ export default function CommandPalette() {
     { id: 'open-linkedin',  label: 'LinkedIn',        hint: 'linkedin.com', category: 'open',    icon: LINK_ICON, run: () => { window.open('https://www.linkedin.com/in/denis-leonte-216683216/', '_blank', 'noopener'); } },
     { id: 'copy-email',     label: 'Copy Email',      hint: 'denis@denistechs.com', category: 'action', icon: COPY_ICON, run: () => { navigator.clipboard?.writeText('denis@denistechs.com'); } },
     { id: 'dl-resume',      label: 'Download Resume', hint: 'resume.pdf',  category: 'action',   icon: DL_ICON,  run: () => { const a = document.createElement('a'); a.href='/resume.pdf'; a.download='resume.pdf'; a.click(); } },
-    { id: 'theme-dark',     label: 'Dark Mode',       category: 'theme',   icon: MOON_ICON, run: () => { document.querySelector<HTMLButtonElement>('.theme-btn[data-theme="dark"]')?.click(); } },
-    { id: 'theme-light',    label: 'Light Mode',      category: 'theme',   icon: SUN_ICON,  run: () => { document.querySelector<HTMLButtonElement>('.theme-btn[data-theme="light"]')?.click(); } },
+    { id: 'theme-dark',     label: 'Dark Mode',       category: 'theme',   icon: MOON_ICON, run: () => { (window as any).__theme?.setTheme?.('dark') ?? document.querySelector<HTMLButtonElement>('.theme-btn[data-theme="dark"]')?.click(); } },
+    { id: 'theme-light',    label: 'Light Mode',      category: 'theme',   icon: SUN_ICON,  run: () => { (window as any).__theme?.setTheme?.('light') ?? document.querySelector<HTMLButtonElement>('.theme-btn[data-theme="light"]')?.click(); } },
     { id: 'lang-en',        label: 'English',         hint: 'EN',          category: 'language', icon: GLOBE_ICON, run: () => { (window as any).__i18n?.setLang('en'); } },
     { id: 'lang-ro',        label: 'Română',          hint: 'RO',          category: 'language', icon: GLOBE_ICON, run: () => { (window as any).__i18n?.setLang('ro'); } },
     { id: 'lang-it',        label: 'Italiano',        hint: 'IT',          category: 'language', icon: GLOBE_ICON, run: () => { (window as any).__i18n?.setLang('it'); } },
