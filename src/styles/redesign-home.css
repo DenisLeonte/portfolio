@@ -268,21 +268,36 @@ body.home-redesign #theme-sweep { display: none; }
 
 /* Stats band */
 .blue-stats {
-  /* Content is laid out on the same row height as the ruled lines, so the
-     figures sit in one row and the labels in the next. */
-  --row: clamp(76px, 7vw, 112px);
-  position: relative; padding: var(--row) clamp(24px, 7vw, 116px);
+  position: relative; overflow: hidden; padding: 72px clamp(24px, 7vw, 116px);
   border-top: 1px solid var(--bp-line);
-  background:
-    linear-gradient(var(--bp-line) 1px, transparent 1px) 0 0 / 100% var(--row),
-    radial-gradient(circle at 50% 120%, var(--bp-glow), transparent 60%);
+  background: radial-gradient(circle at 50% 120%, var(--bp-glow), transparent 60%);
 }
 .stats-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 30px; }
-.stats-list li { display: grid; grid-template-rows: var(--row) var(--row); padding-left: 18px; border-left: 1px solid var(--bp-blue-bright); }
-.stat-figure { display: flex; align-items: center; gap: 6px; }
-.stat-num { font-size: calc(var(--row) * .8); font-weight: 500; letter-spacing: -.06em; line-height: 1; font-variant-numeric: tabular-nums; }
-.stat-plus { align-self: flex-end; margin-bottom: calc(var(--row) * .16); font-size: calc(var(--row) * .4); line-height: 1; color: var(--bp-blue-bright); }
-.stat-label { align-self: center; color: var(--bp-tags); font: 500 9px/1.6 'JetBrains Mono', monospace; letter-spacing: .2em; }
+.stats-list li { display: flex; flex-direction: column; gap: 18px; padding-left: 18px; border-left: 1px solid var(--bp-blue-bright); }
+.stat-figure { display: flex; align-items: baseline; gap: 6px; }
+.stat-num { font-size: clamp(52px, 6vw, 92px); font-weight: 500; letter-spacing: -.06em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat-plus { font-size: clamp(30px, 3vw, 46px); line-height: 1; color: var(--bp-blue-bright); }
+.stat-label { display: block; color: var(--bp-tags); font: 500 9px/1.6 'JetBrains Mono', monospace; letter-spacing: .2em; }
+
+/* Trim the text boxes to cap height and baseline, so the rules below touch the
+   top of the glyphs and their baseline. Fallback margins come from the fonts'
+   metrics (Space Grotesk: ascent .98, cap .72; JetBrains Mono: ascent 1.02, cap .73). */
+.stat-num, .stat-plus, .stat-label { text-box: trim-both cap alphabetic; }
+@supports not (text-box: trim-both cap alphabetic) {
+  .stat-figure { margin: -.125em 0 -.155em; font-size: clamp(52px, 6vw, 92px); }
+  .stat-figure .stat-num { font-size: 1em; }
+  .stat-figure .stat-plus { font-size: .5em; }
+  .stat-label { margin: -.43em 0 -.44em; }
+}
+
+/* Full-width rules on the cap line and baseline of the figures and the labels. */
+.stat-figure, .stat-label { position: relative; }
+.stats-list li:first-child .stat-figure::before, .stats-list li:first-child .stat-figure::after,
+.stats-list li:first-child .stat-label::before, .stats-list li:first-child .stat-label::after {
+  content: ''; position: absolute; left: calc(-18px - 100vw); width: 200vw; height: 1px; background: var(--bp-line); pointer-events: none;
+}
+.stat-figure::before, .stat-label::before { top: 0; }
+.stat-figure::after, .stat-label::after { bottom: 0; }
 
 /* About: faint blueprint grid fading out from the heading */
 .blue-about { position: relative; }
@@ -333,7 +348,11 @@ body.home-redesign #theme-sweep { display: none; }
   .record-row { grid-template-columns: 140px minmax(0, 1fr); gap: 14px 28px; }
   .record-desc { grid-column: 2; }
   .record-type { display: none; }
-  .stats-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--row) 24px; }
+  .stats-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 24px; }
+  .stats-list li:nth-child(3) .stat-figure::before, .stats-list li:nth-child(3) .stat-figure::after,
+  .stats-list li:nth-child(3) .stat-label::before, .stats-list li:nth-child(3) .stat-label::after {
+    content: ''; position: absolute; left: calc(-18px - 100vw); width: 200vw; height: 1px; background: var(--bp-line); pointer-events: none;
+  }
 }
 
 @media (max-width: 600px) {
@@ -358,7 +377,7 @@ body.home-redesign #theme-sweep { display: none; }
   .record-desc { grid-column: auto; }
   .record-track { padding-left: 26px; }
   .record-node { left: -25px; top: 28px; }
-  .blue-stats { --row: 64px; padding: var(--row) 20px; }
+  .blue-stats { padding: 56px 20px; }
   .project-index { font-size: 92px; }
   .blue-about h2 { font-size: 44px; }
   .about-copy > p { font-size: 16px; }
