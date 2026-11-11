@@ -8,6 +8,12 @@ const description =
   'Full-stack software engineer in Cluj-Napoca building enterprise applications with Spring Boot, Angular, React, TypeScript, and data-driven technologies.';
 const canonical = new URL('/', Astro.site);
 const host = (url: string) => new URL(url).host;
+// What each project is, in plain words.
+const kinds: Record<string, string> = {
+  'project-1': 'plumbing & heating company',
+  'project-2': 'habit tracking app',
+  'project-3': 'construction firm, Rome',
+};
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -89,14 +95,19 @@ const structuredData = {
       <main>
         <section class="rq-frame rq-hero" data-frame="hero">
           <div class="rq-hero-inner">
-            <p class="rq-mono rq-label" data-reveal>Full-stack software engineer</p>
+            <p class="rq-mono rq-label" data-reveal>Denis Leonte · Full-stack software engineer</p>
             <h1 class="rq-h1">
-              <span class="rq-h1-a" data-reveal>From backend</span>
-              <span class="rq-h1-b" data-reveal>to frontend.</span>
+              <span class="rq-h1-a" data-reveal>I build websites</span>
+              <span class="rq-h1-b" data-reveal>and business software.</span>
             </h1>
             <p class="rq-intro" data-reveal>
-              I'm Denis. I build complete applications. Scroll to follow one request from the database to the screen.
+              The whole thing: the part your customers see, and everything behind it that they don't. Scroll to
+              follow one click through all of it.
             </p>
+            <div class="rq-paths rq-paths-small" data-reveal>
+              <a class="rq-path" href="#contact">Hire me for your team <span aria-hidden="true">↓</span></a>
+              <a class="rq-path" href="#work">Get a website built <span aria-hidden="true">↓</span></a>
+            </div>
             <p class="rq-mono rq-scroll" data-reveal>scroll <span aria-hidden="true">↓</span></p>
           </div>
         </section>
@@ -104,10 +115,10 @@ const structuredData = {
         <section class="rq-frame" data-frame="data" id="data">
           <div class="rq-copy">
             <p class="rq-mono rq-label rq-accent" data-reveal>04 · data · PostgreSQL</p>
-            <h2 class="rq-h2" data-reveal>Every request starts in the dark.</h2>
+            <h2 class="rq-h2" data-reveal>First, I keep your information safe.</h2>
             <p class="rq-p" data-reveal>
-              M.Sc. in High Performance Computing and Big Data Analysis, Babeș-Bolyai University, 2024 to 2026.
-              Distributed computing, parallel algorithms, large-scale data pipelines.
+              Customers, orders, bookings: everything your business knows, stored so it can be found again in an
+              instant. It is also what I studied, with a Master's in High Performance Computing and Big Data.
             </p>
           </div>
         </section>
@@ -115,10 +126,10 @@ const structuredData = {
         <section class="rq-frame" data-frame="service" id="service">
           <div class="rq-copy">
             <p class="rq-mono rq-label rq-accent" data-reveal>03 · service · Java · Spring Boot</p>
-            <h2 class="rq-h2" data-reveal>Then something has to decide what it means.</h2>
+            <h2 class="rq-h2" data-reveal>Then I teach the software your rules.</h2>
             <p class="rq-p" data-reveal>
-              .msg Systems Romania, since 2024. Spring Boot applications and enterprise platform integration on a
-              Mercedes-Benz Group AG project, with teams across Romania and Germany.
+              Who is allowed to do what, what happens next, what must never go wrong. This is my day job since 2024,
+              at .msg Systems Romania on a Mercedes-Benz Group project.
             </p>
           </div>
         </section>
@@ -126,10 +137,10 @@ const structuredData = {
         <section class="rq-frame" data-frame="api" id="api">
           <div class="rq-copy">
             <p class="rq-mono rq-label rq-accent" data-reveal>02 · api · REST</p>
-            <h2 class="rq-h2" data-reveal>It crosses a boundary.</h2>
+            <h2 class="rq-h2" data-reveal>I get separate systems talking.</h2>
             <p class="rq-p" data-reveal>
-              System Integration / Full-Stack Developer: API integration and the real-world middleware between
-              enterprise systems.
+              Most companies run several tools that were built apart. Connecting them so they exchange information
+              reliably is called system integration, and it is in my job title.
             </p>
           </div>
         </section>
@@ -137,7 +148,8 @@ const structuredData = {
         <section class="rq-frame rq-frame-long" data-frame="interface" id="work">
           <div class="rq-copy">
             <p class="rq-mono rq-label rq-accent" data-reveal>01 · interface · React · TypeScript</p>
-            <h2 class="rq-h2" data-reveal>And finally someone sees it.</h2>
+            <h2 class="rq-h2" data-reveal>And I build what your customers see.</h2>
+            <p class="rq-p" data-reveal>Clear, fast websites and apps that work on any phone. Three that are live right now:</p>
             <ul class="rq-projects">
               {
                 projects.map((p, i) => (
@@ -146,28 +158,38 @@ const structuredData = {
                       <span class="rq-project-name">
                         {p.name} <span aria-hidden="true">↗</span>
                       </span>
-                      <span class="rq-mono">{host(p.liveUrl)}</span>
+                      <span class="rq-mono">{kinds[p.id] ?? host(p.liveUrl)}</span>
                     </a>
                   </li>
                 ))
               }
             </ul>
             <p class="rq-p rq-more" data-reveal>
-              <a href="/showcase">More in the showcase: restaurants, e-commerce, agencies →</a>
+              <a href="/showcase">See more examples: restaurants, online shops, agencies →</a>
             </p>
           </div>
         </section>
 
         <section class="rq-frame rq-frame-end" data-frame="response" id="contact">
           <div class="rq-copy rq-copy-wide">
-            <p class="rq-mono rq-label rq-accent" data-reveal>response · delivered</p>
-            <h2 class="rq-status" data-reveal aria-label="200 OK">
-              <span data-status aria-hidden="true">200</span> <span class="rq-accent" aria-hidden="true">OK.</span>
-            </h2>
-            <p class="rq-lead" data-reveal>
-              The request made it. Yours can start here: full-time roles, contract work, or a conversation about
-              distributed systems and espresso.
+            <p class="rq-mono rq-label rq-accent" data-reveal>
+              response · <span data-status>200</span> OK · delivered
             </p>
+            <h2 class="rq-status" data-reveal>It <span class="rq-accent">works.</span></h2>
+            <p class="rq-lead" data-reveal>
+              That is what I do: every layer of a website or application, built by one person. There are two ways
+              we can work together.
+            </p>
+            <div class="rq-paths" data-reveal>
+              <a class="rq-path" href={`mailto:${profile.email}?subject=A%20role%20on%20our%20team`}>
+                <span class="rq-path-title">Hire me for your team <span aria-hidden="true">↗</span></span>
+                <span class="rq-path-sub">Full-time or contract software engineer</span>
+              </a>
+              <a class="rq-path" href="/contact">
+                <span class="rq-path-title">Get a website built <span aria-hidden="true">↗</span></span>
+                <span class="rq-path-sub">For your business, from idea to launch</span>
+              </a>
+            </div>
             <div class="rq-cta" data-reveal>
               <a class="rq-mail" href={`mailto:${profile.email}`} data-magnetic>
                 {profile.email} <span aria-hidden="true">↗</span>
@@ -354,12 +376,12 @@ const structuredData = {
 
       .rq-hero { min-height: 100vh; min-height: 100svh; }
       .rq-hero-inner { position: relative; min-height: 100vh; min-height: 100svh; padding: 110px 0 78px; display: flex; flex-direction: column; }
-      .rq-h1 { margin: clamp(16px, 5vh, 56px) 0 0; flex: 1; display: flex; flex-direction: column; justify-content: space-between; font-weight: 300; font-size: clamp(46px, 8.2vw, 128px); line-height: 1; letter-spacing: -0.045em; }
+      .rq-h1 { margin: clamp(16px, 5vh, 56px) 0 0; flex: 1; display: flex; flex-direction: column; justify-content: space-between; font-weight: 300; font-size: clamp(40px, 7vw, 112px); line-height: 1; letter-spacing: -0.045em; }
       .rq-h1 span { display: block; }
       .rq-h1-a { translate: calc(var(--hero) * -10vw) 0; }
       .rq-h1-b { align-self: flex-end; translate: calc(var(--hero) * 10vw) 0; margin-bottom: clamp(24px, 9vh, 96px); }
       .rq-hero-inner > * { opacity: calc(1 - var(--hero) * 1.8); }
-      .rq-intro { margin: 0; max-width: 24rem; font-size: 17px; line-height: 1.45; }
+      .rq-intro { margin: 0; max-width: 27rem; font-size: 17px; line-height: 1.45; }
       .rq-scroll { position: absolute; right: 0; top: 96px; margin: 0; }
 
       .rq-projects { list-style: none; margin: 8px 0 0; padding: 0; max-width: 28rem; }
@@ -374,9 +396,22 @@ const structuredData = {
       .rq-project-name { font-size: clamp(21px, 2vw, 27px); letter-spacing: -0.02em; }
       .rq-more { font-size: 15px; }
 
-      .rq-status { margin: 0; font-weight: 300; font-size: clamp(84px, 17vw, 250px); line-height: 0.9; letter-spacing: -0.06em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+      .rq-status { margin: 0; font-weight: 300; font-size: clamp(72px, 14vw, 210px); line-height: 0.9; letter-spacing: -0.06em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+      .rq-paths { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+      .rq-path {
+        display: flex; flex-direction: column; gap: 4px; min-width: min(17rem, 100%);
+        text-decoration: none; padding: 16px 20px; border-radius: 14px;
+        border: 1px solid color-mix(in srgb, var(--fg) 45%, transparent);
+        background: color-mix(in srgb, var(--bg) 70%, transparent);
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+      }
+      .rq a.rq-path:hover, .rq a.rq-path:focus-visible { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .rq-path-title { font-size: clamp(18px, 1.5vw, 21px); letter-spacing: -0.01em; }
+      .rq-path-sub { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; opacity: 0.75; }
+      .rq-paths-small { margin-top: 14px; }
+      .rq-paths-small .rq-path { flex-direction: row; align-items: center; gap: 8px; min-width: 0; padding: 12px 18px; border-radius: 999px; font-size: 15px; white-space: nowrap; }
       .rq-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 6px; }
-      .rq-mail { display: inline-block; background: var(--fg); color: var(--bg) !important; text-decoration: none; font-size: clamp(17px, 1.5vw, 20px); padding: 17px 28px; border-radius: 999px; transition: transform 0.25s ease-out; }
+      .rq-mail { display: inline-block; background: var(--fg); color: var(--bg) !important; text-decoration: none; font-size: 16px; padding: 13px 22px; border-radius: 999px; transition: transform 0.25s ease-out; }
       .rq-footer { max-width: 40rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 32px; margin-top: clamp(20px, 5vh, 56px); font-size: 14px; }
       .rq-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; }
       .rq-links a { padding: 12px 0; color: inherit; }
