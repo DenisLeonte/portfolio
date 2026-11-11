@@ -216,7 +216,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
   const props: Prop[] = [];
   const screens: Screen[] = [];
   const layerDetails: LayerDetail[] = [];
-  const lineMat = () => new THREE.LineBasicMaterial({ transparent: true, depthWrite: false });
+  const lineMat = () => new THREE.LineBasicMaterial({ transparent: true, depthWrite: false, fog: false });
   const addLayerDetail = (positions: number[], layer: number, from: number, to: number, strength: number) => {
     const mat = lineMat();
     const lines = segments(positions, mat);
@@ -350,7 +350,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     const w = W / 2, h = HT / 2;
     o.push(-w, -h, 0, w, -h, 0, w, -h, 0, w, h, 0, w, h, 0, -w, h, 0, -w, h, 0, -w, -h, 0, -w, -h, 0, -w, -h - 3, 0, w, -h, 0, w, -h - 3, 0);
     group.add(segments(o, outline));
-    const fill = new THREE.MeshBasicMaterial({ color: LIGHT.fg, transparent: true, opacity: 0, side: THREE.DoubleSide });
+    const fill = new THREE.MeshBasicMaterial({ color: LIGHT.fg, transparent: true, opacity: 0, side: THREE.DoubleSide, fog: false });
     const panel = new THREE.Mesh(screenGeo, fill);
     panel.renderOrder = 1;
     group.add(panel);
@@ -386,6 +386,130 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     screens.push({ group, outline, fill, inner, more, trigger: 3 + trig, a: 0, d: 0, s: 1 });
   });
 
+  // ── Surroundings: rack, ruler, compass, ground and drifting particles ──
+  const GROUND = -34;
+  const rackMat = lineMat();
+  {
+    const rack: number[] = [];
+    for (const [x, z] of [[SLAB, SLAB], [SLAB, -SLAB], [-SLAB, SLAB], [-SLAB, -SLAB]]) rack.push(x, GROUND, z, x, 3 * H + 44, z);
+    // A height ruler beside the stack: long ticks at each layer.
+    const rx = SLAB + 14, rz = -SLAB - 14;
+    rack.push(rx, GROUND, rz, rx, 3 * H + 44, rz);
+    for (let y = 0; y <= 3 * H + 40; y += 10) {
+      const l = y % H === 0 ? 9 : 3.5;
+      rack.push(rx, y, rz, rx + l, y, rz);
+    }
+    scene.add(segments(rack, rackMat));
+  }
+  const compassMat = lineMat();
+  const compassMarkMat = lineMat();
+  const compassMark = segments([0, GROUND, 150, 0, GROUND, 176, -4, GROUND, 170, 0, GROUND, 176, 4, GROUND, 170, 0, GROUND, 176], compassMarkMat);
+  {
+    const ring: number[] = [];
+    for (const r of [150, 108]) {
+      for (let i = 0; i < 120; i++) {
+        const a0 = (i / 120) * Math.PI * 2, a1 = ((i + 1) / 120) * Math.PI * 2;
+        ring.push(Math.sin(a0) * r, GROUND, Math.cos(a0) * r, Math.sin(a1) * r, GROUND, Math.cos(a1) * r);
+      }
+    }
+    for (let d = 0; d < 360; d += 5) {
+      const a = (d / 180) * Math.PI;
+      const r1 = d % 40 === 0 ? 164 : d % 10 === 0 ? 157 : 153;
+      ring.push(Math.sin(a) * 150, GROUND, Math.cos(a) * 150, Math.sin(a) * r1, GROUND, Math.cos(a) * r1);
+    }
+    scene.add(segments(ring, compassMat));
+    scene.add(compassMark);
+  }
+  const groundMat = new THREE.LineBasicMaterial({ transparent: true, depthWrite: false, fog: true });
+  {
+    const g: number[] = [];
+    for (let i = -1200; i <= 1200; i += 60) g.push(i, GROUND - 0.5, -1200, i, GROUND - 0.5, 1200, -1200, GROUND - 0.5, i, 1200, GROUND - 0.5, i);
+    scene.add(segments(g, groundMat));
+  }
+  scene.fog = new THREE.Fog(DARK.bg, 420, 1250);
+
+  const DUST = 420;
+  const dustPos = new Float32Array(DUST * 3);
+  const dustSpeed = new Float32Array(DUST);
+  for (let i = 0; i < DUST; i++) {
+    dustPos[i * 3] = (Math.random() - 0.5) * 560;
+    dustPos[i * 3 + 1] = GROUND + Math.random() * 400;
+    dustPos[i * 3 + 2] = (Math.random() - 0.5) * 560;
+    dustSpeed[i] = 2 + Math.random() * 7;
+  }
+  const dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  const dustMat = new THREE.PointsMaterial({ size: 1.6, sizeAttenuation: false, transparent: true, depthWrite: false, fog: false });
+  const dust = new THREE.Points(dustGeo, dustMat);
+  dust.frustumCulled = false;
+  scene.add(dust);
+
+  // Traffic: small packets that keep running the route the pulse has opened.
+  const packetMat = new THREE.MeshBasicMaterial({ transparent: true, depthTest: false, fog: false });
+  const packetGeo = new THREE.SphereGeometry(0.9, 10, 10);
+  const packets = Array.from({ length: 7 }, () => {
+    const m = new THREE.Mesh(packetGeo, packetMat);
+    scene.add(m);
+    return m;
+  });
+
+  // ── Labels: HTML callouts pinned to objects in the scene ───────
+  interface Label {
+    el: HTMLElement;
+    layer: number;
+    isLayer: boolean;
+    anchor: (out: THREE.Vector3) => void;
+    level: () => number;
+    shown: boolean;
+  }
+  const labelRoot = document.createElement('div');
+  labelRoot.className = 'rq-labels';
+  labelRoot.setAttribute('aria-hidden', 'true');
+  canvas.after(labelRoot);
+  const labels: Label[] = [];
+  const addLabel = (text: string, layer: number, isLayer: boolean, anchor: Label['anchor'], level: Label['level']) => {
+    const el = document.createElement('div');
+    el.className = isLayer ? 'rq-tag rq-tag-layer' : 'rq-tag';
+    const span = document.createElement('span');
+    span.textContent = text;
+    el.append(span);
+    labelRoot.append(el);
+    labels.push({ el, layer, isLayer, anchor, level, shown: false });
+  };
+  const propLabels = [
+    'PostgreSQL', 'tables', 'indexes', 'queries',
+    'Spring Boot', 'Java', 'business logic', 'integration', 'enterprise platform',
+    'request in', 'REST', 'validation', 'JSON', 'response out',
+  ];
+  const propTops = [...DATA.map((d) => d[2]), ...SERVICES.map((d) => d[2] + 3), 9, 9, 9, 9, 9];
+  props.forEach((p, i) => {
+    addLabel(propLabels[i], p.layer, false, (out) => {
+      out.copy(p.obj.position);
+      out.y += propTops[i] * (p.rise ? p.obj.scale.y : 1);
+    }, () => p.d);
+  });
+  ['React', 'TypeScript', 'Astro'].forEach((text, i) => {
+    const sc = screens[i];
+    addLabel(text, 3, false, (out) => {
+      out.copy(sc.group.position);
+      out.y += (HT / 2) * sc.s;
+    }, () => sc.d);
+  });
+  const corner = new THREE.Vector3();
+  ['04 · data', '03 · service', '02 · api', '01 · interface'].forEach((text, k) => {
+    addLabel(text, k, true, (out) => {
+      // Pin to whichever slab corner is currently furthest right on screen.
+      let best = -Infinity;
+      for (const [x, z] of [[SLAB, SLAB], [SLAB, -SLAB], [-SLAB, SLAB], [-SLAB, -SLAB]]) {
+        corner.set(x, k * H, z).project(camera);
+        if (corner.x > best) {
+          best = corner.x;
+          out.set(x, k * H, z);
+        }
+      }
+    }, () => 1);
+  });
+
   // ── Pulse + trail ──────────────────────────────────────────────
   const v = new THREE.Vector3();
   const trailPts: number[] = [];
@@ -401,7 +525,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
   trail.frustumCulled = false;
   scene.add(trail);
 
-  const headMat = new THREE.MeshBasicMaterial({ depthTest: false });
+  const headMat = new THREE.MeshBasicMaterial({ depthTest: false, fog: false });
   const head = new THREE.Mesh(new THREE.SphereGeometry(2, 20, 20), headMat);
   scene.add(head);
 
@@ -414,7 +538,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
   grad.addColorStop(1, 'rgba(255,255,255,0)');
   gctx.fillStyle = grad;
   gctx.fillRect(0, 0, 128, 128);
-  const glowMat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(glowCanvas), blending: THREE.AdditiveBlending, depthTest: false, transparent: true });
+  const glowMat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(glowCanvas), blending: THREE.AdditiveBlending, depthTest: false, transparent: true, fog: false });
   const glow = new THREE.Sprite(glowMat);
   glow.scale.setScalar(34);
   scene.add(glow);
@@ -559,13 +683,40 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     trailMat.opacity = reveal;
     trailGeo.instanceCount = Math.max(1, Math.floor((q / 5) * TOTAL));
 
+    // Surroundings.
+    (scene.fog as THREE.Fog).color.copy(cBg);
+    rackMat.color.copy(cLine);
+    rackMat.opacity = 0.2 * reveal;
+    compassMat.color.copy(cLine);
+    compassMat.opacity = 0.24 * reveal;
+    compassMarkMat.color.copy(cAccent);
+    compassMarkMat.opacity = reveal;
+    groundMat.color.copy(cLine);
+    groundMat.opacity = 0.13 * reveal;
+    dustMat.color.copy(cLine);
+    dustMat.opacity = 0.42 * reveal;
+    if (!reduce) {
+      for (let i = 0; i < DUST; i++) {
+        let y = dustPos[i * 3 + 1] + dustSpeed[i] * 0.016;
+        if (y > GROUND + 400) y = GROUND;
+        dustPos[i * 3 + 1] = y;
+      }
+      dustGeo.getAttribute('position').needsUpdate = true;
+    }
+    packetMat.color.copy(cAccent);
+    packetMat.opacity = 0.85 * smooth(0.05, 0.4, q) * reveal;
+    packets.forEach((m, i) => {
+      const f = ((reduce ? 0 : time * 0.06) + i / packets.length) % 1;
+      pulseAt(f * q, m.position);
+    });
+
     // Camera: 40° of orbit per frame of the story.
     const narrow = Math.max(1, 1.1 / camera.aspect);
     let focusY = lerp(1.5 * H, pulseSmooth.y, b);
     focusY = lerp(focusY, 1.5 * H + 30, e);
-    const r = lerp(lerp(580, 275, b), 560, e) * narrow;
+    const r = lerp(lerp(580, 275, b), 610, e) * narrow;
     // Keep the scene right of the copy on wide screens, above it on narrow ones.
-    if (wide) camera.setViewOffset(width, height, -width * lerp(lerp(0.14, 0.2, b), 0.27, e), 0, width, height);
+    if (wide) camera.setViewOffset(width, height, -width * lerp(lerp(0.14, 0.2, b), 0.2, e), 0, width, height);
     else camera.setViewOffset(width, height, 0, height * 0.16, width, height);
     // On narrow screens the copy sits over the scene once it gets busy, so quieten it.
     canvas.style.opacity = wide ? '1' : String(lerp(1, 0.3, smooth(2.9, 3.3, qc)));
@@ -579,6 +730,31 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       target.z + Math.cos(theta) * r,
     );
     camera.lookAt(target);
+    compassMark.rotation.y = theta;
+
+    // Labels follow their objects in screen space.
+    camera.updateMatrixWorld();
+    for (const l of labels) {
+      let o = l.isLayer
+        ? Math.max(smooth(0.35, 0.9, heroMix), e) * reveal
+        : l.level() * clamp(1 - Math.abs(q - (l.layer + 0.45)) / 0.75) * (1 - e) * 1.5;
+      o = wide ? clamp(o) : 0;
+      if (o >= 0.02) {
+        l.anchor(v);
+        v.project(camera);
+        if (v.z > 1) o = 0;
+      }
+      if (o < 0.02) {
+        if (l.shown) {
+          l.el.style.opacity = '0';
+          l.shown = false;
+        }
+        continue;
+      }
+      l.el.style.transform = `translate3d(${((v.x * 0.5 + 0.5) * width).toFixed(1)}px, ${((-v.y * 0.5 + 0.5) * height).toFixed(1)}px, 0)`;
+      l.el.style.opacity = o.toFixed(2);
+      l.shown = true;
+    }
 
     hud(s, 40 * (qc + 2));
     renderer.render(scene, camera);

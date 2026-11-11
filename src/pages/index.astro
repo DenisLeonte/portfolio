@@ -328,6 +328,15 @@ const structuredData = {
       .rq-rail span { position: absolute; left: -3px; top: 0; width: 7px; height: 7px; margin-top: -3px; border-radius: 50%; background: var(--accent); }
 
       /* ── Frames ───────────────────────────────────── */
+      /* Callouts pinned to objects in the scene (positioned by the scene script) */
+      .rq-labels { position: fixed; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
+      .rq-tag { position: absolute; left: 0; top: 0; opacity: 0; color: var(--fg); will-change: transform, opacity; }
+      .rq-tag::before { content: ''; position: absolute; left: 0; top: 0; width: 28px; height: 1px; background: currentColor; opacity: 0.55; transform-origin: 0 0; transform: rotate(-45deg); }
+      .rq-tag::after { content: ''; position: absolute; left: -2px; top: -2px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+      .rq-tag span { position: absolute; left: 24px; top: -33px; white-space: nowrap; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; }
+      .rq-tag-layer::before { width: 40px; transform: none; }
+      .rq-tag-layer span { left: 48px; top: -8px; color: var(--dim); }
+
       .rq main { position: relative; z-index: 10; }
       .rq-frame { min-height: 175vh; padding: 0 var(--pad); }
       .rq-frame-long { min-height: 230vh; }
