@@ -104,6 +104,7 @@ interface Screen {
   group: THREE.Group;
   outline: THREE.LineBasicMaterial;
   fill: THREE.MeshBasicMaterial;
+  inner: THREE.LineBasicMaterial;
   trigger: number;
   a: number;
   s: number;
@@ -234,10 +235,9 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     pushRing(p, 9);
     addProp(p, 2, x, 10, z, trig, false, true, rot);
   });
-  // Interface: screens go from wireframe to solid, then show the real sites.
+  // Interface: screens go from wireframe to solid, with an abstract page drawn on each.
   const W = 46, HT = 29;
   const screenGeo = new THREE.PlaneGeometry(W, HT);
-  const textures = (root.dataset.shots ?? '').split('|').filter(Boolean);
   ([[28, -34, 0.2], [-18, 4, 0.42], [30, 44, 0.64]] as const).forEach(([x, z, trig], i) => {
     const group = new THREE.Group();
     group.position.set(x, 3 * H + HT / 2 + 3, z);
@@ -247,23 +247,26 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     o.push(-w, -h, 0, w, -h, 0, w, -h, 0, w, h, 0, w, h, 0, -w, h, 0, -w, h, 0, -w, -h, 0, -w, -h, 0, -w, -h - 3, 0, w, -h, 0, w, -h - 3, 0);
     group.add(segments(o, outline));
     const fill = new THREE.MeshBasicMaterial({ color: LIGHT.fg, transparent: true, opacity: 0, side: THREE.DoubleSide });
-    group.add(new THREE.Mesh(screenGeo, fill));
+    const panel = new THREE.Mesh(screenGeo, fill);
+    panel.renderOrder = 1;
+    group.add(panel);
     scene.add(group);
-    screens.push({ group, outline, fill, trigger: 3 + trig, a: 0, s: 1 });
-    if (textures[i]) {
-      new THREE.TextureLoader().load(textures[i], (tex) => {
-        tex.colorSpace = THREE.SRGBColorSpace;
-        tex.anisotropy = 4;
-        // Show the top of each screenshot at the screen's 16:10 ratio.
-        const img = tex.image as { width: number; height: number };
-        const crop = clamp((img.width * (HT / W)) / img.height, 0.05, 1);
-        tex.repeat.set(1, crop);
-        tex.offset.set(0, 1 - crop);
-        fill.map = tex;
-        fill.color.set('#ffffff');
-        fill.needsUpdate = true;
-      });
-    }
+    // A different abstract layout per screen: title bar plus a few content blocks.
+    const ui: number[] = [];
+    const rect = (x0: number, y0: number, x1: number, y1: number) =>
+      ui.push(x0, y0, 0.2, x1, y0, 0.2, x1, y0, 0.2, x1, y1, 0.2, x1, y1, 0.2, x0, y1, 0.2, x0, y1, 0.2, x0, y0, 0.2);
+    ui.push(-w, h - 5, 0.2, w, h - 5, 0.2);
+    if (i === 0) { rect(-w + 4, -h + 4, -2, h - 9); rect(2, 1, w - 4, h - 9); rect(2, -h + 4, w - 4, -3); }
+    else if (i === 1) { rect(-w + 4, 0, w - 4, h - 9); rect(-w + 4, -h + 4, -9, -4); rect(-5, -h + 4, 5, -4); rect(9, -h + 4, w - 4, -4); }
+    else { rect(-w + 4, -h + 4, -w + 14, h - 9); rect(-w + 18, -2, w - 4, h - 9); ui.push(-w + 18, -7, 0.2, w - 4, -7, 0.2, -w + 18, -11, 0.2, w - 12, -11, 0.2); }
+    const inner = lineMat();
+    const innerLines = segments(ui, inner);
+    innerLines.renderOrder = 2;
+    group.add(innerLines);
+    const back = innerLines.clone();
+    back.rotation.y = Math.PI;
+    group.add(back);
+    screens.push({ group, outline, fill, inner, trigger: 3 + trig, a: 0, s: 1 });
   });
 
   // ── Pulse + trail ──────────────────────────────────────────────
@@ -399,7 +402,10 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       const o = layerOpacity(3) * reveal;
       sc.outline.color.copy(cLine);
       sc.outline.opacity = o * focus;
+      sc.fill.color.copy(cFg);
       sc.fill.opacity = sc.a * focus * clamp(o * 1.4);
+      sc.inner.color.copy(cBg);
+      sc.inner.opacity = sc.a * focus;
       sc.s = lerp(sc.s, hovered === i ? 1.22 : 1, 0.1);
       sc.group.scale.setScalar(sc.s);
       sc.group.rotation.y = Math.atan2(camera.position.x - sc.group.position.x, camera.position.z - sc.group.position.z);

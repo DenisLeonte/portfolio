@@ -7,7 +7,6 @@ const title = `${profile.name} | Full-Stack Software Engineer in Cluj-Napoca`;
 const description =
   'Full-stack software engineer in Cluj-Napoca building enterprise applications with Spring Boot, Angular, React, TypeScript, and data-driven technologies.';
 const canonical = new URL('/', Astro.site);
-const shots = projects.map((p) => p.image).join('|');
 const host = (url: string) => new URL(url).host;
 
 const structuredData = {
@@ -66,7 +65,7 @@ const structuredData = {
   </head>
 
   <body>
-    <div class="rq" id="rq" data-shots={shots} data-ground="dark">
+    <div class="rq" id="rq" data-ground="dark">
       <a class="rq-skip" href="#data">Skip to content</a>
       <canvas class="rq-canvas" id="rq-canvas" aria-hidden="true"></canvas>
 
