@@ -84,6 +84,19 @@ function pushRing(a: number[], r: number) {
   }
 }
 
+function pushCircleY(a: number[], r: number, y: number) {
+  const n = 28;
+  for (let i = 0; i < n; i++) {
+    const a0 = (i / n) * Math.PI * 2, a1 = ((i + 1) / n) * Math.PI * 2;
+    a.push(Math.cos(a0) * r, y, Math.sin(a0) * r, Math.cos(a1) * r, y, Math.sin(a1) * r);
+  }
+}
+
+/** An L-shaped link along the slab between two points. */
+function pushLink(a: number[], y: number, ax: number, az: number, bx: number, bz: number) {
+  a.push(ax, y, az, ax, y, bz, ax, y, bz, bx, y, bz);
+}
+
 function segments(positions: number[], material: THREE.LineBasicMaterial) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
@@ -98,6 +111,19 @@ interface Prop {
   rise: boolean;
   spin: boolean;
   a: number;
+  /** Second-pass detail that fills in more slowly once the prop is active. */
+  detail: THREE.LineBasicMaterial;
+  d: number;
+}
+
+/** Extra linework on a layer that draws in as the pulse crosses it, and stays. */
+interface LayerDetail {
+  lines: THREE.LineSegments;
+  mat: THREE.LineBasicMaterial;
+  layer: number;
+  from: number;
+  to: number;
+  strength: number;
 }
 
 interface Screen {
@@ -105,8 +131,10 @@ interface Screen {
   outline: THREE.LineBasicMaterial;
   fill: THREE.MeshBasicMaterial;
   inner: THREE.LineBasicMaterial;
+  more: THREE.LineBasicMaterial;
   trigger: number;
   a: number;
+  d: number;
   s: number;
 }
 
@@ -187,7 +215,14 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
   const layerLines: THREE.LineSegments[] = [];
   const props: Prop[] = [];
   const screens: Screen[] = [];
+  const layerDetails: LayerDetail[] = [];
   const lineMat = () => new THREE.LineBasicMaterial({ transparent: true, depthWrite: false });
+  const addLayerDetail = (positions: number[], layer: number, from: number, to: number, strength: number) => {
+    const mat = lineMat();
+    const lines = segments(positions, mat);
+    scene.add(lines);
+    layerDetails.push({ lines, mat, layer, from, to, strength });
+  };
 
   for (let k = 0; k < 4; k++) {
     const y = k * H;
@@ -206,39 +241,108 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     const gridLines = segments(grid, gm);
     layerLines.push(gridLines);
     scene.add(gridLines);
+
+    // Detail accumulates as the request passes, and each layer up carries more of it.
+    const fine: number[] = [];
+    for (let g = -60; g <= 60; g += 10) {
+      if (g % 20 !== 0 || Math.abs(g) > 40) fine.push(g, y, -SLAB, g, y, SLAB, -SLAB, y, g, SLAB, y, g);
+    }
+    if (k >= 2) for (let g = -55; g <= 55; g += 10) fine.push(g, y, -SLAB, g, y, SLAB, -SLAB, y, g, SLAB, y, g);
+    addLayerDetail(fine, k, 0, 0.75, 0.2);
+
+    const marks: number[] = [];
+    if (k >= 1) {
+      for (let gx = -40; gx <= 40; gx += 20) {
+        for (let gz = -40; gz <= 40; gz += 20) marks.push(gx - 1.6, y + 0.1, gz, gx + 1.6, y + 0.1, gz, gx, y + 0.1, gz - 1.6, gx, y + 0.1, gz + 1.6);
+      }
+    }
+    if (k >= 3) {
+      for (let g = -65; g <= 65; g += 5) {
+        const l = g % 10 === 0 ? 3.2 : 1.6;
+        marks.push(g, y, SLAB, g, y, SLAB + l, g, y, -SLAB, g, y, -SLAB - l, SLAB, y, g, SLAB + l, y, g, -SLAB, y, g, -SLAB - l, y, g);
+      }
+    }
+    if (marks.length) addLayerDetail(marks, k, 0.35, 1, 0.75);
   }
 
-  const addProp = (positions: number[], layer: number, x: number, yOff: number, z: number, trigger: number, rise: boolean, spin = false, rotY = 0) => {
+  // Links between the things on each layer.
+  const DATA = [[-30, -30, 14], [-25, 50, 18], [40, -5, 10], [35, 45, 22]] as const;
+  const SERVICES = [[30, 25, 28], [-35, -40, 18], [22, -48, 40], [-40, 5, 12], [42, 52, 22]] as const;
+  const SCREENS = [[28, -34, 0.2], [-18, 4, 0.42], [30, 44, 0.64]] as const;
+  const inset = (a: number[], y: number, r: number) => a.push(-r, y, -r, r, y, -r, r, y, -r, r, y, r, r, y, r, -r, y, r, -r, y, r, -r, y, -r);
+  {
+    const l0: number[] = [];
+    ([[0, 1], [0, 2], [2, 3], [1, 3]] as const).forEach(([a, b]) => pushLink(l0, 0.15, DATA[a][0], DATA[a][1], DATA[b][0], DATA[b][1]));
+    addLayerDetail(l0, 0, 0.3, 1, 0.45);
+    const l1: number[] = [];
+    ([[0, 4], [0, 2], [2, 1], [1, 3], [3, 0], [4, 3]] as const).forEach(([a, b]) => pushLink(l1, H + 0.15, SERVICES[a][0], SERVICES[a][1], SERVICES[b][0], SERVICES[b][1]));
+    addLayerDetail(l1, 1, 0.2, 1, 0.5);
+    const l2: number[] = [];
+    inset(l2, 2 * H + 0.15, 50);
+    inset(l2, 2 * H + 0.15, 30);
+    l2.push(-50, 2 * H + 0.15, -50, -30, 2 * H + 0.15, -30, 50, 2 * H + 0.15, 50, 30, 2 * H + 0.15, 30, -50, 2 * H + 0.15, 50, -30, 2 * H + 0.15, 30, 50, 2 * H + 0.15, -50, 30, 2 * H + 0.15, -30);
+    addLayerDetail(l2, 2, 0.15, 1, 0.5);
+    const l3: number[] = [];
+    inset(l3, 3 * H + 0.15, 50);
+    l3.push(SCREENS[0][0], 3 * H + 0.15, SCREENS[0][1], SCREENS[0][0], 3 * H + 0.15, -SLAB, SCREENS[1][0], 3 * H + 0.15, SCREENS[1][1], -SLAB, 3 * H + 0.15, SCREENS[1][1], SCREENS[2][0], 3 * H + 0.15, SCREENS[2][1], SCREENS[2][0], 3 * H + 0.15, SLAB);
+    pushLink(l3, 3 * H + 0.15, SCREENS[0][0], SCREENS[0][1], SCREENS[1][0], SCREENS[1][1]);
+    pushLink(l3, 3 * H + 0.15, SCREENS[1][0], SCREENS[1][1], SCREENS[2][0], SCREENS[2][1]);
+    addLayerDetail(l3, 3, 0.1, 1, 0.55);
+  }
+
+  const addProp = (positions: number[], extra: number[], layer: number, x: number, yOff: number, z: number, trigger: number, rise: boolean, spin = false, rotY = 0) => {
     const mat = lineMat();
     const obj = segments(positions, mat);
     obj.position.set(x, layer * H + yOff, z);
     obj.rotation.y = rotY;
+    const detail = lineMat();
+    obj.add(segments(extra, detail));
     scene.add(obj);
-    props.push({ obj, mat, layer, trigger: layer + trigger, rise, spin, a: 0 });
+    props.push({ obj, mat, layer, trigger: layer + trigger, rise, spin, a: 0, detail, d: 0 });
   };
 
   // Data: storage cylinders rise as the pulse passes.
-  ([[-30, -30, 14], [-25, 50, 18], [40, -5, 10], [35, 45, 22]] as const).forEach(([x, z, h], i) => {
+  DATA.forEach(([x, z, h], i) => {
     const p: number[] = [];
     pushCylinder(p, 9, h);
-    addProp(p, 0, x, 0, z, 0.12 + i * 0.18, true);
+    const d: number[] = [];
+    pushCircleY(d, 9, h / 3);
+    pushCircleY(d, 9, (2 * h) / 3);
+    pushCircleY(d, 4.5, h);
+    for (let j = 0; j < 4; j++) {
+      const a = Math.PI / 4 + (j * Math.PI) / 2;
+      d.push(Math.cos(a) * 9, 0, Math.sin(a) * 9, Math.cos(a) * 9, h, Math.sin(a) * 9);
+    }
+    addProp(p, d, 0, x, 0, z, 0.12 + i * 0.18, true);
   });
   // Service: boxes extrude.
-  ([[30, 25, 28], [-35, -40, 18], [22, -48, 40], [-40, 5, 12], [42, 52, 22]] as const).forEach(([x, z, h], i) => {
+  SERVICES.forEach(([x, z, h], i) => {
     const p: number[] = [];
     pushBox(p, 0, 0, 0, 18, h, 18);
-    addProp(p, 1, x, 0, z, 0.1 + i * 0.15, true);
+    const d: number[] = [];
+    for (let f = 6; f < h; f += 6) d.push(-9, f, -9, 9, f, -9, 9, f, -9, 9, f, 9, 9, f, 9, -9, f, 9, -9, f, 9, -9, f, -9);
+    d.push(-9, h, -9, 9, h, 9, -9, h, 9, 9, h, -9);
+    pushBox(d, 0, h, 0, 8, 3, 8);
+    addProp(p, d, 1, x, 0, z, 0.1 + i * 0.15, true);
   });
   // API: gate rings sit on the path; they turn and flash when crossed.
   ([[-S, -20, 0.12, Math.PI / 2], [-25, 20, 0.3, 0], [10, -5, 0.44, Math.PI / 2], [35, -30, 0.56, 0], [S, 20, 0.72, Math.PI / 2]] as const).forEach(([x, z, trig, rot]) => {
     const p: number[] = [];
     pushRing(p, 9);
-    addProp(p, 2, x, 10, z, trig, false, true, rot);
+    const d: number[] = [];
+    pushRing(d, 6.5);
+    pushRing(d, 3.5);
+    for (let j = 0; j < 16; j++) {
+      const a = (j / 16) * Math.PI * 2;
+      const r1 = j % 4 === 0 ? 12.5 : 11;
+      d.push(0, Math.cos(a) * 9, Math.sin(a) * 9, 0, Math.cos(a) * r1, Math.sin(a) * r1);
+    }
+    addProp(p, d, 2, x, 10, z, trig, false, true, rot);
   });
   // Interface: screens go from wireframe to solid, with an abstract page drawn on each.
   const W = 46, HT = 29;
   const screenGeo = new THREE.PlaneGeometry(W, HT);
-  ([[28, -34, 0.2], [-18, 4, 0.42], [30, 44, 0.64]] as const).forEach(([x, z, trig], i) => {
+  SCREENS.forEach(([x, z, trig], i) => {
     const group = new THREE.Group();
     group.position.set(x, 3 * H + HT / 2 + 3, z);
     const outline = lineMat();
@@ -266,7 +370,20 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     const back = innerLines.clone();
     back.rotation.y = Math.PI;
     group.add(back);
-    screens.push({ group, outline, fill, inner, trigger: 3 + trig, a: 0, s: 1 });
+    // Finer page furniture arrives last: window dots, text rows, a cursor.
+    const fineUi: number[] = [];
+    for (let j = 0; j < 3; j++) fineUi.push(-w + 2 + j * 2.4, h - 2.5, 0.2, -w + 3.2 + j * 2.4, h - 2.5, 0.2);
+    fineUi.push(w - 14, h - 2.5, 0.2, w - 3, h - 2.5, 0.2);
+    fineUi.push(-w + 6, h - 11.5, 0.2, -w + 13, h - 11.5, 0.2, -w + 6, h - 13.5, 0.2, -w + 11, h - 13.5, 0.2);
+    fineUi.push(w - 9, -h + 6, 0.2, w - 6, -h + 6, 0.2, w - 7.5, -h + 7.5, 0.2, w - 7.5, -h + 4.5, 0.2);
+    const more = lineMat();
+    const moreLines = segments(fineUi, more);
+    moreLines.renderOrder = 2;
+    group.add(moreLines);
+    const moreBack = moreLines.clone();
+    moreBack.rotation.y = Math.PI;
+    group.add(moreBack);
+    screens.push({ group, outline, fill, inner, more, trigger: 3 + trig, a: 0, d: 0, s: 1 });
   });
 
   // ── Pulse + trail ──────────────────────────────────────────────
@@ -385,12 +502,24 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       gridMats[k].opacity = o * 0.28;
     }
 
+    // Layer detail draws in while the pulse is on that layer and stays afterwards.
+    for (const d of layerDetails) {
+      const level = clamp((clamp(q - d.layer) - d.from) / (d.to - d.from));
+      const count = d.lines.geometry.getAttribute('position').count;
+      d.lines.geometry.setDrawRange(0, Math.floor((count * level) / 2) * 2);
+      d.mat.color.copy(cLine);
+      d.mat.opacity = layerOpacity(d.layer) * d.strength * reveal;
+    }
+
     for (const p of props) {
       const on = q >= p.trigger ? 1 : 0;
       p.a = first || reduce ? on : lerp(p.a, on, 0.1);
+      p.d = first || reduce ? on : lerp(p.d, on, 0.03);
       const flash = clamp(1 - Math.abs(q - p.trigger) * 5);
       p.mat.color.copy(cLine).lerp(cAccent, Math.max(flash, p.spin ? p.a * 0.85 : 0));
       p.mat.opacity = layerOpacity(p.layer) * (p.rise ? 0.25 + 0.75 * p.a : 0.55 + 0.45 * p.a) * reveal;
+      p.detail.color.copy(cLine);
+      p.detail.opacity = layerOpacity(p.layer) * 0.55 * p.d * reveal;
       if (p.rise) p.obj.scale.y = 0.04 + 0.96 * p.a;
       if (p.spin) p.obj.rotation.x = p.a * Math.PI * 0.5;
     }
@@ -406,6 +535,9 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       sc.fill.opacity = sc.a * focus * clamp(o * 1.4);
       sc.inner.color.copy(cBg);
       sc.inner.opacity = sc.a * focus;
+      sc.d = first || reduce ? on : lerp(sc.d, on, 0.025);
+      sc.more.color.copy(cBg);
+      sc.more.opacity = sc.d * focus;
       sc.s = lerp(sc.s, hovered === i ? 1.22 : 1, 0.1);
       sc.group.scale.setScalar(sc.s);
       sc.group.rotation.y = Math.atan2(camera.position.x - sc.group.position.x, camera.position.z - sc.group.position.z);
