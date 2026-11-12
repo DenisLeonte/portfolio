@@ -9,6 +9,7 @@ import * as THREE from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2.js';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 const H = 70; // vertical distance between layers
 const S = 60; // half-size of the pulse path on a layer
@@ -76,14 +77,6 @@ function pushCylinder(a: number[], r: number, h: number) {
   }
 }
 
-function pushRing(a: number[], r: number) {
-  const n = 32;
-  for (let i = 0; i < n; i++) {
-    const a0 = (i / n) * Math.PI * 2, a1 = ((i + 1) / n) * Math.PI * 2;
-    a.push(0, Math.cos(a0) * r, Math.sin(a0) * r, 0, Math.cos(a1) * r, Math.sin(a1) * r);
-  }
-}
-
 function pushCircleY(a: number[], r: number, y: number) {
   const n = 28;
   for (let i = 0; i < n; i++) {
@@ -116,6 +109,9 @@ interface Prop {
   d: number;
   /** Solid faces, on the layers high enough to have them. */
   solid: THREE.MeshLambertMaterial | null;
+  /** Gate barrier: lowered across the path until the pulse is let through. */
+  bar?: THREE.Mesh;
+  barMat?: THREE.MeshBasicMaterial;
 }
 
 /** Extra linework on a layer that draws in as the pulse crosses it, and stays. */
@@ -358,19 +354,29 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     const body = new THREE.BoxGeometry(18, h, 18).translate(0, h / 2, 0);
     addProp(p, d, 1, x, 0, z, 0.1 + i * 0.15, true, false, 0, body);
   });
-  // API: gate rings sit on the path; they turn and flash when crossed.
+  // API: checkpoint gates straddle the path. Each has a barrier that lifts, and the
+  // gate turns green, once the pulse has been let through.
   ([[-S, -20, 0.12, Math.PI / 2], [-25, 20, 0.3, 0], [10, -5, 0.44, Math.PI / 2], [35, -30, 0.56, 0], [S, 20, 0.72, Math.PI / 2]] as const).forEach(([x, z, trig, rot]) => {
+    // Local frame: the path runs along x through the origin, 10 above the slab.
+    const parts: [number, number, number, number, number, number][] = [
+      [0, -10, 0, 7, 1.4, 25], // plinth
+      [0, -8.6, -9.4, 3, 17, 3], // posts
+      [0, -8.6, 9.4, 3, 17, 3],
+      [0, 8.4, 0, 3.6, 3, 23], // lintel
+    ];
     const p: number[] = [];
-    pushRing(p, 9);
-    const d: number[] = [];
-    pushRing(d, 6.5);
-    pushRing(d, 3.5);
-    for (let j = 0; j < 16; j++) {
-      const a = (j / 16) * Math.PI * 2;
-      const r1 = j % 4 === 0 ? 12.5 : 11;
-      d.push(0, Math.cos(a) * 9, Math.sin(a) * 9, 0, Math.cos(a) * r1, Math.sin(a) * r1);
+    const geos: THREE.BufferGeometry[] = [];
+    for (const [cx, y0, cz, sx, sy, sz] of parts) {
+      pushBox(p, cx, y0, cz, sx, sy, sz);
+      geos.push(new THREE.BoxGeometry(sx, sy, sz).translate(cx, y0 + sy / 2, cz));
     }
-    addProp(p, d, 2, x, 10, z, trig, false, true, rot, new THREE.TorusGeometry(9, 1.1, 12, 48).rotateY(Math.PI / 2));
+    addProp(p, [], 2, x, 10, z, trig, false, true, rot, mergeGeometries(geos));
+    const gate = props[props.length - 1];
+    const barMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, fog: false });
+    const bar = solidMesh(new THREE.BoxGeometry(1.2, 2.2, 15.8), barMat);
+    gate.obj.add(bar);
+    gate.bar = bar;
+    gate.barMat = barMat;
   });
   // Upper layers also carry small solid components sitting on the grid.
   const addTiles = (layer: number, list: readonly (readonly [number, number, number, number, number])[]) => {
@@ -539,7 +545,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     'Spring Boot', 'Java', 'business logic', 'integration', 'enterprise platform',
     'request in', 'REST', 'validation', 'JSON', 'response out',
   ];
-  const propTops = [...DATA.map((d) => d[2]), ...SERVICES.map((d) => d[2] + 3), 9, 9, 9, 9, 9];
+  const propTops = [...DATA.map((d) => d[2]), ...SERVICES.map((d) => d[2] + 3), 11.4, 11.4, 11.4, 11.4, 11.4];
   props.forEach((p, i) => {
     addLabel(propLabels[i], p.layer, false, (out) => {
       out.copy(p.obj.position);
@@ -721,7 +727,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       p.mat.color.copy(cLine).lerp(cAccent, Math.max(flash, p.spin ? p.a * 0.85 : 0));
       p.mat.opacity = layerOpacity(p.layer) * (p.rise ? 0.25 + 0.75 * p.a : 0.55 + 0.45 * p.a) * reveal;
       if (p.solid) {
-        p.solid.color.copy(cSolid).lerp(cAccent, flash * 0.5);
+        p.solid.color.copy(cSolid).lerp(cAccent, Math.max(flash * 0.5, p.spin ? p.a * 0.3 : 0));
         // Gates firm up as the pulse arrives on their layer, not one by one as it
         // crosses them, so the layer is solid well before the pulse leaves.
         const firm = p.spin ? smooth(0.02, 0.32, q - p.layer) : p.d;
@@ -730,7 +736,12 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       p.detail.color.copy(cLine);
       p.detail.opacity = layerOpacity(p.layer) * 0.55 * p.d * reveal * wire(p.layer);
       if (p.rise) p.obj.scale.y = 0.04 + 0.96 * p.a;
-      if (p.spin) p.obj.rotation.x = p.a * Math.PI * 0.5;
+      if (p.bar && p.barMat) {
+        p.bar.position.y = p.a * 6.6;
+        p.barMat.color.copy(cAccent);
+        p.barMat.opacity = smooth(0.02, 0.32, q - p.layer) * solidity(p.layer);
+        p.bar.visible = p.barMat.opacity > 0.01;
+      }
     }
 
     screens.forEach((sc, i) => {
