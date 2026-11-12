@@ -114,6 +114,8 @@ interface Prop {
   /** Second-pass detail that fills in more slowly once the prop is active. */
   detail: THREE.LineBasicMaterial;
   d: number;
+  /** Solid faces, on the layers high enough to have them. */
+  solid: THREE.MeshLambertMaterial | null;
 }
 
 /** Extra linework on a layer that draws in as the pulse crosses it, and stays. */
@@ -132,6 +134,7 @@ interface Screen {
   fill: THREE.MeshBasicMaterial;
   inner: THREE.LineBasicMaterial;
   more: THREE.LineBasicMaterial;
+  stand: THREE.MeshLambertMaterial;
   trigger: number;
   a: number;
   d: number;
@@ -217,6 +220,23 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
   const screens: Screen[] = [];
   const layerDetails: LayerDetail[] = [];
   const lineMat = () => new THREE.LineBasicMaterial({ transparent: true, depthWrite: false, fog: false });
+  // The stack turns from drawing into object on the way up: no faces on the data
+  // layer, translucent ones on service, nearly solid on api, fully solid on interface.
+  const SOLID = [0, 0.42, 0.8, 1];
+  const SLAB_SOLID = [0, 0.22, 0.55, 0.94];
+  const solidMat = () =>
+    new THREE.MeshLambertMaterial({ transparent: true, opacity: 0, depthWrite: false, fog: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 });
+  const solidMesh = (geo: THREE.BufferGeometry, mat: THREE.Material) => {
+    const m = new THREE.Mesh(geo, mat);
+    m.renderOrder = -1;
+    return m;
+  };
+  scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+  const sun = new THREE.DirectionalLight(0xffffff, 2.2);
+  sun.position.set(0.5, 1, 0.35);
+  scene.add(sun);
+  const slabSolids: THREE.MeshLambertMaterial[] = [];
+  const tiles: { mat: THREE.MeshLambertMaterial; layer: number }[] = [];
   const addLayerDetail = (positions: number[], layer: number, from: number, to: number, strength: number) => {
     const mat = lineMat();
     const lines = segments(positions, mat);
@@ -233,6 +253,11 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     const slabLines = segments(slab, m);
     layerLines.push(slabLines);
     scene.add(slabLines);
+    const slabSolid = solidMat();
+    slabSolids.push(slabSolid);
+    const slabMesh = solidMesh(new THREE.BoxGeometry(SLAB * 2, 4, SLAB * 2), slabSolid);
+    slabMesh.position.y = y - 2;
+    scene.add(slabMesh);
 
     const grid: number[] = [];
     for (let g = -40; g <= 40; g += 20) grid.push(g, y, -SLAB, g, y, SLAB, -SLAB, y, g, SLAB, y, g);
@@ -290,15 +315,20 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     addLayerDetail(l3, 3, 0.1, 1, 0.55);
   }
 
-  const addProp = (positions: number[], extra: number[], layer: number, x: number, yOff: number, z: number, trigger: number, rise: boolean, spin = false, rotY = 0) => {
+  const addProp = (positions: number[], extra: number[], layer: number, x: number, yOff: number, z: number, trigger: number, rise: boolean, spin = false, rotY = 0, solidGeo: THREE.BufferGeometry | null = null) => {
     const mat = lineMat();
     const obj = segments(positions, mat);
     obj.position.set(x, layer * H + yOff, z);
     obj.rotation.y = rotY;
     const detail = lineMat();
     obj.add(segments(extra, detail));
+    let solid: THREE.MeshLambertMaterial | null = null;
+    if (solidGeo && SOLID[layer] > 0) {
+      solid = solidMat();
+      obj.add(solidMesh(solidGeo, solid));
+    }
     scene.add(obj);
-    props.push({ obj, mat, layer, trigger: layer + trigger, rise, spin, a: 0, detail, d: 0 });
+    props.push({ obj, mat, layer, trigger: layer + trigger, rise, spin, a: 0, detail, d: 0, solid });
   };
 
   // Data: storage cylinders rise as the pulse passes.
@@ -323,7 +353,8 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     for (let f = 6; f < h; f += 6) d.push(-9, f, -9, 9, f, -9, 9, f, -9, 9, f, 9, 9, f, 9, -9, f, 9, -9, f, 9, -9, f, -9);
     d.push(-9, h, -9, 9, h, 9, -9, h, 9, 9, h, -9);
     pushBox(d, 0, h, 0, 8, 3, 8);
-    addProp(p, d, 1, x, 0, z, 0.1 + i * 0.15, true);
+    const body = new THREE.BoxGeometry(18, h, 18).translate(0, h / 2, 0);
+    addProp(p, d, 1, x, 0, z, 0.1 + i * 0.15, true, false, 0, body);
   });
   // API: gate rings sit on the path; they turn and flash when crossed.
   ([[-S, -20, 0.12, Math.PI / 2], [-25, 20, 0.3, 0], [10, -5, 0.44, Math.PI / 2], [35, -30, 0.56, 0], [S, 20, 0.72, Math.PI / 2]] as const).forEach(([x, z, trig, rot]) => {
@@ -337,8 +368,26 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       const r1 = j % 4 === 0 ? 12.5 : 11;
       d.push(0, Math.cos(a) * 9, Math.sin(a) * 9, 0, Math.cos(a) * r1, Math.sin(a) * r1);
     }
-    addProp(p, d, 2, x, 10, z, trig, false, true, rot);
+    addProp(p, d, 2, x, 10, z, trig, false, true, rot, new THREE.TorusGeometry(9, 1.1, 12, 48).rotateY(Math.PI / 2));
   });
+  // Upper layers also carry small solid components sitting on the grid.
+  const addTiles = (layer: number, list: readonly (readonly [number, number, number, number, number])[]) => {
+    const mat = solidMat();
+    const edge = lineMat();
+    const lines: number[] = [];
+    for (const [x, z, sx, sz, h] of list) {
+      const mesh = solidMesh(new THREE.BoxGeometry(sx, h, sz), mat);
+      mesh.position.set(x, layer * H + h / 2, z);
+      scene.add(mesh);
+      pushBox(lines, x, layer * H, z, sx, h, sz);
+    }
+    scene.add(segments(lines, edge));
+    tiles.push({ mat, layer });
+    layerDetails.push({ lines: scene.children[scene.children.length - 1] as THREE.LineSegments, mat: edge, layer, from: 0.3, to: 1, strength: 0.8 });
+  };
+  addTiles(2, [[-45, 45, 16, 16, 3], [45, -52, 20, 10, 2], [-48, -48, 12, 12, 5], [48, 50, 12, 18, 2.5], [-10, -50, 18, 8, 2], [-48, 0, 8, 22, 3.5]]);
+  addTiles(3, [[-48, -48, 26, 14, 2], [-52, -22, 14, 14, 4], [52, 0, 14, 30, 2], [-50, 40, 22, 22, 3], [-8, 52, 30, 10, 2], [0, -54, 22, 8, 5], [55, -52, 10, 10, 7], [-22, 30, 10, 10, 2], [52, 54, 14, 8, 3]]);
+
   // Interface: screens go from wireframe to solid, with an abstract page drawn on each.
   const W = 46, HT = 29;
   const screenGeo = new THREE.PlaneGeometry(W, HT);
@@ -352,8 +401,15 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     group.add(segments(o, outline));
     const fill = new THREE.MeshBasicMaterial({ color: LIGHT.fg, transparent: true, opacity: 0, side: THREE.DoubleSide, fog: false });
     const panel = new THREE.Mesh(screenGeo, fill);
-    panel.renderOrder = 1;
+    panel.renderOrder = -1;
     group.add(panel);
+    const stand = solidMat();
+    const post = solidMesh(new THREE.BoxGeometry(1.6, 3, 1.6), stand);
+    post.position.y = -HT / 2 - 1.5;
+    group.add(post);
+    const foot = solidMesh(new THREE.BoxGeometry(16, 0.9, 7), stand);
+    foot.position.y = -HT / 2 - 2.6;
+    group.add(foot);
     scene.add(group);
     // A different abstract layout per screen: title bar plus a few content blocks.
     const ui: number[] = [];
@@ -383,7 +439,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     const moreBack = moreLines.clone();
     moreBack.rotation.y = Math.PI;
     group.add(moreBack);
-    screens.push({ group, outline, fill, inner, more, trigger: 3 + trig, a: 0, d: 0, s: 1 });
+    screens.push({ group, outline, fill, inner, more, stand, trigger: 3 + trig, a: 0, d: 0, s: 1 });
   });
 
   // ── Surroundings: rack, ruler, compass, ground and drifting particles ──
@@ -580,6 +636,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
   const pulseSmooth = new THREE.Vector3();
   const target = new THREE.Vector3();
   const cLine = new THREE.Color();
+  const cSolid = new THREE.Color();
   let qc = story() - 1;
   let reveal = reduce ? 1 : 0;
   let running = true;
@@ -626,6 +683,23 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       gridMats[k].opacity = o * 0.28;
     }
 
+    // Solid faces: a mid-tone between ground and line colour, shaded by the light.
+    cSolid.copy(cBg).lerp(cFg, 0.17);
+    const solidity = (k: number) => clamp(layerOpacity(k) * 1.6) * reveal;
+    const setSolid = (m: THREE.MeshLambertMaterial, o: number) => {
+      m.opacity = o;
+      m.depthWrite = o > 0.7;
+      m.visible = o > 0.01;
+    };
+    for (let k = 0; k < 4; k++) {
+      slabSolids[k].color.copy(cSolid);
+      setSolid(slabSolids[k], SLAB_SOLID[k] * smooth(0, 0.8, q - k) * solidity(k));
+    }
+    for (const tl of tiles) {
+      tl.mat.color.copy(cSolid);
+      setSolid(tl.mat, SOLID[tl.layer] * smooth(0.3, 1, q - tl.layer) * solidity(tl.layer));
+    }
+
     // Layer detail draws in while the pulse is on that layer and stays afterwards.
     for (const d of layerDetails) {
       const level = clamp((clamp(q - d.layer) - d.from) / (d.to - d.from));
@@ -642,6 +716,10 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       const flash = clamp(1 - Math.abs(q - p.trigger) * 5);
       p.mat.color.copy(cLine).lerp(cAccent, Math.max(flash, p.spin ? p.a * 0.85 : 0));
       p.mat.opacity = layerOpacity(p.layer) * (p.rise ? 0.25 + 0.75 * p.a : 0.55 + 0.45 * p.a) * reveal;
+      if (p.solid) {
+        p.solid.color.copy(cSolid).lerp(cAccent, flash * 0.5);
+        setSolid(p.solid, SOLID[p.layer] * p.d * solidity(p.layer));
+      }
       p.detail.color.copy(cLine);
       p.detail.opacity = layerOpacity(p.layer) * 0.55 * p.d * reveal;
       if (p.rise) p.obj.scale.y = 0.04 + 0.96 * p.a;
@@ -660,6 +738,8 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       sc.inner.color.copy(cBg);
       sc.inner.opacity = sc.a * focus;
       sc.d = first || reduce ? on : lerp(sc.d, on, 0.025);
+      sc.stand.color.copy(cSolid);
+      setSolid(sc.stand, sc.a * focus * solidity(3));
       sc.more.color.copy(cBg);
       sc.more.opacity = sc.d * focus;
       sc.s = lerp(sc.s, hovered === i ? 1.22 : 1, 0.1);
