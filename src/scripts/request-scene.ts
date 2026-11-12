@@ -383,7 +383,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     }
     scene.add(segments(lines, edge));
     tiles.push({ mat, layer });
-    layerDetails.push({ lines: scene.children[scene.children.length - 1] as THREE.LineSegments, mat: edge, layer, from: 0.3, to: 1, strength: 0.8 });
+    layerDetails.push({ lines: scene.children[scene.children.length - 1] as THREE.LineSegments, mat: edge, layer, from: 0.04, to: 0.36, strength: 0.8 });
   };
   addTiles(2, [[-45, 45, 16, 16, 3], [45, -52, 20, 10, 2], [-48, -48, 12, 12, 5], [48, 50, 12, 18, 2.5], [-10, -50, 18, 8, 2], [-48, 0, 8, 22, 3.5]]);
   addTiles(3, [[-48, -48, 26, 14, 2], [-52, -22, 14, 14, 4], [52, 0, 14, 30, 2], [-50, 40, 22, 22, 3], [-8, 52, 30, 10, 2], [0, -54, 22, 8, 5], [55, -52, 10, 10, 7], [-22, 30, 10, 10, 2], [52, 54, 14, 8, 3]]);
@@ -693,11 +693,11 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     };
     for (let k = 0; k < 4; k++) {
       slabSolids[k].color.copy(cSolid);
-      setSolid(slabSolids[k], SLAB_SOLID[k] * smooth(0, 0.8, q - k) * solidity(k));
+      setSolid(slabSolids[k], SLAB_SOLID[k] * smooth(0, 0.28, q - k) * solidity(k));
     }
     for (const tl of tiles) {
       tl.mat.color.copy(cSolid);
-      setSolid(tl.mat, SOLID[tl.layer] * smooth(0.3, 1, q - tl.layer) * solidity(tl.layer));
+      setSolid(tl.mat, SOLID[tl.layer] * smooth(0.06, 0.36, q - tl.layer) * solidity(tl.layer));
     }
 
     // Layer detail draws in while the pulse is on that layer and stays afterwards.
@@ -712,13 +712,16 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     for (const p of props) {
       const on = q >= p.trigger ? 1 : 0;
       p.a = first || reduce ? on : lerp(p.a, on, 0.1);
-      p.d = first || reduce ? on : lerp(p.d, on, 0.03);
+      p.d = first || reduce ? on : lerp(p.d, on, 0.06);
       const flash = clamp(1 - Math.abs(q - p.trigger) * 5);
       p.mat.color.copy(cLine).lerp(cAccent, Math.max(flash, p.spin ? p.a * 0.85 : 0));
       p.mat.opacity = layerOpacity(p.layer) * (p.rise ? 0.25 + 0.75 * p.a : 0.55 + 0.45 * p.a) * reveal;
       if (p.solid) {
         p.solid.color.copy(cSolid).lerp(cAccent, flash * 0.5);
-        setSolid(p.solid, SOLID[p.layer] * p.d * solidity(p.layer));
+        // Gates firm up as the pulse arrives on their layer, not one by one as it
+        // crosses them, so the layer is solid well before the pulse leaves.
+        const firm = p.spin ? smooth(0.02, 0.32, q - p.layer) : p.d;
+        setSolid(p.solid, SOLID[p.layer] * firm * solidity(p.layer));
       }
       p.detail.color.copy(cLine);
       p.detail.opacity = layerOpacity(p.layer) * 0.55 * p.d * reveal;
