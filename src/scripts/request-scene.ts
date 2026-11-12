@@ -126,6 +126,8 @@ interface LayerDetail {
   from: number;
   to: number;
   strength: number;
+  /** Outline of a solid: kept when a layer drops its wireframe. */
+  outline?: boolean;
 }
 
 interface Screen {
@@ -383,7 +385,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
     }
     scene.add(segments(lines, edge));
     tiles.push({ mat, layer });
-    layerDetails.push({ lines: scene.children[scene.children.length - 1] as THREE.LineSegments, mat: edge, layer, from: 0.04, to: 0.36, strength: 0.8 });
+    layerDetails.push({ lines: scene.children[scene.children.length - 1] as THREE.LineSegments, mat: edge, layer, from: 0.04, to: 0.36, strength: 0.8, outline: true });
   };
   addTiles(2, [[-45, 45, 16, 16, 3], [45, -52, 20, 10, 2], [-48, -48, 12, 12, 5], [48, 50, 12, 18, 2.5], [-10, -50, 18, 8, 2], [-48, 0, 8, 22, 3.5]]);
   addTiles(3, [[-48, -48, 26, 14, 2], [-52, -22, 14, 14, 4], [52, 0, 14, 30, 2], [-50, 40, 22, 22, 3], [-8, 52, 30, 10, 2], [0, -54, 22, 8, 5], [55, -52, 10, 10, 7], [-22, 30, 10, 10, 2], [52, 54, 14, 8, 3]]);
@@ -675,12 +677,14 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       const prox = clamp(1 - Math.abs(q - (k + 0.4)) / 1.3);
       return lerp(lerp(0.12 + 0.88 * prox, 0.8, heroMix), 0.65, e);
     };
+    // The api layer drops its construction lines as it turns solid: outlines only.
+    const wire = (k: number) => (k === 2 ? 1 - smooth(0, 0.28, q - k) : 1);
     for (let k = 0; k < 4; k++) {
       const o = layerOpacity(k);
       layerMats[k].color.copy(cLine);
       layerMats[k].opacity = o;
       gridMats[k].color.copy(cLine);
-      gridMats[k].opacity = o * 0.28;
+      gridMats[k].opacity = o * 0.28 * wire(k);
     }
 
     // Solid faces: a mid-tone between ground and line colour, shaded by the light.
@@ -706,7 +710,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
       const count = d.lines.geometry.getAttribute('position').count;
       d.lines.geometry.setDrawRange(0, Math.floor((count * level) / 2) * 2);
       d.mat.color.copy(cLine);
-      d.mat.opacity = layerOpacity(d.layer) * d.strength * reveal;
+      d.mat.opacity = layerOpacity(d.layer) * d.strength * reveal * (d.outline ? 1 : wire(d.layer));
     }
 
     for (const p of props) {
@@ -724,7 +728,7 @@ export function initRequestScene(root: HTMLElement, canvas: HTMLCanvasElement) {
         setSolid(p.solid, SOLID[p.layer] * firm * solidity(p.layer));
       }
       p.detail.color.copy(cLine);
-      p.detail.opacity = layerOpacity(p.layer) * 0.55 * p.d * reveal;
+      p.detail.opacity = layerOpacity(p.layer) * 0.55 * p.d * reveal * wire(p.layer);
       if (p.rise) p.obj.scale.y = 0.04 + 0.96 * p.a;
       if (p.spin) p.obj.rotation.x = p.a * Math.PI * 0.5;
     }
